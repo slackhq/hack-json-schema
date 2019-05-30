@@ -1,0 +1,10 @@
+{
+    "nickname": {"type": "string"},
+    "loop": {"$ref": "loop-schema.json#/properties/loop"},
+    "person": {
+      "type": "object",
+      "properties": {
+        "nickname": { "$ref": "#/nickname" }
+      }
+    }
+}

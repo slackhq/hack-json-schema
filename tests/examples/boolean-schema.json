@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "simple": {
+      "type": "boolean"
+    },
+    "coerce": {
+      "type": "boolean",
+      "coerce": true
+    }
+  }
+}

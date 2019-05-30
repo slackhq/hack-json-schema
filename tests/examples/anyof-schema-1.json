@@ -1,0 +1,6 @@
+{
+    "anyOf": [
+        { "type": "string" },
+        { "type": "null" }
+    ]
+}

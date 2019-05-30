@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "properties": {
+    "simple": {
+      "type": "string"
+    },
+    "coerce": {
+      "$ref": "#/definitions/coerce"
+    },
+    "sanitize_uniline": {
+      "type": "string",
+      "sanitize": {
+        "multiline": false
+      }
+    },
+    "sanitize_multiline": {
+      "type": "string",
+      "sanitize": {
+        "multiline": true
+      }
+    },
+    "date_format": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "definitions": {
+    "coerce": {
+      "type": "string",
+      "coerce": true
+    }
+  }
+}

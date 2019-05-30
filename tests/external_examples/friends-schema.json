@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "title": "Friends",
+  "type": "array",
+  "items": { "$ref": "#/definitions/person" },
+  "definitions": {
+    "person": {
+      "type": "object",
+      "properties": {
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "age": { "$ref": "#/definitions/age" },
+        "~devices/": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/devices/phone" }
+        }
+      },
+      "required": ["first_name", "last_name"]
+    },
+    "devices": {
+      "phone": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "integer"
+          },
+          "carrier/provider": {
+            "type": "string"
+          }
+        },
+        "required": ["model"]
+      }
+    },
+    "nickname": {
+      "$ref": "external_definitions.json#/nickname"
+    },
+    "age": {
+      "$ref": "../examples/person-schema.json#/properties/age"
+    },
+    "relative": {
+      "$ref": "external_definitions.json#/person"
+    }
+  }
+}

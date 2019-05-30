@@ -1,0 +1,332 @@
+@generated
+!@#$%codegentest:testDoubleNull
+<?hh // strict
+/**
+ * This file is generated. Do not modify it manually!
+ *
+ * To re-generate this file run `make test`
+ *
+ *
+ * @-generated SignedSource<<f391861aa73c3eb1b2a595b238e156dc>>
+ */
+namespace Slack\Hack\JsonSchema\Tests\Generated;
+use namespace Slack\Hack\JsonSchema;
+use namespace Slack\Hack\JsonSchema\Constraints;
+
+<<Codegen>>
+final class AnyOfValidator3AnyOf0 {
+
+  public static function check(mixed $input, string $pointer): mixed {
+    $typed = Constraints\NullConstraint::check($input, $pointer);
+
+    return $typed;
+  }
+}
+
+<<Codegen>>
+final class AnyOfValidator3AnyOf1 {
+
+  public static function check(mixed $input, string $pointer): mixed {
+    $typed = Constraints\NullConstraint::check($input, $pointer);
+
+    return $typed;
+  }
+}
+
+<<Codegen>>
+final class AnyOfValidator3 extends JsonSchema\BaseValidator<mixed> {
+
+  final protected function process(): mixed {
+    return self::check($this->input, '');
+  }
+
+  public static function check(mixed $input, string $pointer): mixed {
+    $constraints = vec[
+      class_meth(AnyOfValidator3AnyOf0::class, 'check'),
+      class_meth(AnyOfValidator3AnyOf1::class, 'check'),
+    ];
+
+    foreach ($constraints as $constraint) {
+      try {
+        $output = $constraint($input, $pointer);
+        return $output;
+      } catch (JsonSchema\InvalidFieldException $e) {
+      }
+    }
+
+    $error = shape(
+      'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
+      'constraint' => shape(
+        'type' => JsonSchema\FieldErrorConstraint::ANY_OF,
+      ),
+      'message' => "failed to match any allowed schemas",
+    );
+    throw new JsonSchema\InvalidFieldException($pointer, vec[$error]);
+  }
+}
+
+!@#$%codegentest:testMixedUnchanged
+<?hh // strict
+/**
+ * This file is generated. Do not modify it manually!
+ *
+ * To re-generate this file run `make test`
+ *
+ *
+ * @-generated SignedSource<<edcbdacae81461c9b657c6370d4e641f>>
+ */
+namespace Slack\Hack\JsonSchema\Tests\Generated;
+use namespace Slack\Hack\JsonSchema;
+use namespace Slack\Hack\JsonSchema\Constraints;
+
+<<Codegen>>
+final class AnyOfValidator2AnyOf0 {
+
+  public static function check(mixed $input, string $pointer): string {
+    $typed = Constraints\StringConstraint::check($input, $pointer);
+
+    return $typed;
+  }
+}
+
+<<Codegen>>
+final class AnyOfValidator2AnyOf1 {
+
+  public static function check(mixed $input, string $pointer): num {
+    $typed = Constraints\NumberConstraint::check($input, $pointer);
+
+    return $typed;
+  }
+}
+
+<<Codegen>>
+final class AnyOfValidator2 extends JsonSchema\BaseValidator<mixed> {
+
+  final protected function process(): mixed {
+    return self::check($this->input, '');
+  }
+
+  public static function check(mixed $input, string $pointer): mixed {
+    $constraints = vec[
+      class_meth(AnyOfValidator2AnyOf0::class, 'check'),
+      class_meth(AnyOfValidator2AnyOf1::class, 'check'),
+    ];
+
+    foreach ($constraints as $constraint) {
+      try {
+        $output = $constraint($input, $pointer);
+        return $output;
+      } catch (JsonSchema\InvalidFieldException $e) {
+      }
+    }
+
+    $error = shape(
+      'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
+      'constraint' => shape(
+        'type' => JsonSchema\FieldErrorConstraint::ANY_OF,
+      ),
+      'message' => "failed to match any allowed schemas",
+    );
+    throw new JsonSchema\InvalidFieldException($pointer, vec[$error]);
+  }
+}
+
+!@#$%codegentest:testNullableObject
+<?hh // strict
+/**
+ * This file is generated. Do not modify it manually!
+ *
+ * To re-generate this file run `make test`
+ *
+ *
+ * @-generated SignedSource<<f9dffe013a35e5f3a353564ae2835a2a>>
+ */
+namespace Slack\Hack\JsonSchema\Tests\Generated;
+use namespace Slack\Hack\JsonSchema;
+use namespace Slack\Hack\JsonSchema\Constraints;
+
+type TAnyOfValidator4AnyOf1 = shape(
+  ?'post-office-box' => string,
+  ?'extended-address' => string,
+  ?'street-address' => string,
+);
+
+<<Codegen>>
+final class AnyOfValidator4AnyOf1PropertiesPostOfficeBox {
+
+  public static function check(mixed $input, string $pointer): string {
+    $typed = Constraints\StringConstraint::check($input, $pointer);
+
+    return $typed;
+  }
+}
+
+<<Codegen>>
+final class AnyOfValidator4AnyOf1PropertiesExtendedAddress {
+
+  public static function check(mixed $input, string $pointer): string {
+    $typed = Constraints\StringConstraint::check($input, $pointer);
+
+    return $typed;
+  }
+}
+
+<<Codegen>>
+final class AnyOfValidator4AnyOf1PropertiesStreetAddress {
+
+  public static function check(mixed $input, string $pointer): string {
+    $typed = Constraints\StringConstraint::check($input, $pointer);
+
+    return $typed;
+  }
+}
+
+<<Codegen>>
+final class AnyOfValidator4AnyOf1 {
+
+  public static function check(
+    mixed $input,
+    string $pointer,
+  ): TAnyOfValidator4AnyOf1 {
+    $typed = Constraints\ObjectConstraint::check($input, $pointer);
+
+    $errors = vec[];
+    $output = shape();
+
+    if (\HH\Lib\C\contains_key($typed, 'post-office-box')) {
+      try {
+        $output['post-office-box'] = AnyOfValidator4AnyOf1PropertiesPostOfficeBox::check(
+          $typed['post-office-box'],
+          JsonSchema\get_pointer($pointer, 'post-office-box'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'extended-address')) {
+      try {
+        $output['extended-address'] = AnyOfValidator4AnyOf1PropertiesExtendedAddress::check(
+          $typed['extended-address'],
+          JsonSchema\get_pointer($pointer, 'extended-address'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'street-address')) {
+      try {
+        $output['street-address'] = AnyOfValidator4AnyOf1PropertiesStreetAddress::check(
+          $typed['street-address'],
+          JsonSchema\get_pointer($pointer, 'street-address'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\count($errors)) {
+      throw new JsonSchema\InvalidFieldException($pointer, $errors);
+    }
+
+    /* HH_IGNORE_ERROR[4057] */
+    return $output;
+  }
+}
+
+<<Codegen>>
+final class AnyOfValidator4 extends JsonSchema\BaseValidator<mixed> {
+
+  final protected function process(): mixed {
+    return self::check($this->input, '');
+  }
+
+  public static function check(
+    mixed $input,
+    string $pointer,
+  ): ?TAnyOfValidator4AnyOf1 {
+    if (\is_null($input)) {
+      return null;
+    }
+    $constraints = vec[
+      class_meth(AnyOfValidator4AnyOf1::class, 'check'),
+    ];
+
+    foreach ($constraints as $constraint) {
+      try {
+        $output = $constraint($input, $pointer);
+        return $output;
+      } catch (JsonSchema\InvalidFieldException $e) {
+      }
+    }
+
+    $error = shape(
+      'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
+      'constraint' => shape(
+        'type' => JsonSchema\FieldErrorConstraint::ANY_OF,
+      ),
+      'message' => "failed to match any allowed schemas",
+    );
+    throw new JsonSchema\InvalidFieldException($pointer, vec[$error]);
+  }
+}
+
+!@#$%codegentest:testNullableString
+<?hh // strict
+/**
+ * This file is generated. Do not modify it manually!
+ *
+ * To re-generate this file run `make test`
+ *
+ *
+ * @-generated SignedSource<<1fbc87ea79a9da7407e2755277824584>>
+ */
+namespace Slack\Hack\JsonSchema\Tests\Generated;
+use namespace Slack\Hack\JsonSchema;
+use namespace Slack\Hack\JsonSchema\Constraints;
+
+<<Codegen>>
+final class AnyOfValidator1AnyOf0 {
+
+  public static function check(mixed $input, string $pointer): string {
+    $typed = Constraints\StringConstraint::check($input, $pointer);
+
+    return $typed;
+  }
+}
+
+<<Codegen>>
+final class AnyOfValidator1 extends JsonSchema\BaseValidator<mixed> {
+
+  final protected function process(): mixed {
+    return self::check($this->input, '');
+  }
+
+  public static function check(mixed $input, string $pointer): ?string {
+    if (\is_null($input)) {
+      return null;
+    }
+    $constraints = vec[
+      class_meth(AnyOfValidator1AnyOf0::class, 'check'),
+    ];
+
+    foreach ($constraints as $constraint) {
+      try {
+        $output = $constraint($input, $pointer);
+        return $output;
+      } catch (JsonSchema\InvalidFieldException $e) {
+      }
+    }
+
+    $error = shape(
+      'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
+      'constraint' => shape(
+        'type' => JsonSchema\FieldErrorConstraint::ANY_OF,
+      ),
+      'message' => "failed to match any allowed schemas",
+    );
+    throw new JsonSchema\InvalidFieldException($pointer, vec[$error]);
+  }
+}
+

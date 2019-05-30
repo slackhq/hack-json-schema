@@ -1,0 +1,149 @@
+{
+  "type": "object",
+  "properties": {
+    "only_additional_properties": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "only_no_additional_properties": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "only_properties": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_string"],
+      "properties": {
+        "string": { "type": "string", "default": "optional_default" },
+        "number": { "type": "number", "default": 3 },
+        "required_string": { "type": "string", "default": "required_default" }
+      }
+    },
+    "only_pattern_properties": {
+      "type": "object",
+      "patternProperties": {
+        "^S_": { "type": "string" },
+        "^I_": { "type": "number" }
+      }
+    },
+    "single_pattern_property_string": {
+      "type": "object",
+      "patternProperties": {
+        "^S_": { "type": "string" }
+      }
+    },
+    "single_pattern_property_object": {
+      "type": "object",
+      "patternProperties": {
+        "^S_": {
+          "type": "object",
+          "required": ["sample"],
+          "properties": {
+            "sample": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "pattern_properties_no_additional_properties": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^S_": { "type": "string" },
+        "^I_": { "type": "number" }
+      }
+    },
+    "properties_and_pattern_properties": {
+      "type": "object",
+      "properties": {
+        "string": { "type": "string" }
+      },
+      "patternProperties": {
+        "^S_": { "type": "string" },
+        "^I_": { "type": "number" }
+      }
+    },
+    "properties_and_pattern_properties_no_additional": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "string": { "type": "string" }
+      },
+      "patternProperties": {
+        "^S_": { "type": "string" },
+        "^I_": { "type": "number" }
+      }
+    },
+    "nested_object": {
+      "type": "object",
+      "properties": {
+        "first": {
+          "type": "object",
+          "properties": {
+            "second": {
+              "type": "object",
+              "properties": {
+                "last": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "coerce_object": {
+      "type": "object",
+      "coerce": true,
+      "properties": {
+        "first": {
+          "type": "string"
+        },
+        "second": {
+          "type": "number"
+        }
+      }
+    },
+    "implicit_additional_properties": {
+      "type": "object",
+      "properties": {
+        "first": {
+          "type": "string"
+        }
+      }
+    },
+    "explicit_additional_properties": {
+      "type": "object",
+      "properties": {
+        "first": {
+          "type": "string"
+        }
+      }
+    },
+    "no_additional_properties": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "first": {
+          "type": "string"
+        }
+      }
+    },
+    "additional_properties_array": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "additional_properties_ref": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/properties/additional_properties_array"
+      }
+    }
+  }
+}

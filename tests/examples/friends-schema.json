@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "title": "Friends",
+  "type": "array",
+  "items": { "$ref": "#/definitions/person" },
+  "definitions": {
+    "person": {
+      "type": "object",
+      "properties": {
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "age": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "~devices/": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/devices/phone" }
+        },
+        "enemies" : {
+          "type" : "null"
+        },
+        "rating" : {
+          "type" : "array",
+          "items" : [
+            {
+              "type" : "integer"
+            },
+            {
+              "type" : "string"
+            }
+          ],
+          "additionalItems" : false
+        },
+        "contact" : {
+          "type" : "array",
+          "items" : [
+            {
+              "type" : "integer"
+            },
+            {
+              "type" : "string"
+            }
+          ]
+        },
+        "empty_object": {
+          "type": "object"
+        }
+      },
+      "required": ["first_name", "last_name"]
+    },
+    "devices": {
+      "phone": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string"
+          },
+          "carrier/provider": {
+            "type": "string"
+          }
+        },
+        "required": ["model"]
+      }
+    }
+  }
+}

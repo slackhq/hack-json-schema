@@ -1,0 +1,190 @@
+<?hh // strict
+
+namespace Slack\Hack\JsonSchema\Tests;
+
+use \HH\Lib\C;
+use function Facebook\FBExpect\expect;
+use type Slack\Hack\JsonSchema\Validator;
+use type Slack\Hack\JsonSchema\Codegen\{Codegen, IJsonSchemaCodegenConfig};
+use type Facebook\HackTest\HackTest;
+
+abstract class BaseCodegenTestCase extends HackTest {
+
+  const string CODEGEN_ROOT = __DIR__.'/examples/codegen';
+  const string CODEGEN_NS = 'Slack\\Hack\\JsonSchema\\Tests\\Generated';
+
+  public function assertUnchanged(string $value, ?string $token = null): void {
+    self::markTestSkipped("assertUnchanged doesn't work in hacktest yet");
+
+    $class_name = \get_called_class();
+    $path = \Facebook\HackCodegen\CodegenExpectedFile::getPath($class_name);
+    $expected = \Facebook\HackCodegen\CodegenExpectedFile::parseFile($path);
+    $token = $token === null
+      ? \Facebook\HackCodegen\CodegenExpectedFile::findToken()
+      : $token;
+
+    if ($expected->contains($token) && $expected[$token] === $value) {
+      return;
+    }
+
+    $new_expected = clone $expected;
+    $new_expected[$token] = $value;
+    \Facebook\HackCodegen\CodegenExpectedFile::writeExpectedFile(
+      $path,
+      $new_expected,
+      $expected,
+    );
+
+    $expected = \Facebook\HackCodegen\CodegenExpectedFile::parseFile($path);
+    invariant(
+      $expected->contains($token) && $expected[$token] === $value,
+      'New value not accepted by user',
+    );
+  }
+
+  public static function getCodeGenRoot(): string {
+    return self::CODEGEN_ROOT;
+  }
+
+  public static function getCodeGenPath(string $file): string {
+    return self::getCodeGenRoot()."/{$file}";
+  }
+
+  public static function getBuilder(
+    string $json_filename,
+    string $name,
+    shape(
+      ?'sanitize_string' => Codegen::TSanitizeStringConfig,
+      ?'json_schema_codegen_config' => IJsonSchemaCodegenConfig,
+      ?'refs' => Codegen::TValidatorRefsConfig,
+      ?'defaults' => Codegen::TValidatorDefaultsConfig,
+    ) $options = shape(),
+  ): shape(
+    'path' => string,
+    'codegen' => Codegen,
+  ) {
+    $path = self::getCodeGenPath("{$name}.php");
+    $validator_config = shape(
+      'namespace' => self::CODEGEN_NS,
+      'file' => $path,
+      'class' => $name,
+    );
+
+    $defaults = $options['defaults'] ?? null;
+    if ($defaults is nonnull) {
+      $validator_config['defaults'] = $defaults;
+    }
+
+    $sanitize_string = $options['sanitize_string'] ?? null;
+    if ($sanitize_string is nonnull) {
+      $validator_config['sanitize_string'] = $sanitize_string;
+    }
+
+    $refs = $options['refs'] ?? null;
+    if ($refs is nonnull) {
+      $validator_config['refs'] = $refs;
+    }
+
+    $codegen_config = shape(
+      'generatedFrom' => '`make test`',
+      'validator' => $validator_config,
+    );
+
+    $json_schema_codegen_config =
+      $options['json_schema_codegen_config'] ?? null;
+    if ($json_schema_codegen_config is nonnull) {
+      $codegen_config['jsonSchemaCodegenConfig'] = $json_schema_codegen_config;
+    }
+
+    $codegen =
+      Codegen::forPath(__DIR__."/examples/{$json_filename}", $codegen_config);
+
+    return shape(
+      'path' => $path,
+      'codegen' => $codegen,
+    );
+  }
+
+  public static function benchmark(
+    string $label,
+    (function(): void) $callback,
+  ): void {
+    $benchmarks = [];
+
+    foreach (\range(0, 1000) as $iteration) {
+      $start = self::microtimeMs();
+      $callback();
+      $end = self::microtimeMs();
+      $benchmarks[] = $end - $start;
+    }
+
+    $average = \HH\Lib\Math\sum($benchmarks) / C\count($benchmarks);
+    \print_r("{$label} took: {$average}\n");
+  }
+
+  public static function microtimeMs(): int {
+    $gtod = \gettimeofday();
+    return ($gtod['sec'] * 1000) + ((int)($gtod['usec'] / 1000));
+  }
+
+  public function assertMatchesInput(
+    mixed $expected,
+    mixed $got,
+    string $msg = '',
+  ): void {
+    if (
+      !($expected instanceof KeyedContainer) ||
+      !($got instanceof KeyedContainer)
+    ) {
+      expect($expected)->toBeSame($got, $msg);
+      return;
+    }
+
+    foreach ($expected as $key => $expected_value) {
+      $got_value = null;
+      if (C\contains_key($got, $key))
+        $got_value = $got[$key];
+
+      if (
+        $expected instanceof KeyedContainer &&
+        $got_value instanceof KeyedContainer
+      ) {
+        $this->assertMatchesInput($expected_value, $got_value, $msg);
+        return;
+      }
+
+      expect($expected_value)->toBeSame(
+        $got_value,
+        $msg.": mismatch on {$key}",
+      );
+    }
+  }
+
+  public function expectCases<T>(
+    vec<shape('input' => mixed, ?'output' => mixed, 'valid' => bool)> $cases,
+    (function(mixed): Validator<T>) $init,
+  ): void {
+
+    foreach ($cases as $case) {
+      $validator = $init($case['input']);
+      $validator->validate();
+
+      $input = \print_r($case['input'], true);
+      if ($case['valid']) {
+        expect($validator->isValid())->toBeTrue(
+          "should be valid for input: {$input}",
+        );
+      } else {
+        expect($validator->isValid())->toBeFalse(
+          "should be invalid for input: {$input}",
+        );
+      }
+
+      $output = $case['output'] ?? null;
+      if ($output is nonnull) {
+        expect($validator->getValidatedInput())->toBeSame($output);
+      }
+    }
+  }
+
+}

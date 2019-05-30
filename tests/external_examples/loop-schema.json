@@ -1,0 +1,8 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "trying to create a loop",
+    "type": "object",
+    "properties": {
+        "loop": {"$ref": "external_definitions.json#/loop"}
+    }
+}

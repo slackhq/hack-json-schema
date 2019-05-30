@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "properties": {
+    "array_of_strings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "untyped_array": {
+      "type": "array"
+    },
+    "coerce_array": {
+      "type": "array",
+      "coerce": true,
+      "items": {
+        "type": "number",
+        "coerce": true
+      }
+    }
+  }
+}

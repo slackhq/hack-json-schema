@@ -1,0 +1,10 @@
+sharedmem_hash_table_pow=20
+sharedmem_dep_table_pow=20
+enable_experimental_tc_features=safe_pass_by_ref,unpacking_check_arity,no_fallback_in_namespaces,disallow_untyped_lambda_as_non_function_type,disallow_refs_in_array,shape_field_check,sealed_classes
+safe_array = true
+safe_vector_array = true
+disallow_destruct = true
+disallow_elvis_space=true
+disallow_non_arraykey_keys=true
+disallow_unsafe_comparisons=true
+decl_override_require_hint=true

@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "boolean": {
+      "type": "boolean"
+    },
+    "boolean_coerce_false": {
+      "type": "boolean",
+      "coerce": false
+    },
+    "nested_coerce_false": {
+      "type": "object",
+      "properties": {
+        "boolean_prop": {
+          "type": "boolean",
+          "coerce": false
+        },
+        "number_prop": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}

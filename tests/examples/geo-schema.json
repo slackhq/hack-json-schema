@@ -1,0 +1,19 @@
+{
+    "id": "http://json-schema.org/geo",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "A geographical coordinate",
+    "type": "object",
+    "required": ["latitude", "longitude"],
+    "properties": {
+      "latitude": {
+        "type": "number",
+        "maximum": 90,
+        "minimum": -90
+      },
+      "longitude": {
+        "type": "number",
+        "maximum": 180,
+        "minimum": -180
+      }
+    }
+}

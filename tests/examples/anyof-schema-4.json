@@ -1,0 +1,13 @@
+{
+    "anyOf": [
+        { "type": "null" },
+        { 
+            "type": "object",
+            "properties": {
+                "post-office-box": { "type": "string" },
+                "extended-address": { "type": "string" },
+                "street-address": { "type": "string" }
+            } 
+        }
+    ]
+}

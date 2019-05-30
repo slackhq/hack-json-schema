@@ -1,0 +1,147 @@
+{
+  "type": "object",
+  "properties": {
+    "all_of": {
+      "allOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "integer"
+        }
+      ]
+    },
+    "any_of": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "integer"
+        }
+      ]
+    },
+    "all_of_pass_through": {
+      "allOf": [
+        {
+          "type": "string",
+          "sanitize": {
+            "multiline": false
+          }
+        },
+        {
+          "type": "string",
+          "minLength": 1
+        }
+      ]
+    },
+    "all_of_pass_through_second": {
+      "allOf": [
+        {
+          "type": "string",
+          "sanitize": {
+            "multiline": true
+          }
+        },
+        {
+          "type": "string",
+          "sanitize": {
+            "multiline": false
+          }
+        }
+      ]
+    },
+    "all_of_coerce": {
+      "allOf": [
+        {
+          "type": "object",
+          "coerce": true
+        },
+        {
+          "type": "object",
+          "properties": {
+            "property": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "all_of_default": {
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "property": {
+              "type": "string",
+              "default": "default"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "numerical_property": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        }
+      ]
+    },
+    "all_of_default_first_schema_wins": {
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "property": {
+              "type": "string",
+              "default": "actual_default"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "property": {
+              "type": "string",
+              "default": "not_default"
+            }
+          }
+        }
+      ]
+    },
+    "any_of_optimized_enum": {
+      "anyOf": [
+        {
+          "type": "object",
+          "required": ["type"],
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["first"]
+            },
+            "string": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["type"],
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["second"]
+            },
+            "integer": {
+              "type": "integer"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

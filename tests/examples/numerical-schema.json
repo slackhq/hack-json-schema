@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "integer": {
+      "type": "integer"
+    },
+    "number": {
+      "type": "number"
+    },
+    "integer_coerce": {
+      "type": "integer",
+      "coerce": true
+    },
+    "number_coerce": {
+      "type": "number",
+      "coerce": true
+    }
+  }
+}

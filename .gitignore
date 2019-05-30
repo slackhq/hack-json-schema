@@ -1,0 +1,5 @@
+/vendor/
+.vscode
+.notes
+composer.phar
+.DS_Store

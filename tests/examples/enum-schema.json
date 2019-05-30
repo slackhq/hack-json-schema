@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "properties": {
+    "enum_string": {
+      "type": "string",
+      "enum": ["one", "two", "three"]
+    },
+    "enum_number": {
+      "type": "number",
+      "enum": [1, 2, 3]
+    }
+  }
+}

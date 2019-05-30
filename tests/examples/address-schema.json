@@ -1,0 +1,46 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "An Address following the convention of http://microformats.org/wiki/hcard",
+    "type": "object",
+    "properties": {
+        "post-office-box": { "type": "string" },
+        "extended-address": { "type": "string" },
+        "street-address": { "type": "string" },
+        "locality":{ "type": "string" },
+        "region": { "type": "string" },
+        "phones": {
+          "type": "array",
+          "items": { "$ref": "friends-schema.json#/definitions/devices/phone" }
+        },
+        "postal-code": {
+          "anyOf": [
+            { "type": "string" },
+            { "type": "integer" }
+          ]
+        },
+        "size" : {
+            "allOf" : [
+                { "type" : "integer" },
+                { "type" : "number" }
+            ]
+        },
+        "longitude" : {
+            "not" : [
+                { "type" : "integer" },
+                { "type" : "string" }
+            ]
+        },
+        "latitude" : {
+            "oneOf" : [
+                { "type" : "integer" },
+                { "type" : "number" }
+            ]
+        },
+        "country-name": { "type": "string"}
+    },
+    "required": ["locality", "region", "country-name"],
+    "dependencies": {
+        "post-office-box": ["street-address"],
+        "extended-address": ["street-address"]
+    }
+}

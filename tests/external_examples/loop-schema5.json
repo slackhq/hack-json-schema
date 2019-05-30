@@ -1,0 +1,5 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "trying to create a loop",
+    "$ref": "loop-schema4.json#"
+}

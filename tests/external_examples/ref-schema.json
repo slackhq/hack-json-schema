@@ -1,0 +1,21 @@
+{
+  "definitions": {
+    "string": {
+      "type": "string"
+    },
+    "self": {
+      "$ref": "#/definitions/string"
+    },
+    "object": {
+      "type": "object",
+      "properties": {
+        "string": {
+          "type": "string"
+        },
+        "integer": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

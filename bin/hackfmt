@@ -1,0 +1,23 @@
+#!/bin/bash
+
+file=`realpath $1`
+shift # remove filename so getopts ignores it
+
+# Since this wrapper performs in-place modification of a file, it can speed up
+# some editor workflows (e.g., Sublime) to perform the formatting over a
+# tempfile that is generated during a pre-save hook. Such tempfiles will cause
+# false negatives in the test for ignored file paths, so we provide an option
+# for the caller to provide an effective ignore path as a flag.
+ignore_path=$file
+while getopts "i:" opt; do
+	case ${opt} in
+		i )
+			ignore_path=$OPTARG
+			shift
+			;;
+	esac
+done
+shift $((OPTIND -1)) # cleanup getopts
+
+# run hackfmt if file doesn't match regex of ignored file paths
+[[ "$ignore_path" =~ ^(examples|external_examples) ]] || hackfmt --in-place $file

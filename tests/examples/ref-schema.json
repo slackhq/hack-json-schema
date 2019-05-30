@@ -1,0 +1,72 @@
+{
+  "type": "object",
+  "properties": {
+    "local-reference": {
+      "$ref": "#/definitions/local-object-reference"
+    },
+    "remote-reference": {
+      "$ref": "#/definitions/remote-reference"
+    },
+    "remote-reference-self": {
+      "$ref": "../external_examples/ref-schema.json#/definitions/self"
+    },
+    "remote-same-dir-reference": {
+      "$ref": "string-schema.json#/definitions/coerce"
+    },
+    "remote-nested-dir-reference": {
+      "$ref": "nested/nested-definitions.json#/definitions/string"
+    },
+    "nullable-unique-ref": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "../external_examples/ref-schema.json#/definitions/object"
+        }
+      ]
+    },
+    "duplicate-refs": {
+      "type": "object",
+      "properties": {
+        "first": {
+          "$ref": "../external_examples/ref-schema.json#/definitions/object"
+        },
+        "second": {
+          "$ref": "../external_examples/ref-schema.json#/definitions/object"
+        },
+        "third": {
+          "$ref": "../external_examples/ref-schema.json#/definitions/object"
+        },
+        "fourth": {
+          "$ref": "../external_examples/ref-schema.json#/definitions/object"
+        },
+        "fifth": {
+          "$ref": "../external_examples/ref-schema.json#/definitions/object"
+        }
+      }
+    },
+    "single-item-array-ref": {
+      "type": "array",
+      "items": {
+        "$ref": "../external_examples/ref-schema.json#/definitions/object"
+      }
+    }
+  },
+  "definitions": {
+    "remote-reference": {
+      "$ref": "../external_examples/ref-schema.json#/definitions/string"
+    },
+    "local-object-reference": {
+      "type": "object",
+      "properties": {
+        "first": {
+          "$ref": "#/definitions/local-property-reference"
+        }
+      }
+    },
+    "local-property-reference": {
+      "type": "string"
+    }
+  }
+}

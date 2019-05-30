@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Person",
+  "type": "object",
+  "properties": {
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "age": {
+      "description": "Age in years",
+      "type": "integer",
+      "minimum": 0
+    },
+    "string_or_num": {
+      "type": ["string", "integer"]
+    },
+    "friends": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "age": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": ["first_name", "last_name"],
+        "additionalProperties": false
+      }
+    },
+    "string_and_number": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        }
+      ]
+    },
+    "devices": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          { "$ref": "#/definitions/devices/phone" },
+          {
+            "$ref": "#/definitions/devices/computer"
+          }
+        ]
+      }
+    }
+  },
+  "required": ["first_name", "last_name"],
+  "definitions": {
+    "devices": {
+      "phone": {
+        "type": "object",
+        "required": ["model", "carrier", "type"],
+        "properties": {
+          "type": { "type": "string", "enum": ["phone"] },
+          "model": { "type": "string" },
+          "carrier": { "type": "string" },
+          "number": {
+            "type": "string",
+            "pattern": "^(\\([0-9]{3}\\))?[0-9]{3}-[0-9]{4}$"
+          }
+        },
+        "additionalProperties": { "type": "string" }
+      },
+      "computer": {
+        "type": "object",
+        "required": ["manufacturer", "type"],
+        "properties": {
+          "type": { "type": "string", "enum": ["computer"] },
+          "manufacturer": { "type": "string" },
+          "year": { "type": "integer" }
+        },
+        "additionalProperties": true
+      }
+    }
+  }
+}
