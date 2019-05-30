@@ -1,5 +1,7 @@
 # Hack JSON Schema
-Hack JSON Schema is a library for validating JSON inputs, using JSON schemas, in Hack. Given a JSON schema file, you can generate a validator in Hack to validate incoming JSON against the schema. If the JSON conforms to the schema, the validator will returned typed output.
+Hack JSON Schema is a library for validating JSON inputs, using JSON schemas, in Hack.
+
+Given a JSON schema file, you can generate a validator in Hack to validate incoming JSON against the schema. If the JSON conforms to the schema, the validator will returned typed output.
 
 There are several benefits to generation:
 
