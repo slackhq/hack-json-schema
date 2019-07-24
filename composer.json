@@ -9,13 +9,14 @@
         }
     ],
     "require": {
-        "facebook/hack-codegen": "4.0.2",
-        "hhvm/hsl": "3.30.0",
-        "hhvm/type-assert": "3.2.6"
+        "facebook/hack-codegen": "^4.1.0",
+        "hhvm/hsl": "^4.0.1",
+        "hhvm/type-assert": "^3.3.0"
     },
     "require-dev": {
-        "facebook/fbexpect": "2.3.0",
-        "hhvm/hacktest": "1.3"
+        "hhvm/hhast": "^4.0.5",
+        "facebook/fbexpect": "^2.3.0",
+        "hhvm/hacktest": "^1.3"
     },
     "autoload": {
       "classmap": [ "src/" ]
