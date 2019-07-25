@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<4671726aa3c6b380ea01d02c4e70713e>>
+ * @generated SignedSource<<6d1fd6561cd1fc5e89265211e0917079>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -17,7 +17,7 @@ final class ExternalExamplesRefSchema
 
   public static function check(
     mixed $input,
-    string $pointer,
+    string $_pointer,
   ): TExternalExamplesRefSchema {
     return $input;
   }

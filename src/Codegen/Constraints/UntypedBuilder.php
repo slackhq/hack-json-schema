@@ -58,16 +58,20 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       $this->generateOneOfChecks($one_of, $hb);
     }
 
+    $pointer_param = 'string $pointer';
     $has_any_check = vec[$any_of, $all_of, $not, $one_of] |> Vec\filter_nulls($$);
     if (C\is_empty($has_any_check)) {
       // If there are no valid checks, just return $input. We don't throw an
       // error because this could be a "definitions" file that points to valid
       // schemas.
       $hb->addReturn('$input', HackBuilderValues::literal());
+
+      // This will be an unused variable, appease the linter
+      $pointer_param = 'string $_pointer';
     }
 
     return $this->codegenCheckMethod()
-      ->addParameters(['mixed $input', 'string $pointer'])
+      ->addParameters(['mixed $input', $pointer_param])
       ->setBody($hb->getCode())
       ->setReturnType($this->getType());
   }
