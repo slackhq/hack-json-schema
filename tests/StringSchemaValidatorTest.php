@@ -1,8 +1,7 @@
-<?hh //strict
+<?hh // strict
 
 namespace Slack\Hack\JsonSchema\Tests;
 
-use function Facebook\FBExpect\expect;
 
 use type Slack\Hack\JsonSchema\Tests\Generated\StringSchemaValidator;
 
@@ -19,6 +18,7 @@ function _string_schema_validator_test_multiline(string $input): string {
 
 final class StringSchemaValidatorTest extends BaseCodegenTestCase {
 
+  <<__Override>>
   public static async function beforeFirstTestAsync(): Awaitable<void> {
     $ret = self::getBuilder(
       'string-schema.json',

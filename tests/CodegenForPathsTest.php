@@ -1,13 +1,9 @@
-<?hh
+<?hh // strict
 
 namespace Slack\Hack\JsonSchema\Tests;
 
 use type Slack\Hack\JsonSchema\Codegen\Codegen;
-use type Slack\Hack\JsonSchema\Tests\Generated\{
-  ExamplesStringSchema,
-  ExternalExamplesRefSchema,
-  ExternalExamplesFriendsSchema,
-};
+use type Slack\Hack\JsonSchema\Tests\Generated\{ExamplesStringSchema, ExternalExamplesFriendsSchema};
 
 final class CodegenForPathsTest extends BaseCodegenTestCase {
 
@@ -28,12 +24,8 @@ final class CodegenForPathsTest extends BaseCodegenTestCase {
           ),
         ),
         'sanitize_string' => shape(
-          'uniline' => fun(
-            '\Slack\Hack\JsonSchema\Tests\_string_schema_validator_test_uniline',
-          ),
-          'multiline' => fun(
-            '\Slack\Hack\JsonSchema\Tests\_string_schema_validator_test_multiline',
-          ),
+          'uniline' => fun('\Slack\Hack\JsonSchema\Tests\_string_schema_validator_test_uniline'),
+          'multiline' => fun('\Slack\Hack\JsonSchema\Tests\_string_schema_validator_test_multiline'),
         ),
       ),
       'generatedFrom' => '`make test`',
@@ -46,7 +38,6 @@ final class CodegenForPathsTest extends BaseCodegenTestCase {
 
     $validators = vec[
       new ExamplesStringSchema(dict[]),
-      new ExternalExamplesRefSchema(dict[]),
       new ExternalExamplesFriendsSchema(dict[]),
     ];
     foreach ($validators as $validator) {

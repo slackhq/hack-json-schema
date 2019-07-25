@@ -1,4 +1,4 @@
-<?hh
+<?hh // strict
 
 namespace Slack\Hack\JsonSchema\Tests;
 
@@ -10,6 +10,7 @@ use type Slack\Hack\JsonSchema\Tests\Generated\AddressSchemaFileValidator;
 
 final class AddressSchemaValidatorTest extends BaseCodegenTestCase {
 
+  <<__Override>>
   public static async function beforeFirstTestAsync(): Awaitable<void> {
     $ret = self::getBuilder('address-schema.json', 'AddressSchemaValidator');
     $ret['codegen']->build();

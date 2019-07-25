@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<373743d0ab5971cc67fb2ad4b93b0452>>
+ * @generated SignedSource<<69e239936b611cf9ef351b668bb20141>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -852,6 +852,7 @@ final class CustomCodegenConfigValidator
     return $output;
   }
 
+  <<__Override>>
   final protected function process(): custom_codegen_config_validator_t {
     return self::check($this->input, $this->pointer);
   }

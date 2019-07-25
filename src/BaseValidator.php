@@ -3,7 +3,6 @@
 namespace Slack\Hack\JsonSchema;
 
 use namespace HH\Lib\C;
-use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 abstract class BaseValidator<+T> implements Validator<T> {
@@ -37,10 +36,11 @@ abstract class BaseValidator<+T> implements Validator<T> {
 
   final public function getValidatedInput(): T {
     if ($this->validated_input === null) {
-      if (!$this->validated)
+      if (!$this->validated) {
         throw new \Exception(
           'Must call `validate` before accessing validated input.',
         );
+      }
       throw new \Exception(
         "Can't access validated input since validator is invalid.",
       );

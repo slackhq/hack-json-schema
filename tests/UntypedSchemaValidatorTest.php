@@ -1,4 +1,4 @@
-<?hh //strict
+<?hh // strict
 
 namespace Slack\Hack\JsonSchema\Tests;
 
@@ -21,6 +21,7 @@ function _untyped_schema_validator_test_multiline(string $input): string {
 
 final class UntypedSchemaValidatorTest extends BaseCodegenTestCase {
 
+  <<__Override>>
   public static async function beforeFirstTestAsync(): Awaitable<void> {
     $ret = self::getBuilder(
       'untyped-schema.json',

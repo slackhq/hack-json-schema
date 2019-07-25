@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<809f302aeb122b540b89e7bf6ea9d51f>>
+ * @generated SignedSource<<9c467773332189ef35d34936f09c6977>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -64,6 +64,7 @@ final class AnyOfValidator1 extends JsonSchema\BaseValidator<TAnyOfValidator1> {
     throw new JsonSchema\InvalidFieldException($pointer, $output_errors);
   }
 
+  <<__Override>>
   final protected function process(): TAnyOfValidator1 {
     return self::check($this->input, $this->pointer);
   }

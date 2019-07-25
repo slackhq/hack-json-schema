@@ -13,15 +13,17 @@ class ObjectRequiredConstraint {
   ): void {
     $errors = vec[];
     foreach ($required as $name) {
-      if (!C\contains_key($input, $name))
+      if (!C\contains_key($input, $name)) {
         $errors[] = shape(
           'code' => JsonSchema\FieldErrorCode::MISSING_FIELD,
           'message' => "missing required field: {$name}",
           'field' => $name,
         );
+      }
     }
 
-    if (C\count($errors))
+    if (C\count($errors)) {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
+    }
   }
 }

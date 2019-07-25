@@ -2,7 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use HH\Lib\{Str, Vec};
+use namespace HH\Lib\Vec;
 use type Facebook\HackCodegen\{
   CodegenFile,
   CodegenGeneratedFrom,
@@ -159,8 +159,9 @@ final class Codegen {
     self::TCodegenConfig $config,
   ): Codegen {
     $contents = \file_get_contents($schema_path);
-    if (!$contents)
+    if (!$contents) {
       throw new \Exception("Failed reading schema: `{$schema_path}`");
+    }
 
     $schema = \json_decode(
       $contents,
@@ -168,8 +169,9 @@ final class Codegen {
       512,
       \JSON_FB_HACK_ARRAYS,
     );
-    if ($schema === null)
+    if ($schema === null) {
       throw new \Exception("Failed decoding schema: `{$schema_path}`");
+    }
 
     $refs = $config['validator']['refs'] ?? shape();
     $refs['root_directory'] = \dirname($schema_path);

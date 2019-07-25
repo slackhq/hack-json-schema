@@ -2,23 +2,17 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use type \Facebook\HackCodegen\{
-  CodegenClass,
+use type Facebook\HackCodegen\{
   CodegenMethod,
   CodegenFile,
   CodegenFileType,
-  CodegenFileResult,
   CodegenGeneratedFrom,
-  CodegenProperty,
   HackCodegenFactory,
   IHackCodegenConfig,
-  HackBuilderValues,
-  HackBuilderKeys,
   HackBuilder,
 };
 
-use namespace \HH\Lib\Str;
-use namespace \Facebook\TypeAssert;
+use namespace HH\Lib\Str;
 
 final class ValidatorBuilder {
   private ?CodegenGeneratedFrom $generatedFrom;
@@ -136,6 +130,7 @@ final class ValidatorBuilder {
     return $this->cg
       ->codegenMethod('process')
       ->setReturnType($root->getType())
+      ->addEmptyUserAttribute('__Override')
       ->setProtected()
       ->setIsFinal(true)
       ->setBody($hb->getCode());

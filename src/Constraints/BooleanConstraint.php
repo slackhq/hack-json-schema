@@ -2,9 +2,9 @@
 
 namespace Slack\Hack\JsonSchema\Constraints;
 
-use namespace \Facebook\TypeAssert;
+use namespace Facebook\TypeAssert;
 use namespace Slack\Hack\JsonSchema;
-use namespace \HH\Lib\Str;
+use namespace HH\Lib\Str;
 
 class BooleanConstraint {
   public static function check(
@@ -13,14 +13,17 @@ class BooleanConstraint {
     bool $coerce,
   ): bool {
     if ($coerce) {
-      if (Str\lowercase((string)$input) === 'false')
+      if (Str\lowercase((string)$input) === 'false') {
         return false;
+      }
 
-      if ($input === '0')
+      if ($input === '0') {
         return false;
+      }
 
-      if ($input is nonnull && $input)
+      if ($input is nonnull && $input) {
         return true;
+      }
 
       return false;
     }

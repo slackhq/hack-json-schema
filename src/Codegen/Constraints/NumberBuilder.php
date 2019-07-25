@@ -2,9 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use type \Facebook\HackCodegen\{
-  CodegenShape,
-  CodegenProperty,
+use type Facebook\HackCodegen\{
   CodegenMethod,
   HackBuilderValues,
 };
@@ -21,6 +19,7 @@ class NumberBuilder extends BaseBuilder<TNumberSchema> {
   protected static string $schema_name =
     'Slack\Hack\JsonSchema\Codegen\TNumberSchema';
 
+  <<__Override>>
   public function build(): this {
     $class = $this->codegenClass()
       ->addMethod($this->getCheckMethod());
@@ -99,9 +98,11 @@ class NumberBuilder extends BaseBuilder<TNumberSchema> {
       ->setReturnType($return_type);
   }
 
+  <<__Override>>
   public function getType(): string {
-    if ($this->typed_schema['type'] === TSchemaType::INTEGER_T)
+    if ($this->typed_schema['type'] === TSchemaType::INTEGER_T) {
       return 'int';
+    }
     return 'num';
   }
 

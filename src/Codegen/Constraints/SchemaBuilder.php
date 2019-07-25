@@ -4,8 +4,8 @@ namespace Slack\Hack\JsonSchema\Codegen;
 
 use namespace Slack\Hack\JsonSchema;
 
-use type \Facebook\HackCodegen\{CodegenClass};
-use namespace \HH\Lib\C;
+use type Facebook\HackCodegen\{CodegenClass};
+use namespace HH\Lib\C;
 
 enum TSchemaType: string {
   OBJECT_T = 'object';
@@ -47,10 +47,11 @@ class SchemaBuilder implements IBuilder {
 
     $refs = keyset[];
     while ($ref is nonnull) {
-      if (C\contains_key($refs, $ref))
+      if (C\contains_key($refs, $ref)) {
         throw new JsonSchema\CircularReferenceException(
           "Circular reference beginning at {$ref}",
         );
+      }
 
       $refs[] = $ref;
 

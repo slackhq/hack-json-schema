@@ -1,4 +1,4 @@
-<?hh
+<?hh // strict
 
 namespace Slack\Hack\JsonSchema\Tests;
 
@@ -11,6 +11,7 @@ use type Slack\Hack\JsonSchema\Tests\Generated\ObjectSchemaValidator;
 
 final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
 
+  <<__Override>>
   public static async function beforeFirstTestAsync(): Awaitable<void> {
     $ret = self::getBuilder('object-schema.json', 'ObjectSchemaValidator');
     $ret['codegen']->build();

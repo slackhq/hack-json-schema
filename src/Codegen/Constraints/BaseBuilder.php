@@ -2,11 +2,10 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use type \Facebook\HackCodegen\{
+use type Facebook\HackCodegen\{
   CodegenClass,
   CodegenProperty,
   CodegenMethod,
-  CodegenShape,
   HackBuilder,
   HackBuilderValues,
 };
@@ -52,8 +51,9 @@ abstract class BaseBuilder<T> implements IBuilder {
   }
 
   protected function codegenClass(): CodegenClass {
-    if ($this->class)
+    if ($this->class) {
       return $this->class;
+    }
 
     return $this->ctx
       ->getHackCodegenFactory()
@@ -110,8 +110,9 @@ abstract class BaseBuilder<T> implements IBuilder {
   }
 
   public function addBuilderClass(CodegenClass $class): void {
-    if ($this->class)
+    if ($this->class) {
       return;
+    }
 
     $this->ctx->getFile()->addClass($class);
   }

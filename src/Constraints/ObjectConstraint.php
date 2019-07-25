@@ -2,8 +2,8 @@
 
 namespace Slack\Hack\JsonSchema\Constraints;
 
-use namespace \Facebook\TypeAssert;
-use namespace \Facebook\TypeSpec;
+use namespace Facebook\TypeAssert;
+use namespace Facebook\TypeSpec;
 
 use namespace Slack\Hack\JsonSchema;
 

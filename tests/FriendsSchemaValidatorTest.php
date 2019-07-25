@@ -1,4 +1,4 @@
-<?hh
+<?hh // strict
 
 namespace Slack\Hack\JsonSchema\Tests;
 
@@ -8,6 +8,7 @@ use function Facebook\FBExpect\expect;
 
 final class FriendsSchemaValidatorTest extends BaseCodegenTestCase {
 
+  <<__Override>>
   public static async function beforeFirstTestAsync(): Awaitable<void> {
     $ret = self::getBuilder('friends-schema.json', 'FriendsSchemaValidator');
     $ret['codegen']->build();

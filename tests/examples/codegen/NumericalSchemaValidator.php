@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<a0f0dadfd8c0238230b5659bc0cca98a>>
+ * @generated SignedSource<<acc213d7579837075e03a06ab5653b81>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -142,6 +142,7 @@ final class NumericalSchemaValidator
     return $output;
   }
 
+  <<__Override>>
   final protected function process(): TNumericalSchemaValidator {
     return self::check($this->input, $this->pointer);
   }

@@ -2,15 +2,9 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use namespace \HH\Lib\{Str, C, Vec};
+use namespace HH\Lib\{Str, Vec};
 
-use type \Facebook\HackCodegen\{
-  CodegenShape,
-  CodegenType,
-  CodegenProperty,
-  CodegenMethod,
-  HackBuilderValues,
-};
+use type Facebook\HackCodegen\CodegenMethod;
 
 type TCodegenMethods = vec<CodegenMethod>;
 
@@ -41,10 +35,11 @@ class UniqueRefBuilder implements IBuilder {
     $unique_refs_config as nonnull;
 
     $source_root = $unique_refs_config['source_root'];
-    if (!Str\contains($resolved_path, $source_root))
+    if (!Str\contains($resolved_path, $source_root)) {
       throw new \Exception(
         "Provided `source_root` ($source_root) not found in the resolved ref path ($resolved_path)",
       );
+    }
 
     $schema_path = $this->getRefSchemaPath($this->ref);
     $names = static::getNames(
@@ -135,7 +130,7 @@ class UniqueRefBuilder implements IBuilder {
     return $this->type;
   }
 
-  public function setSuffix(string $suffix): void {
+  public function setSuffix(string $_suffix): void {
     // noop because we don't use suffixes for unique refs
   }
 

@@ -2,14 +2,8 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use namespace \HH\Lib\{Str, C};
-use type \Facebook\HackCodegen\{
-  CodegenFile,
-  CodegenGeneratedFrom,
-  HackCodegenFactory,
-  HackCodegenConfig,
-  IHackCodegenConfig,
-};
+use namespace HH\Lib\C;
+use type Facebook\HackCodegen\CodegenFile;
 
 final class RefCache {
 

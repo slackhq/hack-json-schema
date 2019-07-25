@@ -2,7 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use type \Facebook\HackCodegen\{CodegenFile, HackCodegenFactory, CodegenClass};
+use type Facebook\HackCodegen\{CodegenFile, HackCodegenFactory, CodegenClass};
 
 final class RootBuilder implements IBuilder {
   private Context $ctx;
@@ -45,7 +45,7 @@ final class RootBuilder implements IBuilder {
     return $this->root->getType();
   }
 
-  public function setSuffix(string $suffix): void {
+  public function setSuffix(string $_suffix): void {
     // noop because we don't use suffixes for the root builder
   }
 

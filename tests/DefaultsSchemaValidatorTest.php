@@ -1,13 +1,13 @@
-<?hh
+<?hh // strict
 
 namespace Slack\Hack\JsonSchema\Tests;
 
-use function Facebook\FBExpect\expect;
 
 use type Slack\Hack\JsonSchema\Tests\Generated\DefaultsSchemaValidator;
 
 final class DefaultsSchemaValidatorTest extends BaseCodegenTestCase {
 
+  <<__Override>>
   public static async function beforeFirstTestAsync(): Awaitable<void> {
     $ret = self::getBuilder(
       'defaults-schema.json',

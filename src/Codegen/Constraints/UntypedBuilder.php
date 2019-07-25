@@ -3,15 +3,7 @@
 namespace Slack\Hack\JsonSchema\Codegen;
 
 use namespace HH\Lib\{C, Vec};
-use type \Facebook\HackCodegen\{
-  CodegenType,
-  CodegenShape,
-  CodegenProperty,
-  CodegenMethod,
-  HackBuilder,
-  HackBuilderKeys,
-  HackBuilderValues,
-};
+use type Facebook\HackCodegen\{CodegenType, CodegenMethod, HackBuilder, HackBuilderKeys, HackBuilderValues};
 
 type TUntypedSchema = shape(
   ?'anyOf' => vec<TSchema>,
@@ -27,10 +19,10 @@ type TOptimizedAnyOfTypes = shape(
 );
 
 class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
-  protected static string $schema_name =
-    'Slack\hack\JsonSchema\Codegen\TUntypedSchema';
+  protected static string $schema_name = 'Slack\hack\JsonSchema\Codegen\TUntypedSchema';
   private ?string $current_type = null;
 
+  <<__Override>>
   public function build(): this {
     $class = $this->codegenClass()
       ->addMethod($this->getCheckMethod());
@@ -72,28 +64,17 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       ->setReturnType($this->getType());
   }
 
-  private function generateNotChecks(
-    vec<TSchema> $schemas,
-    HackBuilder $hb,
-  ): void {
+  private function generateNotChecks(vec<TSchema> $schemas, HackBuilder $hb): void {
     $constraints = vec[];
     foreach ($schemas as $index => $schema) {
-      $schema_builder = new SchemaBuilder(
-        $this->ctx,
-        $this->generateClassName($this->suffix, 'not', (string)$index),
-        $schema,
-      );
+      $schema_builder =
+        new SchemaBuilder($this->ctx, $this->generateClassName($this->suffix, 'not', (string)$index), $schema);
       $schema_builder->build();
-      $constraints[] =
-        "class_meth({$schema_builder->getClassName()}::class, 'check')";
+      $constraints[] = "class_meth({$schema_builder->getClassName()}::class, 'check')";
     }
 
     $hb
-      ->addAssignment(
-        '$constraints',
-        $constraints,
-        HackBuilderValues::vec(HackBuilderValues::literal()),
-      )
+      ->addAssignment('$constraints', $constraints, HackBuilderValues::vec(HackBuilderValues::literal()))
       ->ensureEmptyLine();
 
     $hb
@@ -125,42 +106,27 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
         HackBuilderValues::shapeWithPerKeyRendering(shape(
           'code' => HackBuilderValues::literal(),
           'message' => HackBuilderValues::literal(),
-          'constraint' => HackBuilderValues::shapeWithUniformRendering(
-            HackBuilderValues::literal(),
-          ),
+          'constraint' => HackBuilderValues::shapeWithUniformRendering(HackBuilderValues::literal()),
         )),
       )
-      ->addLine(
-        'throw new JsonSchema\\InvalidFieldException($pointer, vec[$error]);',
-      )
+      ->addLine('throw new JsonSchema\\InvalidFieldException($pointer, vec[$error]);')
       ->endIfBlock();
 
     $hb->addReturn('$output', HackBuilderValues::literal());
 
   }
 
-  private function generateOneOfChecks(
-    vec<TSchema> $schemas,
-    HackBuilder $hb,
-  ): void {
+  private function generateOneOfChecks(vec<TSchema> $schemas, HackBuilder $hb): void {
     $constraints = vec[];
     foreach ($schemas as $index => $schema) {
-      $schema_builder = new SchemaBuilder(
-        $this->ctx,
-        $this->generateClassName($this->suffix, 'oneOf', (string)$index),
-        $schema,
-      );
+      $schema_builder =
+        new SchemaBuilder($this->ctx, $this->generateClassName($this->suffix, 'oneOf', (string)$index), $schema);
       $schema_builder->build();
-      $constraints[] =
-        "class_meth({$schema_builder->getClassName()}::class, 'check')";
+      $constraints[] = "class_meth({$schema_builder->getClassName()}::class, 'check')";
     }
 
     $hb
-      ->addAssignment(
-        '$constraints',
-        $constraints,
-        HackBuilderValues::vec(HackBuilderValues::literal()),
-      )
+      ->addAssignment('$constraints', $constraints, HackBuilderValues::vec(HackBuilderValues::literal()))
       ->ensureEmptyLine();
 
     $hb
@@ -196,61 +162,38 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
         HackBuilderValues::shapeWithPerKeyRendering(shape(
           'code' => HackBuilderValues::literal(),
           'message' => HackBuilderValues::literal(),
-          'constraint' => HackBuilderValues::shapeWithUniformRendering(
-            HackBuilderValues::literal(),
-          ),
+          'constraint' => HackBuilderValues::shapeWithUniformRendering(HackBuilderValues::literal()),
         )),
       )
-      ->addLine(
-        'throw new JsonSchema\\InvalidFieldException($pointer, vec[$error]);',
-      )
+      ->addLine('throw new JsonSchema\\InvalidFieldException($pointer, vec[$error]);')
       ->endIfBlock();
 
     $hb->addReturn('$output', HackBuilderValues::literal());
 
   }
 
-  private function generateAllOfChecks(
-    vec<TSchema> $schemas,
-    HackBuilder $hb,
-  ): void {
+  private function generateAllOfChecks(vec<TSchema> $schemas, HackBuilder $hb): void {
     $constraints = vec[];
     foreach ($schemas as $index => $schema) {
-      $schema_builder = new SchemaBuilder(
-        $this->ctx,
-        $this->generateClassName($this->suffix, 'allOf', (string)$index),
-        $schema,
-      );
+      $schema_builder =
+        new SchemaBuilder($this->ctx, $this->generateClassName($this->suffix, 'allOf', (string)$index), $schema);
       $schema_builder->build();
-      $constraints[] =
-        "class_meth({$schema_builder->getClassName()}::class, 'check')";
+      $constraints[] = "class_meth({$schema_builder->getClassName()}::class, 'check')";
     }
 
     $hb
-      ->addAssignment(
-        '$constraints',
-        $constraints,
-        HackBuilderValues::vec(HackBuilderValues::literal()),
-      )
+      ->addAssignment('$constraints', $constraints, HackBuilderValues::vec(HackBuilderValues::literal()))
       ->ensureEmptyLine();
 
     $hb
       ->addAssignment('$failed_any', false, HackBuilderValues::export())
-      ->addAssignment(
-        '$errors',
-        vec[],
-        HackBuilderValues::vec(HackBuilderValues::export()),
-      )
+      ->addAssignment('$errors', vec[], HackBuilderValues::vec(HackBuilderValues::export()))
       ->addAssignment('$output', '$input', HackBuilderValues::literal())
       ->startForeachLoop('$constraints', null, '$constraint')
       ->startTryBlock()
       ->addMultilineCall('$output = $constraint', ['$output', '$pointer'])
       ->addCatchBlock('JsonSchema\InvalidFieldException', '$e')
-      ->addAssignment(
-        '$errors',
-        '\HH\Lib\Vec\concat($errors, $e->errors)',
-        HackBuilderValues::literal(),
-      )
+      ->addAssignment('$errors', '\HH\Lib\Vec\concat($errors, $e->errors)', HackBuilderValues::literal())
       ->addAssignment('$failed_any', true, HackBuilderValues::export())
       ->endTryBlock()
       ->endForeachLoop()
@@ -272,41 +215,23 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
         HackBuilderValues::shapeWithPerKeyRendering(shape(
           'code' => HackBuilderValues::literal(),
           'message' => HackBuilderValues::literal(),
-          'constraint' => HackBuilderValues::shapeWithUniformRendering(
-            HackBuilderValues::literal(),
-          ),
+          'constraint' => HackBuilderValues::shapeWithUniformRendering(HackBuilderValues::literal()),
         )),
       )
       ->ensureEmptyLine()
-      ->addAssignment(
-        '$output_errors',
-        'vec[$error]',
-        HackBuilderValues::literal(),
-      )
-      ->addAssignment(
-        '$output_errors',
-        '\HH\Lib\Vec\concat($output_errors, $errors)',
-        HackBuilderValues::literal(),
-      )
-      ->addLine(
-        'throw new JsonSchema\\InvalidFieldException($pointer, $output_errors);',
-      )
+      ->addAssignment('$output_errors', 'vec[$error]', HackBuilderValues::literal())
+      ->addAssignment('$output_errors', '\HH\Lib\Vec\concat($output_errors, $errors)', HackBuilderValues::literal())
+      ->addLine('throw new JsonSchema\\InvalidFieldException($pointer, $output_errors);')
       ->endIfBlock();
 
     $hb->addReturn('$output', HackBuilderValues::literal());
   }
 
-  private function generateAnyOfChecks(
-    vec<TSchema> $schemas,
-    HackBuilder $hb,
-  ): void {
+  private function generateAnyOfChecks(vec<TSchema> $schemas, HackBuilder $hb): void {
     $schema_builders = Vec\map_with_key(
       $schemas,
-      ($index, $schema) ==> $schema_builder = new SchemaBuilder(
-        $this->ctx,
-        $this->generateClassName($this->suffix, 'anyOf', (string)$index),
-        $schema,
-      ),
+      ($index, $schema) ==> $schema_builder =
+        new SchemaBuilder($this->ctx, $this->generateClassName($this->suffix, 'anyOf', (string)$index), $schema),
     );
 
     $any_of_types = $this->getOptimizedAnyOfTypes($schema_builders);
@@ -330,9 +255,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
   * key, instead of validating incoming values against all available schemas,
   * we can use the required "type" key to validate against a specific schema.
   */
-  private function getOptimizedAnyOfTypes(
-    vec<SchemaBuilder> $schema_builders,
-  ): ?TOptimizedAnyOfTypes {
+  private function getOptimizedAnyOfTypes(vec<SchemaBuilder> $schema_builders): ?TOptimizedAnyOfTypes {
     // For any "object" type in the incoming schemas, build up a map of the
     // property name to a map of an enum value to schema builder. The case
     // we're looking for will have a property name that maps to a dict with N
@@ -347,37 +270,28 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       if ($type is string) {
         $type = TSchemaType::assert($type);
         if ($type === TSchemaType::OBJECT_T) {
-          $typed = type_assert_shape(
-            $resolved_schema,
-            'Slack\Hack\JsonSchema\Codegen\TObjectSchema',
-          );
+          $typed = type_assert_shape($resolved_schema, 'Slack\Hack\JsonSchema\Codegen\TObjectSchema');
           $required = $typed['required'] ?? vec[];
           $properties = $typed['properties'] ?? null;
           if ($properties is nonnull) {
             foreach ($properties as $property_name => $property_schema) {
               $property_type = $property_schema['type'] ?? null;
-              if ($property_type === null) continue;
+              if ($property_type === null) {
+                continue;
+              }
               $property_type = TSchemaType::assert($property_type);
 
-              if (
-                $property_type === TSchemaType::STRING_T &&
-                C\contains($required, $property_name)
-              ) {
-                $typed_property_schema = type_assert_shape(
-                  $property_schema,
-                  'Slack\Hack\JsonSchema\Codegen\TStringSchema',
-                );
+              if ($property_type === TSchemaType::STRING_T && C\contains($required, $property_name)) {
+                $typed_property_schema =
+                  type_assert_shape($property_schema, 'Slack\Hack\JsonSchema\Codegen\TStringSchema');
 
                 $enum = $typed_property_schema['enum'] ?? null;
                 if ($enum is nonnull && C\count($enum) === 1) {
-                  if (
-                    !C\contains_key($object_to_enum_builder_map, $property_name)
-                  ) {
+                  if (!C\contains_key($object_to_enum_builder_map, $property_name)) {
                     $object_to_enum_builder_map[$property_name] = dict[];
                   }
 
-                  $object_to_enum_builder_map[$property_name][$enum[0]] =
-                    $schema_builder;
+                  $object_to_enum_builder_map[$property_name][$enum[0]] = $schema_builder;
                 }
               }
             }
@@ -400,14 +314,10 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
     return $optimization;
   }
 
-  private function generateGenericAnyOfChecks(
-    vec<SchemaBuilder> $schema_builders,
-    HackBuilder $hb,
-  ): void {
+  private function generateGenericAnyOfChecks(vec<SchemaBuilder> $schema_builders, HackBuilder $hb): void {
     $constraints = vec[];
     foreach ($schema_builders as $schema_builder) {
-      $constraints[] =
-        "class_meth({$schema_builder->getClassName()}::class, 'check')";
+      $constraints[] = "class_meth({$schema_builder->getClassName()}::class, 'check')";
     }
 
     // Checks for the special case of one null and one non-null type in order to
@@ -424,10 +334,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
     if (\count($schema_builders) === 1) {
       $this->current_type = $schema_builders[0]->getType();
     } else if (\count($schema_builders) === 2) {
-      $without_null = Vec\filter(
-        $schema_builders,
-        $sb ==> !($sb->getBuilder() instanceof NullBuilder),
-      );
+      $without_null = Vec\filter($schema_builders, $sb ==> !($sb->getBuilder() instanceof NullBuilder));
 
       if (\count($without_null) === 1) {
         $non_null_schema_builder = $without_null[0];
@@ -453,16 +360,8 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
     }
 
     $hb
-      ->addAssignment(
-        '$constraints',
-        $constraints,
-        HackBuilderValues::vec(HackBuilderValues::literal()),
-      )
-      ->addAssignment(
-        '$errors',
-        vec[],
-        HackBuilderValues::vec(HackBuilderValues::export()),
-      )
+      ->addAssignment('$constraints', $constraints, HackBuilderValues::vec(HackBuilderValues::literal()))
+      ->addAssignment('$errors', vec[], HackBuilderValues::vec(HackBuilderValues::export()))
       ->ensureEmptyLine();
 
     $hb
@@ -471,11 +370,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       ->addMultilineCall('$output = $constraint', ['$input', '$pointer'])
       ->addReturn('$output', HackBuilderValues::literal())
       ->addCatchBlock('JsonSchema\InvalidFieldException', '$e')
-      ->addAssignment(
-        '$errors',
-        '\HH\Lib\Vec\concat($errors, $e->errors)',
-        HackBuilderValues::literal(),
-      )
+      ->addAssignment('$errors', '\HH\Lib\Vec\concat($errors, $e->errors)', HackBuilderValues::literal())
       ->endTryBlock()
       ->endForeachLoop()
       ->ensureEmptyLine();
@@ -495,40 +390,23 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
         HackBuilderValues::shapeWithPerKeyRendering(shape(
           'code' => HackBuilderValues::literal(),
           'message' => HackBuilderValues::literal(),
-          'constraint' => HackBuilderValues::shapeWithUniformRendering(
-            HackBuilderValues::literal(),
-          ),
+          'constraint' => HackBuilderValues::shapeWithUniformRendering(HackBuilderValues::literal()),
         )),
       )
       ->ensureEmptyLine()
-      ->addAssignment(
-        '$output_errors',
-        'vec[$error]',
-        HackBuilderValues::literal(),
-      )
-      ->addAssignment(
-        '$output_errors',
-        '\HH\Lib\Vec\concat($output_errors, $errors)',
-        HackBuilderValues::literal(),
-      )
-      ->addLine(
-        'throw new JsonSchema\\InvalidFieldException($pointer, $output_errors);',
-      );
+      ->addAssignment('$output_errors', 'vec[$error]', HackBuilderValues::literal())
+      ->addAssignment('$output_errors', '\HH\Lib\Vec\concat($output_errors, $errors)', HackBuilderValues::literal())
+      ->addLine('throw new JsonSchema\\InvalidFieldException($pointer, $output_errors);');
   }
 
-  private function generateOptimizedAnyOfChecks(
-    TOptimizedAnyOfTypes $any_of_types,
-    HackBuilder $hb,
-  ): void {
+  private function generateOptimizedAnyOfChecks(TOptimizedAnyOfTypes $any_of_types, HackBuilder $hb): void {
     $types = dict[];
     foreach ($any_of_types['types'] as $type_name => $schema_builder) {
-      $suffix =
-        $this->generateClassName($this->suffix, 'anyOfTypes', $type_name);
+      $suffix = $this->generateClassName($this->suffix, 'anyOfTypes', $type_name);
       $schema_builder->setSuffix($suffix);
       $schema_builder->build();
 
-      $types[$type_name] =
-        "class_meth({$schema_builder->getClassName()}::class, 'check')";
+      $types[$type_name] = "class_meth({$schema_builder->getClassName()}::class, 'check')";
     }
 
     $hb
@@ -539,20 +417,9 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
         HackBuilderValues::literal(),
       )
       ->ensureEmptyLine()
-      ->addMultilineCall(
-        'Constraints\ObjectRequiredConstraint::check',
-        ['$typed', 'keyset[$key]', '$pointer'],
-      )
-      ->addAssignment(
-        '$type_name',
-        '($typed[$key] ?? null) as nonnull',
-        HackBuilderValues::literal(),
-      )
-      ->addAssignment(
-        '$field_pointer',
-        'JsonSchema\get_pointer($pointer, $key)',
-        HackBuilderValues::literal(),
-      )
+      ->addMultilineCall('Constraints\ObjectRequiredConstraint::check', ['$typed', 'keyset[$key]', '$pointer'])
+      ->addAssignment('$type_name', '($typed[$key] ?? null) as nonnull', HackBuilderValues::literal())
+      ->addAssignment('$field_pointer', 'JsonSchema\get_pointer($pointer, $key)', HackBuilderValues::literal())
       ->addAssignment(
         '$type_name',
         'Constraints\StringConstraint::check($type_name, $field_pointer, false)',
@@ -562,19 +429,12 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       ->addAssignment(
         '$types',
         $types,
-        HackBuilderValues::dict(
-          HackBuilderKeys::export(),
-          HackBuilderValues::literal(),
-        ),
+        HackBuilderValues::dict(HackBuilderKeys::export(), HackBuilderValues::literal()),
       )
       ->ensureEmptyLine();
 
     $hb
-      ->addAssignment(
-        '$constraint',
-        '$types[$type_name] ?? null',
-        HackBuilderValues::literal(),
-      );
+      ->addAssignment('$constraint', '$types[$type_name] ?? null', HackBuilderValues::literal());
 
     $error = shape(
       'code' => 'JsonSchema\FieldErrorCode::FAILED_CONSTRAINT',
@@ -594,14 +454,10 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
         HackBuilderValues::shapeWithPerKeyRendering(shape(
           'code' => HackBuilderValues::literal(),
           'message' => HackBuilderValues::literal(),
-          'constraint' => HackBuilderValues::shapeWithUniformRendering(
-            HackBuilderValues::literal(),
-          ),
+          'constraint' => HackBuilderValues::shapeWithUniformRendering(HackBuilderValues::literal()),
         )),
       )
-      ->addLine(
-        'throw new JsonSchema\\InvalidFieldException($field_pointer, vec[$error]);',
-      )
+      ->addLine('throw new JsonSchema\\InvalidFieldException($field_pointer, vec[$error]);')
       ->endIfBlock()
       ->ensureEmptyLine();
 
@@ -609,6 +465,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       ->addMultilineCall('return $constraint', ['$typed', '$pointer']);
   }
 
+  <<__Override>>
   public function getType(): string {
     return $this->generateTypeName($this->getClassName());
   }

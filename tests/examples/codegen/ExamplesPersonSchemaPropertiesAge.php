@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<fe04a21fb75be07bc97e3ced3e05753a>>
+ * @generated SignedSource<<24583845aaf8cbef2169f7f5e56913c6>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -30,6 +30,7 @@ final class ExamplesPersonSchemaPropertiesAge
     return $typed;
   }
 
+  <<__Override>>
   final protected function process(): int {
     return self::check($this->input, $this->pointer);
   }

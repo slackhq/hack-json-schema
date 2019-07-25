@@ -2,10 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use type \Facebook\HackCodegen\{
-  CodegenShape,
-  CodegenType,
-  CodegenProperty,
+use type Facebook\HackCodegen\{
   CodegenMethod,
   HackBuilderValues,
 };
@@ -28,6 +25,7 @@ class StringBuilder extends BaseBuilder<TStringSchema> {
   protected static string $schema_name =
     'Slack\Hack\JsonSchema\Codegen\TStringSchema';
 
+  <<__Override>>
   public function build(): this {
     $class = $this->codegenClass()
       ->addMethod($this->getCheckMethod());
@@ -164,6 +162,7 @@ class StringBuilder extends BaseBuilder<TStringSchema> {
       ->setReturnType('string');
   }
 
+  <<__Override>>
   public function getType(): string {
     return 'string';
   }

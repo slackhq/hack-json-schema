@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<c3456804e837d4d1b1b69c772427815f>>
+ * @generated SignedSource<<2434a3b8f8e970910c9bd45c6cb01cc9>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -300,6 +300,7 @@ final class CodegenForSchemaFriendsSchema
     return $output;
   }
 
+  <<__Override>>
   final protected function process(): vec<TCodegenForSchemaFriendsSchemaItems> {
     return self::check($this->input, $this->pointer);
   }

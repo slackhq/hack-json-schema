@@ -2,7 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Constraints;
 
-use namespace \Facebook\{TypeAssert, TypeCoerce};
+use namespace Facebook\{TypeAssert, TypeCoerce};
 use namespace Slack\Hack\JsonSchema;
 
 class IntegerConstraint {

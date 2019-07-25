@@ -2,7 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Tests;
 
-use \HH\Lib\C;
+use namespace HH\Lib\C;
 use function Facebook\FBExpect\expect;
 use type Slack\Hack\JsonSchema\Validator;
 use type Slack\Hack\JsonSchema\Codegen\{Codegen, IJsonSchemaCodegenConfig};
@@ -142,8 +142,9 @@ abstract class BaseCodegenTestCase extends HackTest {
 
     foreach ($expected as $key => $expected_value) {
       $got_value = null;
-      if (C\contains_key($got, $key))
+      if (C\contains_key($got, $key)) {
         $got_value = $got[$key];
+      }
 
       if (
         $expected instanceof KeyedContainer &&

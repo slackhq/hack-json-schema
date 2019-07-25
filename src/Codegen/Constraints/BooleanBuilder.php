@@ -2,9 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use type \Facebook\HackCodegen\{
-  CodegenShape,
-  CodegenProperty,
+use type Facebook\HackCodegen\{
   CodegenMethod,
   HackBuilderValues,
 };
@@ -19,6 +17,7 @@ class BooleanBuilder extends BaseBuilder<TBooleanSchema> {
   protected static string $schema_name =
     'Slack\Hack\JsonSchema\Codegen\TBooleanSchema';
 
+  <<__Override>>
   public function build(): this {
 
     $properties = vec[];
@@ -36,6 +35,7 @@ class BooleanBuilder extends BaseBuilder<TBooleanSchema> {
     return $this;
   }
 
+  <<__Override>>
   public function getType(): string {
     return 'bool';
   }

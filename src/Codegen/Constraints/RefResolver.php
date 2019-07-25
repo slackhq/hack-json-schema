@@ -2,7 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use namespace \HH\Lib\{Str, C};
+use namespace HH\Lib\{Str, C};
 
 use namespace Slack\Hack\JsonSchema;
 
@@ -26,16 +26,18 @@ trait RefResolver {
       $paths = $this->splitRefPaths($ref);
       $full_path = $root_directory."/".$paths[0];
       $new_root_path = \realpath($full_path);
-      if ($new_root_path === false)
+      if ($new_root_path === false) {
         throw new \Exception("Error resolving reference: {$full_path}");
+      }
 
       $current_schema = $this->loadSchema($new_root_path);
       $current_file_name = Str\split($new_root_path, '/') |> C\last($$) ?? '';
       $ctx->setCurrentRefFileName($current_file_name);
 
-      if ($current_schema === null)
+      if ($current_schema === null) {
         throw
           new \Exception("Failed reading schema: `{$new_root_path}`, `{$ref}`");
+      }
 
       if ($ctx->hasSeenRef($new_root_path)) {
         throw new JsonSchema\CircularReferenceException(
@@ -83,8 +85,9 @@ trait RefResolver {
   * Return just the path to the file within a ref.
   */
   protected function getRefFilePath(string $ref): string {
-    if ($ref[0] === '#')
+    if ($ref[0] === '#') {
       return '';
+    }
     $paths = $this->splitRefPaths($ref);
     return $paths[0];
   }
@@ -93,8 +96,9 @@ trait RefResolver {
   * Return just the path to the schema within a ref.
   */
   protected function getRefSchemaPath(string $ref): string {
-    if ($ref[0] === '#')
+    if ($ref[0] === '#') {
       return \substr($ref, 1);
+    }
 
     $paths = $this->splitRefPaths($ref);
     return $paths[1] ?? '';
@@ -109,16 +113,18 @@ trait RefResolver {
   */
   protected function splitRefPaths(string $ref): vec<string> {
     $paths = \HH\Lib\Vec\filter(\HH\Lib\Str\split($ref, '#'));
-    if ($paths[0][0] === "/")
+    if ($paths[0][0] === "/") {
       $paths[0] = \substr($paths[0], 1);
+    }
 
     return $paths;
   }
 
   protected function loadSchema(string $fp): ?TSchema {
     $contents = \file_get_contents($fp);
-    if (!$contents)
+    if (!$contents) {
       return null;
+    }
 
     $schema = \json_decode(
       $contents,
@@ -127,8 +133,9 @@ trait RefResolver {
       \JSON_FB_HACK_ARRAYS,
     );
 
-    if ($schema === null)
+    if ($schema === null) {
       throw new \Exception("Failed decoding schema: `{$fp}`");
+    }
 
     return type_assert_shape($schema, 'Slack\Hack\JsonSchema\Codegen\TSchema');
   }

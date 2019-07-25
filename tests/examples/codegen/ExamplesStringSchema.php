@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<c3aaab3b3969ac5c72fda97f3a938d6e>>
+ * @generated SignedSource<<145c38cedb8b03b578422d56be1d6844>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -162,6 +162,7 @@ final class ExamplesStringSchema
     return $output;
   }
 
+  <<__Override>>
   final protected function process(): TExamplesStringSchema {
     return self::check($this->input, $this->pointer);
   }

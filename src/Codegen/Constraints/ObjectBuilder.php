@@ -2,13 +2,11 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use namespace \HH\Lib\{C, Str};
+use namespace HH\Lib\{C, Str};
 
-use type \Facebook\HackCodegen\{
+use type Facebook\HackCodegen\{
   CodegenType,
-  CodegenShape,
   CodegenShapeMember,
-  CodegenProperty,
   CodegenMethod,
   HackBuilderValues,
   HackBuilderKeys,
@@ -29,6 +27,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
   protected static string $schema_name =
     'Slack\Hack\JsonSchema\Codegen\TObjectSchema';
 
+  <<__Override>>
   public function build(): this {
     // Each property is itself a JSON schema. We need to build the classes for
     // each of those schemas first, since we'll use those generated classes in
@@ -98,6 +97,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     return $this;
   }
 
+  <<__Override>>
   public function getType(): string {
     return $this->generateTypeName($this->getClassName());
   }
@@ -457,13 +457,15 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     $properties = $this->typed_schema['properties'] ?? null;
     $defaults = dict[];
 
-    if ($properties === null)
+    if ($properties === null) {
       return $defaults;
+    }
 
     foreach ($properties as $name => $schema) {
       $default = $schema['default'] ?? null;
-      if ($default is nonnull)
+      if ($default is nonnull) {
         $defaults[$name] = $default;
+      }
     }
 
     return $defaults;
@@ -527,8 +529,9 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
       $members = [];
       foreach ($property_classes as $property => $builder) {
         $member = new CodegenShapeMember($property, $builder->getType());
-        if (!\HH\Lib\C\contains($required, $property))
+        if (!\HH\Lib\C\contains($required, $property)) {
           $member->setIsOptional();
+        }
 
         $members[] = $member;
       }

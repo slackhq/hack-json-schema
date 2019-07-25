@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<2690bc9c85fd33e1842748bc28e2740c>>
+ * @generated SignedSource<<d75009ff06339d0bb802631096bde5b6>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -176,6 +176,7 @@ final class ArraySchemaValidator
     return $output;
   }
 
+  <<__Override>>
   final protected function process(): TArraySchemaValidator {
     return self::check($this->input, $this->pointer);
   }

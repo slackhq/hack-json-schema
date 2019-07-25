@@ -2,7 +2,6 @@
 
 namespace Slack\Hack\JsonSchema\Constraints;
 
-use namespace \Facebook\TypeAssert;
 use namespace Slack\Hack\JsonSchema;
 
 class NullConstraint {

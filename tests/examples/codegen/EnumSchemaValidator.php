@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<2e35f97aee9a1334a02504a85947315f>>
+ * @generated SignedSource<<044ff35046294aeec6c37797043b0d72>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -104,6 +104,7 @@ final class EnumSchemaValidator
     return $output;
   }
 
+  <<__Override>>
   final protected function process(): TEnumSchemaValidator {
     return self::check($this->input, $this->pointer);
   }

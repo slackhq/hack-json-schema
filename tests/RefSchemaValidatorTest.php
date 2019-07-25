@@ -1,14 +1,14 @@
-<?hh //strict
+<?hh // strict
 
 namespace Slack\Hack\JsonSchema\Tests;
 
 use function Facebook\FBExpect\expect;
 
-use type Slack\Hack\JsonSchema\Codegen\Codegen;
 use type Slack\Hack\JsonSchema\Tests\Generated\RefSchemaValidator;
 
 final class RefSchemaValidatorTest extends BaseCodegenTestCase {
 
+  <<__Override>>
   public static async function beforeFirstTestAsync(): Awaitable<void> {
     $ret = self::getBuilder(
       'ref-schema.json',

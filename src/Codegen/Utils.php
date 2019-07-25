@@ -2,7 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use namespace \Facebook\TypeAssert;
+use namespace Facebook\TypeAssert;
 
 <<__Memoize>>
 /* HH_IGNORE_ERROR[4030] `getResolvedTypeStructure` returns an `array` */

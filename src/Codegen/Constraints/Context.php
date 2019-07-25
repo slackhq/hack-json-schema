@@ -2,9 +2,9 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use namespace \HH\Lib\{Str, C};
+use namespace HH\Lib\{Str, C};
 
-use type \Facebook\HackCodegen\{CodegenFile, HackCodegenFactory};
+use type Facebook\HackCodegen\{CodegenFile, HackCodegenFactory};
 
 final class Context {
   private Codegen::TValidatorConfig $validatorConfig;
@@ -86,8 +86,9 @@ final class Context {
 
   public function getRefsRootDirectory(): ?string {
     $refs_config = $this->refsConfig ?? null;
-    if ($refs_config === null)
+    if ($refs_config === null) {
       return null;
+    }
 
     return $refs_config['root_directory'] ?? null;
   }

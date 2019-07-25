@@ -2,11 +2,8 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use namespace Slack\Hack\JsonSchema;
 
-use type \Facebook\HackCodegen\{
-  CodegenShape,
-  CodegenProperty,
+use type Facebook\HackCodegen\{
   CodegenMethod,
   HackBuilderValues,
 };
@@ -20,6 +17,7 @@ class NullBuilder extends BaseBuilder<TNullSchema> {
   protected static string $schema_name =
     'Slack\Hack\JsonSchema\Codegen\TNullSchema';
 
+  <<__Override>>
   public function build(): this {
     $class = $this->codegenClass()
       ->addMethod($this->getCheckMethod());
@@ -49,6 +47,7 @@ class NullBuilder extends BaseBuilder<TNullSchema> {
       ->setReturnType($this->getType());
   }
 
+  <<__Override>>
   public function getType(): string {
     return 'mixed';
   }

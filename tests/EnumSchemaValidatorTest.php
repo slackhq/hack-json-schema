@@ -1,13 +1,13 @@
-<?hh //strict
+<?hh // strict
 
 namespace Slack\Hack\JsonSchema\Tests;
 
-use function Facebook\FBExpect\expect;
 
 use type Slack\Hack\JsonSchema\Tests\Generated\EnumSchemaValidator;
 
 final class EnumSchemaValidatorTest extends BaseCodegenTestCase {
 
+  <<__Override>>
   public static async function beforeFirstTestAsync(): Awaitable<void> {
     $ret = self::getBuilder('enum-schema.json', 'EnumSchemaValidator');
     $ret['codegen']->build();

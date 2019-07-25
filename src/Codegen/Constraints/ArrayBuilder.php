@@ -2,10 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use type \Facebook\HackCodegen\{
-  CodegenShape,
-  CodegenType,
-  CodegenProperty,
+use type Facebook\HackCodegen\{
   CodegenMethod,
   HackBuilderValues,
   HackBuilder,
@@ -29,6 +26,7 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
   protected static string $schema_name =
     'Slack\Hack\JsonSchema\Codegen\TArraySchema';
 
+  <<__Override>>
   public function build(): this {
     $class = $this->codegenClass()
       ->addMethod($this->getCheckMethod());
@@ -59,10 +57,12 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
     return $this;
   }
 
+  <<__Override>>
   public function getType(): string {
     // Items can be many types, best we can do is `vec<mixed>`.
-    if (!$this->isSchema($this->typed_schema['items'] ?? null))
+    if (!$this->isSchema($this->typed_schema['items'] ?? null)) {
       return 'vec<mixed>';
+    }
 
     // Items is a single type, get the type from the items builder.
     $items_builder = $this->singleItemSchemaBuilder;
@@ -129,8 +129,9 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
     HackBuilder $hb,
     bool $additionalItems,
   ): void {
-    if ($items === null)
+    if ($items === null) {
       return;
+    }
 
     $hb
       ->addAssignment('$output', 'vec[]', HackBuilderValues::literal());

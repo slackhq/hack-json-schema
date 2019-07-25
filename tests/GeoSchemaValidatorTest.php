@@ -1,4 +1,4 @@
-<?hh
+<?hh // strict
 
 namespace Slack\Hack\JsonSchema\Tests;
 
@@ -7,6 +7,7 @@ use type Slack\Hack\JsonSchema\Tests\Generated\GeoSchemaValidator;
 
 final class GeoSchemaValidatorTest extends BaseCodegenTestCase {
 
+  <<__Override>>
   public static async function beforeFirstTestAsync(): Awaitable<void> {
     $ret = self::getBuilder('geo-schema.json', 'GeoSchemaValidator');
     $ret['codegen']->build();
