@@ -1,6 +1,7 @@
 # Hack JSON Schema
 
-[![Build Status](https://travis-ci.org/slackhq/hack-json-schema.svg?branch=master)]((https://travis-ci.org/slackhq/hack-json-schema)
+[![Build Status](https://travis-ci.org/slackhq/hack-json-schema.svg?branch=master)](https://travis-ci.org/slackhq/hack-json-schema)
+
 Hack JSON Schema is a library for validating JSON inputs, using JSON schemas, in Hack.
 
 Given a JSON schema file, you can generate a validator in Hack to validate incoming JSON against the schema. If the JSON conforms to the schema, the validator will returned typed output.
