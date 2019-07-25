@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<e93737e4926b5282744623834e2891c2>>
+ * @generated SignedSource<<292108a0d52cb454cfe3405b1a931b40>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -104,7 +104,6 @@ type TObjectSchemaValidator = shape(
   ...
 );
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesOnlyAdditionalProperties {
 
   private static bool $coerce = false;
@@ -118,7 +117,6 @@ final class ObjectSchemaValidatorPropertiesOnlyAdditionalProperties {
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesOnlyNoAdditionalProperties {
 
   private static bool $coerce = false;
@@ -151,7 +149,6 @@ final class ObjectSchemaValidatorPropertiesOnlyNoAdditionalProperties {
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesOnlyPropertiesPropertiesString {
 
   private static bool $coerce = false;
@@ -163,7 +160,6 @@ final class ObjectSchemaValidatorPropertiesOnlyPropertiesPropertiesString {
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesOnlyPropertiesPropertiesNumber {
 
   private static bool $coerce = false;
@@ -175,7 +171,6 @@ final class ObjectSchemaValidatorPropertiesOnlyPropertiesPropertiesNumber {
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesOnlyPropertiesPropertiesRequiredString {
 
   private static bool $coerce = false;
@@ -187,7 +182,6 @@ final class ObjectSchemaValidatorPropertiesOnlyPropertiesPropertiesRequiredStrin
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesOnlyProperties {
 
   private static keyset<string> $required = keyset[
@@ -280,7 +274,6 @@ final class ObjectSchemaValidatorPropertiesOnlyProperties {
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesOnlyPatternPropertiesPatternProperties0 {
 
   private static bool $coerce = false;
@@ -292,7 +285,6 @@ final class ObjectSchemaValidatorPropertiesOnlyPatternPropertiesPatternPropertie
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesOnlyPatternPropertiesPatternProperties1 {
 
   private static bool $coerce = false;
@@ -304,7 +296,6 @@ final class ObjectSchemaValidatorPropertiesOnlyPatternPropertiesPatternPropertie
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesOnlyPatternProperties {
 
   private static bool $coerce = false;
@@ -363,7 +354,6 @@ final class ObjectSchemaValidatorPropertiesOnlyPatternProperties {
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesSinglePatternPropertyStringPatternProperties0 {
 
   private static bool $coerce = false;
@@ -375,7 +365,6 @@ final class ObjectSchemaValidatorPropertiesSinglePatternPropertyStringPatternPro
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesSinglePatternPropertyString {
 
   private static bool $coerce = false;
@@ -432,7 +421,6 @@ final class ObjectSchemaValidatorPropertiesSinglePatternPropertyString {
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesSinglePatternPropertyObjectPatternProperties0PropertiesSample {
 
   private static bool $coerce = false;
@@ -444,7 +432,6 @@ final class ObjectSchemaValidatorPropertiesSinglePatternPropertyObjectPatternPro
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesSinglePatternPropertyObjectPatternProperties0 {
 
   private static keyset<string> $required = keyset[
@@ -492,7 +479,6 @@ final class ObjectSchemaValidatorPropertiesSinglePatternPropertyObjectPatternPro
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesSinglePatternPropertyObject {
 
   private static bool $coerce = false;
@@ -549,7 +535,6 @@ final class ObjectSchemaValidatorPropertiesSinglePatternPropertyObject {
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesPatternPropertiesNoAdditionalPropertiesPatternProperties0 {
 
   private static bool $coerce = false;
@@ -561,7 +546,6 @@ final class ObjectSchemaValidatorPropertiesPatternPropertiesNoAdditionalProperti
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesPatternPropertiesNoAdditionalPropertiesPatternProperties1 {
 
   private static bool $coerce = false;
@@ -573,7 +557,6 @@ final class ObjectSchemaValidatorPropertiesPatternPropertiesNoAdditionalProperti
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesPatternPropertiesNoAdditionalProperties {
 
   private static bool $coerce = false;
@@ -640,7 +623,6 @@ final class ObjectSchemaValidatorPropertiesPatternPropertiesNoAdditionalProperti
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesPropertiesString {
 
   private static bool $coerce = false;
@@ -652,7 +634,6 @@ final class ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesPropert
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesPatternProperties0 {
 
   private static bool $coerce = false;
@@ -664,7 +645,6 @@ final class ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesPattern
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesPatternProperties1 {
 
   private static bool $coerce = false;
@@ -676,7 +656,6 @@ final class ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesPattern
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesPropertiesAndPatternProperties {
 
   private static bool $coerce = false;
@@ -757,7 +736,6 @@ final class ObjectSchemaValidatorPropertiesPropertiesAndPatternProperties {
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesNoAdditionalPropertiesString {
 
   private static bool $coerce = false;
@@ -769,7 +747,6 @@ final class ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesNoAddit
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesNoAdditionalPatternProperties0 {
 
   private static bool $coerce = false;
@@ -781,7 +758,6 @@ final class ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesNoAddit
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesNoAdditionalPatternProperties1 {
 
   private static bool $coerce = false;
@@ -793,7 +769,6 @@ final class ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesNoAddit
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesNoAdditional {
 
   private static bool $coerce = false;
@@ -877,7 +852,6 @@ final class ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesNoAddit
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesNestedObjectPropertiesFirstPropertiesSecondPropertiesLast {
 
   private static bool $coerce = false;
@@ -889,7 +863,6 @@ final class ObjectSchemaValidatorPropertiesNestedObjectPropertiesFirstProperties
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesNestedObjectPropertiesFirstPropertiesSecond {
 
   private static bool $coerce = false;
@@ -929,7 +902,6 @@ final class ObjectSchemaValidatorPropertiesNestedObjectPropertiesFirstProperties
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesNestedObjectPropertiesFirst {
 
   private static bool $coerce = false;
@@ -969,7 +941,6 @@ final class ObjectSchemaValidatorPropertiesNestedObjectPropertiesFirst {
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesNestedObject {
 
   private static bool $coerce = false;
@@ -1009,7 +980,6 @@ final class ObjectSchemaValidatorPropertiesNestedObject {
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesCoerceObjectPropertiesFirst {
 
   private static bool $coerce = false;
@@ -1021,7 +991,6 @@ final class ObjectSchemaValidatorPropertiesCoerceObjectPropertiesFirst {
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesCoerceObjectPropertiesSecond {
 
   private static bool $coerce = false;
@@ -1033,7 +1002,6 @@ final class ObjectSchemaValidatorPropertiesCoerceObjectPropertiesSecond {
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesCoerceObject {
 
   private static bool $coerce = true;
@@ -1084,7 +1052,6 @@ final class ObjectSchemaValidatorPropertiesCoerceObject {
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesImplicitAdditionalPropertiesPropertiesFirst {
 
   private static bool $coerce = false;
@@ -1096,7 +1063,6 @@ final class ObjectSchemaValidatorPropertiesImplicitAdditionalPropertiesPropertie
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesImplicitAdditionalProperties {
 
   private static bool $coerce = false;
@@ -1136,7 +1102,6 @@ final class ObjectSchemaValidatorPropertiesImplicitAdditionalProperties {
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesExplicitAdditionalPropertiesPropertiesFirst {
 
   private static bool $coerce = false;
@@ -1148,7 +1113,6 @@ final class ObjectSchemaValidatorPropertiesExplicitAdditionalPropertiesPropertie
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesExplicitAdditionalProperties {
 
   private static bool $coerce = false;
@@ -1188,7 +1152,6 @@ final class ObjectSchemaValidatorPropertiesExplicitAdditionalProperties {
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesNoAdditionalPropertiesPropertiesFirst {
 
   private static bool $coerce = false;
@@ -1200,7 +1163,6 @@ final class ObjectSchemaValidatorPropertiesNoAdditionalPropertiesPropertiesFirst
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesNoAdditionalProperties {
 
   private static bool $coerce = false;
@@ -1253,7 +1215,6 @@ final class ObjectSchemaValidatorPropertiesNoAdditionalProperties {
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesAdditionalPropertiesArrayAdditionalPropertiesItems {
 
   private static bool $coerce = false;
@@ -1265,7 +1226,6 @@ final class ObjectSchemaValidatorPropertiesAdditionalPropertiesArrayAdditionalPr
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesAdditionalPropertiesArrayAdditionalProperties {
 
   private static bool $coerce = false;
@@ -1295,7 +1255,6 @@ final class ObjectSchemaValidatorPropertiesAdditionalPropertiesArrayAdditionalPr
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesAdditionalPropertiesArray {
 
   private static bool $coerce = false;
@@ -1328,7 +1287,6 @@ final class ObjectSchemaValidatorPropertiesAdditionalPropertiesArray {
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesAdditionalPropertiesRefAdditionalPropertiesAdditionalPropertiesItems {
 
   private static bool $coerce = false;
@@ -1340,7 +1298,6 @@ final class ObjectSchemaValidatorPropertiesAdditionalPropertiesRefAdditionalProp
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesAdditionalPropertiesRefAdditionalPropertiesAdditionalProperties {
 
   private static bool $coerce = false;
@@ -1370,7 +1327,6 @@ final class ObjectSchemaValidatorPropertiesAdditionalPropertiesRefAdditionalProp
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesAdditionalPropertiesRefAdditionalProperties {
 
   private static bool $coerce = false;
@@ -1403,7 +1359,6 @@ final class ObjectSchemaValidatorPropertiesAdditionalPropertiesRefAdditionalProp
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidatorPropertiesAdditionalPropertiesRef {
 
   private static bool $coerce = false;
@@ -1436,7 +1391,6 @@ final class ObjectSchemaValidatorPropertiesAdditionalPropertiesRef {
   }
 }
 
-<<Codegen>>
 final class ObjectSchemaValidator
   extends JsonSchema\BaseValidator<TObjectSchemaValidator> {
 

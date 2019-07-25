@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<9f381392cae0b72d33ee4bb2cfd6deae>>
+ * @generated SignedSource<<5f356c211f6f2355d32d989c9f9129e2>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -76,7 +76,6 @@ type TUntypedSchemaValidator = shape(
   ...
 );
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOfAllOf0 {
 
   private static bool $coerce = false;
@@ -88,7 +87,6 @@ final class UntypedSchemaValidatorPropertiesAllOfAllOf0 {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOfAllOf1 {
 
   private static bool $coerce = false;
@@ -101,7 +99,6 @@ final class UntypedSchemaValidatorPropertiesAllOfAllOf1 {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOf {
 
   public static function check(
@@ -143,7 +140,6 @@ final class UntypedSchemaValidatorPropertiesAllOf {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAnyOfAnyOf0 {
 
   private static bool $coerce = false;
@@ -155,7 +151,6 @@ final class UntypedSchemaValidatorPropertiesAnyOfAnyOf0 {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAnyOfAnyOf1 {
 
   private static bool $coerce = false;
@@ -168,7 +163,6 @@ final class UntypedSchemaValidatorPropertiesAnyOfAnyOf1 {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAnyOf {
 
   public static function check(
@@ -205,7 +199,6 @@ final class UntypedSchemaValidatorPropertiesAnyOf {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOfPassThroughAllOf0 {
 
   private static bool $coerce = false;
@@ -221,7 +214,6 @@ final class UntypedSchemaValidatorPropertiesAllOfPassThroughAllOf0 {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOfPassThroughAllOf1 {
 
   private static int $minLength = 1;
@@ -240,7 +232,6 @@ final class UntypedSchemaValidatorPropertiesAllOfPassThroughAllOf1 {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOfPassThrough {
 
   public static function check(
@@ -282,7 +273,6 @@ final class UntypedSchemaValidatorPropertiesAllOfPassThrough {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOfPassThroughSecondAllOf0 {
 
   private static bool $coerce = false;
@@ -298,7 +288,6 @@ final class UntypedSchemaValidatorPropertiesAllOfPassThroughSecondAllOf0 {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOfPassThroughSecondAllOf1 {
 
   private static bool $coerce = false;
@@ -314,7 +303,6 @@ final class UntypedSchemaValidatorPropertiesAllOfPassThroughSecondAllOf1 {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOfPassThroughSecond {
 
   public static function check(
@@ -356,7 +344,6 @@ final class UntypedSchemaValidatorPropertiesAllOfPassThroughSecond {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOfCoerceAllOf0 {
 
   private static bool $coerce = true;
@@ -373,7 +360,6 @@ final class UntypedSchemaValidatorPropertiesAllOfCoerceAllOf0 {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOfCoerceAllOf1PropertiesProperty {
 
   private static bool $coerce = false;
@@ -385,7 +371,6 @@ final class UntypedSchemaValidatorPropertiesAllOfCoerceAllOf1PropertiesProperty 
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOfCoerceAllOf1 {
 
   private static bool $coerce = false;
@@ -425,7 +410,6 @@ final class UntypedSchemaValidatorPropertiesAllOfCoerceAllOf1 {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOfCoerce {
 
   public static function check(
@@ -467,7 +451,6 @@ final class UntypedSchemaValidatorPropertiesAllOfCoerce {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOfDefaultAllOf0PropertiesProperty {
 
   private static bool $coerce = false;
@@ -479,7 +462,6 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultAllOf0PropertiesProperty
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOfDefaultAllOf0 {
 
   private static bool $coerce = false;
@@ -525,7 +507,6 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultAllOf0 {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOfDefaultAllOf1PropertiesNumericalProperty {
 
   private static bool $coerce = false;
@@ -537,7 +518,6 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultAllOf1PropertiesNumerica
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOfDefaultAllOf1 {
 
   private static bool $coerce = false;
@@ -583,7 +563,6 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultAllOf1 {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOfDefault {
 
   public static function check(
@@ -625,7 +604,6 @@ final class UntypedSchemaValidatorPropertiesAllOfDefault {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf0PropertiesProperty {
 
   private static bool $coerce = false;
@@ -637,7 +615,6 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf0Pro
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf0 {
 
   private static bool $coerce = false;
@@ -683,7 +660,6 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf0 {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf1PropertiesProperty {
 
   private static bool $coerce = false;
@@ -695,7 +671,6 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf1Pro
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf1 {
 
   private static bool $coerce = false;
@@ -741,7 +716,6 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf1 {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWins {
 
   public static function check(
@@ -783,7 +757,6 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWins {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesFirstPropertiesType {
 
   private static vec<mixed> $enum = vec[
@@ -799,7 +772,6 @@ final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesFirstPro
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesFirstPropertiesString {
 
   private static bool $coerce = false;
@@ -811,7 +783,6 @@ final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesFirstPro
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesFirst {
 
   private static keyset<string> $required = keyset[
@@ -884,7 +855,6 @@ final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesFirst {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesSecondPropertiesType {
 
   private static vec<mixed> $enum = vec[
@@ -900,7 +870,6 @@ final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesSecondPr
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesSecondPropertiesInteger {
 
   private static bool $coerce = false;
@@ -913,7 +882,6 @@ final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesSecondPr
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesSecond {
 
   private static keyset<string> $required = keyset[
@@ -986,7 +954,6 @@ final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesSecond {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnum {
 
   public static function check(
@@ -1027,7 +994,6 @@ final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnum {
   }
 }
 
-<<Codegen>>
 final class UntypedSchemaValidator
   extends JsonSchema\BaseValidator<TUntypedSchemaValidator> {
 

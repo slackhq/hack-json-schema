@@ -45,35 +45,23 @@ final class ValidatorBuilder {
     return $this;
   }
 
-  public function setSanitizeString(
-    ?Codegen::TSanitizeStringConfig $sanitize_string,
-  ): this {
+  public function setSanitizeString(?Codegen::TSanitizeStringConfig $sanitize_string): this {
     $this->sanitizeString = $sanitize_string;
     return $this;
   }
 
-  public function renderToFile(
-    string $filename,
-    ?string $namespace,
-    string $classname,
-  ): CodegenFile {
+  public function renderToFile(string $filename, ?string $namespace, string $classname): CodegenFile {
     $file = $this->getCodegenFile($filename, $namespace, $classname);
     $file->save();
     return $file;
   }
 
-  private function getCodegenFile(
-    string $filename,
-    ?string $namespace,
-    string $classname,
-  ): CodegenFile {
+  private function getCodegenFile(string $filename, ?string $namespace, string $classname): CodegenFile {
     $file = $this->cg
       ->codegenFile($filename)
       ->setDoClobber($this->discardChanges)
       ->setFileType(CodegenFileType::HACK_STRICT)
-      ->setGeneratedFrom(
-        $this->generatedFrom ?? $this->cg->codegenGeneratedFromScript(),
-      )
+      ->setGeneratedFrom($this->generatedFrom ?? $this->cg->codegenGeneratedFromScript())
       ->useNamespace('Slack\Hack\JsonSchema');
 
     $this->buildCodegenClass($classname, $file);
@@ -85,26 +73,16 @@ final class ValidatorBuilder {
     return $file;
   }
 
-  private function buildCodegenClass(
-    string $classname,
-    CodegenFile $file,
-  ): void {
+  private function buildCodegenClass(string $classname, CodegenFile $file): void {
     $class = $this->cg->codegenClass($classname);
 
-    $root = new RootBuilder(
-      $this->codegenConfig,
-      $this->cg,
-      $this->jsonSchemaCodegenConfig,
-      $this->schema,
-      $class,
-      $file,
-    );
+    $root =
+      new RootBuilder($this->codegenConfig, $this->cg, $this->jsonSchemaCodegenConfig, $this->schema, $class, $file);
 
     $root->build();
 
     $abstract = $this->createAbstract;
     $class
-      ->addEmptyUserAttribute('Codegen')
       ->setExtends("JsonSchema\BaseValidator<{$root->getType()}>")
       ->setIsAbstract($abstract)
       ->setIsFinal(!$abstract)
@@ -118,14 +96,9 @@ final class ValidatorBuilder {
     }
   }
 
-  private function getCodegenClassProcessMethod(
-    RootBuilder $root,
-  ): CodegenMethod {
+  private function getCodegenClassProcessMethod(RootBuilder $root): CodegenMethod {
     $hb = new HackBuilder($this->hackCodegenConfig);
-    $hb->addMultilineCall(
-      "return self::check",
-      ['$this->input', '$this->pointer'],
-    );
+    $hb->addMultilineCall("return self::check", ['$this->input', '$this->pointer']);
 
     return $this->cg
       ->codegenMethod('process')

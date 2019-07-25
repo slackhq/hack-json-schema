@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<d7559fbfa96671e2931c595f9b3b9c43>>
+ * @generated SignedSource<<4ccaa4c2362d97c8d9267ffa73faacc1>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -40,7 +40,6 @@ type TAddressSchemaValidator = shape(
   ...
 );
 
-<<Codegen>>
 final class AddressSchemaValidatorPropertiesPostOfficeBox {
 
   private static bool $coerce = false;
@@ -52,7 +51,6 @@ final class AddressSchemaValidatorPropertiesPostOfficeBox {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaValidatorPropertiesExtendedAddress {
 
   private static bool $coerce = false;
@@ -64,7 +62,6 @@ final class AddressSchemaValidatorPropertiesExtendedAddress {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaValidatorPropertiesStreetAddress {
 
   private static bool $coerce = false;
@@ -76,7 +73,6 @@ final class AddressSchemaValidatorPropertiesStreetAddress {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaValidatorPropertiesLocality {
 
   private static bool $coerce = false;
@@ -88,7 +84,6 @@ final class AddressSchemaValidatorPropertiesLocality {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaValidatorPropertiesRegion {
 
   private static bool $coerce = false;
@@ -100,7 +95,6 @@ final class AddressSchemaValidatorPropertiesRegion {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaValidatorPropertiesPhonesItemsPropertiesModel {
 
   private static bool $coerce = false;
@@ -112,7 +106,6 @@ final class AddressSchemaValidatorPropertiesPhonesItemsPropertiesModel {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaValidatorPropertiesPhonesItemsPropertiesCarrierNanProvider {
 
   private static bool $coerce = false;
@@ -124,7 +117,6 @@ final class AddressSchemaValidatorPropertiesPhonesItemsPropertiesCarrierNanProvi
   }
 }
 
-<<Codegen>>
 final class AddressSchemaValidatorPropertiesPhonesItems {
 
   private static keyset<string> $required = keyset[
@@ -183,7 +175,6 @@ final class AddressSchemaValidatorPropertiesPhonesItems {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaValidatorPropertiesPhones {
 
   private static bool $coerce = false;
@@ -216,7 +207,6 @@ final class AddressSchemaValidatorPropertiesPhones {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaValidatorPropertiesPostalCodeAnyOf0 {
 
   private static bool $coerce = false;
@@ -228,7 +218,6 @@ final class AddressSchemaValidatorPropertiesPostalCodeAnyOf0 {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaValidatorPropertiesPostalCodeAnyOf1 {
 
   private static bool $coerce = false;
@@ -241,7 +230,6 @@ final class AddressSchemaValidatorPropertiesPostalCodeAnyOf1 {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaValidatorPropertiesPostalCode {
 
   public static function check(
@@ -278,7 +266,6 @@ final class AddressSchemaValidatorPropertiesPostalCode {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaValidatorPropertiesSizeAllOf0 {
 
   private static bool $coerce = false;
@@ -291,7 +278,6 @@ final class AddressSchemaValidatorPropertiesSizeAllOf0 {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaValidatorPropertiesSizeAllOf1 {
 
   private static bool $coerce = false;
@@ -303,7 +289,6 @@ final class AddressSchemaValidatorPropertiesSizeAllOf1 {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaValidatorPropertiesSize {
 
   public static function check(
@@ -345,7 +330,6 @@ final class AddressSchemaValidatorPropertiesSize {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaValidatorPropertiesLongitudeNot0 {
 
   private static bool $coerce = false;
@@ -358,7 +342,6 @@ final class AddressSchemaValidatorPropertiesLongitudeNot0 {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaValidatorPropertiesLongitudeNot1 {
 
   private static bool $coerce = false;
@@ -370,7 +353,6 @@ final class AddressSchemaValidatorPropertiesLongitudeNot1 {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaValidatorPropertiesLongitude {
 
   public static function check(
@@ -407,7 +389,6 @@ final class AddressSchemaValidatorPropertiesLongitude {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaValidatorPropertiesLatitudeOneOf0 {
 
   private static bool $coerce = false;
@@ -420,7 +401,6 @@ final class AddressSchemaValidatorPropertiesLatitudeOneOf0 {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaValidatorPropertiesLatitudeOneOf1 {
 
   private static bool $coerce = false;
@@ -432,7 +412,6 @@ final class AddressSchemaValidatorPropertiesLatitudeOneOf1 {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaValidatorPropertiesLatitude {
 
   public static function check(
@@ -473,7 +452,6 @@ final class AddressSchemaValidatorPropertiesLatitude {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaValidatorPropertiesCountryName {
 
   private static bool $coerce = false;
@@ -485,7 +463,6 @@ final class AddressSchemaValidatorPropertiesCountryName {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaValidator
   extends JsonSchema\BaseValidator<TAddressSchemaValidator> {
 

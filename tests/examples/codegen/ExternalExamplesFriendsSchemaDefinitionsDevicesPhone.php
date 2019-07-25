@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<938caee24c30b7197daf15f893a80c4d>>
+ * @generated SignedSource<<8ece7378f68d7ad03976c350bcbe6c03>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -17,7 +17,6 @@ type TExternalExamplesFriendsSchemaDefinitionsDevicesPhone = shape(
   ...
 );
 
-<<Codegen>>
 final class ExternalExamplesFriendsSchemaDefinitionsDevicesPhonePropertiesModel {
 
   private static bool $coerce = false;
@@ -30,7 +29,6 @@ final class ExternalExamplesFriendsSchemaDefinitionsDevicesPhonePropertiesModel 
   }
 }
 
-<<Codegen>>
 final class ExternalExamplesFriendsSchemaDefinitionsDevicesPhonePropertiesCarrierNanProvider {
 
   private static bool $coerce = false;
@@ -42,7 +40,6 @@ final class ExternalExamplesFriendsSchemaDefinitionsDevicesPhonePropertiesCarrie
   }
 }
 
-<<Codegen>>
 final class ExternalExamplesFriendsSchemaDefinitionsDevicesPhone
   extends JsonSchema\BaseValidator<TExternalExamplesFriendsSchemaDefinitionsDevicesPhone> {
 

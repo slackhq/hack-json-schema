@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<4ea88516ca1b13dedc216cd3e8fb928b>>
+ * @generated SignedSource<<0024ed3e55c959aed3145c2f9c4910cb>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -34,7 +34,6 @@ type TRefSchemaValidator = shape(
   ...
 );
 
-<<Codegen>>
 final class RefSchemaValidatorPropertiesNullableUniqueRef {
 
   public static function check(
@@ -74,7 +73,6 @@ final class RefSchemaValidatorPropertiesNullableUniqueRef {
   }
 }
 
-<<Codegen>>
 final class RefSchemaValidatorPropertiesDuplicateRefs {
 
   private static bool $coerce = false;
@@ -158,7 +156,6 @@ final class RefSchemaValidatorPropertiesDuplicateRefs {
   }
 }
 
-<<Codegen>>
 final class RefSchemaValidatorPropertiesSingleItemArrayRef {
 
   private static bool $coerce = false;
@@ -191,7 +188,6 @@ final class RefSchemaValidatorPropertiesSingleItemArrayRef {
   }
 }
 
-<<Codegen>>
 final class RefSchemaValidator
   extends JsonSchema\BaseValidator<TRefSchemaValidator> {
 

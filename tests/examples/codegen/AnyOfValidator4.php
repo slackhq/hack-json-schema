@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<36bc31730764cc7dc4b987fb5e4a8da6>>
+ * @generated SignedSource<<937a7c6f61e290cc94de067cb90f3d75>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -20,7 +20,6 @@ type TAnyOfValidator4AnyOf1 = shape(
 
 type TAnyOfValidator4 = ?TAnyOfValidator4AnyOf1;
 
-<<Codegen>>
 final class AnyOfValidator4AnyOf1PropertiesPostOfficeBox {
 
   private static bool $coerce = false;
@@ -32,7 +31,6 @@ final class AnyOfValidator4AnyOf1PropertiesPostOfficeBox {
   }
 }
 
-<<Codegen>>
 final class AnyOfValidator4AnyOf1PropertiesExtendedAddress {
 
   private static bool $coerce = false;
@@ -44,7 +42,6 @@ final class AnyOfValidator4AnyOf1PropertiesExtendedAddress {
   }
 }
 
-<<Codegen>>
 final class AnyOfValidator4AnyOf1PropertiesStreetAddress {
 
   private static bool $coerce = false;
@@ -56,7 +53,6 @@ final class AnyOfValidator4AnyOf1PropertiesStreetAddress {
   }
 }
 
-<<Codegen>>
 final class AnyOfValidator4AnyOf1 {
 
   private static bool $coerce = false;
@@ -118,7 +114,6 @@ final class AnyOfValidator4AnyOf1 {
   }
 }
 
-<<Codegen>>
 final class AnyOfValidator4 extends JsonSchema\BaseValidator<TAnyOfValidator4> {
 
   public static function check(

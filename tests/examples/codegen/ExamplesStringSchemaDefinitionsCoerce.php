@@ -5,13 +5,12 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<f331a5892fb7369aa5fcfa8f897efc86>>
+ * @generated SignedSource<<ee2983debd2ce5a31cb9b456ee06fbcf>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
 use namespace Slack\Hack\JsonSchema\Constraints;
 
-<<Codegen>>
 final class ExamplesStringSchemaDefinitionsCoerce
   extends JsonSchema\BaseValidator<string> {
 

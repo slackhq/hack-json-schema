@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<fdabedf4f4e824c447f9410e4c8a4566>>
+ * @generated SignedSource<<65087a7e2931d3c1a038648eed68565e>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -16,7 +16,6 @@ type TExamplesRefSchemaDefinitionsLocalObjectReference = shape(
   ...
 );
 
-<<Codegen>>
 final class ExamplesRefSchemaDefinitionsLocalObjectReference
   extends JsonSchema\BaseValidator<TExamplesRefSchemaDefinitionsLocalObjectReference> {
 

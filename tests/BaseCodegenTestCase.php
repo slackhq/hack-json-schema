@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh // partial
 
 namespace Slack\Hack\JsonSchema\Tests;
 

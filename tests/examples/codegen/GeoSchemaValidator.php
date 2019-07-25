@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<6517b72724bee9e908d2351f899371f9>>
+ * @generated SignedSource<<7d18141ee43e6ecf896f0b336a7aee53>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -17,7 +17,6 @@ type TGeoSchemaValidator = shape(
   ...
 );
 
-<<Codegen>>
 final class GeoSchemaValidatorPropertiesLatitude {
 
   private static int $maximum = 90;
@@ -41,7 +40,6 @@ final class GeoSchemaValidatorPropertiesLatitude {
   }
 }
 
-<<Codegen>>
 final class GeoSchemaValidatorPropertiesLongitude {
 
   private static int $maximum = 180;
@@ -65,7 +63,6 @@ final class GeoSchemaValidatorPropertiesLongitude {
   }
 }
 
-<<Codegen>>
 final class GeoSchemaValidator
   extends JsonSchema\BaseValidator<TGeoSchemaValidator> {
 

@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<acc213d7579837075e03a06ab5653b81>>
+ * @generated SignedSource<<2b2bad7656ad9eed5de1cb01bf39f100>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -19,7 +19,6 @@ type TNumericalSchemaValidator = shape(
   ...
 );
 
-<<Codegen>>
 final class NumericalSchemaValidatorPropertiesInteger {
 
   private static bool $coerce = false;
@@ -32,7 +31,6 @@ final class NumericalSchemaValidatorPropertiesInteger {
   }
 }
 
-<<Codegen>>
 final class NumericalSchemaValidatorPropertiesNumber {
 
   private static bool $coerce = false;
@@ -44,7 +42,6 @@ final class NumericalSchemaValidatorPropertiesNumber {
   }
 }
 
-<<Codegen>>
 final class NumericalSchemaValidatorPropertiesIntegerCoerce {
 
   private static bool $coerce = true;
@@ -57,7 +54,6 @@ final class NumericalSchemaValidatorPropertiesIntegerCoerce {
   }
 }
 
-<<Codegen>>
 final class NumericalSchemaValidatorPropertiesNumberCoerce {
 
   private static bool $coerce = true;
@@ -69,7 +65,6 @@ final class NumericalSchemaValidatorPropertiesNumberCoerce {
   }
 }
 
-<<Codegen>>
 final class NumericalSchemaValidator
   extends JsonSchema\BaseValidator<TNumericalSchemaValidator> {
 

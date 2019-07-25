@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<d75009ff06339d0bb802631096bde5b6>>
+ * @generated SignedSource<<b12f5e7c401f7fe7b51f0e63aae838cc>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -18,7 +18,6 @@ type TArraySchemaValidator = shape(
   ...
 );
 
-<<Codegen>>
 final class ArraySchemaValidatorPropertiesArrayOfStringsItems {
 
   private static bool $coerce = false;
@@ -30,7 +29,6 @@ final class ArraySchemaValidatorPropertiesArrayOfStringsItems {
   }
 }
 
-<<Codegen>>
 final class ArraySchemaValidatorPropertiesArrayOfStrings {
 
   private static bool $coerce = false;
@@ -60,7 +58,6 @@ final class ArraySchemaValidatorPropertiesArrayOfStrings {
   }
 }
 
-<<Codegen>>
 final class ArraySchemaValidatorPropertiesUntypedArray {
 
   private static bool $coerce = false;
@@ -72,7 +69,6 @@ final class ArraySchemaValidatorPropertiesUntypedArray {
   }
 }
 
-<<Codegen>>
 final class ArraySchemaValidatorPropertiesCoerceArrayItems {
 
   private static bool $coerce = true;
@@ -84,7 +80,6 @@ final class ArraySchemaValidatorPropertiesCoerceArrayItems {
   }
 }
 
-<<Codegen>>
 final class ArraySchemaValidatorPropertiesCoerceArray {
 
   private static bool $coerce = true;
@@ -114,7 +109,6 @@ final class ArraySchemaValidatorPropertiesCoerceArray {
   }
 }
 
-<<Codegen>>
 final class ArraySchemaValidator
   extends JsonSchema\BaseValidator<TArraySchemaValidator> {
 

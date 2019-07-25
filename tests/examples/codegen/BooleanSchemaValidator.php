@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<0736376c2f8b143bb5f4441a90a2257c>>
+ * @generated SignedSource<<102e412d69b1d57b343e20bc5fa8ec6a>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -17,7 +17,6 @@ type TBooleanSchemaValidator = shape(
   ...
 );
 
-<<Codegen>>
 final class BooleanSchemaValidatorPropertiesSimple {
 
   private static bool $coerce = false;
@@ -29,7 +28,6 @@ final class BooleanSchemaValidatorPropertiesSimple {
   }
 }
 
-<<Codegen>>
 final class BooleanSchemaValidatorPropertiesCoerce {
 
   private static bool $coerce = true;
@@ -41,7 +39,6 @@ final class BooleanSchemaValidatorPropertiesCoerce {
   }
 }
 
-<<Codegen>>
 final class BooleanSchemaValidator
   extends JsonSchema\BaseValidator<TBooleanSchemaValidator> {
 

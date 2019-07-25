@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<044ff35046294aeec6c37797043b0d72>>
+ * @generated SignedSource<<aa4e9bfb6bad1411b4cdc026d17bb8b5>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -17,7 +17,6 @@ type TEnumSchemaValidator = shape(
   ...
 );
 
-<<Codegen>>
 final class EnumSchemaValidatorPropertiesEnumString {
 
   private static vec<mixed> $enum = vec[
@@ -35,7 +34,6 @@ final class EnumSchemaValidatorPropertiesEnumString {
   }
 }
 
-<<Codegen>>
 final class EnumSchemaValidatorPropertiesEnumNumber {
 
   private static vec<mixed> $enum = vec[
@@ -53,7 +51,6 @@ final class EnumSchemaValidatorPropertiesEnumNumber {
   }
 }
 
-<<Codegen>>
 final class EnumSchemaValidator
   extends JsonSchema\BaseValidator<TEnumSchemaValidator> {
 

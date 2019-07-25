@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<145c38cedb8b03b578422d56be1d6844>>
+ * @generated SignedSource<<e22059012ba226f794caea2781ef0d66>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -20,7 +20,6 @@ type TExamplesStringSchema = shape(
   ...
 );
 
-<<Codegen>>
 final class ExamplesStringSchemaPropertiesSimple {
 
   private static bool $coerce = false;
@@ -32,7 +31,6 @@ final class ExamplesStringSchemaPropertiesSimple {
   }
 }
 
-<<Codegen>>
 final class ExamplesStringSchemaPropertiesSanitizeUniline {
 
   private static bool $coerce = false;
@@ -48,7 +46,6 @@ final class ExamplesStringSchemaPropertiesSanitizeUniline {
   }
 }
 
-<<Codegen>>
 final class ExamplesStringSchemaPropertiesSanitizeMultiline {
 
   private static bool $coerce = false;
@@ -64,7 +61,6 @@ final class ExamplesStringSchemaPropertiesSanitizeMultiline {
   }
 }
 
-<<Codegen>>
 final class ExamplesStringSchemaPropertiesDateFormat {
 
   private static string $format = 'date';
@@ -78,7 +74,6 @@ final class ExamplesStringSchemaPropertiesDateFormat {
   }
 }
 
-<<Codegen>>
 final class ExamplesStringSchema
   extends JsonSchema\BaseValidator<TExamplesStringSchema> {
 

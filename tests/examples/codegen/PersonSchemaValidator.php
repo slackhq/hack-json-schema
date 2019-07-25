@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<05cfd67e61b2241bb7661a7eef067d73>>
+ * @generated SignedSource<<15c3e6fee3445ffa48e69c8b52245b5f>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -47,7 +47,6 @@ type TPersonSchemaValidator = shape(
   ...
 );
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesFirstName {
 
   private static bool $coerce = false;
@@ -59,7 +58,6 @@ final class PersonSchemaValidatorPropertiesFirstName {
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesLastName {
 
   private static bool $coerce = false;
@@ -71,7 +69,6 @@ final class PersonSchemaValidatorPropertiesLastName {
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesAge {
 
   private static int $minimum = 0;
@@ -90,7 +87,6 @@ final class PersonSchemaValidatorPropertiesAge {
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesStringOrNumAnyOf0 {
 
   private static bool $coerce = false;
@@ -102,7 +98,6 @@ final class PersonSchemaValidatorPropertiesStringOrNumAnyOf0 {
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesStringOrNumAnyOf1 {
 
   private static bool $coerce = false;
@@ -115,7 +110,6 @@ final class PersonSchemaValidatorPropertiesStringOrNumAnyOf1 {
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesStringOrNum {
 
   public static function check(
@@ -152,7 +146,6 @@ final class PersonSchemaValidatorPropertiesStringOrNum {
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesFriendsItemsPropertiesFirstName {
 
   private static bool $coerce = false;
@@ -164,7 +157,6 @@ final class PersonSchemaValidatorPropertiesFriendsItemsPropertiesFirstName {
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesFriendsItemsPropertiesLastName {
 
   private static bool $coerce = false;
@@ -176,7 +168,6 @@ final class PersonSchemaValidatorPropertiesFriendsItemsPropertiesLastName {
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesFriendsItemsPropertiesAge {
 
   private static int $minimum = 0;
@@ -195,7 +186,6 @@ final class PersonSchemaValidatorPropertiesFriendsItemsPropertiesAge {
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesFriendsItems {
 
   private static keyset<string> $required = keyset[
@@ -281,7 +271,6 @@ final class PersonSchemaValidatorPropertiesFriendsItems {
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesFriends {
 
   private static bool $coerce = false;
@@ -314,7 +303,6 @@ final class PersonSchemaValidatorPropertiesFriends {
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorItemsPropertiesStringAndNumber0 {
 
   private static bool $coerce = false;
@@ -326,7 +314,6 @@ final class PersonSchemaValidatorItemsPropertiesStringAndNumber0 {
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorItemsPropertiesStringAndNumber1 {
 
   private static bool $coerce = false;
@@ -338,7 +325,6 @@ final class PersonSchemaValidatorItemsPropertiesStringAndNumber1 {
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesStringAndNumber {
 
   private static bool $coerce = false;
@@ -377,7 +363,6 @@ final class PersonSchemaValidatorPropertiesStringAndNumber {
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesPhonePropertiesType {
 
   private static vec<mixed> $enum = vec[
@@ -393,7 +378,6 @@ final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesPhoneProperties
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesPhonePropertiesModel {
 
   private static bool $coerce = false;
@@ -405,7 +389,6 @@ final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesPhoneProperties
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesPhonePropertiesCarrier {
 
   private static bool $coerce = false;
@@ -417,7 +400,6 @@ final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesPhoneProperties
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesPhonePropertiesNumber {
 
   private static string $pattern = '^(\\([0-9]{3}\\))?[0-9]{3}-[0-9]{4}$';
@@ -435,7 +417,6 @@ final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesPhoneProperties
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesPhoneAdditionalProperties {
 
   private static bool $coerce = false;
@@ -447,7 +428,6 @@ final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesPhoneAdditional
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesPhone {
 
   private static keyset<string> $required = keyset[
@@ -546,7 +526,6 @@ final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesPhone {
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesComputerPropertiesType {
 
   private static vec<mixed> $enum = vec[
@@ -562,7 +541,6 @@ final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesComputerPropert
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesComputerPropertiesManufacturer {
 
   private static bool $coerce = false;
@@ -574,7 +552,6 @@ final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesComputerPropert
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesComputerPropertiesYear {
 
   private static bool $coerce = false;
@@ -587,7 +564,6 @@ final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesComputerPropert
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesComputer {
 
   private static keyset<string> $required = keyset[
@@ -663,7 +639,6 @@ final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesComputer {
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesDevicesItems {
 
   public static function check(
@@ -704,7 +679,6 @@ final class PersonSchemaValidatorPropertiesDevicesItems {
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidatorPropertiesDevices {
 
   private static bool $coerce = false;
@@ -737,7 +711,6 @@ final class PersonSchemaValidatorPropertiesDevices {
   }
 }
 
-<<Codegen>>
 final class PersonSchemaValidator
   extends JsonSchema\BaseValidator<TPersonSchemaValidator> {
 

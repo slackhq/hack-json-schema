@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<2a7d42cc96a05a17c143538cd0ff0bae>>
+ * @generated SignedSource<<fe91b5f2c341b5dbda3ac97c4a8499d1>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -31,7 +31,6 @@ type TFriendsSchemaValidatorItems = shape(
   ...
 );
 
-<<Codegen>>
 final class FriendsSchemaValidatorItemsPropertiesFirstName {
 
   private static bool $coerce = false;
@@ -43,7 +42,6 @@ final class FriendsSchemaValidatorItemsPropertiesFirstName {
   }
 }
 
-<<Codegen>>
 final class FriendsSchemaValidatorItemsPropertiesLastName {
 
   private static bool $coerce = false;
@@ -55,7 +53,6 @@ final class FriendsSchemaValidatorItemsPropertiesLastName {
   }
 }
 
-<<Codegen>>
 final class FriendsSchemaValidatorItemsPropertiesAge {
 
   private static int $minimum = 0;
@@ -74,7 +71,6 @@ final class FriendsSchemaValidatorItemsPropertiesAge {
   }
 }
 
-<<Codegen>>
 final class FriendsSchemaValidatorItemsPropertiesNanDevicesNanItemsPropertiesModel {
 
   private static bool $coerce = false;
@@ -86,7 +82,6 @@ final class FriendsSchemaValidatorItemsPropertiesNanDevicesNanItemsPropertiesMod
   }
 }
 
-<<Codegen>>
 final class FriendsSchemaValidatorItemsPropertiesNanDevicesNanItemsPropertiesCarrierNanProvider {
 
   private static bool $coerce = false;
@@ -98,7 +93,6 @@ final class FriendsSchemaValidatorItemsPropertiesNanDevicesNanItemsPropertiesCar
   }
 }
 
-<<Codegen>>
 final class FriendsSchemaValidatorItemsPropertiesNanDevicesNanItems {
 
   private static keyset<string> $required = keyset[
@@ -157,7 +151,6 @@ final class FriendsSchemaValidatorItemsPropertiesNanDevicesNanItems {
   }
 }
 
-<<Codegen>>
 final class FriendsSchemaValidatorItemsPropertiesNanDevicesNan {
 
   private static bool $coerce = false;
@@ -190,7 +183,6 @@ final class FriendsSchemaValidatorItemsPropertiesNanDevicesNan {
   }
 }
 
-<<Codegen>>
 final class FriendsSchemaValidatorItemsPropertiesEnemies {
 
   public static function check(mixed $input, string $pointer): mixed {
@@ -200,7 +192,6 @@ final class FriendsSchemaValidatorItemsPropertiesEnemies {
   }
 }
 
-<<Codegen>>
 final class FriendsSchemaValidatorItemsItemsPropertiesRating0 {
 
   private static bool $coerce = false;
@@ -213,7 +204,6 @@ final class FriendsSchemaValidatorItemsItemsPropertiesRating0 {
   }
 }
 
-<<Codegen>>
 final class FriendsSchemaValidatorItemsItemsPropertiesRating1 {
 
   private static bool $coerce = false;
@@ -225,7 +215,6 @@ final class FriendsSchemaValidatorItemsItemsPropertiesRating1 {
   }
 }
 
-<<Codegen>>
 final class FriendsSchemaValidatorItemsPropertiesRating {
 
   private static bool $coerce = false;
@@ -268,7 +257,6 @@ final class FriendsSchemaValidatorItemsPropertiesRating {
   }
 }
 
-<<Codegen>>
 final class FriendsSchemaValidatorItemsItemsPropertiesContact0 {
 
   private static bool $coerce = false;
@@ -281,7 +269,6 @@ final class FriendsSchemaValidatorItemsItemsPropertiesContact0 {
   }
 }
 
-<<Codegen>>
 final class FriendsSchemaValidatorItemsItemsPropertiesContact1 {
 
   private static bool $coerce = false;
@@ -293,7 +280,6 @@ final class FriendsSchemaValidatorItemsItemsPropertiesContact1 {
   }
 }
 
-<<Codegen>>
 final class FriendsSchemaValidatorItemsPropertiesContact {
 
   private static bool $coerce = false;
@@ -332,7 +318,6 @@ final class FriendsSchemaValidatorItemsPropertiesContact {
   }
 }
 
-<<Codegen>>
 final class FriendsSchemaValidatorItemsPropertiesEmptyObject {
 
   private static bool $coerce = false;
@@ -349,7 +334,6 @@ final class FriendsSchemaValidatorItemsPropertiesEmptyObject {
   }
 }
 
-<<Codegen>>
 final class FriendsSchemaValidatorItems {
 
   private static keyset<string> $required = keyset[
@@ -475,7 +459,6 @@ final class FriendsSchemaValidatorItems {
   }
 }
 
-<<Codegen>>
 final class FriendsSchemaValidator
   extends JsonSchema\BaseValidator<vec<TFriendsSchemaValidatorItems>> {
 

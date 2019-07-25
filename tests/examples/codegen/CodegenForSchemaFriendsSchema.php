@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<2434a3b8f8e970910c9bd45c6cb01cc9>>
+ * @generated SignedSource<<476ee3a232e152e39ccc45877c9bead8>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -25,7 +25,6 @@ type TCodegenForSchemaFriendsSchemaItems = shape(
   ...
 );
 
-<<Codegen>>
 final class CodegenForSchemaFriendsSchemaItemsPropertiesFirstName {
 
   private static bool $coerce = false;
@@ -37,7 +36,6 @@ final class CodegenForSchemaFriendsSchemaItemsPropertiesFirstName {
   }
 }
 
-<<Codegen>>
 final class CodegenForSchemaFriendsSchemaItemsPropertiesLastName {
 
   private static bool $coerce = false;
@@ -49,7 +47,6 @@ final class CodegenForSchemaFriendsSchemaItemsPropertiesLastName {
   }
 }
 
-<<Codegen>>
 final class CodegenForSchemaFriendsSchemaItemsPropertiesAge {
 
   private static int $minimum = 0;
@@ -68,7 +65,6 @@ final class CodegenForSchemaFriendsSchemaItemsPropertiesAge {
   }
 }
 
-<<Codegen>>
 final class CodegenForSchemaFriendsSchemaItemsPropertiesNanDevicesNanItemsPropertiesModel {
 
   private static bool $coerce = false;
@@ -81,7 +77,6 @@ final class CodegenForSchemaFriendsSchemaItemsPropertiesNanDevicesNanItemsProper
   }
 }
 
-<<Codegen>>
 final class CodegenForSchemaFriendsSchemaItemsPropertiesNanDevicesNanItemsPropertiesCarrierNanProvider {
 
   private static bool $coerce = false;
@@ -93,7 +88,6 @@ final class CodegenForSchemaFriendsSchemaItemsPropertiesNanDevicesNanItemsProper
   }
 }
 
-<<Codegen>>
 final class CodegenForSchemaFriendsSchemaItemsPropertiesNanDevicesNanItems {
 
   private static keyset<string> $required = keyset[
@@ -152,7 +146,6 @@ final class CodegenForSchemaFriendsSchemaItemsPropertiesNanDevicesNanItems {
   }
 }
 
-<<Codegen>>
 final class CodegenForSchemaFriendsSchemaItemsPropertiesNanDevicesNan {
 
   private static bool $coerce = false;
@@ -185,7 +178,6 @@ final class CodegenForSchemaFriendsSchemaItemsPropertiesNanDevicesNan {
   }
 }
 
-<<Codegen>>
 final class CodegenForSchemaFriendsSchemaItems {
 
   private static keyset<string> $required = keyset[
@@ -267,7 +259,6 @@ final class CodegenForSchemaFriendsSchemaItems {
   }
 }
 
-<<Codegen>>
 final class CodegenForSchemaFriendsSchema
   extends JsonSchema\BaseValidator<vec<TCodegenForSchemaFriendsSchemaItems>> {
 

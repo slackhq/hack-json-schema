@@ -58,7 +58,6 @@ abstract class BaseBuilder<T> implements IBuilder {
     return $this->ctx
       ->getHackCodegenFactory()
       ->codegenClass($this->getClassName())
-      ->addEmptyUserAttribute('Codegen')
       ->setIsFinal(true);
   }
 

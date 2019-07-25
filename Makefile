@@ -2,7 +2,7 @@
 
 COMPOSER=~/.cache/composer/composer.phar
 
-test: hh_autoload lint
+test: hh_autoload
 	./vendor/bin/hacktest tests
 
 lint: hh_autoload

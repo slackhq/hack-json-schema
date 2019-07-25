@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<7bb687935ecbba87d0b70d0183ee94c3>>
+ * @generated SignedSource<<a09da7a698c3ec24d443de75852145d5>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -24,7 +24,6 @@ type TDefaultsSchemaValidator = shape(
   ...
 );
 
-<<Codegen>>
 final class DefaultsSchemaValidatorPropertiesBoolean {
 
   private static bool $coerce = true;
@@ -36,7 +35,6 @@ final class DefaultsSchemaValidatorPropertiesBoolean {
   }
 }
 
-<<Codegen>>
 final class DefaultsSchemaValidatorPropertiesBooleanCoerceFalse {
 
   private static bool $coerce = false;
@@ -48,7 +46,6 @@ final class DefaultsSchemaValidatorPropertiesBooleanCoerceFalse {
   }
 }
 
-<<Codegen>>
 final class DefaultsSchemaValidatorPropertiesNestedCoerceFalsePropertiesBooleanProp {
 
   private static bool $coerce = false;
@@ -60,7 +57,6 @@ final class DefaultsSchemaValidatorPropertiesNestedCoerceFalsePropertiesBooleanP
   }
 }
 
-<<Codegen>>
 final class DefaultsSchemaValidatorPropertiesNestedCoerceFalsePropertiesNumberProp {
 
   private static bool $coerce = true;
@@ -72,7 +68,6 @@ final class DefaultsSchemaValidatorPropertiesNestedCoerceFalsePropertiesNumberPr
   }
 }
 
-<<Codegen>>
 final class DefaultsSchemaValidatorPropertiesNestedCoerceFalse {
 
   private static bool $coerce = true;
@@ -123,7 +118,6 @@ final class DefaultsSchemaValidatorPropertiesNestedCoerceFalse {
   }
 }
 
-<<Codegen>>
 final class DefaultsSchemaValidator
   extends JsonSchema\BaseValidator<TDefaultsSchemaValidator> {
 

@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<69e239936b611cf9ef351b668bb20141>>
+ * @generated SignedSource<<55258f315addb72de45944218bd31723>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -47,7 +47,6 @@ type custom_codegen_config_validator_t = shape(
   ...
 );
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesFirstName {
 
   private static bool $coerce = false;
@@ -59,7 +58,6 @@ final class CustomCodegenConfigValidatorPropertiesFirstName {
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesLastName {
 
   private static bool $coerce = false;
@@ -71,7 +69,6 @@ final class CustomCodegenConfigValidatorPropertiesLastName {
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesAge {
 
   private static int $minimum = 0;
@@ -90,7 +87,6 @@ final class CustomCodegenConfigValidatorPropertiesAge {
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesStringOrNumAnyOf0 {
 
   private static bool $coerce = false;
@@ -102,7 +98,6 @@ final class CustomCodegenConfigValidatorPropertiesStringOrNumAnyOf0 {
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesStringOrNumAnyOf1 {
 
   private static bool $coerce = false;
@@ -115,7 +110,6 @@ final class CustomCodegenConfigValidatorPropertiesStringOrNumAnyOf1 {
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesStringOrNum {
 
   public static function check(
@@ -152,7 +146,6 @@ final class CustomCodegenConfigValidatorPropertiesStringOrNum {
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesFriendsItemsPropertiesFirstName {
 
   private static bool $coerce = false;
@@ -164,7 +157,6 @@ final class CustomCodegenConfigValidatorPropertiesFriendsItemsPropertiesFirstNam
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesFriendsItemsPropertiesLastName {
 
   private static bool $coerce = false;
@@ -176,7 +168,6 @@ final class CustomCodegenConfigValidatorPropertiesFriendsItemsPropertiesLastName
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesFriendsItemsPropertiesAge {
 
   private static int $minimum = 0;
@@ -195,7 +186,6 @@ final class CustomCodegenConfigValidatorPropertiesFriendsItemsPropertiesAge {
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesFriendsItems {
 
   private static keyset<string> $required = keyset[
@@ -281,7 +271,6 @@ final class CustomCodegenConfigValidatorPropertiesFriendsItems {
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesFriends {
 
   private static bool $coerce = false;
@@ -314,7 +303,6 @@ final class CustomCodegenConfigValidatorPropertiesFriends {
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorItemsPropertiesStringAndNumber0 {
 
   private static bool $coerce = false;
@@ -326,7 +314,6 @@ final class CustomCodegenConfigValidatorItemsPropertiesStringAndNumber0 {
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorItemsPropertiesStringAndNumber1 {
 
   private static bool $coerce = false;
@@ -338,7 +325,6 @@ final class CustomCodegenConfigValidatorItemsPropertiesStringAndNumber1 {
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesStringAndNumber {
 
   private static bool $coerce = false;
@@ -377,7 +363,6 @@ final class CustomCodegenConfigValidatorPropertiesStringAndNumber {
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesPhonePropertiesType {
 
   private static vec<mixed> $enum = vec[
@@ -393,7 +378,6 @@ final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesPhonePro
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesPhonePropertiesModel {
 
   private static bool $coerce = false;
@@ -405,7 +389,6 @@ final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesPhonePro
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesPhonePropertiesCarrier {
 
   private static bool $coerce = false;
@@ -417,7 +400,6 @@ final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesPhonePro
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesPhonePropertiesNumber {
 
   private static string $pattern = '^(\\([0-9]{3}\\))?[0-9]{3}-[0-9]{4}$';
@@ -435,7 +417,6 @@ final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesPhonePro
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesPhoneAdditionalProperties {
 
   private static bool $coerce = false;
@@ -447,7 +428,6 @@ final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesPhoneAdd
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesPhone {
 
   private static keyset<string> $required = keyset[
@@ -546,7 +526,6 @@ final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesPhone {
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesComputerPropertiesType {
 
   private static vec<mixed> $enum = vec[
@@ -562,7 +541,6 @@ final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesComputer
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesComputerPropertiesManufacturer {
 
   private static bool $coerce = false;
@@ -574,7 +552,6 @@ final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesComputer
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesComputerPropertiesYear {
 
   private static bool $coerce = false;
@@ -587,7 +564,6 @@ final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesComputer
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesComputer {
 
   private static keyset<string> $required = keyset[
@@ -663,7 +639,6 @@ final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesComputer
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesDevicesItems {
 
   public static function check(
@@ -704,7 +679,6 @@ final class CustomCodegenConfigValidatorPropertiesDevicesItems {
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidatorPropertiesDevices {
 
   private static bool $coerce = false;
@@ -737,7 +711,6 @@ final class CustomCodegenConfigValidatorPropertiesDevices {
   }
 }
 
-<<Codegen>>
 final class CustomCodegenConfigValidator
   extends JsonSchema\BaseValidator<custom_codegen_config_validator_t> {
 

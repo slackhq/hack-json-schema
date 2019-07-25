@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<43aa876feebcce18e822ca48582334ca>>
+ * @generated SignedSource<<59e15e3598d2bab19cc4dc8a5f54a6af>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -20,7 +20,6 @@ type TStringSchemaValidator = shape(
   ...
 );
 
-<<Codegen>>
 final class StringSchemaValidatorPropertiesSimple {
 
   private static bool $coerce = false;
@@ -32,7 +31,6 @@ final class StringSchemaValidatorPropertiesSimple {
   }
 }
 
-<<Codegen>>
 final class StringSchemaValidatorPropertiesCoerce {
 
   private static bool $coerce = true;
@@ -44,7 +42,6 @@ final class StringSchemaValidatorPropertiesCoerce {
   }
 }
 
-<<Codegen>>
 final class StringSchemaValidatorPropertiesSanitizeUniline {
 
   private static bool $coerce = false;
@@ -60,7 +57,6 @@ final class StringSchemaValidatorPropertiesSanitizeUniline {
   }
 }
 
-<<Codegen>>
 final class StringSchemaValidatorPropertiesSanitizeMultiline {
 
   private static bool $coerce = false;
@@ -76,7 +72,6 @@ final class StringSchemaValidatorPropertiesSanitizeMultiline {
   }
 }
 
-<<Codegen>>
 final class StringSchemaValidatorPropertiesDateFormat {
 
   private static string $format = 'date';
@@ -90,7 +85,6 @@ final class StringSchemaValidatorPropertiesDateFormat {
   }
 }
 
-<<Codegen>>
 final class StringSchemaValidator
   extends JsonSchema\BaseValidator<TStringSchemaValidator> {
 

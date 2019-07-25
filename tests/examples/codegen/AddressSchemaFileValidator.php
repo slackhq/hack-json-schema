@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<4a87524531ef810a540a4567d6cf6b2b>>
+ * @generated SignedSource<<d9a694ad24aff74ff2fabf7aa2e97e43>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -39,7 +39,6 @@ type TAddressSchemaFileValidator = shape(
   ...
 );
 
-<<Codegen>>
 final class AddressSchemaFileValidatorPropertiesPostOfficeBox {
 
   private static bool $coerce = false;
@@ -51,7 +50,6 @@ final class AddressSchemaFileValidatorPropertiesPostOfficeBox {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaFileValidatorPropertiesExtendedAddress {
 
   private static bool $coerce = false;
@@ -63,7 +61,6 @@ final class AddressSchemaFileValidatorPropertiesExtendedAddress {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaFileValidatorPropertiesStreetAddress {
 
   private static bool $coerce = false;
@@ -75,7 +72,6 @@ final class AddressSchemaFileValidatorPropertiesStreetAddress {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaFileValidatorPropertiesLocality {
 
   private static bool $coerce = false;
@@ -87,7 +83,6 @@ final class AddressSchemaFileValidatorPropertiesLocality {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaFileValidatorPropertiesRegion {
 
   private static bool $coerce = false;
@@ -99,7 +94,6 @@ final class AddressSchemaFileValidatorPropertiesRegion {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaFileValidatorPropertiesPhonesItemsPropertiesModel {
 
   private static bool $coerce = false;
@@ -112,7 +106,6 @@ final class AddressSchemaFileValidatorPropertiesPhonesItemsPropertiesModel {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaFileValidatorPropertiesPhonesItemsPropertiesCarrierNanProvider {
 
   private static bool $coerce = false;
@@ -124,7 +117,6 @@ final class AddressSchemaFileValidatorPropertiesPhonesItemsPropertiesCarrierNanP
   }
 }
 
-<<Codegen>>
 final class AddressSchemaFileValidatorPropertiesPhonesItems {
 
   private static keyset<string> $required = keyset[
@@ -183,7 +175,6 @@ final class AddressSchemaFileValidatorPropertiesPhonesItems {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaFileValidatorPropertiesPhones {
 
   private static bool $coerce = false;
@@ -216,7 +207,6 @@ final class AddressSchemaFileValidatorPropertiesPhones {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaFileValidatorPropertiesAge {
 
   private static int $minimum = 0;
@@ -235,7 +225,6 @@ final class AddressSchemaFileValidatorPropertiesAge {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaFileValidatorPropertiesNickname {
 
   private static bool $coerce = false;
@@ -247,7 +236,6 @@ final class AddressSchemaFileValidatorPropertiesNickname {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaFileValidatorPropertiesRelativePropertiesNickname {
 
   private static bool $coerce = false;
@@ -259,7 +247,6 @@ final class AddressSchemaFileValidatorPropertiesRelativePropertiesNickname {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaFileValidatorPropertiesRelative {
 
   private static bool $coerce = false;
@@ -299,7 +286,6 @@ final class AddressSchemaFileValidatorPropertiesRelative {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaFileValidatorPropertiesPostalCodeAnyOf0 {
 
   private static bool $coerce = false;
@@ -311,7 +297,6 @@ final class AddressSchemaFileValidatorPropertiesPostalCodeAnyOf0 {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaFileValidatorPropertiesPostalCodeAnyOf1 {
 
   private static bool $coerce = false;
@@ -324,7 +309,6 @@ final class AddressSchemaFileValidatorPropertiesPostalCodeAnyOf1 {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaFileValidatorPropertiesPostalCode {
 
   public static function check(
@@ -361,7 +345,6 @@ final class AddressSchemaFileValidatorPropertiesPostalCode {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaFileValidatorPropertiesCountryName {
 
   private static bool $coerce = false;
@@ -373,7 +356,6 @@ final class AddressSchemaFileValidatorPropertiesCountryName {
   }
 }
 
-<<Codegen>>
 final class AddressSchemaFileValidator
   extends JsonSchema\BaseValidator<TAddressSchemaFileValidator> {
 
