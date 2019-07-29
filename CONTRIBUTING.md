@@ -55,3 +55,4 @@ If the contribution doesn't meet the above criteria, you may fail our automated 
 5.  :arrow_heading_up: Push your new branch to your fork. (e.g. `git push username fix-issue-16`).
 6.  :inbox_tray: Open a Pull Request on github.com from your new branch on your fork to `master` in this
     repository.
+    
