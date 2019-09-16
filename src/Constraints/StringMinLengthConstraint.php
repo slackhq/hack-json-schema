@@ -18,7 +18,7 @@ class StringMinLengthConstraint {
           'expected' => $minimum,
           'got' => $length,
         ),
-        'message' => "must be less than {$minimum} characters",
+        'message' => "must be more than ".($minimum-1)." characters",
       );
       throw new JsonSchema\InvalidFieldException($pointer, vec[$error]);
     }
