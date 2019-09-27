@@ -18,7 +18,7 @@ class StringMaxLengthConstraint {
           'expected' => $maximum,
           'got' => $length,
         ),
-        'message' => "must be less than {$maximum} characters",
+        'message' => "must be less than ".($maximum+1)." characters",
       );
       throw new JsonSchema\InvalidFieldException($pointer, vec[$error]);
     }
