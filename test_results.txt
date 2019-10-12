@@ -1,0 +1,21 @@
+./vendor/bin/hh-autoload
+/opt/lampp/htdocs/hack-json-schema/vendor/autoload.hack
+./vendor/bin/hacktest tests
+...............................S............................................................SSSS...........................
+
+1) Slack\Hack\JsonSchema\Tests\CustomCodegenConfigTest::testCustomConfig
+Skipped: assertUnchanged doesn't work in hacktest yet
+
+2) Slack\Hack\JsonSchema\Tests\AnyOfRefiningTest::testNullableString
+Skipped: assertUnchanged doesn't work in hacktest yet
+
+3) Slack\Hack\JsonSchema\Tests\AnyOfRefiningTest::testMixedUnchanged
+Skipped: assertUnchanged doesn't work in hacktest yet
+
+4) Slack\Hack\JsonSchema\Tests\AnyOfRefiningTest::testDoubleNull
+Skipped: assertUnchanged doesn't work in hacktest yet
+
+5) Slack\Hack\JsonSchema\Tests\AnyOfRefiningTest::testNullableObject
+Skipped: assertUnchanged doesn't work in hacktest yet
+
+Summary: 123 test(s), 118 passed, 0 failed, 5 skipped, 0 error(s).
