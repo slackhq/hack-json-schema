@@ -141,7 +141,7 @@ abstract class BaseCodegenTestCase extends HackTest {
     }
 
     foreach ($expected as $key => $expected_value) {
-      $got_value = $got[$key] ?? null;
+      $got_value = $got[$key as arraykey] ?? null;
 
       if (
         $expected is KeyedContainer<_, _> &&
