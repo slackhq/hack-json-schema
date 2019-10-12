@@ -2,7 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Tests;
 
-use namespace HH\Lib\C;
+use namespace HH\Lib\{C, Str};
 use function Facebook\FBExpect\expect;
 use type Slack\Hack\JsonSchema\Validator;
 use type Slack\Hack\JsonSchema\Codegen\{Codegen, IJsonSchemaCodegenConfig};
@@ -154,7 +154,7 @@ abstract class BaseCodegenTestCase extends HackTest {
 
       expect($expected_value)->toBeSame(
         $got_value,
-        $msg.": mismatch on {$key}",
+        Str\format("%s: mismatch on %s", $msg, (string)$key),
       );
     }
   }
