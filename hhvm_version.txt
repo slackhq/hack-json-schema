@@ -1,3 +1,0 @@
-HipHop VM 4.26.0 (rel)
-Compiler: 1570480091_055726735
-Repo schema: e24c730ecd4902e383877e9e82598459f02b76f6
