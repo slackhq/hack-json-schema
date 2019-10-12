@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh // partial
 
 namespace Slack\Hack\JsonSchema\Tests;
 
@@ -72,12 +72,21 @@ final class DefaultsSchemaValidatorTest extends BaseCodegenTestCase {
   public function testNestedCoerceFalse(): void {
     $cases = vec[
       shape(
-        'input' => ['nested_coerce_false' => ['boolean_prop' => 'false', 'number_prop' => 3]],
-        'output' => ['nested_coerce_false' => ['boolean_prop' => false, 'number_prop' => 3]],
+        'input' => [
+          'nested_coerce_false' =>
+            ['boolean_prop' => 'false', 'number_prop' => 3],
+        ],
+        'output' => [
+          'nested_coerce_false' =>
+            ['boolean_prop' => false, 'number_prop' => 3],
+        ],
         'valid' => true,
       ),
       shape(
-        'input' => ['nested_coerce_false' => ['boolean_prop' => true, 'number_prop' => '3']],
+        'input' => [
+          'nested_coerce_false' =>
+            ['boolean_prop' => true, 'number_prop' => '3'],
+        ],
         'valid' => false,
       ),
     ];

@@ -1,11 +1,14 @@
-<?hh // strict
+<?hh // partial
 
 namespace Slack\Hack\JsonSchema\Tests;
 
 use namespace HH\Lib\C;
 use function Facebook\FBExpect\expect;
 
-use type Slack\Hack\JsonSchema\Tests\Generated\{AddressSchemaFileValidator, AddressSchemaValidator};
+use type Slack\Hack\JsonSchema\Tests\Generated\{
+  AddressSchemaFileValidator,
+  AddressSchemaValidator,
+};
 
 final class AddressSchemaValidatorTest extends BaseCodegenTestCase {
 
@@ -13,7 +16,10 @@ final class AddressSchemaValidatorTest extends BaseCodegenTestCase {
   public static async function beforeFirstTestAsync(): Awaitable<void> {
     $ret = self::getBuilder('address-schema.json', 'AddressSchemaValidator');
     $ret['codegen']->build();
-    $ret_remote = self::getBuilder('address-schema-remote.json', 'AddressSchemaFileValidator');
+    $ret_remote = self::getBuilder(
+      'address-schema-remote.json',
+      'AddressSchemaFileValidator',
+    );
     $ret_remote['codegen']->build();
     require_once($ret['path']);
     require_once($ret_remote['path']);
@@ -57,7 +63,9 @@ final class AddressSchemaValidatorTest extends BaseCodegenTestCase {
     ]);
     $validator->validate();
 
-    expect($validator->isValid())->toBeTrue('numeric postal codes should be valid');
+    expect($validator->isValid())->toBeTrue(
+      'numeric postal codes should be valid',
+    );
   }
 
   public function testAddressWithInvalidPostalCode(): void {
@@ -85,7 +93,9 @@ final class AddressSchemaValidatorTest extends BaseCodegenTestCase {
     ]);
     $validator->validate();
 
-    expect($validator->isValid())->toBeTrue('file reference to phone type should be valid');
+    expect($validator->isValid())->toBeTrue(
+      'file reference to phone type should be valid',
+    );
   }
 
   public function testAddressWithSizeAllOf(): void {
@@ -96,7 +106,9 @@ final class AddressSchemaValidatorTest extends BaseCodegenTestCase {
       'size' => 200,
     ]);
     $validator->validate();
-    expect($validator->isValid())->toBeTrue('should be valid as 200 is both an integer and a number');
+    expect($validator->isValid())->toBeTrue(
+      'should be valid as 200 is both an integer and a number',
+    );
   }
 
   public function testAddressWithSizeAllOfFailure(): void {
@@ -107,7 +119,9 @@ final class AddressSchemaValidatorTest extends BaseCodegenTestCase {
       'size' => 200.5,
     ]);
     $validator->validate();
-    expect($validator->isValid())->toBeFalse('should not be valid as 200.5 is not an integer');
+    expect($validator->isValid())->toBeFalse(
+      'should not be valid as 200.5 is not an integer',
+    );
   }
 
   public function testAddressWithLongitudeNot(): void {
@@ -118,7 +132,9 @@ final class AddressSchemaValidatorTest extends BaseCodegenTestCase {
       'longitude' => 200.5,
     ]);
     $validator->validate();
-    expect($validator->isValid())->toBeTrue('should be valid as 200.5 is not an integer nor a string');
+    expect($validator->isValid())->toBeTrue(
+      'should be valid as 200.5 is not an integer nor a string',
+    );
   }
 
   public function testAddressWithLongitudeNotFailure(): void {
@@ -129,7 +145,9 @@ final class AddressSchemaValidatorTest extends BaseCodegenTestCase {
       'longitude' => 200,
     ]);
     $validator->validate();
-    expect($validator->isValid())->toBeFalse('should not be valid as 200 is an integer');
+    expect($validator->isValid())->toBeFalse(
+      'should not be valid as 200 is an integer',
+    );
   }
 
   public function testAddressWithLatitudeOneOf(): void {
@@ -140,7 +158,9 @@ final class AddressSchemaValidatorTest extends BaseCodegenTestCase {
       'latitude' => 200.5,
     ]);
     $validator->validate();
-    expect($validator->isValid())->toBeTrue('should be valid as 200.5 is not an integer but is a number');
+    expect($validator->isValid())->toBeTrue(
+      'should be valid as 200.5 is not an integer but is a number',
+    );
   }
 
   public function testAddressWithLatitudeOneOfFailure(): void {
@@ -151,7 +171,9 @@ final class AddressSchemaValidatorTest extends BaseCodegenTestCase {
       'latitude' => 200,
     ]);
     $validator->validate();
-    expect($validator->isValid())->toBeFalse('should not be valid as 200 is an integer and number');
+    expect($validator->isValid())->toBeFalse(
+      'should not be valid as 200 is an integer and number',
+    );
   }
 
   public function testAddressWithFailedFileRef(): void {
@@ -166,7 +188,9 @@ final class AddressSchemaValidatorTest extends BaseCodegenTestCase {
       ],
     ]);
     $validator->validate();
-    expect($validator->isValid())->toBeFalse('file reference to phone type should be invalid');
+    expect($validator->isValid())->toBeFalse(
+      'file reference to phone type should be invalid',
+    );
     expect(\count($validator->getErrors()))->toBeSame(3);
   }
 
@@ -185,7 +209,9 @@ final class AddressSchemaValidatorTest extends BaseCodegenTestCase {
     ]);
     $validator->validate();
 
-    expect($validator->isValid())->toBeTrue('file reference to phone type should be valid');
+    expect($validator->isValid())->toBeTrue(
+      'file reference to phone type should be valid',
+    );
   }
 
   public function testAddressWithFalseDepthRefs(): void {
@@ -203,7 +229,9 @@ final class AddressSchemaValidatorTest extends BaseCodegenTestCase {
     ]);
     $validator->validate();
 
-    expect($validator->isValid())->toBeFalse('file reference to phone type should be valid');
+    expect($validator->isValid())->toBeFalse(
+      'file reference to phone type should be valid',
+    );
     expect(C\count($validator->getErrors()))->toBeSame(2);
   }
 

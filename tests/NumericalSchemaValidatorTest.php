@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh // partial
 
 namespace Slack\Hack\JsonSchema\Tests;
 
@@ -9,7 +9,8 @@ final class NumericalSchemaValidatorTest extends BaseCodegenTestCase {
 
   <<__Override>>
   public static async function beforeFirstTestAsync(): Awaitable<void> {
-    $ret = self::getBuilder('numerical-schema.json', 'NumericalSchemaValidator');
+    $ret =
+      self::getBuilder('numerical-schema.json', 'NumericalSchemaValidator');
     $ret['codegen']->build();
     require_once($ret['path']);
   }

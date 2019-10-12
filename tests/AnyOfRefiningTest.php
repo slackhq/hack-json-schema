@@ -1,10 +1,15 @@
-<?hh // strict
+<?hh // partial
 
 namespace Slack\Hack\JsonSchema\Tests;
 
 use function Facebook\FBExpect\expect;
 
-use type Slack\Hack\JsonSchema\Tests\Generated\{AnyOfValidator1, AnyOfValidator2, AnyOfValidator3, AnyOfValidator4};
+use type Slack\Hack\JsonSchema\Tests\Generated\{
+  AnyOfValidator1,
+  AnyOfValidator2,
+  AnyOfValidator3,
+  AnyOfValidator4,
+};
 
 final class AnyOfRefiningTest extends BaseCodegenTestCase {
 
