@@ -15,6 +15,7 @@ function get_function_name_from_function(mixed $function): string {
   $func_name = '';
 
   if (\HHVM_VERSION_ID >= 42100) {
+    /*HH_FIXME[2049]*//*HH_FIXME[4107] These errors don't apply in hhvm > 4.21*/
     $is_function = \is_callable_with_name($function, false, inout $func_name);
     invariant($is_function, 'You may only pass named functions to %s', __FUNCTION__);
   } else {
