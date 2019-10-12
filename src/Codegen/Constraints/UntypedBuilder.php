@@ -3,7 +3,7 @@
 namespace Slack\Hack\JsonSchema\Codegen;
 
 use namespace HH\Lib\{C, Vec};
-use type Facebook\HackCodegen\{CodegenType, CodegenMethod, HackBuilder, HackBuilderKeys, HackBuilderValues};
+use type Facebook\HackCodegen\{CodegenMethod, CodegenType, HackBuilder, HackBuilderKeys, HackBuilderValues};
 
 type TUntypedSchema = shape(
   ?'anyOf' => vec<TSchema>,

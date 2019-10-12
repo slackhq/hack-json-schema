@@ -5,12 +5,12 @@ namespace Slack\Hack\JsonSchema\Codegen;
 use namespace HH\Lib\{C, Str};
 
 use type Facebook\HackCodegen\{
-  CodegenType,
-  CodegenShapeMember,
   CodegenMethod,
-  HackBuilderValues,
-  HackBuilderKeys,
+  CodegenShapeMember,
+  CodegenType,
   HackBuilder,
+  HackBuilderKeys,
+  HackBuilderValues,
 };
 
 type TObjectSchema = shape(

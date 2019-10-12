@@ -6,8 +6,8 @@ use namespace HH\Lib\Vec;
 use type Facebook\HackCodegen\{
   CodegenFile,
   CodegenGeneratedFrom,
-  HackCodegenFactory,
   HackCodegenConfig,
+  HackCodegenFactory,
   IHackCodegenConfig,
 };
 

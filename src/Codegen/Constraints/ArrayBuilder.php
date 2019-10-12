@@ -4,8 +4,8 @@ namespace Slack\Hack\JsonSchema\Codegen;
 
 use type Facebook\HackCodegen\{
   CodegenMethod,
-  HackBuilderValues,
   HackBuilder,
+  HackBuilderValues,
 };
 
 type TArraySchema = shape(

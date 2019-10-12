@@ -2,7 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use type Facebook\HackCodegen\{CodegenFile, HackCodegenFactory, CodegenClass};
+use type Facebook\HackCodegen\{CodegenClass, CodegenFile, HackCodegenFactory};
 
 final class RootBuilder implements IBuilder {
   private Context $ctx;

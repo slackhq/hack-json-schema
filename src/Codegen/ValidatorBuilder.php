@@ -3,13 +3,13 @@
 namespace Slack\Hack\JsonSchema\Codegen;
 
 use type Facebook\HackCodegen\{
-  CodegenMethod,
   CodegenFile,
   CodegenFileType,
   CodegenGeneratedFrom,
+  CodegenMethod,
+  HackBuilder,
   HackCodegenFactory,
   IHackCodegenConfig,
-  HackBuilder,
 };
 
 use namespace HH\Lib\Str;

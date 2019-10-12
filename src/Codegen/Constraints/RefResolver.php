@@ -2,7 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use namespace HH\Lib\{Str, C};
+use namespace HH\Lib\{C, Str};
 
 use namespace Slack\Hack\JsonSchema;
 
