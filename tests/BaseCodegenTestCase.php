@@ -16,7 +16,7 @@ abstract class BaseCodegenTestCase extends HackTest {
   public function assertUnchanged(string $value, ?string $token = null): void {
     self::markTestSkipped("assertUnchanged doesn't work in hacktest yet");
 
-    $class_name = \get_called_class();
+    $class_name = static::class;
     $path = \Facebook\HackCodegen\CodegenExpectedFile::getPath($class_name);
     $expected = \Facebook\HackCodegen\CodegenExpectedFile::parseFile($path);
     $token = $token === null
@@ -133,8 +133,8 @@ abstract class BaseCodegenTestCase extends HackTest {
     string $msg = '',
   ): void {
     if (
-      !($expected instanceof KeyedContainer) ||
-      !($got instanceof KeyedContainer)
+      !($expected is KeyedContainer<_, _>) ||
+      !($got is KeyedContainer<_, _>)
     ) {
       expect($expected)->toBeSame($got, $msg);
       return;
@@ -147,8 +147,8 @@ abstract class BaseCodegenTestCase extends HackTest {
       }
 
       if (
-        $expected instanceof KeyedContainer &&
-        $got_value instanceof KeyedContainer
+        $expected is KeyedContainer<_, _> &&
+        $got_value is KeyedContainer<_, _>
       ) {
         $this->assertMatchesInput($expected_value, $got_value, $msg);
         return;

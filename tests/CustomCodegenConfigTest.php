@@ -53,15 +53,15 @@ final class CustomCodegenConfig implements IJsonSchemaCodegenConfig {
 
   public function sanitize(string $input): string {
     return $input
-      |> str_replace('_', ' ', $$)
-      |> str_replace('-', ' ', $$)
-      |> str_replace('.', ' ', $$)
-      |> preg_split('/(?=[A-Z])/', $$)
-      |> array_filter($$)
+      |> \str_replace('_', ' ', $$)
+      |> \str_replace('-', ' ', $$)
+      |> \str_replace('.', ' ', $$)
+      |> \preg_split('/(?=[A-Z])/', $$)
+      |> \array_filter($$)
       |> \HH\Lib\Vec\map($$, fun('\HH\Lib\Str\lowercase'))
       |> \HH\Lib\Str\join($$, ' ')
-      |> preg_replace("/[^A-Za-z0-9 ]/", ' nan ', $$)
-      |> str_replace(' ', '_', $$);
+      |> \preg_replace("/[^A-Za-z0-9 ]/", ' nan ', $$)
+      |> \str_replace(' ', '_', $$);
   }
 
 }

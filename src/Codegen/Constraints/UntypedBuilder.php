@@ -346,7 +346,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
     if (\count($schema_builders) === 1) {
       $this->current_type = $schema_builders[0]->getType();
     } else if (\count($schema_builders) === 2) {
-      $without_null = Vec\filter($schema_builders, $sb ==> !($sb->getBuilder() instanceof NullBuilder));
+      $without_null = Vec\filter($schema_builders, $sb ==> !($sb->getBuilder() is NullBuilder));
 
       if (\count($without_null) === 1) {
         $non_null_schema_builder = $without_null[0];

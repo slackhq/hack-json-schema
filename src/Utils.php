@@ -11,6 +11,23 @@ function get_pointer(string $current, string ...$parts): string {
   return !Str\is_empty($current) ? "{$current}/{$encoded}" : "/{$encoded}";
 }
 
+function get_function_name_from_function(mixed $function): string {
+  $func_name = '';
+
+  if (\HHVM_VERSION_ID >= 42100) {
+    $is_function = \is_callable($function, false);
+    invariant($is_function, 'You may only pass named functions to %s', __FUNCTION__);
+    /*HH_FIXME[2049]*//*HH_FIXME[4107] These errors are ot relevant for hhvm > 4.21*/
+    $func_name = \HH\fun_get_function($function);
+  } else {
+    /*HH_FIXME[4105] The error is not relevant for hhvm < 4.21*/
+    $is_function = \is_callable($function, false, inout $func_name);
+    invariant($is_function, 'You may only pass named functions to %s', __FUNCTION__);
+  }
+
+  return $func_name;
+}
+
 /**
 * Encode paths within the pointer according to RFC-6901
 * (https://tools.ietf.org/html/rfc6901)
