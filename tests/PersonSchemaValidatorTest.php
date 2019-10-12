@@ -1,4 +1,4 @@
-<?hh // partial
+<?hh // strict
 
 namespace Slack\Hack\JsonSchema\Tests;
 
@@ -19,14 +19,11 @@ final class PersonSchemaValidatorTest extends BaseCodegenTestCase {
     $validator = new PersonSchemaValidator(dict[]);
     $validator->validate();
 
-    expect($validator->isValid())->toBeFalse(
-      'should have failed on empty input',
-    );
+    expect($validator->isValid())->toBeFalse('should have failed on empty input');
   }
 
   public function testValidSchema(): void {
-    $input =
-      dict['first_name' => 'Michael', 'last_name' => 'Hahn', 'age' => 29];
+    $input = dict['first_name' => 'Michael', 'last_name' => 'Hahn', 'age' => 29];
 
     $validator = new PersonSchemaValidator($input);
     $validator->validate();
@@ -43,18 +40,14 @@ final class PersonSchemaValidatorTest extends BaseCodegenTestCase {
   }
 
   public function testInvalidPartialAge(): void {
-    $validator = new PersonSchemaValidator(
-      dict['first_name' => 'Michael', 'last_name' => 'Hahn', 'age' => 29.8],
-    );
+    $validator = new PersonSchemaValidator(dict['first_name' => 'Michael', 'last_name' => 'Hahn', 'age' => 29.8]);
     $validator->validate();
 
     expect($validator->isValid())->toBeFalse('should fail from partial age');
   }
 
   public function testNegativeAge(): void {
-    $validator = new PersonSchemaValidator(
-      dict['first_name' => 'Michael', 'last_name' => 'Hahn', 'age' => -29],
-    );
+    $validator = new PersonSchemaValidator(dict['first_name' => 'Michael', 'last_name' => 'Hahn', 'age' => -29]);
     $validator->validate();
 
     expect($validator->isValid())->toBeFalse('should fail from negative age');
@@ -85,9 +78,7 @@ final class PersonSchemaValidatorTest extends BaseCodegenTestCase {
     ]);
     $validator->validate();
 
-    expect($validator->isValid())->toBeFalse(
-      'should have failed with invalid friends age',
-    );
+    expect($validator->isValid())->toBeFalse('should have failed with invalid friends age');
   }
 
   public function testInvalidStringAndNumber(): void {
@@ -98,9 +89,7 @@ final class PersonSchemaValidatorTest extends BaseCodegenTestCase {
     ]);
     $validator->validate();
 
-    expect($validator->isValid())->toBeFalse(
-      'should require one string and one number',
-    );
+    expect($validator->isValid())->toBeFalse('should require one string and one number');
   }
 
   public function testValidStringAndNumber(): void {
@@ -177,9 +166,7 @@ final class PersonSchemaValidatorTest extends BaseCodegenTestCase {
     ]);
     $validator->validate();
 
-    expect($validator->isValid())->toBeTrue(
-      'should allow additional properties',
-    );
+    expect($validator->isValid())->toBeTrue('should allow additional properties');
 
     $validated = $validator->getValidatedInput();
     $devices = $validated['devices'] ?? null as nonnull;
@@ -188,10 +175,7 @@ final class PersonSchemaValidatorTest extends BaseCodegenTestCase {
     invariant(\is_array($device), 'device should be array');
 
     $extra = $device['extra'] ?? null;
-    expect($extra)->toBeSame(
-      true,
-      'additional properties should  be included in output',
-    );
+    expect($extra)->toBeSame(true, 'additional properties should  be included in output');
   }
 
   public function testDevicesPhoneValidAdditionalProperties(): void {
@@ -210,9 +194,7 @@ final class PersonSchemaValidatorTest extends BaseCodegenTestCase {
     ]);
     $validator->validate();
 
-    expect($validator->isValid())->toBeTrue(
-      'should allow additional properties that are strings',
-    );
+    expect($validator->isValid())->toBeTrue('should allow additional properties that are strings');
 
     $validated = $validator->getValidatedInput();
     $devices = $validated['devices'] ?? null as nonnull;
@@ -221,10 +203,7 @@ final class PersonSchemaValidatorTest extends BaseCodegenTestCase {
     invariant(\is_array($device), 'device should be array');
 
     $extra = $device['extra'] ?? null;
-    expect($extra)->toBeSame(
-      null,
-      "additional properties aren't set if other properties are defined",
-    );
+    expect($extra)->toBeSame(null, "additional properties aren't set if other properties are defined");
   }
 
   public function testDevicesPhoneInvalidAdditionalProperties(): void {
@@ -241,9 +220,7 @@ final class PersonSchemaValidatorTest extends BaseCodegenTestCase {
       ],
     ]);
     $validator->validate();
-    expect($validator->isValid())->toBeFalse(
-      "should not allow additional properties that aren't strings",
-    );
+    expect($validator->isValid())->toBeFalse("should not allow additional properties that aren't strings");
     expect(C\count($validator->getErrors()))->toBeSame(2);
   }
 
@@ -263,9 +240,7 @@ final class PersonSchemaValidatorTest extends BaseCodegenTestCase {
     ]);
     $validator->validate();
 
-    expect($validator->isValid())->toBeFalse(
-      'should be invalid phone number pattern',
-    );
+    expect($validator->isValid())->toBeFalse('should be invalid phone number pattern');
   }
 
   public function testValidStringOrNumber(): void {
