@@ -1,1 +1,21 @@
-No errors!
+Typing[4107] Unbound name (typing): HH\ReifiedGenerics\get_type_structure
+   --> vendor/hhvm/type-assert/src/TypeAssert.hack
+ 64 |     \HH\ReifiedGenerics\get_type_structure<T>(),
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Naming[2049] Unbound name: HH\ReifiedGenerics\get_type_structure (a global function)
+   --> vendor/hhvm/type-assert/src/TypeAssert.hack
+ 64 |     \HH\ReifiedGenerics\get_type_structure<T>(),
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Typing[4107] Unbound name (typing): HH\ReifiedGenerics\get_type_structure
+   --> vendor/hhvm/type-assert/src/TypeCoerce.hack
+ 49 |     \HH\ReifiedGenerics\get_type_structure<T>(),
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Naming[2049] Unbound name: HH\ReifiedGenerics\get_type_structure (a global function)
+   --> vendor/hhvm/type-assert/src/TypeCoerce.hack
+ 49 |     \HH\ReifiedGenerics\get_type_structure<T>(),
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+4 errors found.
