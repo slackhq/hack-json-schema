@@ -1,3 +1,0 @@
-HipHop VM 4.17.3 (rel)
-Compiler: 1567533127_212303702
-Repo schema: 56e6d5ff644bc84d839fa6c2be709c316e2e8c60
