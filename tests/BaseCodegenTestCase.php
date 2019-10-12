@@ -141,7 +141,8 @@ abstract class BaseCodegenTestCase extends HackTest {
     }
 
     foreach ($expected as $key => $expected_value) {
-      $got_value = $got[$key as arraykey] ?? null;
+      /*HH_IGNORE_ERROR[4110] HHVM4.0.4 does not want you to use $key in the subscript here*/
+      $got_value = $got[$key] ?? null;
 
       if (
         $expected is KeyedContainer<_, _> &&
