@@ -16,6 +16,13 @@ abstract class BaseCodegenTestCase extends HackTest {
   public function assertUnchanged(string $value, ?string $token = null): void {
     self::markTestSkipped("assertUnchanged doesn't work in hacktest yet");
 
+    /*
+
+    /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+    | This code never runs, because of the markTestSkipped above.    |
+    | HHVM 4.3+ can't find \Facebook\HackCodegen\CodegenExpectedFile.|
+    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
     $class_name = static::class;
     $path = \Facebook\HackCodegen\CodegenExpectedFile::getPath($class_name);
     $expected = \Facebook\HackCodegen\CodegenExpectedFile::parseFile($path);
@@ -40,6 +47,7 @@ abstract class BaseCodegenTestCase extends HackTest {
       $expected->contains($token) && $expected[$token] === $value,
       'New value not accepted by user',
     );
+    */
   }
 
   public static function getCodeGenRoot(): string {
@@ -90,14 +98,12 @@ abstract class BaseCodegenTestCase extends HackTest {
       'validator' => $validator_config,
     );
 
-    $json_schema_codegen_config =
-      $options['json_schema_codegen_config'] ?? null;
+    $json_schema_codegen_config = $options['json_schema_codegen_config'] ?? null;
     if ($json_schema_codegen_config is nonnull) {
       $codegen_config['jsonSchemaCodegenConfig'] = $json_schema_codegen_config;
     }
 
-    $codegen =
-      Codegen::forPath(__DIR__."/examples/{$json_filename}", $codegen_config);
+    $codegen = Codegen::forPath(__DIR__."/examples/{$json_filename}", $codegen_config);
 
     return shape(
       'path' => $path,
@@ -105,10 +111,7 @@ abstract class BaseCodegenTestCase extends HackTest {
     );
   }
 
-  public static function benchmark(
-    string $label,
-    (function(): void) $callback,
-  ): void {
+  public static function benchmark(string $label, (function(): void) $callback): void {
     $benchmarks = [];
 
     foreach (\range(0, 1000) as $iteration) {
@@ -127,15 +130,8 @@ abstract class BaseCodegenTestCase extends HackTest {
     return ($gtod['sec'] * 1000) + ((int)($gtod['usec'] / 1000));
   }
 
-  public function assertMatchesInput(
-    mixed $expected,
-    mixed $got,
-    string $msg = '',
-  ): void {
-    if (
-      !($expected is KeyedContainer<_, _>) ||
-      !($got is KeyedContainer<_, _>)
-    ) {
+  public function assertMatchesInput(mixed $expected, mixed $got, string $msg = ''): void {
+    if (!($expected is KeyedContainer<_, _>) || !($got is KeyedContainer<_, _>)) {
       expect($expected)->toBeSame($got, $msg);
       return;
     }
@@ -144,18 +140,12 @@ abstract class BaseCodegenTestCase extends HackTest {
       /*HH_IGNORE_ERROR[4110] HHVM4.0.4 does not want you to use $key in the subscript here*/
       $got_value = $got[$key] ?? null;
 
-      if (
-        $expected is KeyedContainer<_, _> &&
-        $got_value is KeyedContainer<_, _>
-      ) {
+      if ($expected is KeyedContainer<_, _> && $got_value is KeyedContainer<_, _>) {
         $this->assertMatchesInput($expected_value, $got_value, $msg);
         return;
       }
 
-      expect($expected_value)->toBeSame(
-        $got_value,
-        Str\format("%s: mismatch on %s", $msg, (string)$key),
-      );
+      expect($expected_value)->toBeSame($got_value, Str\format("%s: mismatch on %s", $msg, (string)$key));
     }
   }
 
@@ -170,13 +160,9 @@ abstract class BaseCodegenTestCase extends HackTest {
 
       $input = \print_r($case['input'], true);
       if ($case['valid']) {
-        expect($validator->isValid())->toBeTrue(
-          "should be valid for input: {$input}",
-        );
+        expect($validator->isValid())->toBeTrue("should be valid for input: {$input}");
       } else {
-        expect($validator->isValid())->toBeFalse(
-          "should be invalid for input: {$input}",
-        );
+        expect($validator->isValid())->toBeFalse("should be invalid for input: {$input}");
       }
 
       $output = $case['output'] ?? null;
