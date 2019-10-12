@@ -3,3 +3,4 @@
 .notes
 composer.phar
 .DS_Store
+**/*.hhast.parser-cache
