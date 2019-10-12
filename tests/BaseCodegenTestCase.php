@@ -13,7 +13,7 @@ abstract class BaseCodegenTestCase extends HackTest {
   const string CODEGEN_ROOT = __DIR__.'/examples/codegen';
   const string CODEGEN_NS = 'Slack\\Hack\\JsonSchema\\Tests\\Generated';
 
-  public function assertUnchanged(string $value, ?string $token = null): void {
+  public function assertUnchanged(string $_value, ?string $_token = null): void {
     self::markTestSkipped("assertUnchanged doesn't work in hacktest yet");
 
     /*
