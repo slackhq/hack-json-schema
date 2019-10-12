@@ -384,7 +384,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
     $input = ['first' => 'first', 'second' => 2];
 
     $validator =
-      new ObjectSchemaValidator(['coerce_object' => json_encode($input)]);
+      new ObjectSchemaValidator(['coerce_object' => \json_encode($input)]);
     $validator->validate();
 
     expect($validator->isValid())->toBeTrue();
@@ -397,7 +397,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
     $input = ['first' => 2, 'second' => 'invalid'];
 
     $validator =
-      new ObjectSchemaValidator(['coerce_object' => json_encode($input)]);
+      new ObjectSchemaValidator(['coerce_object' => \json_encode($input)]);
     $validator->validate();
 
     expect($validator->isValid())->toBeFalse();
