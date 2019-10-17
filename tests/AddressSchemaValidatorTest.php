@@ -5,8 +5,10 @@ namespace Slack\Hack\JsonSchema\Tests;
 use namespace HH\Lib\C;
 use function Facebook\FBExpect\expect;
 
-use type Slack\Hack\JsonSchema\Tests\Generated\AddressSchemaValidator;
-use type Slack\Hack\JsonSchema\Tests\Generated\AddressSchemaFileValidator;
+use type Slack\Hack\JsonSchema\Tests\Generated\{
+  AddressSchemaFileValidator,
+  AddressSchemaValidator,
+};
 
 final class AddressSchemaValidatorTest extends BaseCodegenTestCase {
 

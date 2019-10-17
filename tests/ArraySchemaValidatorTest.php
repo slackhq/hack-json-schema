@@ -35,9 +35,7 @@ final class ArraySchemaValidatorTest extends BaseCodegenTestCase {
   }
 
   public function testArrayOfStringsLegacyArrays(): void {
-    $validator = new ArraySchemaValidator(
-      ['array_of_strings' => ['test', 'list', 'of', 'strings']],
-    );
+    $validator = new ArraySchemaValidator(['array_of_strings' => ['test', 'list', 'of', 'strings']]);
     $validator->validate();
 
     expect($validator->isValid())->toBeTrue();
@@ -73,7 +71,7 @@ final class ArraySchemaValidatorTest extends BaseCodegenTestCase {
     $input = vec[1, 2, 3, 4];
 
     $validator = new ArraySchemaValidator(dict[
-      'coerce_array' => json_encode($input),
+      'coerce_array' => \json_encode($input),
     ]);
     $validator->validate();
 
@@ -87,7 +85,7 @@ final class ArraySchemaValidatorTest extends BaseCodegenTestCase {
     $input = vec[1, 2, 3, 'invalid'];
 
     $validator = new ArraySchemaValidator(dict[
-      'coerce_array' => json_encode($input),
+      'coerce_array' => \json_encode($input),
     ]);
     $validator->validate();
 

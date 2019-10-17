@@ -4,8 +4,8 @@ namespace Slack\Hack\JsonSchema\Codegen;
 
 use type Facebook\HackCodegen\{
   CodegenClass,
-  CodegenProperty,
   CodegenMethod,
+  CodegenProperty,
   HackBuilder,
   HackBuilderValues,
 };

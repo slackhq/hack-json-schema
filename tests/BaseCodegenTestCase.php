@@ -2,7 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Tests;
 
-use namespace HH\Lib\C;
+use namespace HH\Lib\{C, Str};
 use function Facebook\FBExpect\expect;
 use type Slack\Hack\JsonSchema\Validator;
 use type Slack\Hack\JsonSchema\Codegen\{Codegen, IJsonSchemaCodegenConfig};
@@ -13,10 +13,17 @@ abstract class BaseCodegenTestCase extends HackTest {
   const string CODEGEN_ROOT = __DIR__.'/examples/codegen';
   const string CODEGEN_NS = 'Slack\\Hack\\JsonSchema\\Tests\\Generated';
 
-  public function assertUnchanged(string $value, ?string $token = null): void {
+  public function assertUnchanged(string $_value, ?string $_token = null): void {
     self::markTestSkipped("assertUnchanged doesn't work in hacktest yet");
 
-    $class_name = \get_called_class();
+    /*
+
+    /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+    | This code never runs, because of the markTestSkipped above.    |
+    | HHVM 4.3+ can't find \Facebook\HackCodegen\CodegenExpectedFile.|
+    \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+    $class_name = static::class;
     $path = \Facebook\HackCodegen\CodegenExpectedFile::getPath($class_name);
     $expected = \Facebook\HackCodegen\CodegenExpectedFile::parseFile($path);
     $token = $token === null
@@ -40,6 +47,7 @@ abstract class BaseCodegenTestCase extends HackTest {
       $expected->contains($token) && $expected[$token] === $value,
       'New value not accepted by user',
     );
+    */
   }
 
   public static function getCodeGenRoot(): string {
@@ -90,14 +98,12 @@ abstract class BaseCodegenTestCase extends HackTest {
       'validator' => $validator_config,
     );
 
-    $json_schema_codegen_config =
-      $options['json_schema_codegen_config'] ?? null;
+    $json_schema_codegen_config = $options['json_schema_codegen_config'] ?? null;
     if ($json_schema_codegen_config is nonnull) {
       $codegen_config['jsonSchemaCodegenConfig'] = $json_schema_codegen_config;
     }
 
-    $codegen =
-      Codegen::forPath(__DIR__."/examples/{$json_filename}", $codegen_config);
+    $codegen = Codegen::forPath(__DIR__."/examples/{$json_filename}", $codegen_config);
 
     return shape(
       'path' => $path,
@@ -105,10 +111,7 @@ abstract class BaseCodegenTestCase extends HackTest {
     );
   }
 
-  public static function benchmark(
-    string $label,
-    (function(): void) $callback,
-  ): void {
+  public static function benchmark(string $label, (function(): void) $callback): void {
     $benchmarks = [];
 
     foreach (\range(0, 1000) as $iteration) {
@@ -127,37 +130,22 @@ abstract class BaseCodegenTestCase extends HackTest {
     return ($gtod['sec'] * 1000) + ((int)($gtod['usec'] / 1000));
   }
 
-  public function assertMatchesInput(
-    mixed $expected,
-    mixed $got,
-    string $msg = '',
-  ): void {
-    if (
-      !($expected instanceof KeyedContainer) ||
-      !($got instanceof KeyedContainer)
-    ) {
+  public function assertMatchesInput(mixed $expected, mixed $got, string $msg = ''): void {
+    if (!($expected is KeyedContainer<_, _>) || !($got is KeyedContainer<_, _>)) {
       expect($expected)->toBeSame($got, $msg);
       return;
     }
 
     foreach ($expected as $key => $expected_value) {
-      $got_value = null;
-      if (C\contains_key($got, $key)) {
-        $got_value = $got[$key];
-      }
+      /*HH_IGNORE_ERROR[4110] HHVM4.0.4 does not want you to use $key in the subscript here*/
+      $got_value = $got[$key] ?? null;
 
-      if (
-        $expected instanceof KeyedContainer &&
-        $got_value instanceof KeyedContainer
-      ) {
+      if ($expected is KeyedContainer<_, _> && $got_value is KeyedContainer<_, _>) {
         $this->assertMatchesInput($expected_value, $got_value, $msg);
         return;
       }
 
-      expect($expected_value)->toBeSame(
-        $got_value,
-        $msg.": mismatch on {$key}",
-      );
+      expect($expected_value)->toBeSame($got_value, Str\format("%s: mismatch on %s", $msg, (string)$key));
     }
   }
 
@@ -172,13 +160,9 @@ abstract class BaseCodegenTestCase extends HackTest {
 
       $input = \print_r($case['input'], true);
       if ($case['valid']) {
-        expect($validator->isValid())->toBeTrue(
-          "should be valid for input: {$input}",
-        );
+        expect($validator->isValid())->toBeTrue("should be valid for input: {$input}");
       } else {
-        expect($validator->isValid())->toBeFalse(
-          "should be invalid for input: {$input}",
-        );
+        expect($validator->isValid())->toBeFalse("should be invalid for input: {$input}");
       }
 
       $output = $case['output'] ?? null;

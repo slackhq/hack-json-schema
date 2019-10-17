@@ -185,7 +185,7 @@ final class PersonSchemaValidatorTest extends BaseCodegenTestCase {
     $devices = $validated['devices'] ?? null as nonnull;
 
     $device = $devices[0];
-    invariant(is_array($device), 'device should be array');
+    invariant(\is_array($device), 'device should be array');
 
     $extra = $device['extra'] ?? null;
     expect($extra)->toBeSame(
@@ -218,7 +218,7 @@ final class PersonSchemaValidatorTest extends BaseCodegenTestCase {
     $devices = $validated['devices'] ?? null as nonnull;
 
     $device = $devices[0];
-    invariant(is_array($device), 'device should be array');
+    invariant(\is_array($device), 'device should be array');
 
     $extra = $device['extra'] ?? null;
     expect($extra)->toBeSame(

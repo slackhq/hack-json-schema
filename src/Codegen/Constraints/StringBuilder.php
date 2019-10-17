@@ -2,10 +2,9 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use type Facebook\HackCodegen\{
-  CodegenMethod,
-  HackBuilderValues,
-};
+use function Slack\Hack\JsonSchema\get_function_name_from_function;
+
+use type Facebook\HackCodegen\{CodegenMethod, HackBuilderValues};
 
 type TStringSchema = shape(
   'type' => TSchemaType,
@@ -22,8 +21,7 @@ type TStringSchema = shape(
 );
 
 class StringBuilder extends BaseBuilder<TStringSchema> {
-  protected static string $schema_name =
-    'Slack\Hack\JsonSchema\Codegen\TStringSchema';
+  protected static string $schema_name = 'Slack\Hack\JsonSchema\Codegen\TStringSchema';
 
   <<__Override>>
   public function build(): this {
@@ -87,27 +85,17 @@ class StringBuilder extends BaseBuilder<TStringSchema> {
     $sanitize = $this->typed_schema['sanitize'] ?? null;
     $sanitize_string = $this->ctx->getSanitizeStringConfig();
     if ($sanitize is nonnull && $sanitize_string === null) {
-      throw new \Exception(
-        "Specified `sanitize` on a string without providing sanitization functions.",
-      );
+      throw new \Exception("Specified `sanitize` on a string without providing sanitization functions.");
     } else if ($sanitize is nonnull && $sanitize_string is nonnull) {
       if ($sanitize['multiline']) {
-        $sanitization_func = (string)$sanitize_string['multiline'];
+        $sanitization_func = get_function_name_from_function($sanitize_string['multiline']);
       } else {
-        $sanitization_func = (string)$sanitize_string['uniline'];
+        $sanitization_func = get_function_name_from_function($sanitize_string['uniline']);
       }
 
       $hb
-        ->addAssignment(
-          '$sanitize_string',
-          "fun('\\$sanitization_func')",
-          HackBuilderValues::literal(),
-        )
-        ->addAssignment(
-          '$typed',
-          '$sanitize_string($typed)',
-          HackBuilderValues::literal(),
-        )
+        ->addAssignment('$sanitize_string', "fun('\\$sanitization_func')", HackBuilderValues::literal())
+        ->addAssignment('$typed', '$sanitize_string($typed)', HackBuilderValues::literal())
         ->ensureEmptyLine();
     }
 
@@ -119,25 +107,15 @@ class StringBuilder extends BaseBuilder<TStringSchema> {
     $format = $this->typed_schema['format'] ?? null;
 
     if ($pattern is nonnull) {
-      $hb->addMultilineCall(
-        'Constraints\StringPatternConstraint::check',
-        ['$typed', 'self::$pattern', '$pointer'],
-      );
+      $hb->addMultilineCall('Constraints\StringPatternConstraint::check', ['$typed', 'self::$pattern', '$pointer']);
     }
 
     if ($format is nonnull) {
-      $hb->addMultilineCall(
-        'Constraints\StringFormatConstraint::check',
-        ['$typed', 'self::$format', '$pointer'],
-      );
+      $hb->addMultilineCall('Constraints\StringFormatConstraint::check', ['$typed', 'self::$format', '$pointer']);
     }
 
     if ($max_length is nonnull || $min_length is nonnull) {
-      $hb->addAssignment(
-        '$length',
-        '\mb_strlen($typed)',
-        HackBuilderValues::literal(),
-      );
+      $hb->addAssignment('$length', '\mb_strlen($typed)', HackBuilderValues::literal());
     }
 
     if ($max_length is nonnull) {
