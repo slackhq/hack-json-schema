@@ -25,17 +25,18 @@ class ObjectConstraint {
       } else {
         $darray_spec = TypeSpec\dict_like_array(TypeSpec\string(), TypeSpec\mixed());
         # Fallback to checking legacy PHP dict-like-arrays
-        $darray_spec->assertType($input);
-
-        # Coerce a valid dict-like-array to a dict.
-        return $dict_spec->coerceType($input);
+        return dict($darray_spec->assertType($input));
       }
     } catch (TypeAssert\IncorrectTypeException $e) {
       self::throwInvalidInput($pointer);
+      // Do not remove this catch until TypeAssert 3.6.2 is a requirement.
+      // TypeSpec\dict(...)->assertType(...) throws an TypeCoersionException under 3.6.1 and below.
+      // This is should have been an IncorrectTypeException and this has since been rectified.
+      // This library builds against 3.6.1- and 3.6.2+, so both exceptions need to be caught.
+      // In future, remove this second catch and inline the body of throwInvalidInput here.
     } catch (TypeAssert\TypeCoercionException $e) {
       self::throwInvalidInput($pointer);
     }
-
   }
 
   private static function throwInvalidInput(string $pointer): noreturn {
