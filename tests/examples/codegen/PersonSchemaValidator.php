@@ -246,7 +246,7 @@ final class PersonSchemaValidatorPropertiesFriendsItems {
       }
     }
 
-    foreach ($typed as $key => $value) {
+    foreach ($typed as $key => $_value) {
       if (\HH\Lib\C\contains_key(self::$properties, $key)) {
         continue;
       }
