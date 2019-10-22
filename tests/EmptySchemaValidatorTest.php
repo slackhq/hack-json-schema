@@ -2,9 +2,13 @@
 
 namespace Slack\Hack\JsonSchema\Tests;
 
+use namespace HH\Lib\C;
+use namespace Slack\Hack\JsonSchema;
+use namespace Facebook\TypeAssert;
 use function Facebook\FBExpect\expect;
 use type Facebook\HackTest\DataProvider;
 
+use type Slack\Hack\JsonSchema\Tests\Generated\ObjectSchemaValidator;
 
 final class EmptySchemaValidatorTest extends BaseCodegenTestCase {
 

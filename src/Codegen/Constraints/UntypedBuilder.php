@@ -275,7 +275,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
     // indicating that each incoming schema had the same field and it was an
     // enum).
     $object_to_enum_builder_map = dict[];
-    foreach ($schema_builders as $schema_builder) {
+    foreach ($schema_builders as $index => $schema_builder) {
       $resolved_schema = $schema_builder->getResolvedSchema();
 
       $type = $resolved_schema['type'] ?? null;

@@ -246,7 +246,7 @@ final class CustomCodegenConfigValidatorPropertiesFriendsItems {
       }
     }
 
-    foreach ($typed as $key => $_value) {
+    foreach ($typed as $key => $value) {
       if (\HH\Lib\C\contains_key(self::$properties, $key)) {
         continue;
       }
