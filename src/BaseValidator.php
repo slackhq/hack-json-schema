@@ -10,10 +10,7 @@ abstract class BaseValidator<+T> implements Validator<T> {
   private ?T $validated_input;
   private bool $validated = false;
 
-  public function __construct(
-    protected mixed $input,
-    protected string $pointer = '',
-  ) {}
+  public function __construct(protected mixed $input, protected string $pointer = '') {}
 
   abstract protected function process(): T;
 
@@ -37,13 +34,9 @@ abstract class BaseValidator<+T> implements Validator<T> {
   final public function getValidatedInput(): T {
     if ($this->validated_input === null) {
       if (!$this->validated) {
-        throw new \Exception(
-          'Must call `validate` before accessing validated input.',
-        );
+        throw new \Exception('Must call `validate` before accessing validated input.');
       }
-      throw new \Exception(
-        "Can't access validated input since validator is invalid.",
-      );
+      throw new \Exception("Can't access validated input since validator is invalid.");
     }
 
     return $this->validated_input;
