@@ -9,7 +9,7 @@ abstract class BaseValidator<+T> implements Validator<T> {
   private vec<TFieldError> $errors = vec[];
   <<__LateInit>> private T $validated_input;
   private bool $has_been_validated = false;
-  private bool $is_invalid = false;
+  <<__LateInit>> private bool $is_invalid;
 
   public function __construct(protected mixed $input, protected string $pointer = '') {}
 
