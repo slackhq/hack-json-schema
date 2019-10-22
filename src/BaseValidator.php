@@ -18,12 +18,12 @@ abstract class BaseValidator<+T> implements Validator<T> {
   final public function validate(): void {
     try {
       $this->validated_input = $this->process();
-      $this->has_been_validated = true;
       $this->is_invalid = false;
     } catch (InvalidFieldException $e) {
       $this->errors = $e->errors;
       $this->is_invalid = true;
     }
+    $this->has_been_validated = true;
   }
 
   final public function isValid(): bool {
