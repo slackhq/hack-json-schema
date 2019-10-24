@@ -439,7 +439,6 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
 
     if ($properties is nonnull) {
       $hb
-        ->addLine("/* HH_IGNORE_ERROR[4057] */")
         ->addLine("/* HH_IGNORE_ERROR[4163] */")
         ->addReturn('$output', HackBuilderValues::literal());
     } else if (
