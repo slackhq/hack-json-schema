@@ -114,7 +114,7 @@ abstract class BaseCodegenTestCase extends HackTest {
   public static function benchmark(string $label, (function(): void) $callback): void {
     $benchmarks = [];
 
-    foreach (\range(0, 1000) as $iteration) {
+    for ($i = 0; $i < 1000; $i++) {
       $start = self::microtimeMs();
       $callback();
       $end = self::microtimeMs();
