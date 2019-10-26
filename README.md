@@ -16,7 +16,7 @@ There are several benefits to generation:
 ### Codegen::forPath
 The most basic way to use this library is to generate a validator from a JSON schema file:
 
-```
+```hack
 use type Slack\Hack\JsonSchema\Codegen\Codegen;
 
 Codegen::forPath('/path/to/json-schema.json', shape(
@@ -29,7 +29,7 @@ Codegen::forPath('/path/to/json-schema.json', shape(
 
 `/path/to/MyJsonSchemaValidator.php` now exists with a class:
 
-```
+```hack
 final class MyJsonSchemaValidator extends BaseValidator {
   ... class contents
 }
@@ -37,7 +37,7 @@ final class MyJsonSchemaValidator extends BaseValidator {
 
 Each validator has a `validate` method, which takes a decoded JSON object:
 
-```
+```hack
 $json = json_decode($args['json_input'], true);
 $validator = new MyJsonSchemaValidator($json);
 $validator->validate();
@@ -61,7 +61,7 @@ This works well if you only have one primary schema, but if you have multiple sc
 
 In these cases, you can use `Codegen::forPaths`.
 
-```
+```hack
 use type Slack\Hack\JsonSchema\Codegen\Codegen;
 
 $schemas = vec['/path/to/json-schema-1.json', '/path/to/json-schema-2.json', '/path/to/json-schema-3.json'];
@@ -84,12 +84,12 @@ By defining the `source_root` and `output_root` we can generate unique validator
 ### Installing Dependencies
 We use composer to install our dependencies. Running the following will install composer (if it doesn't exist already) and install the dependencies:
 
-```
+```console
 make composer-install
 ```
 
 ### Running Tests
-```
+```console
 make test
 ```
 
