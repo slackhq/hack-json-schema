@@ -1,6 +1,12 @@
 hackfmt.line_width=120
 ignored_paths = [ "vendor/.+/tests/.+", "vendor/.+/bin/.+"]
 
+;-------------------------------------------------------------------------------------;
+; These settings are extra strictness to ease forward compatibility with hhvm.latest  ;
+;              You may disable them if they are giving you trouble                    ;
+;         Some options may not yet apply for your current hhvm version                ;
+;-------------------------------------------------------------------------------------;
+
 disallow_toplevel_requires = true
 disable_static_closures = true
 disable_halt_compiler = true
