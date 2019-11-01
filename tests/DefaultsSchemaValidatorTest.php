@@ -70,6 +70,7 @@ final class DefaultsSchemaValidatorTest extends BaseCodegenTestCase {
   }
 
   public function testNestedCoerceFalse(): void {
+    // This test is not doing anything, since $cases is unused.
     $cases = vec[
       shape(
         'input' => [
@@ -91,5 +92,4 @@ final class DefaultsSchemaValidatorTest extends BaseCodegenTestCase {
       ),
     ];
   }
-
 }
