@@ -19,17 +19,17 @@ disable_unset_class_const = true
 check_attribute_locations = true
 disallow_func_ptrs_in_constants = true
 
-;-------------------------------------------;
-; Settings that can be enabled after date X ;
-;-------------------------------------------;
+;---------------------------------------------------;
+; Settings that can be enabled after HHVM version X ;
+;---------------------------------------------------;
 
-; 2019/10/31
-disallow_silence = true
-; 2019/10/31
-disallow_scrutinee_case_value_type_mismatch = true
-; 2019/10/31
-disable_lval_as_an_expression = true
-; 2019/10/31
-new_inference_lambda = true
-; 2019/10/31
+; 4.29
+disallow_silence = false
+; 4.29
+disallow_scrutinee_case_value_type_mismatch = false
+; 4.29
+disable_lval_as_an_expression = false
+; 4.29
+new_inference_lambda = false
+; 4.29
 disallow_array_literal = false
