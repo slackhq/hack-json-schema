@@ -32,4 +32,4 @@ disable_lval_as_an_expression = true
 ; 2019/10/31
 new_inference_lambda = true
 ; 2019/10/31
-disallow_array_literal = true
+disallow_array_literal = false
