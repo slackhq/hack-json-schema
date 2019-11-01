@@ -1,2 +1,35 @@
 hackfmt.line_width=120
 ignored_paths = [ "vendor/.+/tests/.+", "vendor/.+/bin/.+"]
+
+disallow_toplevel_requires = true
+disable_static_closures = true
+disable_halt_compiler = true
+unsafe_rx = false
+disallow_invalid_arraykey = true
+disallow_byref_dynamic_calls = true
+disallow_byref_calls = true
+typecheck_xhp_cvars = true
+union_intersection_type_hints = true
+disable_partially_abstract_typeconsts = true
+check_xhp_attribute = true
+disallow_invalid_arraykey_constraint = true
+disable_legacy_soft_typehints = true
+const_default_func_args = true
+disable_unset_class_const = true
+check_attribute_locations = true
+disallow_func_ptrs_in_constants = true
+
+;-------------------------------------------;
+; Settings that can be enabled after date X ;
+;-------------------------------------------;
+
+; 2019/10/31
+disallow_silence = true
+; 2019/10/31
+disallow_scrutinee_case_value_type_mismatch = true
+; 2019/10/31
+disable_lval_as_an_expression = true
+; 2019/10/31
+new_inference_lambda = true
+; 2019/10/31
+disallow_array_literal = true
