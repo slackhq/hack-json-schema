@@ -15,7 +15,6 @@ disallow_invalid_arraykey = true
 disallow_byref_dynamic_calls = true
 disallow_byref_calls = true
 typecheck_xhp_cvars = true
-union_intersection_type_hints = true
 disable_partially_abstract_typeconsts = true
 check_xhp_attribute = true
 disallow_invalid_arraykey_constraint = true
