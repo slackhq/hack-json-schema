@@ -1,5 +1,5 @@
 hackfmt.line_width=120
-ignored_paths = [ "vendor/.+/tests/.+", "vendor/.+/bin/.+", "tests/*"]
+ignored_paths = [ "vendor/.+/tests/.+", "vendor/.+/bin/.+" ]
 
 #[HCM] if HHVM_VERSION_ID >= 42500
 #[HCM] disallow_array_literal = true

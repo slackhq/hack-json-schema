@@ -21,23 +21,23 @@ final class DefaultsSchemaValidatorTest extends BaseCodegenTestCase {
   public function testBoolean(): void {
     $cases = vec[
       shape(
-        'input' => ['boolean' => true],
-        'output' => ['boolean' => true],
+        'input' => darray['boolean' => true],
+        'output' => darray['boolean' => true],
         'valid' => true,
       ),
       shape(
-        'input' => ['boolean' => 0],
-        'output' => ['boolean' => false],
+        'input' => darray['boolean' => 0],
+        'output' => darray['boolean' => false],
         'valid' => true,
       ),
       shape(
-        'input' => ['boolean' => 'false'],
-        'output' => ['boolean' => false],
+        'input' => darray['boolean' => 'false'],
+        'output' => darray['boolean' => false],
         'valid' => true,
       ),
       shape(
-        'input' => ['boolean' => 'true'],
-        'output' => ['boolean' => true],
+        'input' => darray['boolean' => 'true'],
+        'output' => darray['boolean' => true],
         'valid' => true,
       ),
     ];
@@ -48,20 +48,20 @@ final class DefaultsSchemaValidatorTest extends BaseCodegenTestCase {
   public function testBooleanCoerceFalse(): void {
     $cases = vec[
       shape(
-        'input' => ['boolean_coerce_false' => true],
-        'output' => ['boolean_coerce_false' => true],
+        'input' => darray['boolean_coerce_false' => true],
+        'output' => darray['boolean_coerce_false' => true],
         'valid' => true,
       ),
       shape(
-        'input' => ['boolean_coerce_false' => 0],
+        'input' => darray['boolean_coerce_false' => 0],
         'valid' => false,
       ),
       shape(
-        'input' => ['boolean_coerce_false' => 'false'],
+        'input' => darray['boolean_coerce_false' => 'false'],
         'valid' => false,
       ),
       shape(
-        'input' => ['boolean_coerce_false' => 'true'],
+        'input' => darray['boolean_coerce_false' => 'true'],
         'valid' => false,
       ),
     ];
@@ -70,22 +70,23 @@ final class DefaultsSchemaValidatorTest extends BaseCodegenTestCase {
   }
 
   public function testNestedCoerceFalse(): void {
+    // @TODO This testcase does nothing. $cases is an unused variable.
     $cases = vec[
       shape(
-        'input' => [
+        'input' => darray[
           'nested_coerce_false' =>
-            ['boolean_prop' => 'false', 'number_prop' => 3],
+            darray['boolean_prop' => 'false', 'number_prop' => 3],
         ],
-        'output' => [
+        'output' => darray[
           'nested_coerce_false' =>
-            ['boolean_prop' => false, 'number_prop' => 3],
+            darray['boolean_prop' => false, 'number_prop' => 3],
         ],
         'valid' => true,
       ),
       shape(
-        'input' => [
+        'input' => darray[
           'nested_coerce_false' =>
-            ['boolean_prop' => true, 'number_prop' => '3'],
+            darray['boolean_prop' => true, 'number_prop' => '3'],
         ],
         'valid' => false,
       ),
