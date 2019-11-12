@@ -2,7 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use namespace HH\Lib\{C, Str};
+use namespace HH\Lib\{C, Keyset, Str};
 
 use type Facebook\HackCodegen\{
   CodegenMethod,
@@ -50,7 +50,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
         $this->getCheckMethod($property_classes, $pattern_properties_classes),
       );
 
-    $class_properties = [];
+    $class_properties = vec[];
     $required = $this->typed_schema['required'] ?? null;
     if ($required is nonnull) {
       $hb = $this->getHackBuilder()
@@ -76,10 +76,10 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
       ($additional_properties is nonnull || $pattern_properties is nonnull) &&
       $properties is nonnull
     ) {
-      $properties = $this->typed_schema['properties'] ?? [];
+      $properties = $this->typed_schema['properties'] ?? dict[];
       $hb = $this->getHackBuilder()
         ->addValue(
-          keyset(\HH\Lib\Vec\keys($properties)),
+          Keyset\keys($properties),
           HackBuilderValues::keyset(HackBuilderValues::export()),
         );
 
@@ -109,7 +109,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     $hb = $this->getCheckMethodCode($properties, $pattern_properties);
 
     return $this->codegenCheckMethod()
-      ->addParameters(['mixed $input', 'string $pointer'])
+      ->addParameters(vec['mixed $input', 'string $pointer'])
       ->setBody($hb->getCode())
       ->setReturnType($this->getType());
   }
@@ -181,7 +181,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     if ($required is nonnull) {
       $hb->addMultilineCall(
         'Constraints\ObjectRequiredConstraint::check',
-        ['$typed', 'self::$required', '$pointer'],
+        vec['$typed', 'self::$required', '$pointer'],
       );
     }
 
@@ -239,7 +239,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
           ->startTryBlock()
           ->addMultilineCall(
             "\$output['{$property_name}'] = {$property_class_name}::check",
-            [
+            vec[
               "\$typed['{$property_name}']",
               "JsonSchema\get_pointer(\$pointer, '{$property_name}')",
             ],
@@ -327,12 +327,12 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
         if ($properties is nonnull) {
           $hb->addMultilineCall(
             '$constraint',
-            ['$value', 'JsonSchema\get_pointer($pointer, $key)'],
+            vec['$value', 'JsonSchema\get_pointer($pointer, $key)'],
           );
         } else {
           $hb->addMultilineCall(
             '$output[$key] = $constraint',
-            ['$value', 'JsonSchema\get_pointer($pointer, $key)'],
+            vec['$value', 'JsonSchema\get_pointer($pointer, $key)'],
           );
         }
 
@@ -406,13 +406,13 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
           $hb
             ->addMultilineCall(
               "{$additional_properties_class_name}::check",
-              ['$value', 'JsonSchema\get_pointer($pointer, $key)'],
+              vec['$value', 'JsonSchema\get_pointer($pointer, $key)'],
             );
         } else {
           $hb
             ->addMultilineCall(
               "\$output[\$key] = {$additional_properties_class_name}::check",
-              ['$value', 'JsonSchema\get_pointer($pointer, $key)'],
+              vec['$value', 'JsonSchema\get_pointer($pointer, $key)'],
             );
         }
 
@@ -516,7 +516,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     ?dict<string, SchemaBuilder> $pattern_property_classes = null,
   ): CodegenType {
     if ($property_classes is nonnull) {
-      $required = $this->typed_schema['required'] ?? [];
+      $required = $this->typed_schema['required'] ?? vec[];
       $additional_properties =
         $this->typed_schema['additionalProperties'] ?? null;
 
@@ -525,7 +525,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
           ? $additional_properties
           : true;
 
-      $members = [];
+      $members = vec[];
       foreach ($property_classes as $property => $builder) {
         $member = new CodegenShapeMember($property, $builder->getType());
         if (!\HH\Lib\C\contains($required, $property)) {

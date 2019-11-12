@@ -22,7 +22,7 @@ class NullBuilder extends BaseBuilder<TNullSchema> {
     $class = $this->codegenClass()
       ->addMethod($this->getCheckMethod());
 
-    $properties = [];
+    $properties = vec[];
 
     $class->addProperties($properties);
     $this->addBuilderClass($class);
@@ -42,7 +42,7 @@ class NullBuilder extends BaseBuilder<TNullSchema> {
     $hb->addReturn('$typed', HackBuilderValues::literal());
 
     return $this->codegenCheckMethod()
-      ->addParameters(['mixed $input', 'string $pointer'])
+      ->addParameters(vec['mixed $input', 'string $pointer'])
       ->setBody($hb->getCode())
       ->setReturnType($this->getType());
   }

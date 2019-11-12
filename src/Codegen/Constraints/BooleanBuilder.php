@@ -50,7 +50,7 @@ class BooleanBuilder extends BaseBuilder<TBooleanSchema> {
       ->addReturn('$typed', HackBuilderValues::literal());
 
     return $this->codegenCheckMethod()
-      ->addParameters(['mixed $input', 'string $pointer'])
+      ->addParameters(vec['mixed $input', 'string $pointer'])
       ->setBody($hb->getCode())
       ->setReturnType($this->getType());
   }
