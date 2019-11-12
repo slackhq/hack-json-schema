@@ -1,7 +1,7 @@
 {
   "roots": ["src", "tests"],
   "builtinLinters": "all",
-  "extraLinters": ["Facebook\\HHAST\\Linters\\PreferLambdasLinter", "Facebook\\HHAST\\Linters\\NoPHPArrayLiteralsLinter"],
+  "extraLinters": ["Facebook\\HHAST\\Linters\\PreferLambdasLinter"],
   "disabledLinters": [
     "Facebook\\HHAST\\Linters\\LicenseHeaderLinter",
     "Facebook\\HHAST\\Linters\\NoStringInterpolationLinter",
