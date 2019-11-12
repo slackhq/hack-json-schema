@@ -390,14 +390,14 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
     expect($validator->isValid())->toBeTrue();
 
     $validated = $validator->getValidatedInput();
-    expect($validated)->toBeSame(darray['coerce_object' => $input]);
+    expect($validated)->toBeSame(shape('coerce_object' => $input));
   }
 
   public function testCoerceObjectInvalidString(): void {
     $input = darray['first' => 2, 'second' => 'invalid'];
 
     $validator =
-      new ObjectSchemaValidator(darray['coerce_object' => \json_encode($input)]);
+      new ObjectSchemaValidator(shape('coerce_object' => \json_encode($input)));
     $validator->validate();
 
     expect($validator->isValid())->toBeFalse();
