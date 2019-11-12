@@ -320,7 +320,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
           ->addAssignment('$failed_any', false, HackBuilderValues::export())
           ->ensureEmptyLine()
           ->startForeachLoop('$patterns', '$pattern', '$constraint')
-          ->addAssignment('$matches', '[]', HackBuilderValues::literal())
+          ->addAssignment('$matches', 'varray[]', HackBuilderValues::literal())
           ->startIfBlock('\preg_match("/{$pattern}/", $key)')
           ->startTryBlock();
 
