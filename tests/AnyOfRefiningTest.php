@@ -20,9 +20,9 @@ final class AnyOfRefiningTest extends BaseCodegenTestCase {
     $ret = self::getBuilder('anyof-schema-2.json', 'AnyOfValidator2');
     $ret['codegen']->build();
     $ret = self::getBuilder('anyof-schema-3.json', 'AnyOfValidator3');
-    $cf = $ret['codegen']->build();
+    $ret['codegen']->build();
     $ret = self::getBuilder('anyof-schema-4.json', 'AnyOfValidator4');
-    $cf = $ret['codegen']->build();
+    $ret['codegen']->build();
   }
 
   public function testNullableString(): void {

@@ -70,7 +70,8 @@ final class DefaultsSchemaValidatorTest extends BaseCodegenTestCase {
   }
 
   public function testNestedCoerceFalse(): void {
-    $cases = vec[
+    // This test is doing nothing, unused variable
+    $_cases = vec[
       shape(
         'input' => [
           'nested_coerce_false' =>
