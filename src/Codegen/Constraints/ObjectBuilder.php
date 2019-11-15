@@ -259,7 +259,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     } else {
       # if `properties` isn't defined, we have a dynamic-ish output (either
       # `additionalProperties` or `patternProperties`)
-      $hb
+      $hb->addLine('/*HHAST_IGNORE_ERROR[UnusedVariable] Some functions generated with this statement do not use their $output, they use their $typed instead*/')
         ->addAssignment('$output', 'dict[]', HackBuilderValues::literal())
         ->ensureEmptyLine();
     }
