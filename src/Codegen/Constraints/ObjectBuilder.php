@@ -304,6 +304,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
       $pattern_properties is nonnull
     ) {
       $hb
+        ->addLine('/*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not used their $value*/')
         ->startForeachLoop('$typed', '$key', '$value');
 
       if ($properties is nonnull) {
