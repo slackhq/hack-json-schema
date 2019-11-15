@@ -242,7 +242,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
   private function generateAnyOfChecks(vec<TSchema> $schemas, HackBuilder $hb): void {
     $schema_builders = Vec\map_with_key(
       $schemas,
-      ($index, $schema) ==> $schema_builder =
+      ($index, $schema) ==>
         new SchemaBuilder($this->ctx, $this->generateClassName($this->suffix, 'anyOf', (string)$index), $schema),
     );
 

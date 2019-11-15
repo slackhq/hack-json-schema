@@ -33,7 +33,6 @@ final class CodegenForSchemaTest extends BaseCodegenTestCase {
       'validator' => $validator_config,
     );
 
-    $codegen =
       Codegen::forSchema($schema, $codegen_config, $root_directory)->build();
   }
 
