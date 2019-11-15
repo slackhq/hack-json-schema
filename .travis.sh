@@ -12,7 +12,7 @@ php --version
 if (hhvm --version | grep -q -- -dev); then
   rm -f composer.lock
 fi
-composer install
+composer upgrade
 
 hh_client
 
