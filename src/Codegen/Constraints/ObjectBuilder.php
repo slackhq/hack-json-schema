@@ -209,7 +209,8 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
         // more advanced, they'll be an option for handling this in a more
         // performant way in the future. Right now those don't work consistently
         // because they don't work for shapes that contain generics.
-        $hb->startForeachLoop('$typed', '$key', '$value')
+        $hb->addLine('/*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not used their $value*/')
+          ->startForeachLoop('$typed', '$key', '$value')
           ->addLine(
             '/* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */',
           )
