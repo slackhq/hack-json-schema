@@ -29,57 +29,57 @@ final class RefSchemaValidatorTest extends BaseCodegenTestCase {
   public function testUniqueRefs(): void {
     $cases = vec[
       shape(
-        'input' => ['remote-reference' => 'one'],
-        'output' => ['remote-reference' => 'one'],
+        'input' => darray['remote-reference' => 'one'],
+        'output' => darray['remote-reference' => 'one'],
         'valid' => true,
       ),
       shape(
-        'input' => ['remote-reference' => 5],
+        'input' => darray['remote-reference' => 5],
         'valid' => false,
       ),
       shape(
-        'input' => [
-          'duplicate-refs' => [
-            'first' => ['string' => 'test', 'integer' => 5],
-            'fourth' => ['string' => 'test', 'integer' => 5],
+        'input' => darray[
+          'duplicate-refs' => darray[
+            'first' => darray['string' => 'test', 'integer' => 5],
+            'fourth' => darray['string' => 'test', 'integer' => 5],
           ],
         ],
-        'output' => [
-          'duplicate-refs' => [
-            'first' => ['string' => 'test', 'integer' => 5],
-            'fourth' => ['string' => 'test', 'integer' => 5],
+        'output' => darray[
+          'duplicate-refs' => darray[
+            'first' => darray['string' => 'test', 'integer' => 5],
+            'fourth' => darray['string' => 'test', 'integer' => 5],
           ],
         ],
         'valid' => true,
       ),
       shape(
-        'input' => ['remote-same-dir-reference' => 4],
-        'output' => ['remote-same-dir-reference' => '4'],
+        'input' => darray['remote-same-dir-reference' => 4],
+        'output' => darray['remote-same-dir-reference' => '4'],
         'valid' => true,
       ),
       shape(
-        'input' => ['remote-nested-dir-reference' => 'test'],
-        'output' => ['remote-nested-dir-reference' => 'test'],
+        'input' => darray['remote-nested-dir-reference' => 'test'],
+        'output' => darray['remote-nested-dir-reference' => 'test'],
         'valid' => true,
       ),
       shape(
-        'input' => [
-          'single-item-array-ref' => [
-            ['string' => 'test', 'integer' => 5],
-            ['string' => 'test2', 'integer' => 10],
+        'input' => darray[
+          'single-item-array-ref' => varray[
+            darray['string' => 'test', 'integer' => 5],
+            darray['string' => 'test2', 'integer' => 10],
           ],
         ],
-        'output' => [
+        'output' => darray[
           'single-item-array-ref' => vec[
-            ['string' => 'test', 'integer' => 5],
-            ['string' => 'test2', 'integer' => 10],
+            darray['string' => 'test', 'integer' => 5],
+            darray['string' => 'test2', 'integer' => 10],
           ],
         ],
         'valid' => true,
       ),
       shape(
-        'input' => ['local-reference' => ['first' => 'test']],
-        'output' => ['local-reference' => ['first' => 'test']],
+        'input' => darray['local-reference' => darray['first' => 'test']],
+        'output' => darray['local-reference' => darray['first' => 'test']],
         'valid' => true,
       ),
     ];
@@ -88,7 +88,7 @@ final class RefSchemaValidatorTest extends BaseCodegenTestCase {
   }
 
   public function testNullableUniqueRefNullValue(): void {
-    $input = ['nullable-unique-ref' => null];
+    $input = darray['nullable-unique-ref' => null];
 
     $validator = new RefSchemaValidator($input);
     $validator->validate();
@@ -100,7 +100,7 @@ final class RefSchemaValidatorTest extends BaseCodegenTestCase {
   }
 
   public function testNullableUniqueRef(): void {
-    $input = ['nullable-unique-ref' => ['integer' => 1, 'string' => 'string']];
+    $input = darray['nullable-unique-ref' => darray['integer' => 1, 'string' => 'string']];
 
     $validator = new RefSchemaValidator($input);
     $validator->validate();

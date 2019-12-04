@@ -31,7 +31,7 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
     $class = $this->codegenClass()
       ->addMethod($this->getCheckMethod());
 
-    $properties = [];
+    $properties = vec[];
     $max_items = $this->typed_schema['maxItems'] ?? null;
     if ($max_items is nonnull) {
       $properties[] = $this->codegenProperty('maxItems')
@@ -96,14 +96,14 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
     if ($max_items is nonnull) {
       $hb->addMultilineCall(
         'Constraints\ArrayMaxItemsConstraint::check',
-        ['$length', 'self::$maxItems', '$pointer'],
+        vec['$length', 'self::$maxItems', '$pointer'],
       );
     }
 
     if ($min_items is nonnull) {
       $hb->addMultilineCall(
         'Constraints\ArrayMinItemsConstraint::check',
-        ['$length', 'self::$minItems', '$pointer'],
+        vec['$length', 'self::$minItems', '$pointer'],
       );
     }
 
@@ -119,7 +119,7 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
     }
 
     return $this->codegenCheckMethod()
-      ->addParameters(['mixed $input', 'string $pointer'])
+      ->addParameters(vec['mixed $input', 'string $pointer'])
       ->setBody($hb->getCode())
       ->setReturnType($this->getType());
   }
@@ -180,7 +180,7 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
       ->startTryBlock()
       ->addMultilineCall(
         "\$output[] = {$items_class_name}::check",
-        ['$value', 'JsonSchema\get_pointer($pointer, (string) $index)'],
+        vec['$value', 'JsonSchema\get_pointer($pointer, (string) $index)'],
       )
       ->addCatchBlock('JsonSchema\InvalidFieldException', '$e')
       ->addLine('$errors = \HH\Lib\Vec\concat($errors, $e->errors);')
@@ -243,7 +243,7 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
       )
       ->addMultilineCall(
         '$output[] = $constraint',
-        ['$value', 'JsonSchema\get_pointer($pointer, (string) $index)'],
+        vec['$value', 'JsonSchema\get_pointer($pointer, (string) $index)'],
       )
       ->addElseBlock();
 

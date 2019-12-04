@@ -17,7 +17,7 @@ final class ArraySchemaValidatorTest extends BaseCodegenTestCase {
   }
 
   public function testArrayOfStringsInvalidRoot(): void {
-    $validator = new ArraySchemaValidator(['test', 'list', 'of', 'strings']);
+    $validator = new ArraySchemaValidator(varray['test', 'list', 'of', 'strings']);
     $validator->validate();
 
     expect($validator->isValid())->toBeFalse();
@@ -31,40 +31,40 @@ final class ArraySchemaValidatorTest extends BaseCodegenTestCase {
 
     expect($validator->isValid())->toBeTrue();
     $validated = $validator->getValidatedInput();
-    expect(C\count($validated['array_of_strings'] ?? []))->toBeSame(4);
+    expect(C\count($validated['array_of_strings'] ?? vec[]))->toBeSame(4);
   }
 
   public function testArrayOfStringsLegacyArrays(): void {
-    $validator = new ArraySchemaValidator(['array_of_strings' => ['test', 'list', 'of', 'strings']]);
+    $validator = new ArraySchemaValidator(darray['array_of_strings' => varray['test', 'list', 'of', 'strings']]);
     $validator->validate();
 
     expect($validator->isValid())->toBeTrue();
     $validated = $validator->getValidatedInput();
-    expect(C\count($validated['array_of_strings'] ?? []))->toBeSame(4);
+    expect(C\count($validated['array_of_strings'] ?? vec[]))->toBeSame(4);
   }
 
   public function testArrayOfStringsLegacyAndHackArrays(): void {
     $validator = new ArraySchemaValidator(dict[
-      'array_of_strings' => ['test', 'list', 'of', 'strings'],
+      'array_of_strings' => varray['test', 'list', 'of', 'strings'],
     ]);
     $validator->validate();
 
     expect($validator->isValid())->toBeTrue();
     $validated = $validator->getValidatedInput();
-    expect(C\count($validated['array_of_strings'] ?? []))->toBeSame(4);
+    expect(C\count($validated['array_of_strings'] ?? vec[]))->toBeSame(4);
   }
 
   public function testUntypedArrayValid(): void {
     $validator = new ArraySchemaValidator(dict[
-      'untyped_array' => ['test', 'values'],
+      'untyped_array' => varray['test', 'values'],
     ]);
     $validator->validate();
 
     expect($validator->isValid())->toBeTrue();
     $validated = $validator->getValidatedInput();
 
-    expect(($validated['untyped_array'] ?? [])[0])->toBeSame('test');
-    expect(($validated['untyped_array'] ?? [])[1])->toBeSame('values');
+    expect(Shapes::idx($validated, 'untyped_array') as nonnull[0])->toBeSame('test');
+    expect(Shapes::idx($validated, 'untyped_array') as nonnull[1])->toBeSame('values');
   }
 
   public function testCoerceArrayValidString(): void {
@@ -78,7 +78,7 @@ final class ArraySchemaValidatorTest extends BaseCodegenTestCase {
     expect($validator->isValid())->toBeTrue();
     $validated = $validator->getValidatedInput();
 
-    expect($validated)->toBeSame(['coerce_array' => $input]);
+    expect($validated)->toBeSame(shape('coerce_array' => $input));
   }
 
   public function testCoerceArrayInvalidString(): void {
@@ -112,7 +112,7 @@ final class ArraySchemaValidatorTest extends BaseCodegenTestCase {
     expect($validator->isValid())->toBeTrue();
     $validated = $validator->getValidatedInput();
 
-    expect($validated)->toBeSame(['coerce_array' => $input]);
+    expect($validated)->toBeSame(shape('coerce_array' => $input));
   }
 
   public function testCoerceArrayURLEncodedStringSingleValue(): void {
@@ -126,7 +126,7 @@ final class ArraySchemaValidatorTest extends BaseCodegenTestCase {
     expect($validator->isValid())->toBeTrue();
     $validated = $validator->getValidatedInput();
 
-    expect($validated)->toBeSame(['coerce_array' => $input]);
+    expect($validated)->toBeSame(shape('coerce_array' => $input));
   }
 
 }

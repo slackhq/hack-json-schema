@@ -24,7 +24,7 @@ class NumberBuilder extends BaseBuilder<TNumberSchema> {
     $class = $this->codegenClass()
       ->addMethod($this->getCheckMethod());
 
-    $properties = [];
+    $properties = vec[];
     $maximum = $this->typed_schema['maximum'] ?? null;
     if ($maximum is nonnull) {
       $properties[] = $this->codegenProperty('maximum')
@@ -79,21 +79,21 @@ class NumberBuilder extends BaseBuilder<TNumberSchema> {
     if (($this->typed_schema['maximum'] ?? null) is nonnull) {
       $hb->addMultilineCall(
         'Constraints\NumberMaximumConstraint::check',
-        ['$typed', 'self::$maximum', '$pointer'],
+        vec['$typed', 'self::$maximum', '$pointer'],
       );
     }
 
     if (($this->typed_schema['minimum'] ?? null) is nonnull) {
       $hb->addMultilineCall(
         'Constraints\NumberMinimumConstraint::check',
-        ['$typed', 'self::$minimum', '$pointer'],
+        vec['$typed', 'self::$minimum', '$pointer'],
       );
     }
 
     $hb->addReturn('$typed', HackBuilderValues::literal());
 
     return $this->codegenCheckMethod()
-      ->addParameters(['mixed $input', 'string $pointer'])
+      ->addParameters(vec['mixed $input', 'string $pointer'])
       ->setBody($hb->getCode())
       ->setReturnType($return_type);
   }

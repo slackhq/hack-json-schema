@@ -1,2 +1,2 @@
 hackfmt.line_width=120
-ignored_paths = [ "vendor/.+/tests/.+", "vendor/.+/bin/.+"]
+ignored_paths = [ "vendor/.+/tests/.+", "vendor/.+/bin/.+" ]

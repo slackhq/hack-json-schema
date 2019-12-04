@@ -46,7 +46,7 @@ final class AddressSchemaValidatorTest extends BaseCodegenTestCase {
   public function testNonStringInputs(): void {
     $validator = new AddressSchemaValidator(dict[
       'locality' => 'San Francisco',
-      'region' => ['invalid'],
+      'region' => varray['invalid'],
       'country-name' => 7,
     ]);
     $validator->validate();

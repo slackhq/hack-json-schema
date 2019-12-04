@@ -28,7 +28,7 @@ class StringBuilder extends BaseBuilder<TStringSchema> {
     $class = $this->codegenClass()
       ->addMethod($this->getCheckMethod());
 
-    $properties = [];
+    $properties = vec[];
     $max_length = $this->typed_schema['maxLength'] ?? null;
     if ($max_length is nonnull) {
       $properties[] = $this->codegenProperty('maxLength')
@@ -107,11 +107,11 @@ class StringBuilder extends BaseBuilder<TStringSchema> {
     $format = $this->typed_schema['format'] ?? null;
 
     if ($pattern is nonnull) {
-      $hb->addMultilineCall('Constraints\StringPatternConstraint::check', ['$typed', 'self::$pattern', '$pointer']);
+      $hb->addMultilineCall('Constraints\StringPatternConstraint::check', vec['$typed', 'self::$pattern', '$pointer']);
     }
 
     if ($format is nonnull) {
-      $hb->addMultilineCall('Constraints\StringFormatConstraint::check', ['$typed', 'self::$format', '$pointer']);
+      $hb->addMultilineCall('Constraints\StringFormatConstraint::check', vec['$typed', 'self::$format', '$pointer']);
     }
 
     if ($max_length is nonnull || $min_length is nonnull) {
@@ -121,21 +121,21 @@ class StringBuilder extends BaseBuilder<TStringSchema> {
     if ($max_length is nonnull) {
       $hb->addMultilineCall(
         'Constraints\StringMaxLengthConstraint::check',
-        ['$length', 'self::$maxLength', '$pointer'],
+        vec['$length', 'self::$maxLength', '$pointer'],
       );
     }
 
     if ($min_length is nonnull) {
       $hb->addMultilineCall(
         'Constraints\StringMinLengthConstraint::check',
-        ['$length', 'self::$minLength', '$pointer'],
+        vec['$length', 'self::$minLength', '$pointer'],
       );
     }
 
     $hb->addReturn('$typed', HackBuilderValues::literal());
 
     return $this->codegenCheckMethod()
-      ->addParameters(['mixed $input', 'string $pointer'])
+      ->addParameters(vec['mixed $input', 'string $pointer'])
       ->setBody($hb->getCode())
       ->setReturnType('string');
   }

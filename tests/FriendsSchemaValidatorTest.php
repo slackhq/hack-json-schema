@@ -119,7 +119,7 @@ final class FriendsSchemaValidatorTest extends BaseCodegenTestCase {
       dict[
         'first_name' => 'Sally',
         'last_name' => 'Thompson',
-        '~devices/' => [['model' => 'Samsung Galaxy']],
+        '~devices/' => varray[darray['model' => 'Samsung Galaxy']],
       ],
     ]);
     $validator->validate();

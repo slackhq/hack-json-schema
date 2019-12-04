@@ -41,12 +41,12 @@ final class StringSchemaValidatorTest extends BaseCodegenTestCase {
   public function testSimple(): void {
     $cases = vec[
       shape(
-        'input' => ['simple' => 'valid'],
-        'output' => ['simple' => 'valid'],
+        'input' => darray['simple' => 'valid'],
+        'output' => darray['simple' => 'valid'],
         'valid' => true,
       ),
       shape(
-        'input' => ['simple' => 0],
+        'input' => darray['simple' => 0],
         'valid' => false,
       ),
     ];
@@ -57,13 +57,13 @@ final class StringSchemaValidatorTest extends BaseCodegenTestCase {
   public function testCoerce(): void {
     $cases = vec[
       shape(
-        'input' => ['coerce' => 'valid'],
-        'output' => ['coerce' => 'valid'],
+        'input' => darray['coerce' => 'valid'],
+        'output' => darray['coerce' => 'valid'],
         'valid' => true,
       ),
       shape(
-        'input' => ['coerce' => 0],
-        'output' => ['coerce' => '0'],
+        'input' => darray['coerce' => 0],
+        'output' => darray['coerce' => '0'],
         'valid' => true,
       ),
     ];
@@ -74,13 +74,13 @@ final class StringSchemaValidatorTest extends BaseCodegenTestCase {
   public function testSanitizeUnilineString(): void {
     $cases = vec[
       shape(
-        'input' => ['sanitize_uniline' => 'some string'],
-        'output' => ['sanitize_uniline' => 'some_string'],
+        'input' => darray['sanitize_uniline' => 'some string'],
+        'output' => darray['sanitize_uniline' => 'some_string'],
         'valid' => true,
       ),
       shape(
-        'input' => ['sanitize_uniline' => "some string\nhere there"],
-        'output' => ['sanitize_uniline' => 'some_string here_there'],
+        'input' => darray['sanitize_uniline' => "some string\nhere there"],
+        'output' => darray['sanitize_uniline' => 'some_string here_there'],
         'valid' => true,
       ),
     ];
@@ -91,8 +91,8 @@ final class StringSchemaValidatorTest extends BaseCodegenTestCase {
   public function testSanitizeMultilineString(): void {
     $cases = vec[
       shape(
-        'input' => ['sanitize_multiline' => "some string\nhere there"],
-        'output' => ['sanitize_multiline' => "some_string\nhere_there"],
+        'input' => darray['sanitize_multiline' => "some string\nhere there"],
+        'output' => darray['sanitize_multiline' => "some_string\nhere_there"],
         'valid' => true,
       ),
     ];
@@ -103,16 +103,16 @@ final class StringSchemaValidatorTest extends BaseCodegenTestCase {
   public function testFormatDateString(): void {
     $cases = vec[
       shape(
-        'input' => ['date_format' => "2000-01-01"],
-        'output' => ['date_format' => "2000-01-01"],
+        'input' => darray['date_format' => "2000-01-01"],
+        'output' => darray['date_format' => "2000-01-01"],
         'valid' => true,
       ),
       shape(
-        'input' => ['date_format' => "2000-01-100"],
+        'input' => darray['date_format' => "2000-01-100"],
         'valid' => false,
       ),
       shape(
-        'input' => ['date_format' => "invalid_date"],
+        'input' => darray['date_format' => "invalid_date"],
         'valid' => false,
       ),
     ];
