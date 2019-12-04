@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<65087a7e2931d3c1a038648eed68565e>>
+ * @generated SignedSource<<60e3758699857d7371da44551c15349d>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -30,6 +30,7 @@ final class ExamplesRefSchemaDefinitionsLocalObjectReference
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -50,13 +51,12 @@ final class ExamplesRefSchemaDefinitionsLocalObjectReference
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
 
   <<__Override>>
-  final protected function process(
+  protected function process(
   ): TExamplesRefSchemaDefinitionsLocalObjectReference {
     return self::check($this->input, $this->pointer);
   }

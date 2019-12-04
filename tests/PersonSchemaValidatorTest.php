@@ -11,7 +11,7 @@ final class PersonSchemaValidatorTest extends BaseCodegenTestCase {
   <<__Override>>
   public static async function beforeFirstTestAsync(): Awaitable<void> {
     $ret = self::getBuilder('person-schema.json', 'PersonSchemaValidator');
-    $res = $ret['codegen']->build();
+    $ret['codegen']->build();
     require_once($ret['path']);
   }
 

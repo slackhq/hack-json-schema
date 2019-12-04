@@ -8,5 +8,11 @@
     "Facebook\\HHAST\\Linters\\NoPHPEqualityLinter",
     "Facebook\\HHAST\\Linters\\AsyncFunctionAndMethodLinter",
     "Facebook\\HHAST\\Linters\\StrictModeOnlyLinter"
+  ],
+  "overrides": [
+    {
+      "patterns": ["*codegen*"],
+      "disableAllAutoFixes": true
+    }
   ]
 }

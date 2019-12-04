@@ -1,6 +1,7 @@
 /vendor/
 .vscode
 .notes
+composer.lock
 composer.phar
 .DS_Store
 **/*.hhast.parser-cache

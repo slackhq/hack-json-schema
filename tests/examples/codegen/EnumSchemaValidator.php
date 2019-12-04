@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<aa4e9bfb6bad1411b4cdc026d17bb8b5>>
+ * @generated SignedSource<<df944c5eee9c91f32b6d689977b75925>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -65,6 +65,7 @@ final class EnumSchemaValidator
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -96,13 +97,12 @@ final class EnumSchemaValidator
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
 
   <<__Override>>
-  final protected function process(): TEnumSchemaValidator {
+  protected function process(): TEnumSchemaValidator {
     return self::check($this->input, $this->pointer);
   }
 }

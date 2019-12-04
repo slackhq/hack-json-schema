@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<7d18141ee43e6ecf896f0b336a7aee53>>
+ * @generated SignedSource<<757e65353039aa68aeaedef7d7f3189a>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -86,6 +86,7 @@ final class GeoSchemaValidator
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -117,13 +118,12 @@ final class GeoSchemaValidator
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
 
   <<__Override>>
-  final protected function process(): TGeoSchemaValidator {
+  protected function process(): TGeoSchemaValidator {
     return self::check($this->input, $this->pointer);
   }
 }

@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<5c62c8d3bc86a19435c46944580d9e81>>
+ * @generated SignedSource<<557fe119dbb46f2c1ce004eedc95a922>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -67,7 +67,7 @@ final class AnyOfValidator3 extends JsonSchema\BaseValidator<TAnyOfValidator3> {
   }
 
   <<__Override>>
-  final protected function process(): TAnyOfValidator3 {
+  protected function process(): TAnyOfValidator3 {
     return self::check($this->input, $this->pointer);
   }
 }

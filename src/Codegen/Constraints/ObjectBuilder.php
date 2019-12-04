@@ -209,7 +209,8 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
         // more advanced, they'll be an option for handling this in a more
         // performant way in the future. Right now those don't work consistently
         // because they don't work for shapes that contain generics.
-        $hb->startForeachLoop('$typed', '$key', '$value')
+        $hb->addLine('/*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/')
+          ->startForeachLoop('$typed', '$key', '$value')
           ->addLine(
             '/* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */',
           )
@@ -258,7 +259,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     } else {
       # if `properties` isn't defined, we have a dynamic-ish output (either
       # `additionalProperties` or `patternProperties`)
-      $hb
+      $hb->addLine('/*HHAST_IGNORE_ERROR[UnusedVariable] Some functions generated with this statement do not use their $output, they use their $typed instead*/')
         ->addAssignment('$output', 'dict[]', HackBuilderValues::literal())
         ->ensureEmptyLine();
     }
@@ -304,6 +305,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
       $pattern_properties is nonnull
     ) {
       $hb
+        ->addLine('/*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/')
         ->startForeachLoop('$typed', '$key', '$value');
 
       if ($properties is nonnull) {
@@ -320,7 +322,6 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
           ->addAssignment('$failed_any', false, HackBuilderValues::export())
           ->ensureEmptyLine()
           ->startForeachLoop('$patterns', '$pattern', '$constraint')
-          ->addAssignment('$matches', 'varray[]', HackBuilderValues::literal())
           ->startIfBlock('\preg_match("/{$pattern}/", $key)')
           ->startTryBlock();
 

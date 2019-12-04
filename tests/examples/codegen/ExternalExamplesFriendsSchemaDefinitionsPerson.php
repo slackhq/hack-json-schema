@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<da8d2aa9d94d101de9d96c13f584dda0>>
+ * @generated SignedSource<<99e96d741be0dcdf94d010766318da06>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -96,6 +96,7 @@ final class ExternalExamplesFriendsSchemaDefinitionsPerson
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -149,13 +150,12 @@ final class ExternalExamplesFriendsSchemaDefinitionsPerson
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
 
   <<__Override>>
-  final protected function process(
+  protected function process(
   ): TExternalExamplesFriendsSchemaDefinitionsPerson {
     return self::check($this->input, $this->pointer);
   }
