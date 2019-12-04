@@ -71,7 +71,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
     }
 
     return $this->codegenCheckMethod()
-      ->addParameters(['mixed $input', $pointer_param])
+      ->addParameters(vec['mixed $input', $pointer_param])
       ->setBody($hb->getCode())
       ->setReturnType($this->getType());
   }
@@ -94,7 +94,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       ->addAssignment('$output', null, HackBuilderValues::export())
       ->startForeachLoop('$constraints', null, '$constraint')
       ->startTryBlock()
-      ->addMultilineCall('$output = $constraint', ['$input', '$pointer'])
+      ->addMultilineCall('$output = $constraint', vec['$input', '$pointer'])
       ->addAssignment('$passed_any', true, HackBuilderValues::export())
       ->addLine('break;')
       ->addCatchBlock('JsonSchema\InvalidFieldException', '$e')
@@ -147,7 +147,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       ->addAssignment('$output', null, HackBuilderValues::export())
       ->startForeachLoop('$constraints', null, '$constraint')
       ->startTryBlock()
-      ->addMultilineCall('$output = $constraint', ['$input', '$pointer'])
+      ->addMultilineCall('$output = $constraint', vec['$input', '$pointer'])
       ->startIfBlock('$passed_any')
       ->addAssignment('$passed_multi', true, HackBuilderValues::export())
       ->addLine("break;")
@@ -203,7 +203,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       ->addAssignment('$output', '$input', HackBuilderValues::literal())
       ->startForeachLoop('$constraints', null, '$constraint')
       ->startTryBlock()
-      ->addMultilineCall('$output = $constraint', ['$output', '$pointer'])
+      ->addMultilineCall('$output = $constraint', vec['$output', '$pointer'])
       ->addCatchBlock('JsonSchema\InvalidFieldException', '$e')
       ->addAssignment('$errors', '\HH\Lib\Vec\concat($errors, $e->errors)', HackBuilderValues::literal())
       ->addAssignment('$failed_any', true, HackBuilderValues::export())
@@ -379,7 +379,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
     $hb
       ->startForeachLoop('$constraints', null, '$constraint')
       ->startTryBlock()
-      ->addMultilineCall('$output = $constraint', ['$input', '$pointer'])
+      ->addMultilineCall('$output = $constraint', vec['$input', '$pointer'])
       ->addReturn('$output', HackBuilderValues::literal())
       ->addCatchBlock('JsonSchema\InvalidFieldException', '$e')
       ->addAssignment('$errors', '\HH\Lib\Vec\concat($errors, $e->errors)', HackBuilderValues::literal())
@@ -429,7 +429,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
         HackBuilderValues::literal(),
       )
       ->ensureEmptyLine()
-      ->addMultilineCall('Constraints\ObjectRequiredConstraint::check', ['$typed', 'keyset[$key]', '$pointer'])
+      ->addMultilineCall('Constraints\ObjectRequiredConstraint::check', vec['$typed', 'keyset[$key]', '$pointer'])
       ->addAssignment('$type_name', '($typed[$key] ?? null) as nonnull', HackBuilderValues::literal())
       ->addAssignment('$field_pointer', 'JsonSchema\get_pointer($pointer, $key)', HackBuilderValues::literal())
       ->addAssignment(
@@ -474,7 +474,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       ->ensureEmptyLine();
 
     $hb
-      ->addMultilineCall('return $constraint', ['$typed', '$pointer']);
+      ->addMultilineCall('return $constraint', vec['$typed', '$pointer']);
   }
 
   <<__Override>>

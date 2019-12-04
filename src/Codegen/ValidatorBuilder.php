@@ -98,7 +98,7 @@ final class ValidatorBuilder {
 
   private function getCodegenClassProcessMethod(RootBuilder $root): CodegenMethod {
     $hb = new HackBuilder($this->hackCodegenConfig);
-    $hb->addMultilineCall("return self::check", ['$this->input', '$this->pointer']);
+    $hb->addMultilineCall("return self::check", vec['$this->input', '$this->pointer']);
 
     return $this->cg
       ->codegenMethod('process')

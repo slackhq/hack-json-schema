@@ -308,7 +308,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
   }
 
   public function testNestedObjectHackArrays(): void {
-    $validator = new ObjectSchemaValidator([
+    $validator = new ObjectSchemaValidator(dict[
       'nested_object' => dict[
         'first' => dict[
           'second' => dict[
@@ -336,7 +336,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
 
   public function testNestedObjectLegacyArrays(): void {
     $validator = new ObjectSchemaValidator(
-      ['nested_object' => ['first' => ['second' => ['last' => 'value']]]],
+      darray['nested_object' => darray['first' => darray['second' => darray['last' => 'value']]]],
     );
 
     $validator->validate();
@@ -356,10 +356,10 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
   }
 
   public function testNestedObjectMixedHackAndLegacy(): void {
-    $validator = new ObjectSchemaValidator([
-      'nested_object' => [
+    $validator = new ObjectSchemaValidator(darray[
+      'nested_object' => darray[
         'first' => dict[
-          'second' => ['last' => 'value'],
+          'second' => darray['last' => 'value'],
         ],
       ],
     ]);
@@ -381,23 +381,23 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
   }
 
   public function testCoerceObjectValidString(): void {
-    $input = ['first' => 'first', 'second' => 2];
+    $input = darray['first' => 'first', 'second' => 2];
 
     $validator =
-      new ObjectSchemaValidator(['coerce_object' => \json_encode($input)]);
+      new ObjectSchemaValidator(darray['coerce_object' => \json_encode($input)]);
     $validator->validate();
 
     expect($validator->isValid())->toBeTrue();
 
     $validated = $validator->getValidatedInput();
-    expect($validated)->toBeSame(['coerce_object' => $input]);
+    expect($validated)->toBeSame(shape('coerce_object' => $input));
   }
 
   public function testCoerceObjectInvalidString(): void {
-    $input = ['first' => 2, 'second' => 'invalid'];
+    $input = darray['first' => 2, 'second' => 'invalid'];
 
     $validator =
-      new ObjectSchemaValidator(['coerce_object' => \json_encode($input)]);
+      new ObjectSchemaValidator(shape('coerce_object' => \json_encode($input)));
     $validator->validate();
 
     expect($validator->isValid())->toBeFalse();
@@ -471,7 +471,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
   public function testAdditionalProperitesArray(): void {
     $input = dict[
       'additional_properties_array' => dict[
-        'something' => ['array', 'of', 'strings'],
+        'something' => varray['array', 'of', 'strings'],
       ],
     ];
 
@@ -481,7 +481,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
 
     $input = dict[
       'additional_properties_array' => dict[
-        'something' => [34, 'of', 'strings'],
+        'something' => varray[34, 'of', 'strings'],
       ],
     ];
 
@@ -494,7 +494,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
     $input = dict[
       'additional_properties_ref' => dict[
         'something' => dict[
-          'something-else' => ['array', 'of', 'strings'],
+          'something-else' => varray['array', 'of', 'strings'],
         ],
       ],
     ];
@@ -506,7 +506,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
     $input = dict[
       'additional_properties_ref' => dict[
         'something' => dict[
-          'something-else' => [34, 'of', 'strings'],
+          'something-else' => varray[34, 'of', 'strings'],
         ],
       ],
     ];

@@ -103,7 +103,7 @@ abstract class BaseBuilder<T> implements IBuilder {
     if (($schema['enum'] ?? null) is nonnull) {
       $hb->addMultilineCall(
         'Constraints\EnumConstraint::check',
-        ['$typed', 'self::$enum', '$pointer'],
+        vec['$typed', 'self::$enum', '$pointer'],
       );
     }
   }
