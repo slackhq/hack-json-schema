@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<55258f315addb72de45944218bd31723>>
+ * @generated SignedSource<<382dad807d4cd9f1961d199e67fe255b>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -246,6 +246,7 @@ final class CustomCodegenConfigValidatorPropertiesFriendsItems {
       }
     }
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       if (\HH\Lib\C\contains_key(self::$properties, $key)) {
         continue;
@@ -265,7 +266,6 @@ final class CustomCodegenConfigValidatorPropertiesFriendsItems {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -501,6 +501,7 @@ final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesPhone {
       }
     }
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       if (\HH\Lib\C\contains_key(self::$properties, $key)) {
         continue;
@@ -520,7 +521,6 @@ final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesPhone {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -591,6 +591,7 @@ final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesComputer
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -633,7 +634,6 @@ final class CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesComputer
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -734,6 +734,7 @@ final class CustomCodegenConfigValidator
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -820,7 +821,6 @@ final class CustomCodegenConfigValidator
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }

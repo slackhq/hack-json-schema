@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<fe91b5f2c341b5dbda3ac97c4a8499d1>>
+ * @generated SignedSource<<43e3e99c9d0969475a40615b03e7a4c2>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -114,6 +114,7 @@ final class FriendsSchemaValidatorItemsPropertiesNanDevicesNanItems {
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -145,7 +146,6 @@ final class FriendsSchemaValidatorItemsPropertiesNanDevicesNanItems {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -328,6 +328,7 @@ final class FriendsSchemaValidatorItemsPropertiesEmptyObject {
   ): TFriendsSchemaValidatorItemsPropertiesEmptyObject {
     $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some functions generated with this statement do not use their $output, they use their $typed instead*/
     $output = dict[];
 
     return $typed;
@@ -356,6 +357,7 @@ final class FriendsSchemaValidatorItems {
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -453,7 +455,6 @@ final class FriendsSchemaValidatorItems {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }

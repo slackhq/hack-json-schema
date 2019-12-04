@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<15c3e6fee3445ffa48e69c8b52245b5f>>
+ * @generated SignedSource<<a85c480d96606dc8072ca84f25e8e734>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -246,6 +246,7 @@ final class PersonSchemaValidatorPropertiesFriendsItems {
       }
     }
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       if (\HH\Lib\C\contains_key(self::$properties, $key)) {
         continue;
@@ -265,7 +266,6 @@ final class PersonSchemaValidatorPropertiesFriendsItems {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -501,6 +501,7 @@ final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesPhone {
       }
     }
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       if (\HH\Lib\C\contains_key(self::$properties, $key)) {
         continue;
@@ -520,7 +521,6 @@ final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesPhone {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -591,6 +591,7 @@ final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesComputer {
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -633,7 +634,6 @@ final class PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesComputer {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -734,6 +734,7 @@ final class PersonSchemaValidator
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -820,7 +821,6 @@ final class PersonSchemaValidator
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }

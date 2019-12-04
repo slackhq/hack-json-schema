@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<5f356c211f6f2355d32d989c9f9129e2>>
+ * @generated SignedSource<<fc81ca3326a9d333b791d19ae91a05c6>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -354,6 +354,7 @@ final class UntypedSchemaValidatorPropertiesAllOfCoerceAllOf0 {
   ): TUntypedSchemaValidatorPropertiesAllOfCoerceAllOf0 {
     $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some functions generated with this statement do not use their $output, they use their $typed instead*/
     $output = dict[];
 
     return $typed;
@@ -384,6 +385,7 @@ final class UntypedSchemaValidatorPropertiesAllOfCoerceAllOf1 {
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -404,7 +406,6 @@ final class UntypedSchemaValidatorPropertiesAllOfCoerceAllOf1 {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -481,6 +482,7 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultAllOf0 {
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -501,7 +503,6 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultAllOf0 {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -537,6 +538,7 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultAllOf1 {
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -557,7 +559,6 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultAllOf1 {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -634,6 +635,7 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf0 {
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -654,7 +656,6 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf0 {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -690,6 +691,7 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf1 {
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -710,7 +712,6 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf1 {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -830,6 +831,7 @@ final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesFirst {
       }
     }
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       if (\HH\Lib\C\contains_key(self::$properties, $key)) {
         continue;
@@ -849,7 +851,6 @@ final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesFirst {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -929,6 +930,7 @@ final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesSecond {
       }
     }
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       if (\HH\Lib\C\contains_key(self::$properties, $key)) {
         continue;
@@ -948,7 +950,6 @@ final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesSecond {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -1008,6 +1009,7 @@ final class UntypedSchemaValidator
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -1105,7 +1107,6 @@ final class UntypedSchemaValidator
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }

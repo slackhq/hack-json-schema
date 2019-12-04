@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<292108a0d52cb454cfe3405b1a931b40>>
+ * @generated SignedSource<<83c988c26df133b35ff3d28a6ed1521c>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -128,8 +128,10 @@ final class ObjectSchemaValidatorPropertiesOnlyNoAdditionalProperties {
     $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
 
     $errors = vec[];
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some functions generated with this statement do not use their $output, they use their $typed instead*/
     $output = dict[];
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       $errors[] = shape(
         'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
@@ -249,6 +251,7 @@ final class ObjectSchemaValidatorPropertiesOnlyProperties {
       }
     }
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       if (\HH\Lib\C\contains_key(self::$properties, $key)) {
         continue;
@@ -268,7 +271,6 @@ final class ObjectSchemaValidatorPropertiesOnlyProperties {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -307,6 +309,7 @@ final class ObjectSchemaValidatorPropertiesOnlyPatternProperties {
     $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
 
     $errors = vec[];
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some functions generated with this statement do not use their $output, they use their $typed instead*/
     $output = dict[];
 
     $patterns = dict[
@@ -316,12 +319,12 @@ final class ObjectSchemaValidatorPropertiesOnlyPatternProperties {
         class_meth(ObjectSchemaValidatorPropertiesOnlyPatternPropertiesPatternProperties1::class, 'check'),
     ];
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       $passed_any = false;
       $failed_any = false;
 
       foreach ($patterns as $pattern => $constraint) {
-        $matches = [];
         if (\preg_match("/{$pattern}/", $key)) {
           try {
             $output[$key] = $constraint(
@@ -376,6 +379,7 @@ final class ObjectSchemaValidatorPropertiesSinglePatternPropertyString {
     $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
 
     $errors = vec[];
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some functions generated with this statement do not use their $output, they use their $typed instead*/
     $output = dict[];
 
     $patterns = dict[
@@ -383,12 +387,12 @@ final class ObjectSchemaValidatorPropertiesSinglePatternPropertyString {
         class_meth(ObjectSchemaValidatorPropertiesSinglePatternPropertyStringPatternProperties0::class, 'check'),
     ];
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       $passed_any = false;
       $failed_any = false;
 
       foreach ($patterns as $pattern => $constraint) {
-        $matches = [];
         if (\preg_match("/{$pattern}/", $key)) {
           try {
             $output[$key] = $constraint(
@@ -453,6 +457,7 @@ final class ObjectSchemaValidatorPropertiesSinglePatternPropertyObjectPatternPro
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -473,7 +478,6 @@ final class ObjectSchemaValidatorPropertiesSinglePatternPropertyObjectPatternPro
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -490,6 +494,7 @@ final class ObjectSchemaValidatorPropertiesSinglePatternPropertyObject {
     $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
 
     $errors = vec[];
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some functions generated with this statement do not use their $output, they use their $typed instead*/
     $output = dict[];
 
     $patterns = dict[
@@ -497,12 +502,12 @@ final class ObjectSchemaValidatorPropertiesSinglePatternPropertyObject {
         class_meth(ObjectSchemaValidatorPropertiesSinglePatternPropertyObjectPatternProperties0::class, 'check'),
     ];
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       $passed_any = false;
       $failed_any = false;
 
       foreach ($patterns as $pattern => $constraint) {
-        $matches = [];
         if (\preg_match("/{$pattern}/", $key)) {
           try {
             $output[$key] = $constraint(
@@ -568,6 +573,7 @@ final class ObjectSchemaValidatorPropertiesPatternPropertiesNoAdditionalProperti
     $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
 
     $errors = vec[];
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some functions generated with this statement do not use their $output, they use their $typed instead*/
     $output = dict[];
 
     $patterns = dict[
@@ -577,12 +583,12 @@ final class ObjectSchemaValidatorPropertiesPatternPropertiesNoAdditionalProperti
         class_meth(ObjectSchemaValidatorPropertiesPatternPropertiesNoAdditionalPropertiesPatternProperties1::class, 'check'),
     ];
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       $passed_any = false;
       $failed_any = false;
 
       foreach ($patterns as $pattern => $constraint) {
-        $matches = [];
         if (\preg_match("/{$pattern}/", $key)) {
           try {
             $output[$key] = $constraint(
@@ -672,6 +678,7 @@ final class ObjectSchemaValidatorPropertiesPropertiesAndPatternProperties {
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -695,6 +702,7 @@ final class ObjectSchemaValidatorPropertiesPropertiesAndPatternProperties {
         class_meth(ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesPatternProperties1::class, 'check'),
     ];
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       if (\HH\Lib\C\contains_key(self::$properties, $key)) {
         continue;
@@ -704,7 +712,6 @@ final class ObjectSchemaValidatorPropertiesPropertiesAndPatternProperties {
       $failed_any = false;
 
       foreach ($patterns as $pattern => $constraint) {
-        $matches = [];
         if (\preg_match("/{$pattern}/", $key)) {
           try {
             $constraint($value, JsonSchema\get_pointer($pointer, $key));
@@ -730,7 +737,6 @@ final class ObjectSchemaValidatorPropertiesPropertiesAndPatternProperties {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -803,6 +809,7 @@ final class ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesNoAddit
         class_meth(ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesNoAdditionalPatternProperties1::class, 'check'),
     ];
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       if (\HH\Lib\C\contains_key(self::$properties, $key)) {
         continue;
@@ -812,7 +819,6 @@ final class ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesNoAddit
       $failed_any = false;
 
       foreach ($patterns as $pattern => $constraint) {
-        $matches = [];
         if (\preg_match("/{$pattern}/", $key)) {
           try {
             $constraint($value, JsonSchema\get_pointer($pointer, $key));
@@ -846,7 +852,6 @@ final class ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesNoAddit
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -876,6 +881,7 @@ final class ObjectSchemaValidatorPropertiesNestedObjectPropertiesFirstProperties
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -896,7 +902,6 @@ final class ObjectSchemaValidatorPropertiesNestedObjectPropertiesFirstProperties
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -915,6 +920,7 @@ final class ObjectSchemaValidatorPropertiesNestedObjectPropertiesFirst {
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -935,7 +941,6 @@ final class ObjectSchemaValidatorPropertiesNestedObjectPropertiesFirst {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -954,6 +959,7 @@ final class ObjectSchemaValidatorPropertiesNestedObject {
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -974,7 +980,6 @@ final class ObjectSchemaValidatorPropertiesNestedObject {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -1015,6 +1020,7 @@ final class ObjectSchemaValidatorPropertiesCoerceObject {
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -1046,7 +1052,6 @@ final class ObjectSchemaValidatorPropertiesCoerceObject {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -1076,6 +1081,7 @@ final class ObjectSchemaValidatorPropertiesImplicitAdditionalProperties {
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -1096,7 +1102,6 @@ final class ObjectSchemaValidatorPropertiesImplicitAdditionalProperties {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -1126,6 +1131,7 @@ final class ObjectSchemaValidatorPropertiesExplicitAdditionalProperties {
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -1146,7 +1152,6 @@ final class ObjectSchemaValidatorPropertiesExplicitAdditionalProperties {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -1190,6 +1195,7 @@ final class ObjectSchemaValidatorPropertiesNoAdditionalProperties {
       }
     }
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       if (\HH\Lib\C\contains_key(self::$properties, $key)) {
         continue;
@@ -1209,7 +1215,6 @@ final class ObjectSchemaValidatorPropertiesNoAdditionalProperties {
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
@@ -1266,8 +1271,10 @@ final class ObjectSchemaValidatorPropertiesAdditionalPropertiesArray {
     $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
 
     $errors = vec[];
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some functions generated with this statement do not use their $output, they use their $typed instead*/
     $output = dict[];
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       try {
         $output[$key] = ObjectSchemaValidatorPropertiesAdditionalPropertiesArrayAdditionalProperties::check(
@@ -1338,8 +1345,10 @@ final class ObjectSchemaValidatorPropertiesAdditionalPropertiesRefAdditionalProp
     $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
 
     $errors = vec[];
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some functions generated with this statement do not use their $output, they use their $typed instead*/
     $output = dict[];
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       try {
         $output[$key] = ObjectSchemaValidatorPropertiesAdditionalPropertiesRefAdditionalPropertiesAdditionalProperties::check(
@@ -1370,8 +1379,10 @@ final class ObjectSchemaValidatorPropertiesAdditionalPropertiesRef {
     $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
 
     $errors = vec[];
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some functions generated with this statement do not use their $output, they use their $typed instead*/
     $output = dict[];
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       try {
         $output[$key] = ObjectSchemaValidatorPropertiesAdditionalPropertiesRefAdditionalProperties::check(
@@ -1405,6 +1416,7 @@ final class ObjectSchemaValidator
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
     foreach ($typed as $key => $value) {
       /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
       $output[$key] = $value;
@@ -1590,7 +1602,6 @@ final class ObjectSchemaValidator
       throw new JsonSchema\InvalidFieldException($pointer, $errors);
     }
 
-    /* HH_IGNORE_ERROR[4057] */
     /* HH_IGNORE_ERROR[4163] */
     return $output;
   }
