@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<fb72babda3f965134cf44f7e186abc8f>>
+ * @generated SignedSource<<187c5d3dea5d235cf501f53eb06aece8>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -305,7 +305,7 @@ final class RefSchemaValidator
   }
 
   <<__Override>>
-  final protected function process(): TRefSchemaValidator {
+  protected function process(): TRefSchemaValidator {
     return self::check($this->input, $this->pointer);
   }
 }

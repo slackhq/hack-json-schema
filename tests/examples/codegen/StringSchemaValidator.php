@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<6f78b20c65e83911a1cac40fe969cf34>>
+ * @generated SignedSource<<da3c62b19a41e60f21d4b25cb1f90be2>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -169,7 +169,7 @@ final class StringSchemaValidator
   }
 
   <<__Override>>
-  final protected function process(): TStringSchemaValidator {
+  protected function process(): TStringSchemaValidator {
     return self::check($this->input, $this->pointer);
   }
 }

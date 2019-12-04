@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<e5d9c20b4c10348eeeda65941249e506>>
+ * @generated SignedSource<<757e65353039aa68aeaedef7d7f3189a>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -123,7 +123,7 @@ final class GeoSchemaValidator
   }
 
   <<__Override>>
-  final protected function process(): TGeoSchemaValidator {
+  protected function process(): TGeoSchemaValidator {
     return self::check($this->input, $this->pointer);
   }
 }

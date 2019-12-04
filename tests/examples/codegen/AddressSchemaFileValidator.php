@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<c305506985616e476d2a3e823dab1d90>>
+ * @generated SignedSource<<bef0bb3b74324ed45875f5b1854093ff>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -516,7 +516,7 @@ final class AddressSchemaFileValidator
   }
 
   <<__Override>>
-  final protected function process(): TAddressSchemaFileValidator {
+  protected function process(): TAddressSchemaFileValidator {
     return self::check($this->input, $this->pointer);
   }
 }

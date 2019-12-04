@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<6d1fd6561cd1fc5e89265211e0917079>>
+ * @generated SignedSource<<2dd9b05b0b8085182489f4d37c4e8024>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -23,7 +23,7 @@ final class ExternalExamplesRefSchema
   }
 
   <<__Override>>
-  final protected function process(): TExternalExamplesRefSchema {
+  protected function process(): TExternalExamplesRefSchema {
     return self::check($this->input, $this->pointer);
   }
 }

@@ -105,7 +105,6 @@ final class ValidatorBuilder {
       ->setReturnType($root->getType())
       ->addEmptyUserAttribute('__Override')
       ->setProtected()
-      ->setIsFinal(true)
       ->setBody($hb->getCode());
   }
 

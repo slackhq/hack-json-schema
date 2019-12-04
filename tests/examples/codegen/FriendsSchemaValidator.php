@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<43e3e99c9d0969475a40615b03e7a4c2>>
+ * @generated SignedSource<<71da10c4b1e8d8797b14b9323a036a8e>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -493,7 +493,7 @@ final class FriendsSchemaValidator
   }
 
   <<__Override>>
-  final protected function process(): vec<TFriendsSchemaValidatorItems> {
+  protected function process(): vec<TFriendsSchemaValidatorItems> {
     return self::check($this->input, $this->pointer);
   }
 }
