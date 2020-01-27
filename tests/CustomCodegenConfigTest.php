@@ -2,7 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Tests;
 
-use namespace HH\Lib\Str;
+use namespace HH\Lib\{Str, Vec};
 use type Slack\Hack\JsonSchema\Codegen\{IJsonSchemaCodegenConfig};
 
 final class CustomCodegenConfigTest extends BaseCodegenTestCase {
@@ -43,8 +43,8 @@ final class CustomCodegenConfig implements IJsonSchemaCodegenConfig {
 
   public function getTypeNameFormatFunction(): (function(string...): string) {
     return (string ...$parts) ==> {
-      return \HH\Lib\Vec\map($parts, inst_meth($this, 'sanitize'))
-        |> \HH\Lib\Str\join($$, '_');
+      return Vec\map($parts, inst_meth($this, 'sanitize'))
+        |> Str\join($$, '_');
     };
   }
 
@@ -59,8 +59,8 @@ final class CustomCodegenConfig implements IJsonSchemaCodegenConfig {
       |> Str\replace($$, '.', ' ')
       |> \preg_split('/(?=[A-Z])/', $$)
       |> \array_filter($$)
-      |> \HH\Lib\Vec\map($$, fun('\HH\Lib\Str\lowercase'))
-      |> \HH\Lib\Str\join($$, ' ')
+      |> Vec\map($$, fun('\HH\Lib\Str\lowercase'))
+      |> Str\join($$, ' ')
       |> \preg_replace("/[^A-Za-z0-9 ]/", ' nan ', $$)
       |> Str\replace($$, ' ', '_');
   }

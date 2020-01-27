@@ -2,7 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use namespace HH\Lib\Str;
+use namespace HH\Lib\{Str, Vec};
 use namespace Facebook\TypeAssert;
 
 <<__Memoize>>
@@ -29,8 +29,8 @@ function sanitize(string $input): string {
 }
 
 function format(string ...$parts): string {
-  return \HH\Lib\Vec\map($parts, fun('\Slack\Hack\JsonSchema\Codegen\sanitize'))
-    |> \HH\Lib\Str\join($$, '');
+  return Vec\map($parts, fun('\Slack\Hack\JsonSchema\Codegen\sanitize'))
+    |> Str\join($$, '');
 }
 
 /**
