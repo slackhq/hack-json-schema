@@ -15,6 +15,7 @@ enum FieldErrorConstraint: string {
   MIN_LENGTH = 'min_length';
   MAXIMUM = 'maximum';
   MINIMUM = 'minimum';
+  MULTIPLE_OF = 'multiple_of';
   ENUM = 'enum';
   PATTERN = 'pattern';
   FORMAT = 'format';
