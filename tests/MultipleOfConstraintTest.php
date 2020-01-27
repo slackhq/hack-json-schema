@@ -54,9 +54,9 @@ final class MultipleOfConstraintTest extends BaseCodegenTestCase {
     $schema = new Generated\MultipleOfValidator(shape('a_multiple_of_five_int' => 1));
     $schema->validate();
     $err = $schema->getErrors()[0];
-    expect(Shapes::idx($err, 'constraint')as nonnull['type'])->toEqual(JsonSchema\FieldErrorConstraint::MULTIPLE_OF);
-    expect(Shapes::idx($err, 'constraint') |> Shapes::idx($$ as nonnull, 'got'))->toEqual(1);
-    expect(Shapes::idx($err, 'constraint') |> Shapes::idx($$ as nonnull, 'expected'))->toEqual(5);
+    expect(Shapes::idx($err, 'constraint')as nonnull['type'])->toBeSame(JsonSchema\FieldErrorConstraint::MULTIPLE_OF);
+    expect(Shapes::idx($err, 'constraint') |> Shapes::idx($$ as nonnull, 'got'))->toBeSame(1);
+    expect(Shapes::idx($err, 'constraint') |> Shapes::idx($$ as nonnull, 'expected'))->toBeSame(5);
     expect($err['message'])->toBeSame('must be a multiple of 5');
   }
 
