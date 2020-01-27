@@ -2,6 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
+use namespace HH\Lib\Str;
 use namespace Facebook\TypeAssert;
 
 <<__Memoize>>
@@ -19,12 +20,12 @@ function type_assert_shape<T>(mixed $var, string $shape): T {
 
 function sanitize(string $input): string {
   return $input
-    |> \str_replace('_', ' ', $$)
-    |> \str_replace('-', ' ', $$)
-    |> \str_replace('.', ' ', $$)
+    |> Str\replace($$, '_', ' ')
+    |> Str\replace($$, '-', ' ')
+    |> Str\replace($$, '.', ' ')
     |> \preg_replace("/[^A-Za-z0-9 ]/", '_nan_', $$)
-    |> \ucwords($$)
-    |> \str_replace(' ', '', $$);
+    |> Str\capitalize_words($$)
+    |> Str\replace($$, ' ', '');
 }
 
 function format(string ...$parts): string {

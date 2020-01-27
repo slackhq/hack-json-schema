@@ -57,7 +57,7 @@ trait RefResolver {
 
     // Find the schema the `ref` is pointing to
 
-    $ref = \substr($ref, 1);
+    $ref = Str\slice($ref, 1);
     $pointers = \HH\Lib\Str\split($ref, '/') |> \HH\Lib\Vec\filter($$);
 
     while (C\count($pointers)) {
@@ -97,7 +97,7 @@ trait RefResolver {
   */
   protected function getRefSchemaPath(string $ref): string {
     if ($ref[0] === '#') {
-      return \substr($ref, 1);
+      return Str\slice($ref, 1);
     }
 
     $paths = $this->splitRefPaths($ref);
@@ -114,7 +114,7 @@ trait RefResolver {
   protected function splitRefPaths(string $ref): vec<string> {
     $paths = \HH\Lib\Vec\filter(\HH\Lib\Str\split($ref, '#'));
     if ($paths[0][0] === "/") {
-      $paths[0] = \substr($paths[0], 1);
+      $paths[0] = Str\slice($paths[0], 1);
     }
 
     return $paths;

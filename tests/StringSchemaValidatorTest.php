@@ -2,18 +2,19 @@
 
 namespace Slack\Hack\JsonSchema\Tests;
 
+use namespace HH\Lib\Str;
 
 use type Slack\Hack\JsonSchema\Tests\Generated\StringSchemaValidator;
 
 function _string_schema_validator_test_uniline(string $input): string {
   return $input
-    |> \str_replace(' ', '_', $$)
-    |> \str_replace("\n", ' ', $$);
+    |> Str\replace($$, ' ', '_')
+    |> Str\replace($$, "\n", ' ');
 }
 
 function _string_schema_validator_test_multiline(string $input): string {
   return $input
-    |> \str_replace(' ', '_', $$);
+    |> Str\replace($$, ' ', '_');
 }
 
 final class StringSchemaValidatorTest extends BaseCodegenTestCase {
