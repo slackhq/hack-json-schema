@@ -2,6 +2,8 @@
 
 namespace Slack\Hack\JsonSchema;
 
+use namespace HH\Lib\{Str, Vec};
+
 enum FieldErrorCode: string {
   MISSING_FIELD = 'missing_field';
   INVALID_TYPE = 'invalid_type';
@@ -52,7 +54,7 @@ class InvalidFieldException extends \Exception {
     // NB: If we haven't set `pointer` for the errors, set it now. If it is already
     // set it means we're bubbling the errors up and don't want to override the
     // more specific pointer for nested items.
-    $errors = \HH\Lib\Vec\map(
+    $errors = Vec\map(
       $errors,
       $error ==> {
         $error_pointer = $error['pointer'] ?? null;
@@ -64,8 +66,8 @@ class InvalidFieldException extends \Exception {
     );
     $this->errors = $errors;
 
-    $formatted_errors = \HH\Lib\Vec\map($errors, $error ==> $error['message'])
-      |> \HH\Lib\Str\join($$, '');
+    $formatted_errors = Vec\map($errors, $error ==> $error['message'])
+      |> Str\join($$, '');
     $message = "Error validating field '{$pointer}': {$formatted_errors}";
     parent::__construct($message, $code, $previous);
   }

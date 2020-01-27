@@ -529,7 +529,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
       $members = vec[];
       foreach ($property_classes as $property => $builder) {
         $member = new CodegenShapeMember($property, $builder->getType());
-        if (!\HH\Lib\C\contains($required, $property)) {
+        if (!C\contains($required, $property)) {
           $member->setIsOptional();
         }
 

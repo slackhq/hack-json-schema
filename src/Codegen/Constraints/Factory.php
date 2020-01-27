@@ -2,6 +2,8 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
+use namespace HH\Lib\Str;
+
 trait Factory {
   protected Context $ctx;
 
@@ -13,7 +15,7 @@ trait Factory {
   protected function generateTypeName(string $input): string {
     $config = $this->ctx->getJsonSchemaCodegenConfig();
     $processed = $config->getTypeNameFormatFunction()($input);
-    return \HH\Lib\Str\format(
+    return Str\format(
       '%s%s%s',
       $config->getTypeNamePrefix(),
       $processed,

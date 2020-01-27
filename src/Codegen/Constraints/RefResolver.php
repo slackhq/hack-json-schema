@@ -2,7 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use namespace HH\Lib\{C, Str};
+use namespace HH\Lib\{C, Str, Vec};
 
 use namespace Slack\Hack\JsonSchema;
 
@@ -57,12 +57,12 @@ trait RefResolver {
 
     // Find the schema the `ref` is pointing to
 
-    $ref = \substr($ref, 1);
-    $pointers = \HH\Lib\Str\split($ref, '/') |> \HH\Lib\Vec\filter($$);
+    $ref = Str\slice($ref, 1);
+    $pointers = Str\split($ref, '/') |> Vec\filter($$, $str ==> $str !== '');
 
     while (C\count($pointers)) {
       $pointer = $pointers[0];
-      $pointers = \HH\Lib\Vec\drop($pointers, 1);
+      $pointers = Vec\drop($pointers, 1);
       $array_schema = Shapes::toArray($current_schema);
       $next_schema = $array_schema[$pointer] ?? null;
 
@@ -97,7 +97,7 @@ trait RefResolver {
   */
   protected function getRefSchemaPath(string $ref): string {
     if ($ref[0] === '#') {
-      return \substr($ref, 1);
+      return Str\slice($ref, 1);
     }
 
     $paths = $this->splitRefPaths($ref);
@@ -112,9 +112,9 @@ trait RefResolver {
   * { "$ref": "../../common/defs.json#/devices/tablet" }
   */
   protected function splitRefPaths(string $ref): vec<string> {
-    $paths = \HH\Lib\Vec\filter(\HH\Lib\Str\split($ref, '#'));
+    $paths = Vec\filter(Str\split($ref, '#'), $str ==> $str !== '');
     if ($paths[0][0] === "/") {
-      $paths[0] = \substr($paths[0], 1);
+      $paths[0] = Str\slice($paths[0], 1);
     }
 
     return $paths;
