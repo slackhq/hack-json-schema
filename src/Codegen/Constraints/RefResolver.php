@@ -58,7 +58,7 @@ trait RefResolver {
     // Find the schema the `ref` is pointing to
 
     $ref = Str\slice($ref, 1);
-    $pointers = Str\split($ref, '/') |> Vec\filter($$);
+    $pointers = Str\split($ref, '/') |> Vec\filter($$, $str ==> $str !== '');
 
     while (C\count($pointers)) {
       $pointer = $pointers[0];
@@ -112,7 +112,7 @@ trait RefResolver {
   * { "$ref": "../../common/defs.json#/devices/tablet" }
   */
   protected function splitRefPaths(string $ref): vec<string> {
-    $paths = Vec\filter(Str\split($ref, '#'));
+    $paths = Vec\filter(Str\split($ref, '#'), $str ==> $str !== '');
     if ($paths[0][0] === "/") {
       $paths[0] = Str\slice($paths[0], 1);
     }
