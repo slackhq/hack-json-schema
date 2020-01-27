@@ -47,17 +47,17 @@ final class MultipleOfConstraintTest extends BaseCodegenTestCase {
   public function testIsValid(shape(...) $value, bool $is_valid): void {
     $schema = new Generated\MultipleOfValidator($value);
     $schema->validate();
-    expect($schema->isValid())->toEqual($is_valid);
+    expect($schema->isValid())->toBeSame($is_valid);
   }
 
   public function testForError(): void {
     $schema = new Generated\MultipleOfValidator(shape('a_multiple_of_five_int' => 1));
     $schema->validate();
     $err = $schema->getErrors()[0];
-    expect(Shapes::at($err, 'constraint')['type'])->toEqual(JsonSchema\FieldErrorConstraint::MULTIPLE_OF);
-    expect(Shapes::at($err, 'constraint') |> Shapes::at($$, 'got'))->toEqual(1);
-    expect(Shapes::at($err, 'constraint') |> Shapes::at($$, 'expected'))->toEqual(5);
-    expect($err['message'])->toEqual('must be a multiple of 5');
+    expect(Shapes::idx($err, 'constraint')as nonnull['type'])->toEqual(JsonSchema\FieldErrorConstraint::MULTIPLE_OF);
+    expect(Shapes::idx($err, 'constraint') |> Shapes::idx($$ as nonnull, 'got'))->toEqual(1);
+    expect(Shapes::idx($err, 'constraint') |> Shapes::idx($$ as nonnull, 'expected'))->toEqual(5);
+    expect($err['message'])->toBeSame('must be a multiple of 5');
   }
 
 }
