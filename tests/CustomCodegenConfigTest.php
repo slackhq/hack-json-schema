@@ -54,9 +54,7 @@ final class CustomCodegenConfig implements IJsonSchemaCodegenConfig {
 
   public function sanitize(string $input): string {
     return $input
-      |> Str\replace($$, '_', ' ')
-      |> Str\replace($$, '-', ' ')
-      |> Str\replace($$, '.', ' ')
+      |> Str\replace_every($$, dict['_' => ' ', '-' => ' ', '.' => ' '])
       |> \preg_split('/(?=[A-Z])/', $$)
       |> \array_filter($$)
       |> Vec\map($$, fun('\HH\Lib\Str\lowercase'))

@@ -20,9 +20,7 @@ function type_assert_shape<T>(mixed $var, string $shape): T {
 
 function sanitize(string $input): string {
   return $input
-    |> Str\replace($$, '_', ' ')
-    |> Str\replace($$, '-', ' ')
-    |> Str\replace($$, '.', ' ')
+    |> Str\replace_every($$, dict['_' => ' ', '-' => ' ', '.' => ' '])
     |> \preg_replace("/[^A-Za-z0-9 ]/", '_nan_', $$)
     |> Str\capitalize_words($$)
     |> Str\replace($$, ' ', '');
