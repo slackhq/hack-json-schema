@@ -343,12 +343,12 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
     // schemas. This lets us adjust the current type to be nullable
     // (`?<whatever>`)
     $non_null_schema_builder = null;
-    if (\count($schema_builders) === 1) {
+    if (C\count($schema_builders) === 1) {
       $this->current_type = $schema_builders[0]->getType();
-    } else if (\count($schema_builders) === 2) {
+    } else if (C\count($schema_builders) === 2) {
       $without_null = Vec\filter($schema_builders, $sb ==> !($sb->getBuilder() is NullBuilder));
 
-      if (\count($without_null) === 1) {
+      if (C\count($without_null) === 1) {
         $non_null_schema_builder = $without_null[0];
 
         $constraints = vec["class_meth({$non_null_schema_builder

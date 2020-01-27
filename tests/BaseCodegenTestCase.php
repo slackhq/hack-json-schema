@@ -2,7 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Tests;
 
-use namespace HH\Lib\{C, Str};
+use namespace HH\Lib\{C, Math, Str};
 use function Facebook\FBExpect\expect;
 use type Slack\Hack\JsonSchema\Validator;
 use type Slack\Hack\JsonSchema\Codegen\{Codegen, IJsonSchemaCodegenConfig};
@@ -121,7 +121,7 @@ abstract class BaseCodegenTestCase extends HackTest {
       $benchmarks[] = $end - $start;
     }
 
-    $average = \HH\Lib\Math\sum($benchmarks) / C\count($benchmarks);
+    $average = Math\sum($benchmarks) / C\count($benchmarks);
     \print_r("{$label} took: {$average}\n");
   }
 

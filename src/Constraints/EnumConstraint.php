@@ -2,6 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Constraints;
 
+use namespace HH\Lib\C;
 use namespace Slack\Hack\JsonSchema;
 
 class EnumConstraint {
@@ -10,7 +11,7 @@ class EnumConstraint {
     vec<mixed> $enum,
     string $pointer,
   ): void {
-    if (!\HH\Lib\C\contains($enum, $input)) {
+    if (!C\contains($enum, $input)) {
       $error = shape(
         'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
         'constraint' => shape(

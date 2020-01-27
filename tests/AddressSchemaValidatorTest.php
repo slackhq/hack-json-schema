@@ -51,7 +51,7 @@ final class AddressSchemaValidatorTest extends BaseCodegenTestCase {
     ]);
     $validator->validate();
     expect($validator->isValid())->toBeFalse('non string inputs are invalid');
-    expect(\count($validator->getErrors()))->toBeSame(2);
+    expect(C\count($validator->getErrors()))->toBeSame(2);
   }
 
   public function testAddressWithNumericPostalCode(): void {
@@ -191,7 +191,7 @@ final class AddressSchemaValidatorTest extends BaseCodegenTestCase {
     expect($validator->isValid())->toBeFalse(
       'file reference to phone type should be invalid',
     );
-    expect(\count($validator->getErrors()))->toBeSame(3);
+    expect(C\count($validator->getErrors()))->toBeSame(3);
   }
 
   public function testAddressWithDifferentFileRef(): void {
