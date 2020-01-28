@@ -1,4 +1,4 @@
-<?hh // partial
+<?hh // strict
 
 namespace Slack\Hack\JsonSchema\Tests;
 
@@ -28,12 +28,8 @@ final class UntypedSchemaValidatorTest extends BaseCodegenTestCase {
       'UntypedSchemaValidator',
       shape(
         'sanitize_string' => shape(
-          'uniline' => fun(
-            '\Slack\Hack\JsonSchema\Tests\_untyped_schema_validator_test_uniline',
-          ),
-          'multiline' => fun(
-            '\Slack\Hack\JsonSchema\Tests\_untyped_schema_validator_test_multiline',
-          ),
+          'uniline' => fun('\Slack\Hack\JsonSchema\Tests\_untyped_schema_validator_test_uniline'),
+          'multiline' => fun('\Slack\Hack\JsonSchema\Tests\_untyped_schema_validator_test_multiline'),
         ),
       ),
     );
@@ -52,10 +48,7 @@ final class UntypedSchemaValidatorTest extends BaseCodegenTestCase {
     $validated_input = $validator->getValidatedInput();
     $any_of = ($validated_input['any_of'] ?? null) as nonnull;
 
-    Codegen\type_assert_shape(
-      $any_of,
-      'Slack\Hack\JsonSchema\Tests\Generated\TUntypedSchemaValidatorPropertiesAnyOf',
-    );
+    Codegen\type_assert_shape($any_of, 'Slack\Hack\JsonSchema\Tests\Generated\TUntypedSchemaValidatorPropertiesAnyOf');
   }
 
   public function testAllOf(): void {
@@ -89,9 +82,7 @@ final class UntypedSchemaValidatorTest extends BaseCodegenTestCase {
     $validator->validate();
 
     $validated = $validator->getValidatedInput();
-    expect($validated['all_of_pass_through'] ?? null)->toBeSame(
-      'some multiline string',
-    );
+    expect($validated['all_of_pass_through'] ?? null)->toBeSame('some multiline string');
   }
 
   public function testAllOfPassThroughSecondSchemaMutates(): void {
@@ -103,9 +94,7 @@ final class UntypedSchemaValidatorTest extends BaseCodegenTestCase {
     $validator->validate();
 
     $validated = $validator->getValidatedInput();
-    expect($validated['all_of_pass_through_second'] ?? null)->toBeSame(
-      'some multiline string',
-    );
+    expect($validated['all_of_pass_through_second'] ?? null)->toBeSame('some multiline string');
   }
 
   public function testAllOfCoerce(): void {
@@ -117,9 +106,7 @@ final class UntypedSchemaValidatorTest extends BaseCodegenTestCase {
     $validator->validate();
 
     $validated = $validator->getValidatedInput();
-    expect($validated['all_of_coerce'] ?? null)->toBeSame(
-      shape('property' => 'string value'),
-    );
+    expect($validated['all_of_coerce'] ?? null)->toBeSame(shape('property' => 'string value'));
   }
 
   public function testAllOfDefault(): void {
@@ -131,9 +118,7 @@ final class UntypedSchemaValidatorTest extends BaseCodegenTestCase {
     $validator->validate();
 
     $validated = $validator->getValidatedInput();
-    expect($validated['all_of_default'] ?? null)->toBeSame(
-      shape('numerical_property' => 0, 'property' => 'default'),
-    );
+    expect($validated['all_of_default'] ?? null)->toBeSame(shape('numerical_property' => 0, 'property' => 'default'));
   }
 
   public function testAllOfDefaultFirstSchemaWins(): void {

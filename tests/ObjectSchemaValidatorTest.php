@@ -1,4 +1,4 @@
-<?hh // partial
+<?hh // strict
 
 namespace Slack\Hack\JsonSchema\Tests;
 
@@ -32,9 +32,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
     expect($validator->isValid())->toBeFalse();
 
     $error = $validator->getErrors()[0];
-    expect($error['pointer'] ?? '')->toBeSame(
-      '/custom/root/only_properties/string',
-    );
+    expect($error['pointer'] ?? '')->toBeSame('/custom/root/only_properties/string');
   }
 
   public function testOnlyPropertiesDefaultStrings(): void {
@@ -105,9 +103,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
     expect($validator->isValid())->toBeTrue();
 
     $validated = $validator->getValidatedInput();
-    expect($validated['single_pattern_property_string'] ?? null)->toBeSame(
-      dict['S_string_value' => 'string value'],
-    );
+    expect($validated['single_pattern_property_string'] ?? null)->toBeSame(dict['S_string_value' => 'string value']);
   }
 
   public function testSinglePatternPropertyObject(): void {
@@ -258,8 +254,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
     expect(C\count($validator->getErrors()))->toBeSame(3);
   }
 
-  public function testPropertiesAndPatternPropertiesInvalidWithValidProperties(
-  ): void {
+  public function testPropertiesAndPatternPropertiesInvalidWithValidProperties(): void {
     $validator = new ObjectSchemaValidator(dict[
       'properties_and_pattern_properties' => dict[
         'string' => 12,
@@ -286,13 +281,12 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
     expect($validator->isValid())->toBeTrue();
 
     $validated = $validator->getValidatedInput();
-    expect(
-      $validated['properties_and_pattern_properties_no_additional'] ?? null,
-    )->toBeSame(shape('string' => 'some string value'));
+    expect($validated['properties_and_pattern_properties_no_additional'] ?? null)->toBeSame(
+      shape('string' => 'some string value'),
+    );
   }
 
-  public function testPropertiesAndPatternPropertiesNoAdditionalInvalidAdditional(
-  ): void {
+  public function testPropertiesAndPatternPropertiesNoAdditionalInvalidAdditional(): void {
     $validator = new ObjectSchemaValidator(dict[
       'properties_and_pattern_properties_no_additional' => dict[
         'string' => 'some string value',
@@ -383,8 +377,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
   public function testCoerceObjectValidString(): void {
     $input = darray['first' => 'first', 'second' => 2];
 
-    $validator =
-      new ObjectSchemaValidator(darray['coerce_object' => \json_encode($input)]);
+    $validator = new ObjectSchemaValidator(darray['coerce_object' => \json_encode($input)]);
     $validator->validate();
 
     expect($validator->isValid())->toBeTrue();
@@ -396,8 +389,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
   public function testCoerceObjectInvalidString(): void {
     $input = darray['first' => 2, 'second' => 'invalid'];
 
-    $validator =
-      new ObjectSchemaValidator(shape('coerce_object' => \json_encode($input)));
+    $validator = new ObjectSchemaValidator(shape('coerce_object' => \json_encode($input)));
     $validator->validate();
 
     expect($validator->isValid())->toBeFalse();
@@ -406,8 +398,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
 
   public function testImplicitAdditionalProperties(): void {
     $input = dict[
-      'implicit_additional_properties' =>
-        dict['first' => 'value', 'second' => 'value'],
+      'implicit_additional_properties' => dict['first' => 'value', 'second' => 'value'],
     ];
     $validator = new ObjectSchemaValidator($input);
     $validator->validate();
@@ -421,16 +412,12 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
       ),
     )->notToThrow("allows additional properties");
     $dynamic = Shapes::toDict($implicit);
-    expect($dynamic['second'])->toBeSame(
-      'value',
-      'additional property is present',
-    );
+    expect($dynamic['second'])->toBeSame('value', 'additional property is present');
   }
 
   public function testExplicitAdditionalProperties(): void {
     $input = dict[
-      'explicit_additional_properties' =>
-        dict['first' => 'value', 'second' => 'value'],
+      'explicit_additional_properties' => dict['first' => 'value', 'second' => 'value'],
     ];
     $validator = new ObjectSchemaValidator($input);
     $validator->validate();
@@ -444,16 +431,12 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
       ),
     )->notToThrow("allows additional properties");
     $dynamic = Shapes::toDict($explicit);
-    expect($dynamic['second'])->toBeSame(
-      'value',
-      'additional property is present',
-    );
+    expect($dynamic['second'])->toBeSame('value', 'additional property is present');
   }
 
   public function testNoAdditionalProperties(): void {
     $input = dict[
-      'no_additional_properties' =>
-        dict['first' => 'value', 'second' => 'value'],
+      'no_additional_properties' => dict['first' => 'value', 'second' => 'value'],
     ];
     $validator = new ObjectSchemaValidator($input);
     $validator->validate();
