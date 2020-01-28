@@ -1,4 +1,4 @@
-<?hh // partial
+<?hh // strict
 
 namespace Slack\Hack\JsonSchema\Tests;
 
@@ -65,9 +65,7 @@ final class BooleanSchemaValidatorTest extends BaseCodegenTestCase {
       ]);
       $validator->validate();
 
-      expect($validator->isValid())->toBeTrue(
-        "should be valid for input: '{$case['input']}'",
-      );
+      expect($validator->isValid())->toBeTrue("should be valid for input: '{$case['input']}'");
 
       $validated = $validator->getValidatedInput();
       expect($validated)->toNotBeNull('should be valid');
