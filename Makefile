@@ -22,8 +22,8 @@ composer-update: composer-fetch
 	php $(COMPOSER) update
 
 format:
-	find src -type f -exec hackfmt -i {} \;
-	find tests -type f -exec hackfmt -i {} \;
+	find src/**.php -type f -exec hackfmt -i {} \;
+	find tests/**.php -type f -exec hackfmt -i {} \;
 
 examples: hh_autoload
 	hhvm ./bin/generate-examples.php
