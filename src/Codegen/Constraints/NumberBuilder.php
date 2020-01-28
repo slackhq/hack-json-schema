@@ -12,6 +12,7 @@ type TNumberSchema = shape(
   ?'maximum' => int,
   ?'minimum' => int,
   ?'coerce' => bool,
+  ?'multipleOf' => num,
   ...
 );
 
