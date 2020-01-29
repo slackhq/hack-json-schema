@@ -25,4 +25,4 @@ format:
 	find {src,tests} -type f -exec hackfmt -i {} \;
 
 examples: hh_autoload
-	hhvm ./bin/generate-examples.php
+	./vendor/bin/hacktest tests

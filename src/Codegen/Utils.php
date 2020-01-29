@@ -2,6 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
+use namespace HH\Lib\{Str, Vec};
 use namespace Facebook\TypeAssert;
 
 <<__Memoize>>
@@ -19,17 +20,15 @@ function type_assert_shape<T>(mixed $var, string $shape): T {
 
 function sanitize(string $input): string {
   return $input
-    |> \str_replace('_', ' ', $$)
-    |> \str_replace('-', ' ', $$)
-    |> \str_replace('.', ' ', $$)
+    |> Str\replace_every($$, dict['_' => ' ', '-' => ' ', '.' => ' '])
     |> \preg_replace("/[^A-Za-z0-9 ]/", '_nan_', $$)
-    |> \ucwords($$)
-    |> \str_replace(' ', '', $$);
+    |> Str\capitalize_words($$)
+    |> Str\replace($$, ' ', '');
 }
 
 function format(string ...$parts): string {
-  return \HH\Lib\Vec\map($parts, fun('\Slack\Hack\JsonSchema\Codegen\sanitize'))
-    |> \HH\Lib\Str\join($$, '');
+  return Vec\map($parts, fun('\Slack\Hack\JsonSchema\Codegen\sanitize'))
+    |> Str\join($$, '');
 }
 
 /**

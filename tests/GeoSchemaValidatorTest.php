@@ -1,4 +1,4 @@
-<?hh // partial
+<?hh // strict
 
 namespace Slack\Hack\JsonSchema\Tests;
 
@@ -16,9 +16,7 @@ final class GeoSchemaValidatorTest extends BaseCodegenTestCase {
   }
 
   public function testValidateValidInput(): void {
-    $validator = new GeoSchemaValidator(
-      dict['latitude' => 37.7749, 'longitude' => 122.4194],
-    );
+    $validator = new GeoSchemaValidator(dict['latitude' => 37.7749, 'longitude' => 122.4194]);
     $validator->validate();
 
     expect($validator->isValid())->toBeTrue();
@@ -32,16 +30,14 @@ final class GeoSchemaValidatorTest extends BaseCodegenTestCase {
   }
 
   public function testValidateLatitudeOverMaximum(): void {
-    $validator =
-      new GeoSchemaValidator(dict['latitude' => 180, 'longitude' => 120]);
+    $validator = new GeoSchemaValidator(dict['latitude' => 180, 'longitude' => 120]);
     $validator->validate();
 
     expect($validator->isValid())->toBeFalse();
   }
 
   public function testValidateLongitudeOverMaximum(): void {
-    $validator =
-      new GeoSchemaValidator(dict['latitude' => 37, 'longitude' => 190]);
+    $validator = new GeoSchemaValidator(dict['latitude' => 37, 'longitude' => 190]);
     $validator->validate();
 
     expect($validator->isValid())->toBeFalse();

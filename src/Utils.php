@@ -2,11 +2,11 @@
 
 namespace Slack\Hack\JsonSchema;
 
-use namespace HH\Lib\Str;
+use namespace HH\Lib\{Str, Vec};
 
 function get_pointer(string $current, string ...$parts): string {
-  $encoded = \HH\Lib\Vec\map($parts, $path ==> encode_path($path))
-    |> \HH\Lib\Str\join($$, '/');
+  $encoded = Vec\map($parts, $path ==> encode_path($path))
+    |> Str\join($$, '/');
 
   return !Str\is_empty($current) ? "{$current}/{$encoded}" : "/{$encoded}";
 }
