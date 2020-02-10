@@ -12,6 +12,7 @@ type TNumberSchema = shape(
   ?'maximum' => int,
   ?'minimum' => int,
   ?'coerce' => bool,
+  ?'multipleOf' => num,
   ...
 );
 
@@ -38,6 +39,14 @@ class NumberBuilder extends BaseBuilder<TNumberSchema> {
         ->setType('int')
         ->setValue($minimum, HackBuilderValues::export());
     }
+
+    $devisor = $this->typed_schema['multipleOf'] ?? null;
+    if ($devisor is nonnull) {
+      $properties[] = $this->codegenProperty('devisorForMultipleOf')
+        ->setType('num')
+        ->setValue($devisor, HackBuilderValues::export());
+    }
+
 
     $enum = $this->getEnumCodegenProperty();
     if ($enum is nonnull) {
@@ -87,6 +96,13 @@ class NumberBuilder extends BaseBuilder<TNumberSchema> {
       $hb->addMultilineCall(
         'Constraints\NumberMinimumConstraint::check',
         vec['$typed', 'self::$minimum', '$pointer'],
+      );
+    }
+
+    if (($this->typed_schema['multipleOf'] ?? null) is nonnull) {
+      $hb->addMultilineCall(
+        'Constraints\NumberMultipleOfConstraint::check',
+        vec['$typed', 'self::$devisorForMultipleOf', '$pointer'],
       );
     }
 
