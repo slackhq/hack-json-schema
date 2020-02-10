@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<386e40d994e41438a6cf7c899b5da3c1>>
+ * @generated SignedSource<<2ab2503832dc94e7486ad2834e8e40a5>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -649,10 +649,9 @@ final class PersonSchemaValidatorPropertiesDevicesItems {
     $typed = Constraints\ObjectConstraint::check($input, $pointer, false);
 
     Constraints\ObjectRequiredConstraint::check($typed, keyset[$key], $pointer);
-    $type_name = ($typed[$key] ?? null) as nonnull;
     $field_pointer = JsonSchema\get_pointer($pointer, $key);
     $type_name =
-      Constraints\StringConstraint::check($type_name, $field_pointer, false);
+      Constraints\StringConstraint::check($typed[$key] ?? null, $field_pointer, false);
 
     $types = dict[
       'phone' =>

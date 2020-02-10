@@ -430,11 +430,10 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       )
       ->ensureEmptyLine()
       ->addMultilineCall('Constraints\ObjectRequiredConstraint::check', vec['$typed', 'keyset[$key]', '$pointer'])
-      ->addAssignment('$type_name', '($typed[$key] ?? null) as nonnull', HackBuilderValues::literal())
       ->addAssignment('$field_pointer', 'JsonSchema\get_pointer($pointer, $key)', HackBuilderValues::literal())
       ->addAssignment(
         '$type_name',
-        'Constraints\StringConstraint::check($type_name, $field_pointer, false)',
+        'Constraints\StringConstraint::check($typed[$key] ?? null, $field_pointer, false)',
         HackBuilderValues::literal(),
       )
       ->ensureEmptyLine()
