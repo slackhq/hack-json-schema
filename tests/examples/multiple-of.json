@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "properties": {
+    "a_multiple_of_five_int": {
+      "type": "integer",
+      "multipleOf": 5
+    },
+    "a_multiple_of_1_point_one_repeating_number": {
+      "type": "number",
+      "multipleOf": 1.1111111111111111
+    }
+  }
+}
