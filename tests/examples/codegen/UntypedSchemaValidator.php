@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<3c498202f74829743c3f3d148c18ac0b>>
+ * @generated SignedSource<<0f9dda249bf4bf5215072b9e288a0fa5>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -965,10 +965,9 @@ final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnum {
     $typed = Constraints\ObjectConstraint::check($input, $pointer, false);
 
     Constraints\ObjectRequiredConstraint::check($typed, keyset[$key], $pointer);
-    $type_name = ($typed[$key] ?? null) as nonnull;
     $field_pointer = JsonSchema\get_pointer($pointer, $key);
     $type_name =
-      Constraints\StringConstraint::check($type_name, $field_pointer, false);
+      Constraints\StringConstraint::check($typed[$key] ?? null, $field_pointer, false);
 
     $types = dict[
       'first' =>

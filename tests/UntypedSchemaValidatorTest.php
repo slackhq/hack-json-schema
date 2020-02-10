@@ -163,4 +163,23 @@ final class UntypedSchemaValidatorTest extends BaseCodegenTestCase {
     expect($validator->isValid())->toBeFalse();
   }
 
+  public function testAnyOfOptimizedEnumInvalidType(): void {
+    $input = dict[
+      'any_of_optimized_enum' => dict[
+        'type' => null,
+        'integer' => 3,
+      ],
+    ];
+
+    $validator = new UntypedSchemaValidator($input);
+    $validator->validate();
+    expect($validator->isValid())->toBeFalse();
+    $errors = $validator->getErrors();
+    expect(C\count($errors))->toBeSame(1);
+    $error = $errors[0];
+    expect($error['code'])->toBeSame('invalid_type');
+    expect($error['message'])->toBeSame('must provide a string');
+    expect($error['pointer'] ?? null)->toBeSame('/any_of_optimized_enum/type');
+  }
+
 }
