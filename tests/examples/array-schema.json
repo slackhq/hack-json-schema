@@ -17,6 +17,13 @@
         "type": "number",
         "coerce": true
       }
+    },
+    "coerce_array_of_uncoerced_integers": {
+      "type": "array",
+      "coerce": true,
+      "items": {
+        "type": "integer"
+      }
     }
   }
 }
