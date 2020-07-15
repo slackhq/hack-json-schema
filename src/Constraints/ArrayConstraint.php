@@ -2,7 +2,6 @@
 
 namespace Slack\Hack\JsonSchema\Constraints;
 
-use namespace HH\Lib\Str;
 use type Facebook\TypeAssert\{TypeCoercionException};
 use namespace Facebook\TypeSpec;
 use namespace Slack\Hack\JsonSchema;
@@ -22,7 +21,9 @@ class ArrayConstraint {
       // check to see if we can create an array from a comma delimited string.
       $valid_json = $coerced is nonnull && $coerced is Traversable<_>;
       if (!$valid_json) {
-        $coerced = Str\split($input, ',');
+        // Wrap in brackets and try JSON decoding again. This'll result in
+        // correctly typed output for non-string form encoded arrays.
+        $coerced = JsonSchema\json_decode_hack("[{$input}]");
       }
 
       $input = $coerced;
