@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<bef0bb3b74324ed45875f5b1854093ff>>
+ * @generated SignedSource<<8912d020ee5f65e89b543788af6e132a>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -336,7 +336,7 @@ final class AddressSchemaFileValidatorPropertiesPostalCode {
       'constraint' => shape(
         'type' => JsonSchema\FieldErrorConstraint::ANY_OF,
       ),
-      'message' => "failed to match any allowed schemas",
+      'message' => 'failed to match any allowed schemas',
     );
 
     $output_errors = vec[$error];

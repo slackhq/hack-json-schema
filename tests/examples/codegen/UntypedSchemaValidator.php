@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<0f9dda249bf4bf5215072b9e288a0fa5>>
+ * @generated SignedSource<<080a5e5583cc8a672f7b1dfad5cbda13>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -190,7 +190,7 @@ final class UntypedSchemaValidatorPropertiesAnyOf {
       'constraint' => shape(
         'type' => JsonSchema\FieldErrorConstraint::ANY_OF,
       ),
-      'message' => "failed to match any allowed schemas",
+      'message' => 'failed to match any allowed schemas',
     );
 
     $output_errors = vec[$error];

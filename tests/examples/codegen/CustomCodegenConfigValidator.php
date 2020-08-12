@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<b091dd7814125f747984f31d8fafd43c>>
+ * @generated SignedSource<<e76c0d6ceb54c1359eedaf5650e32126>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -137,7 +137,7 @@ final class CustomCodegenConfigValidatorPropertiesStringOrNum {
       'constraint' => shape(
         'type' => JsonSchema\FieldErrorConstraint::ANY_OF,
       ),
-      'message' => "failed to match any allowed schemas",
+      'message' => 'failed to match any allowed schemas',
     );
 
     $output_errors = vec[$error];

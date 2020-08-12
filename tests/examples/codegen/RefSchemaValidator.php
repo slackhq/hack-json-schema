@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<187c5d3dea5d235cf501f53eb06aece8>>
+ * @generated SignedSource<<97f9b4529d3339d01c5b566623068f8f>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -64,7 +64,7 @@ final class RefSchemaValidatorPropertiesNullableUniqueRef {
       'constraint' => shape(
         'type' => JsonSchema\FieldErrorConstraint::ANY_OF,
       ),
-      'message' => "failed to match any allowed schemas",
+      'message' => 'failed to match any allowed schemas',
     );
 
     $output_errors = vec[$error];

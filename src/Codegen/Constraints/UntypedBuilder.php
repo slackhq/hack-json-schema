@@ -403,7 +403,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       'constraint' => shape(
         'type' => 'JsonSchema\FieldErrorConstraint::ANY_OF',
       ),
-      'message' => '"failed to match any allowed schemas"',
+      'message' => '\'failed to match any allowed schemas\'',
     );
 
     $hb

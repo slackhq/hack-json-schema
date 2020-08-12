@@ -21,7 +21,7 @@ function type_assert_shape<T>(mixed $var, string $shape): T {
 function sanitize(string $input): string {
   return $input
     |> Str\replace_every($$, dict['_' => ' ', '-' => ' ', '.' => ' '])
-    |> \preg_replace("/[^A-Za-z0-9 ]/", '_nan_', $$)
+    |> \preg_replace('/[^A-Za-z0-9 ]/', '_nan_', $$)
     |> Str\capitalize_words($$)
     |> Str\replace($$, ' ', '');
 }
@@ -36,11 +36,7 @@ function format(string ...$parts): string {
 * to add getters to hack-codegen to allow us to do this introspection without
 * reflection.
 */
-function get_private_property(
-  string $class_name,
-  string $property_name,
-  mixed $instance,
-): mixed {
+function get_private_property(string $class_name, string $property_name, mixed $instance): mixed {
   $class = new \ReflectionClass($class_name);
   $property = $class->getProperty($property_name);
   $property->setAccessible(true);
