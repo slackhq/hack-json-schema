@@ -13,7 +13,7 @@ function get_pointer(string $current, string ...$parts): string {
 
 function get_function_name_from_function(mixed $function): string {
   $func_name = '';
-  if (\version_compare(\HHVM_VERSION_ID, '4.21', '>=')) {
+  if (\version_compare(\HHVM_VERSION, '4.21', '>=')) {
     $is_function = \is_callable_with_name($function, false, inout $func_name);
     invariant($is_function, 'You may only pass named functions to %s', __FUNCTION__);
   } else {
