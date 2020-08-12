@@ -24,7 +24,7 @@ trait RefResolver {
       }
 
       $paths = $this->splitRefPaths($ref);
-      $full_path = $root_directory."/".$paths[0];
+      $full_path = $root_directory.'/'.$paths[0];
       $new_root_path = \realpath($full_path);
       if ($new_root_path === false) {
         throw new \Exception("Error resolving reference: {$full_path}");
@@ -35,20 +35,17 @@ trait RefResolver {
       $ctx->setCurrentRefFileName($current_file_name);
 
       if ($current_schema === null) {
-        throw
-          new \Exception("Failed reading schema: `{$new_root_path}`, `{$ref}`");
+        throw new \Exception("Failed reading schema: `{$new_root_path}`, `{$ref}`");
       }
 
       if ($ctx->hasSeenRef($new_root_path)) {
-        throw new JsonSchema\CircularReferenceException(
-          "Circular reference beginning at {$original_ref}",
-        );
+        throw new JsonSchema\CircularReferenceException("Circular reference beginning at {$original_ref}");
       } else {
         $ctx->acknowledgeRef($new_root_path);
       }
 
       $ctx->setRootSchema($current_schema);
-      $ref = "#".($paths[1] ?? "");
+      $ref = '#'.($paths[1] ?? '');
     } else {
       // Prefer the root schema to resolve references within, falling back to
       // the current schema that has been loaded.
@@ -67,14 +64,10 @@ trait RefResolver {
       $next_schema = $array_schema[$pointer] ?? null;
 
       if ($next_schema === null) {
-        throw
-          new \Exception("Failed resolving ref: {$pointer} in {$original_ref}");
+        throw new \Exception("Failed resolving ref: {$pointer} in {$original_ref}");
       }
 
-      $typed = type_assert_shape(
-        $next_schema,
-        'Slack\Hack\JsonSchema\Codegen\TSchema',
-      );
+      $typed = type_assert_shape($next_schema, 'Slack\Hack\JsonSchema\Codegen\TSchema');
       $current_schema = $typed;
     }
 
@@ -113,7 +106,7 @@ trait RefResolver {
   */
   protected function splitRefPaths(string $ref): vec<string> {
     $paths = Vec\filter(Str\split($ref, '#'), $str ==> $str !== '');
-    if ($paths[0][0] === "/") {
+    if ($paths[0][0] === '/') {
       $paths[0] = Str\slice($paths[0], 1);
     }
 

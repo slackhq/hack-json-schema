@@ -95,7 +95,7 @@ final class FriendsSchemaValidatorTest extends BaseCodegenTestCase {
         'first_name' => 'Rezza',
         'last_name' => 'Thompson',
         '~devices/' => vec[dict['model' => 'iPhone']],
-        'contact' => vec[5555555555, "person@example.com", "@slack-handle"],
+        'contact' => vec[5555555555, 'person@example.com', '@slack-handle'],
       ],
       dict[
         'first_name' => 'Sally',
@@ -114,7 +114,7 @@ final class FriendsSchemaValidatorTest extends BaseCodegenTestCase {
         'first_name' => 'Rezza',
         'last_name' => 'Thompson',
         '~devices/' => vec[dict['model' => 'iPhone']],
-        'rating' => vec[5555555555, "person@example.com", "@slack-handle"],
+        'rating' => vec[5555555555, 'person@example.com', '@slack-handle'],
       ],
       dict[
         'first_name' => 'Sally',
@@ -139,7 +139,7 @@ final class FriendsSchemaValidatorTest extends BaseCodegenTestCase {
         'first_name' => 'Sally',
         'last_name' => 'Thompson',
         '~devices/' => vec[dict['model' => 'Samsung Galaxy']],
-        'enemies' => "a bunch!",
+        'enemies' => 'a bunch!',
       ],
     ]);
     $validator->validate();

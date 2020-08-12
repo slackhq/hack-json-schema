@@ -17,12 +17,12 @@ final class EnumSchemaValidatorTest extends BaseCodegenTestCase {
   public function testStringEnum(): void {
     $cases = vec[
       shape(
-        'input' => darray['enum_string' => "one"],
-        'output' => darray['enum_string' => "one"],
+        'input' => darray['enum_string' => 'one'],
+        'output' => darray['enum_string' => 'one'],
         'valid' => true,
       ),
       shape(
-        'input' => darray['enum_string' => "four"],
+        'input' => darray['enum_string' => 'four'],
         'valid' => false,
       ),
       shape(
@@ -42,7 +42,7 @@ final class EnumSchemaValidatorTest extends BaseCodegenTestCase {
         'valid' => true,
       ),
       shape(
-        'input' => darray['enum_number' => "four"],
+        'input' => darray['enum_number' => 'four'],
         'valid' => false,
       ),
       shape(

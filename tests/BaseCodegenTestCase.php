@@ -145,7 +145,7 @@ abstract class BaseCodegenTestCase extends HackTest {
         return;
       }
 
-      expect($expected_value)->toBeSame($got_value, Str\format("%s: mismatch on %s", $msg, (string)$key));
+      expect($expected_value)->toBeSame($got_value, Str\format('%s: mismatch on %s', $msg, (string)$key));
     }
   }
 

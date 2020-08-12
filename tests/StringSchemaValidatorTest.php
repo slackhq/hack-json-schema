@@ -100,16 +100,16 @@ final class StringSchemaValidatorTest extends BaseCodegenTestCase {
   public function testFormatDateString(): void {
     $cases = vec[
       shape(
-        'input' => darray['date_format' => "2000-01-01"],
-        'output' => darray['date_format' => "2000-01-01"],
+        'input' => darray['date_format' => '2000-01-01'],
+        'output' => darray['date_format' => '2000-01-01'],
         'valid' => true,
       ),
       shape(
-        'input' => darray['date_format' => "2000-01-100"],
+        'input' => darray['date_format' => '2000-01-100'],
         'valid' => false,
       ),
       shape(
-        'input' => darray['date_format' => "invalid_date"],
+        'input' => darray['date_format' => 'invalid_date'],
         'valid' => false,
       ),
     ];
