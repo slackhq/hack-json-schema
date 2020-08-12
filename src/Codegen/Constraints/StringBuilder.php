@@ -85,7 +85,7 @@ class StringBuilder extends BaseBuilder<TStringSchema> {
     $sanitize = $this->typed_schema['sanitize'] ?? null;
     $sanitize_string = $this->ctx->getSanitizeStringConfig();
     if ($sanitize is nonnull && $sanitize_string === null) {
-      throw new \Exception("Specified `sanitize` on a string without providing sanitization functions.");
+      throw new \Exception('Specified `sanitize` on a string without providing sanitization functions.');
     } else if ($sanitize is nonnull && $sanitize_string is nonnull) {
       if ($sanitize['multiline']) {
         $sanitization_func = get_function_name_from_function($sanitize_string['multiline']);

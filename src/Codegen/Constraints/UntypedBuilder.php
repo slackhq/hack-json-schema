@@ -79,8 +79,11 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
   private function generateNotChecks(vec<TSchema> $schemas, HackBuilder $hb): void {
     $constraints = vec[];
     foreach ($schemas as $index => $schema) {
-      $schema_builder =
-        new SchemaBuilder($this->ctx, $this->generateClassName($this->suffix, 'not', (string)$index), $schema);
+      $schema_builder = new SchemaBuilder(
+        $this->ctx,
+        $this->generateClassName($this->suffix, 'not', (string)$index),
+        $schema,
+      );
       $schema_builder->build();
       $constraints[] = "class_meth({$schema_builder->getClassName()}::class, 'check')";
     }
@@ -107,7 +110,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       'constraint' => shape(
         'type' => 'JsonSchema\FieldErrorConstraint::NOT',
       ),
-      'message' => '"failed because matched disallowed schema"',
+      'message' => '\'failed because matched disallowed schema\'',
     );
 
     $hb
@@ -131,8 +134,11 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
   private function generateOneOfChecks(vec<TSchema> $schemas, HackBuilder $hb): void {
     $constraints = vec[];
     foreach ($schemas as $index => $schema) {
-      $schema_builder =
-        new SchemaBuilder($this->ctx, $this->generateClassName($this->suffix, 'oneOf', (string)$index), $schema);
+      $schema_builder = new SchemaBuilder(
+        $this->ctx,
+        $this->generateClassName($this->suffix, 'oneOf', (string)$index),
+        $schema,
+      );
       $schema_builder->build();
       $constraints[] = "class_meth({$schema_builder->getClassName()}::class, 'check')";
     }
@@ -150,7 +156,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       ->addMultilineCall('$output = $constraint', vec['$input', '$pointer'])
       ->startIfBlock('$passed_any')
       ->addAssignment('$passed_multi', true, HackBuilderValues::export())
-      ->addLine("break;")
+      ->addLine('break;')
       ->endIfBlock()
       ->addAssignment('$passed_any', true, HackBuilderValues::export())
       ->addCatchBlock('JsonSchema\InvalidFieldException', '$e')
@@ -163,7 +169,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       'constraint' => shape(
         'type' => 'JsonSchema\FieldErrorConstraint::ONE_OF',
       ),
-      'message' => '"failed to match exactly one allowed schema"',
+      'message' => '\'failed to match exactly one allowed schema\'',
     );
 
     $hb
@@ -187,8 +193,11 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
   private function generateAllOfChecks(vec<TSchema> $schemas, HackBuilder $hb): void {
     $constraints = vec[];
     foreach ($schemas as $index => $schema) {
-      $schema_builder =
-        new SchemaBuilder($this->ctx, $this->generateClassName($this->suffix, 'allOf', (string)$index), $schema);
+      $schema_builder = new SchemaBuilder(
+        $this->ctx,
+        $this->generateClassName($this->suffix, 'allOf', (string)$index),
+        $schema,
+      );
       $schema_builder->build();
       $constraints[] = "class_meth({$schema_builder->getClassName()}::class, 'check')";
     }
@@ -216,7 +225,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       'constraint' => shape(
         'type' => 'JsonSchema\FieldErrorConstraint::ALL_OF',
       ),
-      'message' => '"failed to match all allowed schemas"',
+      'message' => '\'failed to match all allowed schemas\'',
     );
 
     $hb
@@ -294,8 +303,10 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
               $property_type = TSchemaType::assert($property_type);
 
               if ($property_type === TSchemaType::STRING_T && C\contains($required, $property_name)) {
-                $typed_property_schema =
-                  type_assert_shape($property_schema, 'Slack\Hack\JsonSchema\Codegen\TStringSchema');
+                $typed_property_schema = type_assert_shape(
+                  $property_schema,
+                  'Slack\Hack\JsonSchema\Codegen\TStringSchema',
+                );
 
                 $enum = $typed_property_schema['enum'] ?? null;
                 if ($enum is nonnull && C\count($enum) === 1) {
@@ -368,7 +379,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
     }
 
     if ($non_null_schema_builder is nonnull) {
-      $this->current_type = "?".$non_null_schema_builder->getType();
+      $this->current_type = '?'.$non_null_schema_builder->getType();
     }
 
     $hb
@@ -392,7 +403,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       'constraint' => shape(
         'type' => 'JsonSchema\FieldErrorConstraint::ANY_OF',
       ),
-      'message' => '"failed to match any allowed schemas"',
+      'message' => '\'failed to match any allowed schemas\'',
     );
 
     $hb

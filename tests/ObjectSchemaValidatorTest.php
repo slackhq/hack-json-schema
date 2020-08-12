@@ -410,7 +410,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
         $implicit,
         'Slack\Hack\JsonSchema\Tests\Generated\TObjectSchemaValidatorPropertiesImplicitAdditionalProperties',
       ),
-    )->notToThrow("allows additional properties");
+    )->notToThrow('allows additional properties');
     $dynamic = Shapes::toDict($implicit);
     expect($dynamic['second'])->toBeSame('value', 'additional property is present');
   }
@@ -429,7 +429,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
         $explicit,
         'Slack\Hack\JsonSchema\Tests\Generated\TObjectSchemaValidatorPropertiesExplicitAdditionalProperties',
       ),
-    )->notToThrow("allows additional properties");
+    )->notToThrow('allows additional properties');
     $dynamic = Shapes::toDict($explicit);
     expect($dynamic['second'])->toBeSame('value', 'additional property is present');
   }

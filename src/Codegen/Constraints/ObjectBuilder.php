@@ -24,8 +24,7 @@ type TObjectSchema = shape(
 );
 
 class ObjectBuilder extends BaseBuilder<TObjectSchema> {
-  protected static string $schema_name =
-    'Slack\Hack\JsonSchema\Codegen\TObjectSchema';
+  protected static string $schema_name = 'Slack\Hack\JsonSchema\Codegen\TObjectSchema';
 
   <<__Override>>
   public function build(): this {
@@ -41,23 +40,17 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     $pattern_properties = $this->typed_schema['patternProperties'] ?? null;
     $pattern_properties_classes = null;
     if ($pattern_properties is nonnull) {
-      $pattern_properties_classes =
-        $this->buildClassesForPatternProperties($pattern_properties);
+      $pattern_properties_classes = $this->buildClassesForPatternProperties($pattern_properties);
     }
 
     $class = $this->codegenClass()
-      ->addMethod(
-        $this->getCheckMethod($property_classes, $pattern_properties_classes),
-      );
+      ->addMethod($this->getCheckMethod($property_classes, $pattern_properties_classes));
 
     $class_properties = vec[];
     $required = $this->typed_schema['required'] ?? null;
     if ($required is nonnull) {
       $hb = $this->getHackBuilder()
-        ->addValue(
-          keyset($required),
-          HackBuilderValues::keyset(HackBuilderValues::export()),
-        );
+        ->addValue(keyset($required), HackBuilderValues::keyset(HackBuilderValues::export()));
 
       $class_properties[] = $this->codegenProperty('required')
         ->setType('keyset<string>')
@@ -69,19 +62,12 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
       ->setType('bool')
       ->setValue($coerce, HackBuilderValues::export());
 
-    $additional_properties =
-      $this->typed_schema['additionalProperties'] ?? null;
+    $additional_properties = $this->typed_schema['additionalProperties'] ?? null;
 
-    if (
-      ($additional_properties is nonnull || $pattern_properties is nonnull) &&
-      $properties is nonnull
-    ) {
+    if (($additional_properties is nonnull || $pattern_properties is nonnull) && $properties is nonnull) {
       $properties = $this->typed_schema['properties'] ?? dict[];
       $hb = $this->getHackBuilder()
-        ->addValue(
-          Keyset\keys($properties),
-          HackBuilderValues::keyset(HackBuilderValues::export()),
-        );
+        ->addValue(Keyset\keys($properties), HackBuilderValues::keyset(HackBuilderValues::export()));
 
       $class_properties[] = $this->codegenProperty('properties')
         ->setType('keyset<string>')
@@ -120,10 +106,8 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
   ): HackBuilder {
     $hb = $this->getHackBuilder();
 
-    $additional_properties =
-      $this->typed_schema['additionalProperties'] ?? null;
-    $is_additional_properties_boolean =
-      $additional_properties is nonnull && $additional_properties is bool;
+    $additional_properties = $this->typed_schema['additionalProperties'] ?? null;
+    $is_additional_properties_boolean = $additional_properties is nonnull && $additional_properties is bool;
     $allow_any_additional_properties = $additional_properties is nonnull &&
       $is_additional_properties_boolean &&
       $additional_properties;
@@ -136,11 +120,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
       );
 
     # Check for the simplest case where we just want to return the resulting dictionary
-    if (
-      $properties === null &&
-      $pattern_properties === null &&
-      $allow_any_additional_properties
-    ) {
+    if ($properties === null && $pattern_properties === null && $allow_any_additional_properties) {
       $hb->addReturn('$typed', HackBuilderValues::literal());
       return $hb;
     }
@@ -148,10 +128,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     $include_error_handling = false;
     if ($properties is nonnull || $pattern_properties is nonnull) {
       $include_error_handling = true;
-    } else if (
-      $additional_properties is nonnull &&
-      (!$is_additional_properties_boolean || !$additional_properties)
-    ) {
+    } else if ($additional_properties is nonnull && (!$is_additional_properties_boolean || !$additional_properties)) {
       $include_error_handling = true;
     }
 
@@ -161,19 +138,12 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
       $hb->addAssignment(
         '$defaults',
         $defaults,
-        HackBuilderValues::dict(
-          HackBuilderKeys::export(),
-          HackBuilderValues::export(),
-        ),
+        HackBuilderValues::dict(HackBuilderKeys::export(), HackBuilderValues::export()),
       );
 
       # Merge in `$defaults` first so values from `$typed` will override any
       # defaults.
-      $hb->addAssignment(
-        '$typed',
-        '\HH\Lib\Dict\merge($defaults, $typed)',
-        HackBuilderValues::literal(),
-      );
+      $hb->addAssignment('$typed', '\HH\Lib\Dict\merge($defaults, $typed)', HackBuilderValues::literal());
       $hb->ensureEmptyLine();
     }
 
@@ -209,31 +179,24 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
         // more advanced, they'll be an option for handling this in a more
         // performant way in the future. Right now those don't work consistently
         // because they don't work for shapes that contain generics.
-        $hb->addLine('/*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/')
+        $hb->addLine(
+          '/*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/',
+        )
           ->startForeachLoop('$typed', '$key', '$value')
           ->addLine(
             '/* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */',
           )
-          ->addAssignment(
-            '$output[$key]',
-            '$value',
-            HackBuilderValues::literal(),
-          )
+          ->addAssignment('$output[$key]', '$value', HackBuilderValues::literal())
           ->endForeachLoop()
           ->ensureEmptyLine();
       }
 
       foreach ($properties as $property_name => $property_class) {
         $property_class_name = $property_class->getClassName();
-        $required_property = $required is nonnull
-          ? \HH\Lib\C\contains_key($required, $property_name)
-          : false;
+        $required_property = $required is nonnull ? \HH\Lib\C\contains_key($required, $property_name) : false;
 
         if (!$required_property) {
-          $hb->startIfBlockf(
-            '\HH\Lib\C\contains_key($typed, \'%s\')',
-            $property_name,
-          );
+          $hb->startIfBlockf('\HH\Lib\C\contains_key($typed, \'%s\')', $property_name);
         }
 
         $hb
@@ -259,7 +222,9 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     } else {
       # if `properties` isn't defined, we have a dynamic-ish output (either
       # `additionalProperties` or `patternProperties`)
-      $hb->addLine('/*HHAST_IGNORE_ERROR[UnusedVariable] Some functions generated with this statement do not use their $output, they use their $typed instead*/')
+      $hb->addLine(
+        '/*HHAST_IGNORE_ERROR[UnusedVariable] Some functions generated with this statement do not use their $output, they use their $typed instead*/',
+      )
         ->addAssignment('$output', 'dict[]', HackBuilderValues::literal())
         ->ensureEmptyLine();
     }
@@ -267,18 +232,14 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     if ($pattern_properties is nonnull) {
       $pattern_constraints = dict[];
       foreach ($pattern_properties as $pattern => $schema_builder) {
-        $pattern_constraints[$pattern] =
-          "class_meth({$schema_builder->getClassName()}::class, 'check')";
+        $pattern_constraints[$pattern] = "class_meth({$schema_builder->getClassName()}::class, 'check')";
       }
 
       $hb
         ->addAssignment(
           '$patterns',
           $pattern_constraints,
-          HackBuilderValues::dict(
-            HackBuilderKeys::export(),
-            HackBuilderValues::literal(),
-          ),
+          HackBuilderValues::dict(HackBuilderKeys::export(), HackBuilderValues::literal()),
         )
         ->ensureEmptyLine();
     }
@@ -298,14 +259,11 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     # also be included in the output and will be typed to the specific schema.
     #
 
-    if (
-      (
-        $additional_properties is nonnull && !$allow_any_additional_properties
-      ) ||
-      $pattern_properties is nonnull
-    ) {
+    if (($additional_properties is nonnull && !$allow_any_additional_properties) || $pattern_properties is nonnull) {
       $hb
-        ->addLine('/*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/')
+        ->addLine(
+          '/*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/',
+        )
         ->startForeachLoop('$typed', '$key', '$value');
 
       if ($properties is nonnull) {
@@ -326,15 +284,9 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
           ->startTryBlock();
 
         if ($properties is nonnull) {
-          $hb->addMultilineCall(
-            '$constraint',
-            vec['$value', 'JsonSchema\get_pointer($pointer, $key)'],
-          );
+          $hb->addMultilineCall('$constraint', vec['$value', 'JsonSchema\get_pointer($pointer, $key)']);
         } else {
-          $hb->addMultilineCall(
-            '$output[$key] = $constraint',
-            vec['$value', 'JsonSchema\get_pointer($pointer, $key)'],
-          );
+          $hb->addMultilineCall('$output[$key] = $constraint', vec['$value', 'JsonSchema\get_pointer($pointer, $key)']);
         }
 
         $hb
@@ -377,16 +329,11 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
             HackBuilderValues::shapeWithPerKeyRendering(shape(
               'code' => HackBuilderValues::literal(),
               'message' => HackBuilderValues::literal(),
-              'constraint' => HackBuilderValues::shapeWithUniformRendering(
-                HackBuilderValues::literal(),
-              ),
+              'constraint' => HackBuilderValues::shapeWithUniformRendering(HackBuilderValues::literal()),
             )),
           );
       } else if ($additional_properties is nonnull) {
-        $schema = type_assert_shape(
-          $additional_properties,
-          'Slack\Hack\JsonSchema\Codegen\TSchema',
-        );
+        $schema = type_assert_shape($additional_properties, 'Slack\Hack\JsonSchema\Codegen\TSchema');
 
         $additional_properties_builder = new SchemaBuilder(
           $this->ctx,
@@ -394,8 +341,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
           $schema,
         );
         $additional_properties_builder->build();
-        $additional_properties_class_name =
-          $additional_properties_builder->getClassName();
+        $additional_properties_class_name = $additional_properties_builder->getClassName();
 
         $hb
           ->startTryBlock();
@@ -431,20 +377,16 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     if ($include_error_handling) {
       $hb
         ->startIfBlock('\HH\Lib\C\count($errors)')
-        ->addLine(
-          'throw new JsonSchema\InvalidFieldException($pointer, $errors);',
-        )
+        ->addLine('throw new JsonSchema\InvalidFieldException($pointer, $errors);')
         ->endIfBlock()
         ->ensureEmptyLine();
     }
 
     if ($properties is nonnull) {
       $hb
-        ->addLine("/* HH_IGNORE_ERROR[4163] */")
+        ->addLine('/* HH_IGNORE_ERROR[4163] */')
         ->addReturn('$output', HackBuilderValues::literal());
-    } else if (
-      $additional_properties is nonnull || $pattern_properties is nonnull
-    ) {
+    } else if ($additional_properties is nonnull || $pattern_properties is nonnull) {
       $hb->addReturn('$output', HackBuilderValues::literal());
     } else {
       $hb->addReturn('$typed', HackBuilderValues::literal());
@@ -471,16 +413,12 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     return $defaults;
   }
 
-  private function buildClassesForProperties(
-    dict<string, TSchema> $properties,
-  ): dict<string, SchemaBuilder> {
+  private function buildClassesForProperties(dict<string, TSchema> $properties): dict<string, SchemaBuilder> {
     $output = dict[];
     foreach ($properties as $property_name => $property_schema) {
-      $suffix =
-        $this->generateClassName($this->suffix, 'properties', $property_name);
+      $suffix = $this->generateClassName($this->suffix, 'properties', $property_name);
 
-      $property_builder =
-        new SchemaBuilder($this->ctx, $suffix, $property_schema);
+      $property_builder = new SchemaBuilder($this->ctx, $suffix, $property_schema);
       $property_builder->build();
 
       $output[$property_name] = $property_builder;
@@ -489,20 +427,13 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     return $output;
   }
 
-  private function buildClassesForPatternProperties(
-    dict<string, TSchema> $properties,
-  ): dict<string, SchemaBuilder> {
+  private function buildClassesForPatternProperties(dict<string, TSchema> $properties): dict<string, SchemaBuilder> {
     $output = dict[];
     $index = 0;
     foreach ($properties as $pattern => $property_schema) {
-      $suffix = $this->generateClassName(
-        $this->suffix,
-        'patternProperties',
-        (string)$index,
-      );
+      $suffix = $this->generateClassName($this->suffix, 'patternProperties', (string)$index);
 
-      $property_builder =
-        new SchemaBuilder($this->ctx, $suffix, $property_schema);
+      $property_builder = new SchemaBuilder($this->ctx, $suffix, $property_schema);
       $property_builder->build();
 
       $output[$pattern] = $property_builder;
@@ -518,13 +449,11 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
   ): CodegenType {
     if ($property_classes is nonnull) {
       $required = $this->typed_schema['required'] ?? vec[];
-      $additional_properties =
-        $this->typed_schema['additionalProperties'] ?? null;
+      $additional_properties = $this->typed_schema['additionalProperties'] ?? null;
 
-      $allow_subtyping =
-        $additional_properties is nonnull && $additional_properties is bool
-          ? $additional_properties
-          : true;
+      $allow_subtyping = $additional_properties is nonnull && $additional_properties is bool
+        ? $additional_properties
+        : true;
 
       $members = vec[];
       foreach ($property_classes as $property => $builder) {
@@ -544,10 +473,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
         ->getHackCodegenFactory()
         ->codegenType($this->getType())
         ->setShape($shape);
-    } else if (
-      $pattern_property_classes is nonnull &&
-      C\count($pattern_property_classes) === 1
-    ) {
+    } else if ($pattern_property_classes is nonnull && C\count($pattern_property_classes) === 1) {
       $builder = vec($pattern_property_classes)[0];
       return $this->ctx
         ->getHackCodegenFactory()

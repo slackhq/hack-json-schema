@@ -25,7 +25,7 @@ final class AnyOfRefiningTest extends BaseCodegenTestCase {
     $ret = self::getBuilder('anyof-schema-1.json', 'AnyOfValidator1');
     $cf = $ret['codegen']->build();
 
-    $validator = new AnyOfValidator1("ok");
+    $validator = new AnyOfValidator1('ok');
     $validator->validate();
 
     $rendered = $cf->render();

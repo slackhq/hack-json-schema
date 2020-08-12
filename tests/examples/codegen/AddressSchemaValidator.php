@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<b30e573dd2c84461afc4408894b4ba39>>
+ * @generated SignedSource<<c210a5de8764e578482ea9b79924c58d>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -257,7 +257,7 @@ final class AddressSchemaValidatorPropertiesPostalCode {
       'constraint' => shape(
         'type' => JsonSchema\FieldErrorConstraint::ANY_OF,
       ),
-      'message' => "failed to match any allowed schemas",
+      'message' => 'failed to match any allowed schemas',
     );
 
     $output_errors = vec[$error];
@@ -319,7 +319,7 @@ final class AddressSchemaValidatorPropertiesSize {
         'constraint' => shape(
           'type' => JsonSchema\FieldErrorConstraint::ALL_OF,
         ),
-        'message' => "failed to match all allowed schemas",
+        'message' => 'failed to match all allowed schemas',
       );
 
       $output_errors = vec[$error];
@@ -381,7 +381,7 @@ final class AddressSchemaValidatorPropertiesLongitude {
         'constraint' => shape(
           'type' => JsonSchema\FieldErrorConstraint::NOT,
         ),
-        'message' => "failed because matched disallowed schema",
+        'message' => 'failed because matched disallowed schema',
       );
       throw new JsonSchema\InvalidFieldException($pointer, vec[$error]);
     }
@@ -444,7 +444,7 @@ final class AddressSchemaValidatorPropertiesLatitude {
         'constraint' => shape(
           'type' => JsonSchema\FieldErrorConstraint::ONE_OF,
         ),
-        'message' => "failed to match exactly one allowed schema",
+        'message' => 'failed to match exactly one allowed schema',
       );
       throw new JsonSchema\InvalidFieldException($pointer, vec[$error]);
     }

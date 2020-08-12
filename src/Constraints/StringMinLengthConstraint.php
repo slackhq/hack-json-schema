@@ -5,11 +5,7 @@ namespace Slack\Hack\JsonSchema\Constraints;
 use namespace Slack\Hack\JsonSchema;
 
 class StringMinLengthConstraint {
-  public static function check(
-    int $length,
-    int $minimum,
-    string $pointer,
-  ): void {
+  public static function check(int $length, int $minimum, string $pointer): void {
     if ($minimum > $length) {
       $error = shape(
         'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
@@ -18,7 +14,7 @@ class StringMinLengthConstraint {
           'expected' => $minimum,
           'got' => $length,
         ),
-        'message' => "must be more than ".($minimum-1)." characters",
+        'message' => 'must be more than '.($minimum - 1).' characters',
       );
       throw new JsonSchema\InvalidFieldException($pointer, vec[$error]);
     }

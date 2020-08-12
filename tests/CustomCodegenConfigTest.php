@@ -59,7 +59,7 @@ final class CustomCodegenConfig implements IJsonSchemaCodegenConfig {
       |> \array_filter($$)
       |> Vec\map($$, fun('\HH\Lib\Str\lowercase'))
       |> Str\join($$, ' ')
-      |> \preg_replace("/[^A-Za-z0-9 ]/", ' nan ', $$)
+      |> \preg_replace('/[^A-Za-z0-9 ]/', ' nan ', $$)
       |> Str\replace($$, ' ', '_');
   }
 
