@@ -110,7 +110,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       'constraint' => shape(
         'type' => 'JsonSchema\FieldErrorConstraint::NOT',
       ),
-      'message' => '"failed because matched disallowed schema"',
+      'message' => '\'failed because matched disallowed schema\'',
     );
 
     $hb
@@ -169,7 +169,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       'constraint' => shape(
         'type' => 'JsonSchema\FieldErrorConstraint::ONE_OF',
       ),
-      'message' => '"failed to match exactly one allowed schema"',
+      'message' => '\'failed to match exactly one allowed schema\'',
     );
 
     $hb
@@ -225,7 +225,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       'constraint' => shape(
         'type' => 'JsonSchema\FieldErrorConstraint::ALL_OF',
       ),
-      'message' => '"failed to match all allowed schemas"',
+      'message' => '\'failed to match all allowed schemas\'',
     );
 
     $hb

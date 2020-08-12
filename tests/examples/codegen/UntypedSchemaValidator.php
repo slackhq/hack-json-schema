@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<080a5e5583cc8a672f7b1dfad5cbda13>>
+ * @generated SignedSource<<2b4426bd8e81874c4012b0c5fca9082c>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -129,7 +129,7 @@ final class UntypedSchemaValidatorPropertiesAllOf {
         'constraint' => shape(
           'type' => JsonSchema\FieldErrorConstraint::ALL_OF,
         ),
-        'message' => "failed to match all allowed schemas",
+        'message' => 'failed to match all allowed schemas',
       );
 
       $output_errors = vec[$error];
@@ -262,7 +262,7 @@ final class UntypedSchemaValidatorPropertiesAllOfPassThrough {
         'constraint' => shape(
           'type' => JsonSchema\FieldErrorConstraint::ALL_OF,
         ),
-        'message' => "failed to match all allowed schemas",
+        'message' => 'failed to match all allowed schemas',
       );
 
       $output_errors = vec[$error];
@@ -333,7 +333,7 @@ final class UntypedSchemaValidatorPropertiesAllOfPassThroughSecond {
         'constraint' => shape(
           'type' => JsonSchema\FieldErrorConstraint::ALL_OF,
         ),
-        'message' => "failed to match all allowed schemas",
+        'message' => 'failed to match all allowed schemas',
       );
 
       $output_errors = vec[$error];
@@ -441,7 +441,7 @@ final class UntypedSchemaValidatorPropertiesAllOfCoerce {
         'constraint' => shape(
           'type' => JsonSchema\FieldErrorConstraint::ALL_OF,
         ),
-        'message' => "failed to match all allowed schemas",
+        'message' => 'failed to match all allowed schemas',
       );
 
       $output_errors = vec[$error];
@@ -594,7 +594,7 @@ final class UntypedSchemaValidatorPropertiesAllOfDefault {
         'constraint' => shape(
           'type' => JsonSchema\FieldErrorConstraint::ALL_OF,
         ),
-        'message' => "failed to match all allowed schemas",
+        'message' => 'failed to match all allowed schemas',
       );
 
       $output_errors = vec[$error];
@@ -747,7 +747,7 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWins {
         'constraint' => shape(
           'type' => JsonSchema\FieldErrorConstraint::ALL_OF,
         ),
-        'message' => "failed to match all allowed schemas",
+        'message' => 'failed to match all allowed schemas',
       );
 
       $output_errors = vec[$error];
