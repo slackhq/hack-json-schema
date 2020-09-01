@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<df6e79084f583f4c3b613739bf647027>>
+ * @generated SignedSource<<14484ee6f8f738f12aee00444bbc398d>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -15,7 +15,6 @@ type TArraySchemaValidator = shape(
   ?'array_of_strings' => vec<string>,
   ?'untyped_array' => vec<mixed>,
   ?'coerce_array' => vec<num>,
-  ?'coerce_array_of_uncoerced_integers' => vec<int>,
   ...
 );
 
@@ -110,47 +109,6 @@ final class ArraySchemaValidatorPropertiesCoerceArray {
   }
 }
 
-final class ArraySchemaValidatorPropertiesCoerceArrayOfUncoercedIntegersItems {
-
-  private static bool $coerce = false;
-
-  public static function check(mixed $input, string $pointer): int {
-    $typed =
-      Constraints\IntegerConstraint::check($input, $pointer, self::$coerce);
-
-    return $typed;
-  }
-}
-
-final class ArraySchemaValidatorPropertiesCoerceArrayOfUncoercedIntegers {
-
-  private static bool $coerce = true;
-
-  public static function check(mixed $input, string $pointer): vec<int> {
-    $typed = Constraints\ArrayConstraint::check($input, $pointer, self::$coerce);
-
-    $output = vec[];
-    $errors = vec[];
-
-    foreach ($typed as $index => $value) {
-      try {
-        $output[] = ArraySchemaValidatorPropertiesCoerceArrayOfUncoercedIntegersItems::check(
-          $value,
-          JsonSchema\get_pointer($pointer, (string) $index),
-        );
-      } catch (JsonSchema\InvalidFieldException $e) {
-        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
-      }
-    }
-
-    if (\HH\Lib\C\count($errors)) {
-      throw new JsonSchema\InvalidFieldException($pointer, $errors);
-    }
-
-    return $output;
-  }
-}
-
 final class ArraySchemaValidator
   extends JsonSchema\BaseValidator<TArraySchemaValidator> {
 
@@ -198,17 +156,6 @@ final class ArraySchemaValidator
         $output['coerce_array'] = ArraySchemaValidatorPropertiesCoerceArray::check(
           $typed['coerce_array'],
           JsonSchema\get_pointer($pointer, 'coerce_array'),
-        );
-      } catch (JsonSchema\InvalidFieldException $e) {
-        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
-      }
-    }
-
-    if (\HH\Lib\C\contains_key($typed, 'coerce_array_of_uncoerced_integers')) {
-      try {
-        $output['coerce_array_of_uncoerced_integers'] = ArraySchemaValidatorPropertiesCoerceArrayOfUncoercedIntegers::check(
-          $typed['coerce_array_of_uncoerced_integers'],
-          JsonSchema\get_pointer($pointer, 'coerce_array_of_uncoerced_integers'),
         );
       } catch (JsonSchema\InvalidFieldException $e) {
         $errors = \HH\Lib\Vec\concat($errors, $e->errors);
