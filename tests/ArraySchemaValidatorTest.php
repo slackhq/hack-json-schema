@@ -129,43 +129,4 @@ final class ArraySchemaValidatorTest extends BaseCodegenTestCase {
     expect($validated)->toBeSame(shape('coerce_array' => $input));
   }
 
-  public function testCoerceArrayOfUncoercedIntegersValidString(): void {
-    $input = vec[1, 2, 3, 4];
-
-    $validator = new ArraySchemaValidator(dict[
-      'coerce_array_of_uncoerced_integers' => \json_encode($input),
-    ]);
-    $validator->validate();
-
-    expect($validator->isValid())->toBeTrue();
-    $validated = $validator->getValidatedInput();
-
-    expect($validated)->toBeSame(shape('coerce_array_of_uncoerced_integers' => $input));
-  }
-
-  public function testCoerceArrayOfUncoercedIntegersInvalidString(): void {
-    $input = vec['1', '2', '3', '4'];
-
-    $validator = new ArraySchemaValidator(dict[
-      'coerce_array_of_uncoerced_integers' => \json_encode($input),
-    ]);
-    $validator->validate();
-
-    expect($validator->isValid())->toBeFalse();
-  }
-
-  public function testCoerceArrayOfUncoercedIntegersURLEncodedString(): void {
-    $input = vec[1, 2, 3, 4];
-
-    $validator = new ArraySchemaValidator(dict[
-      'coerce_array_of_uncoerced_integers' => Str\join($input, ','),
-    ]);
-    $validator->validate();
-
-    expect($validator->isValid())->toBeTrue();
-    $validated = $validator->getValidatedInput();
-
-    expect($validated)->toBeSame(shape('coerce_array_of_uncoerced_integers' => $input));
-  }
-
 }
