@@ -19,6 +19,20 @@
         "required_string": { "type": "string", "default": "required_default" }
       }
     },
+    "defaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_string"],
+      "properties": {
+        "required_string": {
+          "type": "string"
+        },
+        "default_string": {
+          "type": "string",
+          "default": "test"
+        }
+      }
+    },
     "only_pattern_properties": {
       "type": "object",
       "patternProperties": {
