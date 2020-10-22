@@ -395,6 +395,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     return $hb;
   }
 
+  <<__Memoize>>
   private function getDefaults(): dict<string, mixed> {
     $properties = $this->typed_schema['properties'] ?? null;
     $defaults = dict[];
@@ -450,6 +451,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     if ($property_classes is nonnull) {
       $required = $this->typed_schema['required'] ?? vec[];
       $additional_properties = $this->typed_schema['additionalProperties'] ?? null;
+      $defaults = $this->getDefaults();
 
       $allow_subtyping = $additional_properties is nonnull && $additional_properties is bool
         ? $additional_properties
@@ -458,7 +460,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
       $members = vec[];
       foreach ($property_classes as $property => $builder) {
         $member = new CodegenShapeMember($property, $builder->getType());
-        if (!C\contains($required, $property)) {
+        if (!C\contains($required, $property) && !C\contains_key($defaults, $property)) {
           $member->setIsOptional();
         }
 

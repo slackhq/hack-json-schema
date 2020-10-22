@@ -124,6 +124,37 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
     expect($property['S_string_value']['sample'])->toBeSame('test');
   }
 
+  public function testDefaultsDefaultValue(): void {
+    $validator = new ObjectSchemaValidator(dict[
+      'defaults' => dict[
+        'required_string' => 'string value',
+      ],
+    ]);
+
+    $validator->validate();
+    expect($validator->isValid())->toBeTrue();
+
+    $validated = $validator->getValidatedInput();
+    $defaults = $validated['defaults'] ?? null as nonnull;
+    expect($defaults['default_string'])->toBeSame('test');
+  }
+
+  public function testDefaultsProvideDefaultValue(): void {
+    $validator = new ObjectSchemaValidator(dict[
+      'defaults' => dict[
+        'required_string' => 'string value',
+        'default_string' => 'provided',
+      ],
+    ]);
+
+    $validator->validate();
+    expect($validator->isValid())->toBeTrue();
+
+    $validated = $validator->getValidatedInput();
+    $defaults = $validated['defaults'] ?? null as nonnull;
+    expect($defaults['default_string'])->toBeSame('provided');
+  }
+
   public function testOnlyPatternPropertiesValid(): void {
     $validator = new ObjectSchemaValidator(dict[
       'only_pattern_properties' => dict[
