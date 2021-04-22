@@ -17,6 +17,20 @@
         "type": "number",
         "coerce": true
       }
+    },
+    "unique_strings": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "unique_numbers": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "integer"
+      }
     }
   }
 }

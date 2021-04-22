@@ -23,6 +23,9 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
 
   <<__Override>>
   public function build(): this {
+    $this->setupSingleItemSchemaBuilder();
+    $this->validateSchema();
+
     $class = $this->codegenClass()
       ->addMethod($this->getCheckMethod());
 
@@ -62,7 +65,12 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
     // Items is a single type, get the type from the items builder.
     $items_builder = $this->singleItemSchemaBuilder;
     invariant($items_builder is nonnull, 'must call `build` method before accessing type');
-    return "vec<{$items_builder->getType()}>";
+    if ($this->schema['uniqueItems'] ?? false) {
+      $container = 'keyset';
+    } else {
+      $container = 'vec';
+    }
+    return "{$container}<{$items_builder->getType()}>";
   }
 
   protected function getCheckMethod(): CodegenMethod {
@@ -117,7 +125,7 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
       ->addAssignment('$output', 'vec[]', HackBuilderValues::literal());
 
     if ($this->isSchema($items)) {
-      $this->buildItemsSingleSchema($items, $hb);
+      $this->buildItemsSingleSchema($hb);
     } else {
       $schemas = type_assert_shape($items, 'Slack\Hack\JsonSchema\Codegen\TArraySchemaItemsMultiSchema');
       $this->buildItemsMultiSchema($schemas, $hb, $additionalItems);
@@ -132,14 +140,8 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
   * through the input, validating each item.
   *
   */
-  private function buildItemsSingleSchema(mixed $items, HackBuilder $hb): void {
-    $schema = type_assert_shape($items, 'Slack\Hack\JsonSchema\Codegen\TArraySchemaItemsSingleSchema');
-
-    $items_builder = new SchemaBuilder($this->ctx, $this->generateClassName($this->suffix, 'items'), $schema);
-
-    $items_builder->build();
-    $items_class_name = $items_builder->getClassName();
-    $this->singleItemSchemaBuilder = $items_builder;
+  private function buildItemsSingleSchema(HackBuilder $hb): void {
+    $items_class_name = $this->singleItemSchemaBuilder?->getClassName() as nonnull;
 
     $hb
       ->addAssignment('$errors', 'vec[]', HackBuilderValues::literal())
@@ -163,6 +165,15 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
       ->addLine('throw new JsonSchema\InvalidFieldException($pointer, $errors);')
       ->endIfBlock()
       ->ensureEmptyLine();
+
+    if ($this->typed_schema['uniqueItems'] ?? false) {
+      $hb
+        ->addMultilineCall(
+          '$output = Constraints\ArrayUniqueItemsConstraint::check',
+          vec['$output', '$pointer']
+        )
+        ->ensureEmptyLine();
+    }
   }
 
   /**
@@ -233,6 +244,43 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
 
   private function isSchema(mixed $items): bool {
     return is_dict($items);
+  }
+
+  /**
+   * Setup the singleItemSchemaBuilder, if necessary.
+   *
+   * This should be the first thing we do in `build()`, since subsequent
+   * logic depends on the single item schema builder.
+   */
+  private function setupSingleItemSchemaBuilder(): void {
+    $items = $this->typed_schema['items'] ?? null;
+    if ($this->isSchema($items)) {
+      $schema = type_assert_shape(
+        $items,
+        'Slack\Hack\JsonSchema\Codegen\TArraySchemaItemsSingleSchema',
+      );
+
+      $items_builder = new SchemaBuilder(
+        $this->ctx,
+        $this->generateClassName($this->suffix, 'items'),
+        $schema,
+      );
+
+      $items_builder->build();
+      $this->singleItemSchemaBuilder = $items_builder;
+    }
+  }
+
+  /**
+   * Validate that the schema is supported.
+   */
+  private function validateSchema(): void {
+    if ($this->schema['uniqueItems'] ?? false) {
+      $item_type = $this->singleItemSchemaBuilder?->getType();
+      if ($item_type !== 'string' && $item_type !== 'int') {
+        throw new \Exception('uniqueItems is only implemented for arrays of strings and integers');
+      }
+    }
   }
 
 }

@@ -5,6 +5,7 @@ namespace Slack\Hack\JsonSchema\Tests;
 use namespace HH\Lib\{C, Str};
 use function Facebook\FBExpect\expect;
 
+use type Slack\Hack\JsonSchema\{FieldErrorCode, FieldErrorConstraint};
 use type Slack\Hack\JsonSchema\Tests\Generated\ArraySchemaValidator;
 
 final class ArraySchemaValidatorTest extends BaseCodegenTestCase {
@@ -127,6 +128,76 @@ final class ArraySchemaValidatorTest extends BaseCodegenTestCase {
     $validated = $validator->getValidatedInput();
 
     expect($validated)->toBeSame(shape('coerce_array' => $input));
+  }
+
+  public function testUniqueItemsWithValidStrings(): void {
+    $input = vec["a", "b", "c"];
+
+    $validator = new ArraySchemaValidator(dict['unique_strings' => $input]);
+    $validator->validate();
+
+    expect($validator->isValid())->toBeTrue();
+    $validated = $validator->getValidatedInput();
+
+    expect($validated)->toBeSame(shape('unique_strings' => keyset($input)));
+  }
+
+  public function testUniqueItemsWithInvalidStrings(): void {
+    $input = vec["a", "b", "a"];
+
+    $validator = new ArraySchemaValidator(dict['unique_strings' => $input]);
+    $validator->validate();
+
+    expect($validator->isValid())->toBeFalse();
+
+    $errors = $validator->getErrors();
+    expect(C\count($errors))->toEqual(1);
+
+    $error = C\firstx($errors);
+    expect($error['code'])->toEqual(FieldErrorCode::FAILED_CONSTRAINT);
+    expect($error['message'])->toEqual('Input contains duplicate items');
+
+    $constraint = Shapes::at($error, 'constraint');
+    expect($constraint['type'])->toEqual(FieldErrorConstraint::UNIQUE_ITEMS);
+    expect($constraint['got'] ?? null)->toEqual($input);
+  }
+
+  public function testUniqueItemsWithValidNumbers(): void {
+    $input = vec[1, 2, 3];
+
+    $validator = new ArraySchemaValidator(dict['unique_numbers' => $input]);
+    $validator->validate();
+
+    expect($validator->isValid())->toBeTrue();
+    $validated = $validator->getValidatedInput();
+
+    expect($validated)->toBeSame(shape('unique_numbers' => keyset($input)));
+  }
+
+  public function testUniqueItemsWithInvalidNumbers(): void {
+    $input = vec[1, 2, 1];
+
+    $validator = new ArraySchemaValidator(dict['unique_numbers' => $input]);
+    $validator->validate();
+
+    expect($validator->isValid())->toBeFalse();
+
+    $errors = $validator->getErrors();
+    expect(C\count($errors))->toEqual(1);
+
+    $error = C\firstx($errors);
+    expect($error['code'])->toEqual(FieldErrorCode::FAILED_CONSTRAINT);
+    expect($error['message'])->toEqual('Input contains duplicate items');
+
+    $constraint = Shapes::at($error, 'constraint');
+    expect($constraint['type'])->toEqual(FieldErrorConstraint::UNIQUE_ITEMS);
+    expect($constraint['got'] ?? null)->toEqual($input);
+  }
+
+  public function testInvalidUniqueItemsConstraint(): void {
+    $ret = self::getBuilder('array-schema-invalid.json', 'ArraySchemaInvalidValidator');
+    expect(() ==> $ret['codegen']->build())
+      ->toThrow(\Exception::class, 'uniqueItems is only implemented for arrays of strings and integers');
   }
 
 }
