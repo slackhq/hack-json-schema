@@ -170,7 +170,7 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
       $hb
         ->addMultilineCall(
           '$output = Constraints\ArrayUniqueItemsConstraint::check',
-          vec['$output', '$pointer']
+          vec['$output', '$pointer', 'self::$coerce']
         )
         ->ensureEmptyLine();
     }

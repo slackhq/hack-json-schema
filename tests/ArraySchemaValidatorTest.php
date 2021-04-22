@@ -194,6 +194,18 @@ final class ArraySchemaValidatorTest extends BaseCodegenTestCase {
     expect($constraint['got'] ?? null)->toEqual($input);
   }
 
+  public function testUniqueItemsWithCoercion(): void {
+    $input = vec[1, 2, 1];
+
+    $validator = new ArraySchemaValidator(dict['unique_numbers_coerce' => $input]);
+    $validator->validate();
+
+    expect($validator->isValid())->toBeTrue();
+    $validated = $validator->getValidatedInput();
+
+    expect($validated)->toEqual(shape('unique_numbers_coerce' => keyset($input)));
+  }
+
   public function testInvalidUniqueItemsConstraint(): void {
     $ret = self::getBuilder('array-schema-invalid.json', 'ArraySchemaInvalidValidator');
     expect(() ==> $ret['codegen']->build())

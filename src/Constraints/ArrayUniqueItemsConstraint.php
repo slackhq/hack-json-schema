@@ -9,9 +9,10 @@ class ArrayUniqueItemsConstraint {
   public static function check<T as arraykey>(
     vec<T> $input,
     string $pointer,
+    bool $coerce,
   ): keyset<T> {
     $output = keyset($input);
-    if (C\count($output) < C\count($input)) {
+    if (!$coerce && C\count($output) < C\count($input)) {
       $error = shape(
         'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
         'constraint' => shape(

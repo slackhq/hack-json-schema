@@ -31,6 +31,14 @@
       "items": {
         "type": "integer"
       }
+    },
+    "unique_numbers_coerce": {
+      "type": "array",
+      "uniqueItems": true,
+      "coerce": true,
+      "items": {
+        "type": "integer"
+      }
     }
   }
 }
