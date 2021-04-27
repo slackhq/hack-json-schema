@@ -5,11 +5,7 @@ namespace Slack\Hack\JsonSchema\Constraints;
 use namespace Slack\Hack\JsonSchema;
 
 class NumberMaximumConstraint {
-  public static function check(
-    num $input,
-    num $maximum,
-    string $pointer,
-  ): void {
+  public static function check(num $input, num $maximum, string $pointer): void {
     if ($input > $maximum) {
       $error = shape(
         'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,

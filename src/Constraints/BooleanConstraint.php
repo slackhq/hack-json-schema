@@ -7,11 +7,7 @@ use namespace Slack\Hack\JsonSchema;
 use namespace HH\Lib\Str;
 
 class BooleanConstraint {
-  public static function check(
-    mixed $input,
-    string $pointer,
-    bool $coerce,
-  ): bool {
+  public static function check(mixed $input, string $pointer, bool $coerce): bool {
     if ($coerce) {
       if (Str\lowercase((string)$input) === 'false') {
         return false;

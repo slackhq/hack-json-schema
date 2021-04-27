@@ -107,22 +107,15 @@ final class Codegen {
     ),
   );
 
-  private function __construct(
-    private dict<arraykey, mixed> $schema,
-    private self::TCodegenConfig $config,
-  ) {}
+  private function __construct(private dict<arraykey, mixed> $schema, private self::TCodegenConfig $config) {}
 
   /**
   * Generate validators for multiple schema paths. This requires using unique
   * references and will auto generate class names and file names for the
   * validators. For more control over the output, use `forPath` or `forSchema`.
   */
-  public static function forPaths(
-    vec<string> $schema_paths,
-    self::TCodegenConfigMulti $config,
-  ): vec<Codegen> {
-    $json_schema_codegen_config =
-      $config['jsonSchemaCodegenConfig'] ?? new JsonSchemaCodegenConfig();
+  public static function forPaths(vec<string> $schema_paths, self::TCodegenConfigMulti $config): vec<Codegen> {
+    $json_schema_codegen_config = $config['jsonSchemaCodegenConfig'] ?? new JsonSchemaCodegenConfig();
 
     $refs_config = $config['validator']['refs'];
     $unique_refs_config = $refs_config['unique'];
@@ -131,16 +124,11 @@ final class Codegen {
     // the file name based on the unique refs config.
 
     $configs = Vec\map($schema_paths, ($schema_path) ==> {
-      $names = UniqueRefBuilder::getNames(
-        $json_schema_codegen_config,
-        $unique_refs_config,
-        $schema_path,
-      );
+      $names = UniqueRefBuilder::getNames($json_schema_codegen_config, $unique_refs_config, $schema_path);
 
       $schema_config = $config;
 
-      $root_directory = $schema_config['validator']['refs']['root_directory'] ??
-        \dirname($schema_path);
+      $root_directory = $schema_config['validator']['refs']['root_directory'] ?? \dirname($schema_path);
       $schema_config['validator']['refs']['root_directory'] = $root_directory;
       $schema_config['validator']['class'] = $names['class'];
       $schema_config['validator']['file'] = $names['file'];
@@ -148,16 +136,10 @@ final class Codegen {
       return $schema_config;
     });
 
-    return Vec\map_with_key(
-      $schema_paths,
-      ($index, $path) ==> Codegen::forPath($path, $configs[$index]),
-    );
+    return Vec\map_with_key($schema_paths, ($index, $path) ==> Codegen::forPath($path, $configs[$index]));
   }
 
-  public static function forPath(
-    string $schema_path,
-    self::TCodegenConfig $config,
-  ): Codegen {
+  public static function forPath(string $schema_path, self::TCodegenConfig $config): Codegen {
     $contents = \file_get_contents($schema_path);
     if (!$contents) {
       throw new \Exception("Failed reading schema: `{$schema_path}`");
@@ -207,8 +189,7 @@ final class Codegen {
       $generated_from = $this->getHackCodegenFactory()
         ->codegenGeneratedFromScript($generated_from);
     } else {
-      $generated_from =
-        $this->getHackCodegenFactory()->codegenGeneratedFromScript();
+      $generated_from = $this->getHackCodegenFactory()->codegenGeneratedFromScript();
     }
 
     return $generated_from;
@@ -226,8 +207,7 @@ final class Codegen {
 
   <<__Memoize>>
   private function getJsonSchemaCodegenConfig(): IJsonSchemaCodegenConfig {
-    return
-      $this->config['jsonSchemaCodegenConfig'] ?? new JsonSchemaCodegenConfig();
+    return $this->config['jsonSchemaCodegenConfig'] ?? new JsonSchemaCodegenConfig();
   }
 
   public function build(): CodegenFile {
@@ -249,11 +229,7 @@ final class Codegen {
       ->setGeneratedFrom($this->getGeneratedFrom())
       ->setDiscardChanges($this->config['discardChanges'] ?? false)
       ->setSanitizeString($config['sanitize_string'] ?? null)
-      ->renderToFile(
-        $config['file'],
-        $config['namespace'] ?? null,
-        $config['class'],
-      );
+      ->renderToFile($config['file'], $config['namespace'] ?? null, $config['class']);
   }
 
 }

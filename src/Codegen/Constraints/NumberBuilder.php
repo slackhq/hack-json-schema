@@ -2,10 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use type Facebook\HackCodegen\{
-  CodegenMethod,
-  HackBuilderValues,
-};
+use type Facebook\HackCodegen\{CodegenMethod, HackBuilderValues};
 
 type TNumberSchema = shape(
   'type' => TSchemaType,
@@ -17,8 +14,7 @@ type TNumberSchema = shape(
 );
 
 class NumberBuilder extends BaseBuilder<TNumberSchema> {
-  protected static string $schema_name =
-    'Slack\Hack\JsonSchema\Codegen\TNumberSchema';
+  protected static string $schema_name = 'Slack\Hack\JsonSchema\Codegen\TNumberSchema';
 
   <<__Override>>
   public function build(): this {
@@ -86,17 +82,11 @@ class NumberBuilder extends BaseBuilder<TNumberSchema> {
     $this->addEnumConstraintCheck($hb);
 
     if (($this->typed_schema['maximum'] ?? null) is nonnull) {
-      $hb->addMultilineCall(
-        'Constraints\NumberMaximumConstraint::check',
-        vec['$typed', 'self::$maximum', '$pointer'],
-      );
+      $hb->addMultilineCall('Constraints\NumberMaximumConstraint::check', vec['$typed', 'self::$maximum', '$pointer']);
     }
 
     if (($this->typed_schema['minimum'] ?? null) is nonnull) {
-      $hb->addMultilineCall(
-        'Constraints\NumberMinimumConstraint::check',
-        vec['$typed', 'self::$minimum', '$pointer'],
-      );
+      $hb->addMultilineCall('Constraints\NumberMinimumConstraint::check', vec['$typed', 'self::$minimum', '$pointer']);
     }
 
     if (($this->typed_schema['multipleOf'] ?? null) is nonnull) {

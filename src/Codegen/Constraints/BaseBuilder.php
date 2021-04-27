@@ -2,13 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use type Facebook\HackCodegen\{
-  CodegenClass,
-  CodegenMethod,
-  CodegenProperty,
-  HackBuilder,
-  HackBuilderValues,
-};
+use type Facebook\HackCodegen\{CodegenClass, CodegenMethod, CodegenProperty, HackBuilder, HackBuilderValues};
 
 <<__ConsistentConstruct>>
 abstract class BaseBuilder<T> implements IBuilder {
@@ -23,8 +17,7 @@ abstract class BaseBuilder<T> implements IBuilder {
     protected TSchema $schema,
     protected ?CodegenClass $class = null,
   ) {
-    $this->typed_schema =
-      type_assert_shape($this->schema, static::$schema_name);
+    $this->typed_schema = type_assert_shape($this->schema, static::$schema_name);
   }
 
   /**
@@ -79,10 +72,7 @@ abstract class BaseBuilder<T> implements IBuilder {
 
   protected function getEnumCodegenProperty(): ?CodegenProperty {
     $property = null;
-    $schema = type_assert_shape(
-      $this->typed_schema,
-      'Slack\Hack\JsonSchema\Codegen\TSchema',
-    );
+    $schema = type_assert_shape($this->typed_schema, 'Slack\Hack\JsonSchema\Codegen\TSchema');
     $enum = $schema['enum'] ?? null;
     if ($enum is nonnull) {
       $hb = $this->getHackBuilder()
@@ -96,15 +86,9 @@ abstract class BaseBuilder<T> implements IBuilder {
   }
 
   protected function addEnumConstraintCheck(HackBuilder $hb): void {
-    $schema = type_assert_shape(
-      $this->typed_schema,
-      'Slack\Hack\JsonSchema\Codegen\TSchema',
-    );
+    $schema = type_assert_shape($this->typed_schema, 'Slack\Hack\JsonSchema\Codegen\TSchema');
     if (($schema['enum'] ?? null) is nonnull) {
-      $hb->addMultilineCall(
-        'Constraints\EnumConstraint::check',
-        vec['$typed', 'self::$enum', '$pointer'],
-      );
+      $hb->addMultilineCall('Constraints\EnumConstraint::check', vec['$typed', 'self::$enum', '$pointer']);
     }
   }
 

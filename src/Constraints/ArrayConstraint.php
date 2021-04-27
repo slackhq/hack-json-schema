@@ -8,11 +8,7 @@ use namespace Facebook\TypeSpec;
 use namespace Slack\Hack\JsonSchema;
 
 class ArrayConstraint {
-  public static function check(
-    mixed $input,
-    string $pointer,
-    bool $coerce,
-  ): vec<mixed> {
+  public static function check(mixed $input, string $pointer, bool $coerce): vec<mixed> {
     if ($coerce && $input is string) {
       $coerced = JsonSchema\json_decode_hack($input);
 

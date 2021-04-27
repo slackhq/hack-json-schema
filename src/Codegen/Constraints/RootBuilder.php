@@ -16,19 +16,9 @@ final class RootBuilder implements IBuilder {
     private CodegenClass $class,
     private CodegenFile $file,
   ) {
-    $this->ctx = new Context(
-      $codegenConfig,
-      $factory,
-      $jsonSchemaCodegenConfig,
-      $schema,
-      $class->getName(),
-      $file,
-    );
+    $this->ctx = new Context($codegenConfig, $factory, $jsonSchemaCodegenConfig, $schema, $class->getName(), $file);
 
-    $typed_schema = type_assert_shape(
-      $this->ctx->getSchema(),
-      'Slack\Hack\JsonSchema\Codegen\TSchema',
-    );
+    $typed_schema = type_assert_shape($this->ctx->getSchema(), 'Slack\Hack\JsonSchema\Codegen\TSchema');
     $this->root = new SchemaBuilder($this->ctx, '', $typed_schema, $class);
   }
 
