@@ -24,17 +24,13 @@ final class Context {
   ) {
     $this->validatorConfig = $codegenConfig['validator'];
     $this->refsConfig = $this->validatorConfig['refs'] ?? null;
-    $this->schema =
-      type_assert_shape($schema_dict, '\Slack\Hack\JsonSchema\Codegen\TSchema');
+    $this->schema = type_assert_shape($schema_dict, '\Slack\Hack\JsonSchema\Codegen\TSchema');
 
     $context_config = $this->validatorConfig['context'] ?? null;
     if ($context_config is nonnull) {
       $root_schema = $context_config['root_schema'] ?? null;
       if ($root_schema is nonnull) {
-        $this->rootSchema = type_assert_shape(
-          $root_schema,
-          'Slack\Hack\JsonSchema\Codegen\TSchema',
-        );
+        $this->rootSchema = type_assert_shape($root_schema, 'Slack\Hack\JsonSchema\Codegen\TSchema');
       }
 
       $root_schema_path = $context_config['root_schema_path'] ?? null;

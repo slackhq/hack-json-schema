@@ -5,11 +5,7 @@ namespace Slack\Hack\JsonSchema\Constraints;
 use namespace Slack\Hack\JsonSchema;
 
 class StringFormatConstraint {
-  public static function check(
-    string $input,
-    string $format,
-    string $pointer,
-  ): void {
+  public static function check(string $input, string $format, string $pointer): void {
 
     switch ($format) {
       case 'date':

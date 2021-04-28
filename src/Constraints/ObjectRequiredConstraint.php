@@ -6,11 +6,7 @@ use namespace HH\Lib\C;
 use namespace Slack\Hack\JsonSchema;
 
 class ObjectRequiredConstraint {
-  public static function check(
-    dict<string, mixed> $input,
-    keyset<string> $required,
-    string $pointer,
-  ): void {
+  public static function check(dict<string, mixed> $input, keyset<string> $required, string $pointer): void {
     $errors = vec[];
     foreach ($required as $name) {
       if (!C\contains_key($input, $name)) {

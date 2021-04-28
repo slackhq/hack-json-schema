@@ -15,11 +15,7 @@ class UniqueRefBuilder implements IBuilder {
   private string $filename;
   private ?string $type;
 
-  public function __construct(
-    protected Context $ctx,
-    protected string $ref,
-    protected TSchema $schema,
-  ) {
+  public function __construct(protected Context $ctx, protected string $ref, protected TSchema $schema) {
     $this->classname = '';
     $this->filename = '';
 
@@ -36,18 +32,11 @@ class UniqueRefBuilder implements IBuilder {
 
     $source_root = $unique_refs_config['source_root'];
     if (!Str\contains($resolved_path, $source_root)) {
-      throw new \Exception(
-        "Provided `source_root` ($source_root) not found in the resolved ref path ($resolved_path)",
-      );
+      throw new \Exception("Provided `source_root` ($source_root) not found in the resolved ref path ($resolved_path)");
     }
 
     $schema_path = $this->getRefSchemaPath($this->ref);
-    $names = static::getNames(
-      $ctx->getJsonSchemaCodegenConfig(),
-      $unique_refs_config,
-      $resolved_path,
-      $schema_path,
-    );
+    $names = static::getNames($ctx->getJsonSchemaCodegenConfig(), $unique_refs_config, $resolved_path, $schema_path);
 
     $this->classname = $names['class'];
     $this->filename = $names['file'];
@@ -73,11 +62,7 @@ class UniqueRefBuilder implements IBuilder {
     $codegen_config['validator']['refs'] = $refs_config;
     $codegen_config['validator']['context'] = $context_config;
 
-    $codegen = Codegen::forSchema(
-      Shapes::toDict($this->schema),
-      $codegen_config,
-      $root_directory,
-    );
+    $codegen = Codegen::forSchema(Shapes::toDict($this->schema), $codegen_config, $root_directory);
 
     $codegen_file = null;
     if (RefCache::isRefCached($this->filename)) {
@@ -88,17 +73,10 @@ class UniqueRefBuilder implements IBuilder {
 
     RefCache::cacheRef($this->filename, $codegen_file);
 
-    $main_class = Vec\filter(
-      $codegen_file->getClasses(),
-      $class ==> $class->getName() === $this->classname,
-    )[0];
+    $main_class = Vec\filter($codegen_file->getClasses(), $class ==> $class->getName() === $this->classname)[0];
 
-    $methods =
-      get_private_property(\get_class($main_class), 'methods', $main_class)
-      |> type_assert_shape(
-        $$,
-        '\Slack\Hack\JsonSchema\Codegen\TCodegenMethods',
-      );
+    $methods = get_private_property(\get_class($main_class), 'methods', $main_class)
+      |> type_assert_shape($$, '\Slack\Hack\JsonSchema\Codegen\TCodegenMethods');
 
     $check_method = Vec\filter(
       $methods,
@@ -108,11 +86,7 @@ class UniqueRefBuilder implements IBuilder {
       },
     )[0];
 
-    $return_type = get_private_property(
-      \get_class($check_method),
-      'returnType',
-      $check_method,
-    );
+    $return_type = get_private_property(\get_class($check_method), 'returnType', $check_method);
     $this->type = $return_type as string;
 
     return $this;
@@ -123,10 +97,7 @@ class UniqueRefBuilder implements IBuilder {
   }
 
   public function getType(): string {
-    invariant(
-      $this->type is nonnull,
-      'must call `build` method before accessing type',
-    );
+    invariant($this->type is nonnull, 'must call `build` method before accessing type');
     return $this->type;
   }
 
@@ -147,23 +118,17 @@ class UniqueRefBuilder implements IBuilder {
     'class' => string,
     'file' => string,
   ) {
-    $classname_formatter =
-      $json_schema_codegen_config->getClassNameFormatFunction();
-    $filename_formatter =
-      $json_schema_codegen_config->getFileNameFormatFunction();
+    $classname_formatter = $json_schema_codegen_config->getClassNameFormatFunction();
+    $filename_formatter = $json_schema_codegen_config->getFileNameFormatFunction();
 
-    $relative_path =
-      Str\strip_prefix($file_path, $unique_refs_config['source_root'].'/');
+    $relative_path = Str\strip_prefix($file_path, $unique_refs_config['source_root'].'/');
     $path_pointers = Str\strip_suffix($relative_path, '.json')
       |> Str\split($$, '/')
       |> Str\join($$, '_');
     $schema_pointers = Str\split($schema_path, '/') |> Str\join($$, '_');
 
     $classname = $classname_formatter($path_pointers, $schema_pointers);
-    $filename = $unique_refs_config['output_root'].
-      '/'.
-      $filename_formatter($classname).
-      '.php';
+    $filename = $unique_refs_config['output_root'].'/'.$filename_formatter($classname).'.php';
 
     return shape(
       'class' => $classname,

@@ -5,11 +5,7 @@ namespace Slack\Hack\JsonSchema\Constraints;
 use namespace Slack\Hack\JsonSchema;
 
 class ArrayMinItemsConstraint {
-  public static function check(
-    int $num_items,
-    int $min_items,
-    string $pointer,
-  ): void {
+  public static function check(int $num_items, int $min_items, string $pointer): void {
     if ($min_items > $num_items) {
       $error = shape(
         'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,

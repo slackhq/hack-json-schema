@@ -7,11 +7,7 @@ use namespace Facebook\{TypeAssert, TypeCoerce};
 use namespace Slack\Hack\JsonSchema;
 
 class StringConstraint {
-  public static function check(
-    mixed $input,
-    string $pointer,
-    bool $coerce,
-  ): string {
+  public static function check(mixed $input, string $pointer, bool $coerce): string {
     if ($coerce) {
       try {
         return TypeCoerce\string($input);

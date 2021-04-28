@@ -3,10 +3,7 @@
 namespace Slack\Hack\JsonSchema\Codegen;
 
 
-use type Facebook\HackCodegen\{
-  CodegenMethod,
-  HackBuilderValues,
-};
+use type Facebook\HackCodegen\{CodegenMethod, HackBuilderValues};
 
 type TNullSchema = shape(
   'type' => TSchemaType,
@@ -14,8 +11,7 @@ type TNullSchema = shape(
 );
 
 class NullBuilder extends BaseBuilder<TNullSchema> {
-  protected static string $schema_name =
-    'Slack\Hack\JsonSchema\Codegen\TNullSchema';
+  protected static string $schema_name = 'Slack\Hack\JsonSchema\Codegen\TNullSchema';
 
   <<__Override>>
   public function build(): this {
@@ -32,11 +28,7 @@ class NullBuilder extends BaseBuilder<TNullSchema> {
 
   protected function getCheckMethod(): CodegenMethod {
     $hb = $this->getHackBuilder()
-      ->addAssignment(
-        '$typed',
-        'Constraints\NullConstraint::check($input, $pointer)',
-        HackBuilderValues::literal(),
-      )
+      ->addAssignment('$typed', 'Constraints\NullConstraint::check($input, $pointer)', HackBuilderValues::literal())
       ->ensureEmptyLine();
 
     $hb->addReturn('$typed', HackBuilderValues::literal());

@@ -48,9 +48,7 @@ class SchemaBuilder implements IBuilder {
     $refs = keyset[];
     while ($ref is nonnull) {
       if (C\contains_key($refs, $ref)) {
-        throw new JsonSchema\CircularReferenceException(
-          "Circular reference beginning at {$ref}",
-        );
+        throw new JsonSchema\CircularReferenceException("Circular reference beginning at {$ref}");
       }
 
       $refs[] = $ref;
@@ -64,11 +62,7 @@ class SchemaBuilder implements IBuilder {
       if ($new_root is nonnull) {
         $new_ctx->setRefsRootDirectory(\dirname($new_root));
         $new_root_schema = $this->loadSchema($new_root);
-        invariant(
-          $new_root_schema is nonnull,
-          'Failed loading new root schema: %s',
-          $new_root,
-        );
+        invariant($new_root_schema is nonnull, 'Failed loading new root schema: %s', $new_root);
         $new_ctx->setSchema($new_root_schema);
       }
 
@@ -122,10 +116,7 @@ class SchemaBuilder implements IBuilder {
         // schemas within `type`. We just leverage our existing `anyOf` builder
         // and convert to that here.
 
-        $types = type_assert_shape(
-          $type,
-          '\Slack\Hack\JsonSchema\Codegen\TSchemaTypeVec',
-        );
+        $types = type_assert_shape($type, '\Slack\Hack\JsonSchema\Codegen\TSchemaTypeVec');
 
         $any_of = vec[];
         foreach ($types as $type) {

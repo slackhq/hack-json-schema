@@ -6,11 +6,7 @@ use namespace Facebook\{TypeAssert, TypeCoerce};
 use namespace Slack\Hack\JsonSchema;
 
 class IntegerConstraint {
-  public static function check(
-    mixed $input,
-    string $pointer,
-    bool $coerce,
-  ): int {
+  public static function check(mixed $input, string $pointer, bool $coerce): int {
     if ($coerce) {
       try {
         return TypeCoerce\int($input);

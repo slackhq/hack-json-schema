@@ -2,10 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use type Facebook\HackCodegen\{
-  CodegenMethod,
-  HackBuilderValues,
-};
+use type Facebook\HackCodegen\{CodegenMethod, HackBuilderValues};
 
 type TBooleanSchema = shape(
   'type' => TSchemaType,
@@ -14,8 +11,7 @@ type TBooleanSchema = shape(
 );
 
 class BooleanBuilder extends BaseBuilder<TBooleanSchema> {
-  protected static string $schema_name =
-    'Slack\Hack\JsonSchema\Codegen\TBooleanSchema';
+  protected static string $schema_name = 'Slack\Hack\JsonSchema\Codegen\TBooleanSchema';
 
   <<__Override>>
   public function build(): this {
