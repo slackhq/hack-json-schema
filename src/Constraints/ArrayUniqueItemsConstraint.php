@@ -6,11 +6,7 @@ use namespace HH\Lib\C;
 use namespace Slack\Hack\JsonSchema;
 
 class ArrayUniqueItemsConstraint {
-  public static function check<T as arraykey>(
-    vec<T> $input,
-    string $pointer,
-    bool $coerce,
-  ): keyset<T> {
+  public static function check<T as arraykey>(vec<T> $input, string $pointer, bool $coerce): keyset<T> {
     $output = keyset($input);
     if (!$coerce && C\count($output) < C\count($input)) {
       $error = shape(

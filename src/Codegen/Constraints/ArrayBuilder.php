@@ -170,7 +170,7 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
       $hb
         ->addMultilineCall(
           '$output = Constraints\ArrayUniqueItemsConstraint::check',
-          vec['$output', '$pointer', 'self::$coerce']
+          vec['$output', '$pointer', 'self::$coerce'],
         )
         ->ensureEmptyLine();
     }
@@ -255,16 +255,9 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
   private function setupSingleItemSchemaBuilder(): void {
     $items = $this->typed_schema['items'] ?? null;
     if ($this->isSchema($items)) {
-      $schema = type_assert_shape(
-        $items,
-        'Slack\Hack\JsonSchema\Codegen\TArraySchemaItemsSingleSchema',
-      );
+      $schema = type_assert_shape($items, 'Slack\Hack\JsonSchema\Codegen\TArraySchemaItemsSingleSchema');
 
-      $items_builder = new SchemaBuilder(
-        $this->ctx,
-        $this->generateClassName($this->suffix, 'items'),
-        $schema,
-      );
+      $items_builder = new SchemaBuilder($this->ctx, $this->generateClassName($this->suffix, 'items'), $schema);
 
       $items_builder->build();
       $this->singleItemSchemaBuilder = $items_builder;
