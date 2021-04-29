@@ -131,7 +131,7 @@ final class ArraySchemaValidatorTest extends BaseCodegenTestCase {
   }
 
   public function testUniqueItemsWithValidStrings(): void {
-    $input = vec["a", "b", "c"];
+    $input = vec['a', 'b', 'c'];
 
     $validator = new ArraySchemaValidator(dict['unique_strings' => $input]);
     $validator->validate();
@@ -143,7 +143,7 @@ final class ArraySchemaValidatorTest extends BaseCodegenTestCase {
   }
 
   public function testUniqueItemsWithInvalidStrings(): void {
-    $input = vec["a", "b", "a"];
+    $input = vec['a', 'b', 'a'];
 
     $validator = new ArraySchemaValidator(dict['unique_strings' => $input]);
     $validator->validate();
