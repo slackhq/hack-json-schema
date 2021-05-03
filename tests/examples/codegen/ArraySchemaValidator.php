@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<14484ee6f8f738f12aee00444bbc398d>>
+ * @generated SignedSource<<731edaf71398ea5fb65cfa1e09cab571>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -15,6 +15,9 @@ type TArraySchemaValidator = shape(
   ?'array_of_strings' => vec<string>,
   ?'untyped_array' => vec<mixed>,
   ?'coerce_array' => vec<num>,
+  ?'unique_strings' => keyset<string>,
+  ?'unique_numbers' => keyset<int>,
+  ?'unique_numbers_coerce' => keyset<int>,
   ...
 );
 
@@ -109,6 +112,146 @@ final class ArraySchemaValidatorPropertiesCoerceArray {
   }
 }
 
+final class ArraySchemaValidatorPropertiesUniqueStringsItems {
+
+  private static bool $coerce = false;
+
+  public static function check(mixed $input, string $pointer): string {
+    $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
+
+    return $typed;
+  }
+}
+
+final class ArraySchemaValidatorPropertiesUniqueStrings {
+
+  private static bool $coerce = false;
+
+  public static function check(mixed $input, string $pointer): keyset<string> {
+    $typed = Constraints\ArrayConstraint::check($input, $pointer, self::$coerce);
+
+    $output = vec[];
+    $errors = vec[];
+
+    foreach ($typed as $index => $value) {
+      try {
+        $output[] = ArraySchemaValidatorPropertiesUniqueStringsItems::check(
+          $value,
+          JsonSchema\get_pointer($pointer, (string) $index),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\count($errors)) {
+      throw new JsonSchema\InvalidFieldException($pointer, $errors);
+    }
+
+    $output = Constraints\ArrayUniqueItemsConstraint::check(
+      $output,
+      $pointer,
+      self::$coerce,
+    );
+
+    return $output;
+  }
+}
+
+final class ArraySchemaValidatorPropertiesUniqueNumbersItems {
+
+  private static bool $coerce = false;
+
+  public static function check(mixed $input, string $pointer): int {
+    $typed =
+      Constraints\IntegerConstraint::check($input, $pointer, self::$coerce);
+
+    return $typed;
+  }
+}
+
+final class ArraySchemaValidatorPropertiesUniqueNumbers {
+
+  private static bool $coerce = false;
+
+  public static function check(mixed $input, string $pointer): keyset<int> {
+    $typed = Constraints\ArrayConstraint::check($input, $pointer, self::$coerce);
+
+    $output = vec[];
+    $errors = vec[];
+
+    foreach ($typed as $index => $value) {
+      try {
+        $output[] = ArraySchemaValidatorPropertiesUniqueNumbersItems::check(
+          $value,
+          JsonSchema\get_pointer($pointer, (string) $index),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\count($errors)) {
+      throw new JsonSchema\InvalidFieldException($pointer, $errors);
+    }
+
+    $output = Constraints\ArrayUniqueItemsConstraint::check(
+      $output,
+      $pointer,
+      self::$coerce,
+    );
+
+    return $output;
+  }
+}
+
+final class ArraySchemaValidatorPropertiesUniqueNumbersCoerceItems {
+
+  private static bool $coerce = false;
+
+  public static function check(mixed $input, string $pointer): int {
+    $typed =
+      Constraints\IntegerConstraint::check($input, $pointer, self::$coerce);
+
+    return $typed;
+  }
+}
+
+final class ArraySchemaValidatorPropertiesUniqueNumbersCoerce {
+
+  private static bool $coerce = true;
+
+  public static function check(mixed $input, string $pointer): keyset<int> {
+    $typed = Constraints\ArrayConstraint::check($input, $pointer, self::$coerce);
+
+    $output = vec[];
+    $errors = vec[];
+
+    foreach ($typed as $index => $value) {
+      try {
+        $output[] = ArraySchemaValidatorPropertiesUniqueNumbersCoerceItems::check(
+          $value,
+          JsonSchema\get_pointer($pointer, (string) $index),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\count($errors)) {
+      throw new JsonSchema\InvalidFieldException($pointer, $errors);
+    }
+
+    $output = Constraints\ArrayUniqueItemsConstraint::check(
+      $output,
+      $pointer,
+      self::$coerce,
+    );
+
+    return $output;
+  }
+}
+
 final class ArraySchemaValidator
   extends JsonSchema\BaseValidator<TArraySchemaValidator> {
 
@@ -156,6 +299,39 @@ final class ArraySchemaValidator
         $output['coerce_array'] = ArraySchemaValidatorPropertiesCoerceArray::check(
           $typed['coerce_array'],
           JsonSchema\get_pointer($pointer, 'coerce_array'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'unique_strings')) {
+      try {
+        $output['unique_strings'] = ArraySchemaValidatorPropertiesUniqueStrings::check(
+          $typed['unique_strings'],
+          JsonSchema\get_pointer($pointer, 'unique_strings'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'unique_numbers')) {
+      try {
+        $output['unique_numbers'] = ArraySchemaValidatorPropertiesUniqueNumbers::check(
+          $typed['unique_numbers'],
+          JsonSchema\get_pointer($pointer, 'unique_numbers'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'unique_numbers_coerce')) {
+      try {
+        $output['unique_numbers_coerce'] = ArraySchemaValidatorPropertiesUniqueNumbersCoerce::check(
+          $typed['unique_numbers_coerce'],
+          JsonSchema\get_pointer($pointer, 'unique_numbers_coerce'),
         );
       } catch (JsonSchema\InvalidFieldException $e) {
         $errors = \HH\Lib\Vec\concat($errors, $e->errors);

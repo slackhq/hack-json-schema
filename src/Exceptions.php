@@ -26,6 +26,7 @@ enum FieldErrorConstraint: string {
   ALL_OF = 'all_of';
   NOT = 'not';
   ONE_OF = 'one_of';
+  UNIQUE_ITEMS = 'unique_items';
 }
 
 type TFieldError = shape(
