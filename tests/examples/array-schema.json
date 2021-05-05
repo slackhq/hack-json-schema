@@ -39,6 +39,18 @@
       "items": {
         "type": "integer"
       }
+    },
+    "unsupported_unique_items": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+          "type": "object",
+          "properties": {
+              "foo": {
+                  "type": "string"
+              }
+          }
+      }
     }
   }
 }

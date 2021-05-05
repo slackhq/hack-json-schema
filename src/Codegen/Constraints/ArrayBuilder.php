@@ -17,14 +17,20 @@ type TArraySchema = shape(
 type TArraySchemaItemsSingleSchema = TSchema;
 type TArraySchemaItemsMultiSchema = vec<TSchema>;
 
+enum HackArrayType: string {
+  VEC = 'vec';
+  KEYSET = 'keyset';
+}
+
 class ArrayBuilder extends BaseBuilder<TArraySchema> {
   private ?IBuilder $singleItemSchemaBuilder = null;
   protected static string $schema_name = 'Slack\Hack\JsonSchema\Codegen\TArraySchema';
+  private HackArrayType $hackArrayType = HackArrayType::VEC;
 
   <<__Override>>
   public function build(): this {
     $this->setupSingleItemSchemaBuilder();
-    $this->validateSchema();
+    $this->determineHackArrayType();
 
     $class = $this->codegenClass()
       ->addMethod($this->getCheckMethod());
@@ -65,12 +71,7 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
     // Items is a single type, get the type from the items builder.
     $items_builder = $this->singleItemSchemaBuilder;
     invariant($items_builder is nonnull, 'must call `build` method before accessing type');
-    if ($this->schema['uniqueItems'] ?? false) {
-      $container = 'keyset';
-    } else {
-      $container = 'vec';
-    }
-    return "{$container}<{$items_builder->getType()}>";
+    return "{$this->hackArrayType}<{$items_builder->getType()}>";
   }
 
   protected function getCheckMethod(): CodegenMethod {
@@ -166,7 +167,7 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
       ->endIfBlock()
       ->ensureEmptyLine();
 
-    if ($this->typed_schema['uniqueItems'] ?? false) {
+    if ($this->hackArrayType === HackArrayType::KEYSET) {
       $hb
         ->addMultilineCall(
           '$output = Constraints\ArrayUniqueItemsConstraint::check',
@@ -262,14 +263,19 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
     }
   }
 
-  /**
-   * Validate that the schema is supported.
-   */
+  <<__Deprecated("Use `setUniqueItems` instead")>>
   private function validateSchema(): void {
+    $this->determineHackArrayType();
+  }
+
+  /**
+   * Determine the type of hack array we will generate.
+   */
+  private function determineHackArrayType(): void {
     if ($this->schema['uniqueItems'] ?? false) {
       $item_type = $this->singleItemSchemaBuilder?->getType();
-      if ($item_type !== 'string' && $item_type !== 'int') {
-        throw new \Exception('uniqueItems is only implemented for arrays of strings and integers');
+      if ($item_type === 'string' || $item_type === 'int') {
+        $this->hackArrayType = HackArrayType::KEYSET;
       }
     }
   }

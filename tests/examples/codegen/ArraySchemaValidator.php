@@ -5,11 +5,16 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<731edaf71398ea5fb65cfa1e09cab571>>
+ * @generated SignedSource<<458640baae767319d7594d9b4fcce940>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
 use namespace Slack\Hack\JsonSchema\Constraints;
+
+type TArraySchemaValidatorPropertiesUnsupportedUniqueItemsItems = shape(
+  ?'foo' => string,
+  ...
+);
 
 type TArraySchemaValidator = shape(
   ?'array_of_strings' => vec<string>,
@@ -18,6 +23,7 @@ type TArraySchemaValidator = shape(
   ?'unique_strings' => keyset<string>,
   ?'unique_numbers' => keyset<int>,
   ?'unique_numbers_coerce' => keyset<int>,
+  ?'unsupported_unique_items' => vec<TArraySchemaValidatorPropertiesUnsupportedUniqueItemsItems>,
   ...
 );
 
@@ -252,6 +258,88 @@ final class ArraySchemaValidatorPropertiesUniqueNumbersCoerce {
   }
 }
 
+final class ArraySchemaValidatorPropertiesUnsupportedUniqueItemsItemsPropertiesFoo {
+
+  private static bool $coerce = false;
+
+  public static function check(mixed $input, string $pointer): string {
+    $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
+
+    return $typed;
+  }
+}
+
+final class ArraySchemaValidatorPropertiesUnsupportedUniqueItemsItems {
+
+  private static bool $coerce = false;
+
+  public static function check(
+    mixed $input,
+    string $pointer,
+  ): TArraySchemaValidatorPropertiesUnsupportedUniqueItemsItems {
+    $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
+
+    $errors = vec[];
+    $output = shape();
+
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
+    foreach ($typed as $key => $value) {
+      /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
+      $output[$key] = $value;
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'foo')) {
+      try {
+        $output['foo'] = ArraySchemaValidatorPropertiesUnsupportedUniqueItemsItemsPropertiesFoo::check(
+          $typed['foo'],
+          JsonSchema\get_pointer($pointer, 'foo'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\count($errors)) {
+      throw new JsonSchema\InvalidFieldException($pointer, $errors);
+    }
+
+    /* HH_IGNORE_ERROR[4163] */
+    return $output;
+  }
+}
+
+final class ArraySchemaValidatorPropertiesUnsupportedUniqueItems {
+
+  private static bool $coerce = false;
+
+  public static function check(
+    mixed $input,
+    string $pointer,
+  ): vec<TArraySchemaValidatorPropertiesUnsupportedUniqueItemsItems> {
+    $typed = Constraints\ArrayConstraint::check($input, $pointer, self::$coerce);
+
+    $output = vec[];
+    $errors = vec[];
+
+    foreach ($typed as $index => $value) {
+      try {
+        $output[] = ArraySchemaValidatorPropertiesUnsupportedUniqueItemsItems::check(
+          $value,
+          JsonSchema\get_pointer($pointer, (string) $index),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\count($errors)) {
+      throw new JsonSchema\InvalidFieldException($pointer, $errors);
+    }
+
+    return $output;
+  }
+}
+
 final class ArraySchemaValidator
   extends JsonSchema\BaseValidator<TArraySchemaValidator> {
 
@@ -332,6 +420,17 @@ final class ArraySchemaValidator
         $output['unique_numbers_coerce'] = ArraySchemaValidatorPropertiesUniqueNumbersCoerce::check(
           $typed['unique_numbers_coerce'],
           JsonSchema\get_pointer($pointer, 'unique_numbers_coerce'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'unsupported_unique_items')) {
+      try {
+        $output['unsupported_unique_items'] = ArraySchemaValidatorPropertiesUnsupportedUniqueItems::check(
+          $typed['unsupported_unique_items'],
+          JsonSchema\get_pointer($pointer, 'unsupported_unique_items'),
         );
       } catch (JsonSchema\InvalidFieldException $e) {
         $errors = \HH\Lib\Vec\concat($errors, $e->errors);
