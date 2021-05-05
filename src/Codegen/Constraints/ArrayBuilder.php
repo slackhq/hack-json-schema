@@ -263,11 +263,6 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
     }
   }
 
-  <<__Deprecated("Use `setUniqueItems` instead")>>
-  private function validateSchema(): void {
-    $this->determineHackArrayType();
-  }
-
   /**
    * Determine the type of hack array we will generate.
    */
