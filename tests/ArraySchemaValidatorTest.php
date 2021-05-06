@@ -206,10 +206,16 @@ final class ArraySchemaValidatorTest extends BaseCodegenTestCase {
     expect($validated)->toEqual(shape('unique_numbers_coerce' => keyset($input)));
   }
 
-  public function testInvalidUniqueItemsConstraint(): void {
-    $ret = self::getBuilder('array-schema-invalid.json', 'ArraySchemaInvalidValidator');
-    expect(() ==> $ret['codegen']->build())
-      ->toThrow(\Exception::class, 'uniqueItems is only implemented for arrays of strings and integers');
+  public function testUnsupportedUniqueItemsConstraint(): void {
+    $input = vec[dict['foo' => 'a'], dict['foo' => 'a']];
+
+    $validator = new ArraySchemaValidator(dict['unsupported_unique_items' => $input]);
+    $validator->validate();
+
+    expect($validator->isValid())->toBeTrue();
+    $validated = $validator->getValidatedInput();
+
+    expect($validated)->toEqual(shape('unsupported_unique_items' => vec[shape('foo' => 'a'), shape('foo' => 'a')]));
   }
 
 }
