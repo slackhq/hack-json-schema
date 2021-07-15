@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<fd534ebd94b67fe23410f2616abaa107>>
+ * @generated SignedSource<<766d50148a61a631dcd0c430fed23430>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -16,14 +16,9 @@ type TObjectSchemaValidatorPropertiesOnlyAdditionalProperties = dict<string, mix
 type TObjectSchemaValidatorPropertiesOnlyNoAdditionalProperties = dict<string, mixed>;
 
 type TObjectSchemaValidatorPropertiesOnlyProperties = shape(
-  'string' => string,
-  'number' => num,
+  ?'string' => string,
+  ?'number' => num,
   'required_string' => string,
-);
-
-type TObjectSchemaValidatorPropertiesDefaults = shape(
-  'required_string' => string,
-  'default_string' => string,
 );
 
 type TObjectSchemaValidatorPropertiesOnlyPatternProperties = dict<string, mixed>;
@@ -93,7 +88,6 @@ type TObjectSchemaValidator = shape(
   ?'only_additional_properties' => TObjectSchemaValidatorPropertiesOnlyAdditionalProperties,
   ?'only_no_additional_properties' => TObjectSchemaValidatorPropertiesOnlyNoAdditionalProperties,
   ?'only_properties' => TObjectSchemaValidatorPropertiesOnlyProperties,
-  ?'defaults' => TObjectSchemaValidatorPropertiesDefaults,
   ?'only_pattern_properties' => TObjectSchemaValidatorPropertiesOnlyPatternProperties,
   ?'single_pattern_property_string' => TObjectSchemaValidatorPropertiesSinglePatternPropertyString,
   ?'single_pattern_property_object' => TObjectSchemaValidatorPropertiesSinglePatternPropertyObject,
@@ -251,106 +245,6 @@ final class ObjectSchemaValidatorPropertiesOnlyProperties {
         $output['required_string'] = ObjectSchemaValidatorPropertiesOnlyPropertiesPropertiesRequiredString::check(
           $typed['required_string'],
           JsonSchema\get_pointer($pointer, 'required_string'),
-        );
-      } catch (JsonSchema\InvalidFieldException $e) {
-        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
-      }
-    }
-
-    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
-    foreach ($typed as $key => $value) {
-      if (\HH\Lib\C\contains_key(self::$properties, $key)) {
-        continue;
-      }
-
-      $errors[] = shape(
-        'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
-        'message' => "invalid additional property: {$key}",
-        'constraint' => shape(
-          'type' => JsonSchema\FieldErrorConstraint::ADDITIONAL_PROPERTIES,
-          'got' => $key,
-        ),
-      );
-    }
-
-    if (\HH\Lib\C\count($errors)) {
-      throw new JsonSchema\InvalidFieldException($pointer, $errors);
-    }
-
-    /* HH_IGNORE_ERROR[4163] */
-    return $output;
-  }
-}
-
-final class ObjectSchemaValidatorPropertiesDefaultsPropertiesRequiredString {
-
-  private static bool $coerce = false;
-
-  public static function check(mixed $input, string $pointer): string {
-    $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
-
-    return $typed;
-  }
-}
-
-final class ObjectSchemaValidatorPropertiesDefaultsPropertiesDefaultString {
-
-  private static bool $coerce = false;
-
-  public static function check(mixed $input, string $pointer): string {
-    $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
-
-    return $typed;
-  }
-}
-
-final class ObjectSchemaValidatorPropertiesDefaults {
-
-  private static keyset<string> $required = keyset[
-    'required_string',
-  ];
-  private static bool $coerce = false;
-  private static keyset<string> $properties = keyset[
-    'required_string',
-    'default_string',
-  ];
-
-  public static function check(
-    mixed $input,
-    string $pointer,
-  ): TObjectSchemaValidatorPropertiesDefaults {
-    $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
-
-    $defaults = dict[
-      'default_string' => 'test',
-    ];
-    $typed = \HH\Lib\Dict\merge($defaults, $typed);
-
-    Constraints\ObjectRequiredConstraint::check(
-      $typed,
-      self::$required,
-      $pointer,
-    );
-
-    $errors = vec[];
-    $output = shape();
-
-    if (\HH\Lib\C\contains_key($typed, 'required_string')) {
-      try {
-        $output['required_string'] = ObjectSchemaValidatorPropertiesDefaultsPropertiesRequiredString::check(
-          $typed['required_string'],
-          JsonSchema\get_pointer($pointer, 'required_string'),
-        );
-      } catch (JsonSchema\InvalidFieldException $e) {
-        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
-      }
-    }
-
-    if (\HH\Lib\C\contains_key($typed, 'default_string')) {
-      try {
-        $output['default_string'] = ObjectSchemaValidatorPropertiesDefaultsPropertiesDefaultString::check(
-          $typed['default_string'],
-          JsonSchema\get_pointer($pointer, 'default_string'),
         );
       } catch (JsonSchema\InvalidFieldException $e) {
         $errors = \HH\Lib\Vec\concat($errors, $e->errors);
@@ -1555,17 +1449,6 @@ final class ObjectSchemaValidator
         $output['only_properties'] = ObjectSchemaValidatorPropertiesOnlyProperties::check(
           $typed['only_properties'],
           JsonSchema\get_pointer($pointer, 'only_properties'),
-        );
-      } catch (JsonSchema\InvalidFieldException $e) {
-        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
-      }
-    }
-
-    if (\HH\Lib\C\contains_key($typed, 'defaults')) {
-      try {
-        $output['defaults'] = ObjectSchemaValidatorPropertiesDefaults::check(
-          $typed['defaults'],
-          JsonSchema\get_pointer($pointer, 'defaults'),
         );
       } catch (JsonSchema\InvalidFieldException $e) {
         $errors = \HH\Lib\Vec\concat($errors, $e->errors);
