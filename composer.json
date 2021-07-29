@@ -11,7 +11,7 @@
     "require": {
         "facebook/hack-codegen": "^4.1.0",
         "hhvm/hsl": "^4.0.1",
-        "hhvm/type-assert": "^3.3.0"
+        "hhvm/type-assert": "=4.1.2"
     },
     "require-dev": {
         "hhvm/hhast": "^4.0.5",
