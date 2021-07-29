@@ -23,7 +23,7 @@ class ObjectConstraint {
       if ($input is dict<_, _>) {
         return $dict_spec->assertType($input);
       } else {
-        $darray_spec = TypeSpec\dict_like_array(TypeSpec\string(), TypeSpec\mixed());
+        $darray_spec = TypeSpec\darray(TypeSpec\string(), TypeSpec\mixed());
         # Fallback to checking legacy PHP dict-like-arrays
         return dict($darray_spec->assertType($input));
       }
