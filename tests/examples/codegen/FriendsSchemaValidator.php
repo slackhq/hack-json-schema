@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<71da10c4b1e8d8797b14b9323a036a8e>>
+ * @generated SignedSource<<c1e1a034a097914b540fefaa46b64ab6>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
