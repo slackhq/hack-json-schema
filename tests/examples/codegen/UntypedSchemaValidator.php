@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<5386112b2408967d5cdecac56bc4d40e>>
+ * @generated SignedSource<<307dd9e864c92ca6b69a2c4d5156158f>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -207,7 +207,7 @@ final class UntypedSchemaValidatorPropertiesAllOfPassThroughAllOf0 {
     $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
 
     $sanitize_string =
-      fun('\Slack\Hack\JsonSchema\Tests\_untyped_schema_validator_test_uniline');
+      \Slack\Hack\JsonSchema\Tests\_untyped_schema_validator_test_uniline<>;
     $typed = $sanitize_string($typed);
 
     return $typed;
@@ -281,7 +281,7 @@ final class UntypedSchemaValidatorPropertiesAllOfPassThroughSecondAllOf0 {
     $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
 
     $sanitize_string =
-      fun('\Slack\Hack\JsonSchema\Tests\_untyped_schema_validator_test_multiline');
+      \Slack\Hack\JsonSchema\Tests\_untyped_schema_validator_test_multiline<>;
     $typed = $sanitize_string($typed);
 
     return $typed;
@@ -296,7 +296,7 @@ final class UntypedSchemaValidatorPropertiesAllOfPassThroughSecondAllOf1 {
     $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
 
     $sanitize_string =
-      fun('\Slack\Hack\JsonSchema\Tests\_untyped_schema_validator_test_uniline');
+      \Slack\Hack\JsonSchema\Tests\_untyped_schema_validator_test_uniline<>;
     $typed = $sanitize_string($typed);
 
     return $typed;

@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<9d3603df706a87efcc3660d9a8d42b73>>
+ * @generated SignedSource<<d1a4e4a4c88c5edb5ac1b4b881ed8a3e>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -39,7 +39,7 @@ final class ExamplesStringSchemaPropertiesSanitizeUniline {
     $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
 
     $sanitize_string =
-     _string_schema_validator_test_uniline<>;
+      \Slack\Hack\JsonSchema\Tests\_string_schema_validator_test_uniline<>;
     $typed = $sanitize_string($typed);
 
     return $typed;
@@ -54,7 +54,7 @@ final class ExamplesStringSchemaPropertiesSanitizeMultiline {
     $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
 
     $sanitize_string =
-     _string_schema_validator_test_multiline<>;
+      \Slack\Hack\JsonSchema\Tests\_string_schema_validator_test_multiline<>;
     $typed = $sanitize_string($typed);
 
     return $typed;
