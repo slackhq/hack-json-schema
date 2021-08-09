@@ -39,7 +39,7 @@ final class ExamplesStringSchemaPropertiesSanitizeUniline {
     $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
 
     $sanitize_string =
-      fun('\Slack\Hack\JsonSchema\Tests\_string_schema_validator_test_uniline');
+     _string_schema_validator_test_uniline<>;
     $typed = $sanitize_string($typed);
 
     return $typed;
@@ -54,7 +54,7 @@ final class ExamplesStringSchemaPropertiesSanitizeMultiline {
     $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
 
     $sanitize_string =
-      fun('\Slack\Hack\JsonSchema\Tests\_string_schema_validator_test_multiline');
+     _string_schema_validator_test_multiline<>;
     $typed = $sanitize_string($typed);
 
     return $typed;

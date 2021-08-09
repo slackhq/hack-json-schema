@@ -94,7 +94,7 @@ class StringBuilder extends BaseBuilder<TStringSchema> {
       }
 
       $hb
-        ->addAssignment('$sanitize_string', "fun('\\$sanitization_func')", HackBuilderValues::literal())
+        ->addAssignment('$sanitize_string', "$sanitization_func<>", HackBuilderValues::literal())
         ->addAssignment('$typed', '$sanitize_string($typed)', HackBuilderValues::literal())
         ->ensureEmptyLine();
     }
