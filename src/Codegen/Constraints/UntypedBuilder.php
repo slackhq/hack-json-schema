@@ -85,7 +85,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
         $schema,
       );
       $schema_builder->build();
-      $constraints[] = "class_meth({$schema_builder->getClassName()}::class, 'check')";
+      $constraints[] = "{$schema_builder->getClassName()}::check<>";
     }
 
     $hb
@@ -140,7 +140,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
         $schema,
       );
       $schema_builder->build();
-      $constraints[] = "class_meth({$schema_builder->getClassName()}::class, 'check')";
+      $constraints[] = "{$schema_builder->getClassName()}::check<>";
     }
 
     $hb
@@ -199,7 +199,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
         $schema,
       );
       $schema_builder->build();
-      $constraints[] = "class_meth({$schema_builder->getClassName()}::class, 'check')";
+      $constraints[] = "{$schema_builder->getClassName()}::check<>";
     }
 
     $hb
@@ -340,7 +340,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
   private function generateGenericAnyOfChecks(vec<SchemaBuilder> $schema_builders, HackBuilder $hb): void {
     $constraints = vec[];
     foreach ($schema_builders as $schema_builder) {
-      $constraints[] = "class_meth({$schema_builder->getClassName()}::class, 'check')";
+      $constraints[] = "{$schema_builder->getClassName()}::check<>";
     }
 
     // Checks for the special case of one null and one non-null type in order to
@@ -362,8 +362,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       if (C\count($without_null) === 1) {
         $non_null_schema_builder = $without_null[0];
 
-        $constraints = vec["class_meth({$non_null_schema_builder
-          ->getClassName()}::class, 'check')"];
+        $constraints = vec["{$non_null_schema_builder->getClassName()}::check<>"];
         $schema_builders = vec[$non_null_schema_builder];
 
         $hb
@@ -429,7 +428,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       $schema_builder->setSuffix($suffix);
       $schema_builder->build();
 
-      $types[$type_name] = "class_meth({$schema_builder->getClassName()}::class, 'check')";
+      $types[$type_name] = "{$schema_builder->getClassName()}::check<>";
     }
 
     $hb

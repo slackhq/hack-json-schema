@@ -42,8 +42,8 @@ final class AnyOfValidator3 extends JsonSchema\BaseValidator<mixed> {
 
   public static function check(mixed $input, string $pointer): mixed {
     $constraints = vec[
-      class_meth(AnyOfValidator3AnyOf0::class, 'check'),
-      class_meth(AnyOfValidator3AnyOf1::class, 'check'),
+      AnyOfValidator3AnyOf0::check<>,
+      AnyOfValidator3AnyOf1::check<>,
     ];
 
     foreach ($constraints as $constraint) {
@@ -108,8 +108,8 @@ final class AnyOfValidator2 extends JsonSchema\BaseValidator<mixed> {
 
   public static function check(mixed $input, string $pointer): mixed {
     $constraints = vec[
-      class_meth(AnyOfValidator2AnyOf0::class, 'check'),
-      class_meth(AnyOfValidator2AnyOf1::class, 'check'),
+      AnyOfValidator2AnyOf0::check<>,
+      AnyOfValidator2AnyOf1::check<>,
     ];
 
     foreach ($constraints as $constraint) {
@@ -250,7 +250,7 @@ final class AnyOfValidator4 extends JsonSchema\BaseValidator<mixed> {
       return null;
     }
     $constraints = vec[
-      class_meth(AnyOfValidator4AnyOf1::class, 'check'),
+      AnyOfValidator4AnyOf1::check<>,
     ];
 
     foreach ($constraints as $constraint) {
@@ -308,7 +308,7 @@ final class AnyOfValidator1 extends JsonSchema\BaseValidator<mixed> {
       return null;
     }
     $constraints = vec[
-      class_meth(AnyOfValidator1AnyOf0::class, 'check'),
+      AnyOfValidator1AnyOf0::check<>,
     ];
 
     foreach ($constraints as $constraint) {

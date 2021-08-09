@@ -2,8 +2,8 @@ SHELL := /bin/bash
 
 .PHONY: test autoload composer
 
-HHVM_VERSION=4.56.0
-HHVM_NEXT_VERSION=4.56.0
+HHVM_VERSION=4.80.5
+HHVM_NEXT_VERSION=4.80.5
 
 DOCKER_RUN=docker run -v $(shell pwd):/data --workdir /data --rm hhvm/hhvm:$(HHVM_VERSION)
 CONTAINER_NAME=hack-json-schema-hhvm

@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<71da10c4b1e8d8797b14b9323a036a8e>>
+ * @generated SignedSource<<c1e1a034a097914b540fefaa46b64ab6>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -225,8 +225,8 @@ final class FriendsSchemaValidatorItemsPropertiesRating {
     $output = vec[];
     $errors = vec[];
     $constraints = vec[
-      class_meth(FriendsSchemaValidatorItemsItemsPropertiesRating0::class, 'check'),
-      class_meth(FriendsSchemaValidatorItemsItemsPropertiesRating1::class, 'check'),
+      FriendsSchemaValidatorItemsItemsPropertiesRating0::check<>,
+      FriendsSchemaValidatorItemsItemsPropertiesRating1::check<>,
     ];
 
     foreach ($typed as $index => $value) {
@@ -290,8 +290,8 @@ final class FriendsSchemaValidatorItemsPropertiesContact {
     $output = vec[];
     $errors = vec[];
     $constraints = vec[
-      class_meth(FriendsSchemaValidatorItemsItemsPropertiesContact0::class, 'check'),
-      class_meth(FriendsSchemaValidatorItemsItemsPropertiesContact1::class, 'check'),
+      FriendsSchemaValidatorItemsItemsPropertiesContact0::check<>,
+      FriendsSchemaValidatorItemsItemsPropertiesContact1::check<>,
     ];
 
     foreach ($typed as $index => $value) {

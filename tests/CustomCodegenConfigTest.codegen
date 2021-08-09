@@ -262,8 +262,8 @@ final class CustomCodegenConfigValidatorPropertiesStringAndNumber {
     $output = vec[];
     $errors = vec[];
     $constraints = vec[
-      class_meth(CustomCodegenConfigValidatorItemsPropertiesStringAndNumber0::class, 'check'),
-      class_meth(CustomCodegenConfigValidatorItemsPropertiesStringAndNumber1::class, 'check'),
+      CustomCodegenConfigValidatorItemsPropertiesStringAndNumber0::check<>,
+      CustomCodegenConfigValidatorItemsPropertiesStringAndNumber1::check<>,
     ];
 
     foreach ($typed as $index => $value) {
@@ -554,9 +554,9 @@ final class CustomCodegenConfigValidatorPropertiesDevicesItems {
 
     $types = dict[
       'phone' =>
-        class_meth(CustomCodegenConfigValidatorPropertiesDevicesItemsOfTypesPhone::class, 'check'),
+        CustomCodegenConfigValidatorPropertiesDevicesItemsOfTypesPhone::check<>,
       'computer' =>
-        class_meth(CustomCodegenConfigValidatorPropertiesDevicesItemsOfTypesComputer::class, 'check'),
+        CustomCodegenConfigValidatorPropertiesDevicesItemsOfTypesComputer::check<>,
     ];
 
     $type_name = $typed[$key] ?? null;

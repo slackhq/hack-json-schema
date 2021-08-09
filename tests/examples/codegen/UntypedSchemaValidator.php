@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<9b56eeba365dbe20f14089dfd10e3b57>>
+ * @generated SignedSource<<5386112b2408967d5cdecac56bc4d40e>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -106,8 +106,8 @@ final class UntypedSchemaValidatorPropertiesAllOf {
     string $pointer,
   ): TUntypedSchemaValidatorPropertiesAllOf {
     $constraints = vec[
-      class_meth(UntypedSchemaValidatorPropertiesAllOfAllOf0::class, 'check'),
-      class_meth(UntypedSchemaValidatorPropertiesAllOfAllOf1::class, 'check'),
+      UntypedSchemaValidatorPropertiesAllOfAllOf0::check<>,
+      UntypedSchemaValidatorPropertiesAllOfAllOf1::check<>,
     ];
 
     $failed_any = false;
@@ -170,8 +170,8 @@ final class UntypedSchemaValidatorPropertiesAnyOf {
     string $pointer,
   ): TUntypedSchemaValidatorPropertiesAnyOf {
     $constraints = vec[
-      class_meth(UntypedSchemaValidatorPropertiesAnyOfAnyOf0::class, 'check'),
-      class_meth(UntypedSchemaValidatorPropertiesAnyOfAnyOf1::class, 'check'),
+      UntypedSchemaValidatorPropertiesAnyOfAnyOf0::check<>,
+      UntypedSchemaValidatorPropertiesAnyOfAnyOf1::check<>,
     ];
     $errors = vec[
     ];
@@ -239,8 +239,8 @@ final class UntypedSchemaValidatorPropertiesAllOfPassThrough {
     string $pointer,
   ): TUntypedSchemaValidatorPropertiesAllOfPassThrough {
     $constraints = vec[
-      class_meth(UntypedSchemaValidatorPropertiesAllOfPassThroughAllOf0::class, 'check'),
-      class_meth(UntypedSchemaValidatorPropertiesAllOfPassThroughAllOf1::class, 'check'),
+      UntypedSchemaValidatorPropertiesAllOfPassThroughAllOf0::check<>,
+      UntypedSchemaValidatorPropertiesAllOfPassThroughAllOf1::check<>,
     ];
 
     $failed_any = false;
@@ -310,8 +310,8 @@ final class UntypedSchemaValidatorPropertiesAllOfPassThroughSecond {
     string $pointer,
   ): TUntypedSchemaValidatorPropertiesAllOfPassThroughSecond {
     $constraints = vec[
-      class_meth(UntypedSchemaValidatorPropertiesAllOfPassThroughSecondAllOf0::class, 'check'),
-      class_meth(UntypedSchemaValidatorPropertiesAllOfPassThroughSecondAllOf1::class, 'check'),
+      UntypedSchemaValidatorPropertiesAllOfPassThroughSecondAllOf0::check<>,
+      UntypedSchemaValidatorPropertiesAllOfPassThroughSecondAllOf1::check<>,
     ];
 
     $failed_any = false;
@@ -418,8 +418,8 @@ final class UntypedSchemaValidatorPropertiesAllOfCoerce {
     string $pointer,
   ): TUntypedSchemaValidatorPropertiesAllOfCoerce {
     $constraints = vec[
-      class_meth(UntypedSchemaValidatorPropertiesAllOfCoerceAllOf0::class, 'check'),
-      class_meth(UntypedSchemaValidatorPropertiesAllOfCoerceAllOf1::class, 'check'),
+      UntypedSchemaValidatorPropertiesAllOfCoerceAllOf0::check<>,
+      UntypedSchemaValidatorPropertiesAllOfCoerceAllOf1::check<>,
     ];
 
     $failed_any = false;
@@ -571,8 +571,8 @@ final class UntypedSchemaValidatorPropertiesAllOfDefault {
     string $pointer,
   ): TUntypedSchemaValidatorPropertiesAllOfDefault {
     $constraints = vec[
-      class_meth(UntypedSchemaValidatorPropertiesAllOfDefaultAllOf0::class, 'check'),
-      class_meth(UntypedSchemaValidatorPropertiesAllOfDefaultAllOf1::class, 'check'),
+      UntypedSchemaValidatorPropertiesAllOfDefaultAllOf0::check<>,
+      UntypedSchemaValidatorPropertiesAllOfDefaultAllOf1::check<>,
     ];
 
     $failed_any = false;
@@ -724,8 +724,8 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWins {
     string $pointer,
   ): TUntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWins {
     $constraints = vec[
-      class_meth(UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf0::class, 'check'),
-      class_meth(UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf1::class, 'check'),
+      UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf0::check<>,
+      UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf1::check<>,
     ];
 
     $failed_any = false;
@@ -971,9 +971,9 @@ final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnum {
 
     $types = dict[
       'first' =>
-        class_meth(UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesFirst::class, 'check'),
+        UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesFirst::check<>,
       'second' =>
-        class_meth(UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesSecond::class, 'check'),
+        UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesSecond::check<>,
     ];
 
     $constraint = $types[$type_name] ?? null;

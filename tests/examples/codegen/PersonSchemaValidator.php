@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<69e5cb53412ae40a0dd69480b9e95303>>
+ * @generated SignedSource<<29a06b2c6c94a2e1969280850f23e6ed>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -117,8 +117,8 @@ final class PersonSchemaValidatorPropertiesStringOrNum {
     string $pointer,
   ): TPersonSchemaValidatorPropertiesStringOrNum {
     $constraints = vec[
-      class_meth(PersonSchemaValidatorPropertiesStringOrNumAnyOf0::class, 'check'),
-      class_meth(PersonSchemaValidatorPropertiesStringOrNumAnyOf1::class, 'check'),
+      PersonSchemaValidatorPropertiesStringOrNumAnyOf0::check<>,
+      PersonSchemaValidatorPropertiesStringOrNumAnyOf1::check<>,
     ];
     $errors = vec[
     ];
@@ -335,8 +335,8 @@ final class PersonSchemaValidatorPropertiesStringAndNumber {
     $output = vec[];
     $errors = vec[];
     $constraints = vec[
-      class_meth(PersonSchemaValidatorItemsPropertiesStringAndNumber0::class, 'check'),
-      class_meth(PersonSchemaValidatorItemsPropertiesStringAndNumber1::class, 'check'),
+      PersonSchemaValidatorItemsPropertiesStringAndNumber0::check<>,
+      PersonSchemaValidatorItemsPropertiesStringAndNumber1::check<>,
     ];
 
     foreach ($typed as $index => $value) {
@@ -655,9 +655,9 @@ final class PersonSchemaValidatorPropertiesDevicesItems {
 
     $types = dict[
       'phone' =>
-        class_meth(PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesPhone::class, 'check'),
+        PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesPhone::check<>,
       'computer' =>
-        class_meth(PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesComputer::class, 'check'),
+        PersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesComputer::check<>,
     ];
 
     $constraint = $types[$type_name] ?? null;

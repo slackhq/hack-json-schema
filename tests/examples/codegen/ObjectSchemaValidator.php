@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<fd534ebd94b67fe23410f2616abaa107>>
+ * @generated SignedSource<<4dc1f7d0a726caf2a6f79d0ee597cb2a>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -420,9 +420,9 @@ final class ObjectSchemaValidatorPropertiesOnlyPatternProperties {
 
     $patterns = dict[
       '^S_' =>
-        class_meth(ObjectSchemaValidatorPropertiesOnlyPatternPropertiesPatternProperties0::class, 'check'),
+        ObjectSchemaValidatorPropertiesOnlyPatternPropertiesPatternProperties0::check<>,
       '^I_' =>
-        class_meth(ObjectSchemaValidatorPropertiesOnlyPatternPropertiesPatternProperties1::class, 'check'),
+        ObjectSchemaValidatorPropertiesOnlyPatternPropertiesPatternProperties1::check<>,
     ];
 
     /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
@@ -490,7 +490,7 @@ final class ObjectSchemaValidatorPropertiesSinglePatternPropertyString {
 
     $patterns = dict[
       '^S_' =>
-        class_meth(ObjectSchemaValidatorPropertiesSinglePatternPropertyStringPatternProperties0::class, 'check'),
+        ObjectSchemaValidatorPropertiesSinglePatternPropertyStringPatternProperties0::check<>,
     ];
 
     /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
@@ -605,7 +605,7 @@ final class ObjectSchemaValidatorPropertiesSinglePatternPropertyObject {
 
     $patterns = dict[
       '^S_' =>
-        class_meth(ObjectSchemaValidatorPropertiesSinglePatternPropertyObjectPatternProperties0::class, 'check'),
+        ObjectSchemaValidatorPropertiesSinglePatternPropertyObjectPatternProperties0::check<>,
     ];
 
     /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
@@ -684,9 +684,9 @@ final class ObjectSchemaValidatorPropertiesPatternPropertiesNoAdditionalProperti
 
     $patterns = dict[
       '^S_' =>
-        class_meth(ObjectSchemaValidatorPropertiesPatternPropertiesNoAdditionalPropertiesPatternProperties0::class, 'check'),
+        ObjectSchemaValidatorPropertiesPatternPropertiesNoAdditionalPropertiesPatternProperties0::check<>,
       '^I_' =>
-        class_meth(ObjectSchemaValidatorPropertiesPatternPropertiesNoAdditionalPropertiesPatternProperties1::class, 'check'),
+        ObjectSchemaValidatorPropertiesPatternPropertiesNoAdditionalPropertiesPatternProperties1::check<>,
     ];
 
     /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
@@ -803,9 +803,9 @@ final class ObjectSchemaValidatorPropertiesPropertiesAndPatternProperties {
 
     $patterns = dict[
       '^S_' =>
-        class_meth(ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesPatternProperties0::class, 'check'),
+        ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesPatternProperties0::check<>,
       '^I_' =>
-        class_meth(ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesPatternProperties1::class, 'check'),
+        ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesPatternProperties1::check<>,
     ];
 
     /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
@@ -910,9 +910,9 @@ final class ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesNoAddit
 
     $patterns = dict[
       '^S_' =>
-        class_meth(ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesNoAdditionalPatternProperties0::class, 'check'),
+        ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesNoAdditionalPatternProperties0::check<>,
       '^I_' =>
-        class_meth(ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesNoAdditionalPatternProperties1::class, 'check'),
+        ObjectSchemaValidatorPropertiesPropertiesAndPatternPropertiesNoAdditionalPatternProperties1::check<>,
     ];
 
     /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/

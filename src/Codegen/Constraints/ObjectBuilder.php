@@ -232,7 +232,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     if ($pattern_properties is nonnull) {
       $pattern_constraints = dict[];
       foreach ($pattern_properties as $pattern => $schema_builder) {
-        $pattern_constraints[$pattern] = "class_meth({$schema_builder->getClassName()}::class, 'check')";
+        $pattern_constraints[$pattern] = "{$schema_builder->getClassName()}::check<>";
       }
 
       $hb

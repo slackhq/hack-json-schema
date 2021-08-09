@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<1bfa039408ec56218d92ea8195a00d66>>
+ * @generated SignedSource<<d09d51631fc44887137258196e936da6>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -125,7 +125,7 @@ final class AnyOfValidator4 extends JsonSchema\BaseValidator<TAnyOfValidator4> {
     }
 
     $constraints = vec[
-      class_meth(AnyOfValidator4AnyOf1::class, 'check'),
+      AnyOfValidator4AnyOf1::check<>,
     ];
     $errors = vec[
     ];
