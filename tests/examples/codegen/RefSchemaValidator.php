@@ -45,7 +45,7 @@ final class RefSchemaValidatorPropertiesNullableUniqueRef {
     }
 
     $constraints = vec[
-      class_meth(ExternalExamplesRefSchemaDefinitionsObject::class, 'check'),
+      ExternalExamplesRefSchemaDefinitionsObject::check<>,
     ];
     $errors = vec[
     ];

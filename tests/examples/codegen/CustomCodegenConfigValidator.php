@@ -117,8 +117,8 @@ final class CustomCodegenConfigValidatorPropertiesStringOrNum {
     string $pointer,
   ): custom_codegen_config_validator_properties_string_or_num_t {
     $constraints = vec[
-      class_meth(CustomCodegenConfigValidatorPropertiesStringOrNumAnyOf0::class, 'check'),
-      class_meth(CustomCodegenConfigValidatorPropertiesStringOrNumAnyOf1::class, 'check'),
+      CustomCodegenConfigValidatorPropertiesStringOrNumAnyOf0::check<>,
+      CustomCodegenConfigValidatorPropertiesStringOrNumAnyOf1::check<>,
     ];
     $errors = vec[
     ];
@@ -335,8 +335,8 @@ final class CustomCodegenConfigValidatorPropertiesStringAndNumber {
     $output = vec[];
     $errors = vec[];
     $constraints = vec[
-      class_meth(CustomCodegenConfigValidatorItemsPropertiesStringAndNumber0::class, 'check'),
-      class_meth(CustomCodegenConfigValidatorItemsPropertiesStringAndNumber1::class, 'check'),
+      CustomCodegenConfigValidatorItemsPropertiesStringAndNumber0::check<>,
+      CustomCodegenConfigValidatorItemsPropertiesStringAndNumber1::check<>,
     ];
 
     foreach ($typed as $index => $value) {
@@ -655,9 +655,9 @@ final class CustomCodegenConfigValidatorPropertiesDevicesItems {
 
     $types = dict[
       'phone' =>
-        class_meth(CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesPhone::class, 'check'),
+        CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesPhone::check<>,
       'computer' =>
-        class_meth(CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesComputer::class, 'check'),
+        CustomCodegenConfigValidatorPropertiesDevicesItemsAnyOfTypesComputer::check<>,
     ];
 
     $constraint = $types[$type_name] ?? null;

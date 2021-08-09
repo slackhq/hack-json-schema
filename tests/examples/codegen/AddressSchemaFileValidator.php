@@ -316,8 +316,8 @@ final class AddressSchemaFileValidatorPropertiesPostalCode {
     string $pointer,
   ): TAddressSchemaFileValidatorPropertiesPostalCode {
     $constraints = vec[
-      class_meth(AddressSchemaFileValidatorPropertiesPostalCodeAnyOf0::class, 'check'),
-      class_meth(AddressSchemaFileValidatorPropertiesPostalCodeAnyOf1::class, 'check'),
+      AddressSchemaFileValidatorPropertiesPostalCodeAnyOf0::check<>,
+      AddressSchemaFileValidatorPropertiesPostalCodeAnyOf1::check<>,
     ];
     $errors = vec[
     ];

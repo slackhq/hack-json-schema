@@ -125,7 +125,7 @@ final class AnyOfValidator4 extends JsonSchema\BaseValidator<TAnyOfValidator4> {
     }
 
     $constraints = vec[
-      class_meth(AnyOfValidator4AnyOf1::class, 'check'),
+      AnyOfValidator4AnyOf1::check<>,
     ];
     $errors = vec[
     ];

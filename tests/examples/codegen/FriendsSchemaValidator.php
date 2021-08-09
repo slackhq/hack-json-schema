@@ -225,8 +225,8 @@ final class FriendsSchemaValidatorItemsPropertiesRating {
     $output = vec[];
     $errors = vec[];
     $constraints = vec[
-      class_meth(FriendsSchemaValidatorItemsItemsPropertiesRating0::class, 'check'),
-      class_meth(FriendsSchemaValidatorItemsItemsPropertiesRating1::class, 'check'),
+      FriendsSchemaValidatorItemsItemsPropertiesRating0::check<>,
+      FriendsSchemaValidatorItemsItemsPropertiesRating1::check<>,
     ];
 
     foreach ($typed as $index => $value) {
@@ -290,8 +290,8 @@ final class FriendsSchemaValidatorItemsPropertiesContact {
     $output = vec[];
     $errors = vec[];
     $constraints = vec[
-      class_meth(FriendsSchemaValidatorItemsItemsPropertiesContact0::class, 'check'),
-      class_meth(FriendsSchemaValidatorItemsItemsPropertiesContact1::class, 'check'),
+      FriendsSchemaValidatorItemsItemsPropertiesContact0::check<>,
+      FriendsSchemaValidatorItemsItemsPropertiesContact1::check<>,
     ];
 
     foreach ($typed as $index => $value) {

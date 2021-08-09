@@ -237,8 +237,8 @@ final class AddressSchemaValidatorPropertiesPostalCode {
     string $pointer,
   ): TAddressSchemaValidatorPropertiesPostalCode {
     $constraints = vec[
-      class_meth(AddressSchemaValidatorPropertiesPostalCodeAnyOf0::class, 'check'),
-      class_meth(AddressSchemaValidatorPropertiesPostalCodeAnyOf1::class, 'check'),
+      AddressSchemaValidatorPropertiesPostalCodeAnyOf0::check<>,
+      AddressSchemaValidatorPropertiesPostalCodeAnyOf1::check<>,
     ];
     $errors = vec[
     ];
@@ -296,8 +296,8 @@ final class AddressSchemaValidatorPropertiesSize {
     string $pointer,
   ): TAddressSchemaValidatorPropertiesSize {
     $constraints = vec[
-      class_meth(AddressSchemaValidatorPropertiesSizeAllOf0::class, 'check'),
-      class_meth(AddressSchemaValidatorPropertiesSizeAllOf1::class, 'check'),
+      AddressSchemaValidatorPropertiesSizeAllOf0::check<>,
+      AddressSchemaValidatorPropertiesSizeAllOf1::check<>,
     ];
 
     $failed_any = false;
@@ -360,8 +360,8 @@ final class AddressSchemaValidatorPropertiesLongitude {
     string $pointer,
   ): TAddressSchemaValidatorPropertiesLongitude {
     $constraints = vec[
-      class_meth(AddressSchemaValidatorPropertiesLongitudeNot0::class, 'check'),
-      class_meth(AddressSchemaValidatorPropertiesLongitudeNot1::class, 'check'),
+      AddressSchemaValidatorPropertiesLongitudeNot0::check<>,
+      AddressSchemaValidatorPropertiesLongitudeNot1::check<>,
     ];
 
     $passed_any = false;
@@ -419,8 +419,8 @@ final class AddressSchemaValidatorPropertiesLatitude {
     string $pointer,
   ): TAddressSchemaValidatorPropertiesLatitude {
     $constraints = vec[
-      class_meth(AddressSchemaValidatorPropertiesLatitudeOneOf0::class, 'check'),
-      class_meth(AddressSchemaValidatorPropertiesLatitudeOneOf1::class, 'check'),
+      AddressSchemaValidatorPropertiesLatitudeOneOf0::check<>,
+      AddressSchemaValidatorPropertiesLatitudeOneOf1::check<>,
     ];
 
     $passed_any = false;

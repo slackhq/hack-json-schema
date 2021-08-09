@@ -199,7 +199,7 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
       );
       $schema_builder->build();
 
-      $constraints[] = "class_meth({$schema_builder->getClassName()}::class, 'check')";
+      $constraints[] = "{$schema_builder->getClassName()}::check<>";
     }
 
     $hb
