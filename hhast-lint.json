@@ -3,6 +3,8 @@
   "builtinLinters": "all",
   "extraLinters": ["Facebook\\HHAST\\Linters\\PreferLambdasLinter"],
   "disabledLinters": [
+    "Facebook\\HHAST\\Linters\\DontHaveTwoEmptyLinesInARowLinter",
+    "Facebook\\HHAST\\Linters\\NoNewlineAtStartOfControlFlowBlockLinter",
     "Facebook\\HHAST\\Linters\\LicenseHeaderLinter",
     "Facebook\\HHAST\\Linters\\NoStringInterpolationLinter",
     "Facebook\\HHAST\\Linters\\NoPHPEqualityLinter",
