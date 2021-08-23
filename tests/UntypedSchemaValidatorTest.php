@@ -28,8 +28,8 @@ final class UntypedSchemaValidatorTest extends BaseCodegenTestCase {
       'UntypedSchemaValidator',
       shape(
         'sanitize_string' => shape(
-          'uniline' => fun('\Slack\Hack\JsonSchema\Tests\_untyped_schema_validator_test_uniline'),
-          'multiline' => fun('\Slack\Hack\JsonSchema\Tests\_untyped_schema_validator_test_multiline'),
+          'uniline' => _untyped_schema_validator_test_uniline<>,
+          'multiline' => _untyped_schema_validator_test_multiline<>,
         ),
       ),
     );

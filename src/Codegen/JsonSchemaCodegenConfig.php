@@ -12,14 +12,14 @@ final class JsonSchemaCodegenConfig implements IJsonSchemaCodegenConfig {
   }
 
   public function getClassNameFormatFunction(): (function(string...): string) {
-    return fun('\Slack\Hack\JsonSchema\Codegen\format');
+    return format<>;
   }
 
   public function getTypeNameFormatFunction(): (function(string...): string) {
-    return fun('\Slack\Hack\JsonSchema\Codegen\format');
+    return format<>;
   }
 
   public function getFileNameFormatFunction(): (function(string...): string) {
-    return fun('\Slack\Hack\JsonSchema\Codegen\format');
+    return format<>;
   }
 }

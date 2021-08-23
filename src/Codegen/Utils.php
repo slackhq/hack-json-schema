@@ -27,7 +27,7 @@ function sanitize(string $input): string {
 }
 
 function format(string ...$parts): string {
-  return Vec\map($parts, fun('\Slack\Hack\JsonSchema\Codegen\sanitize'))
+  return Vec\map($parts, sanitize<>)
     |> Str\join($$, '');
 }
 

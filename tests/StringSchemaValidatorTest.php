@@ -26,8 +26,8 @@ final class StringSchemaValidatorTest extends BaseCodegenTestCase {
       'StringSchemaValidator',
       shape(
         'sanitize_string' => shape(
-          'uniline' => fun('\Slack\Hack\JsonSchema\Tests\_string_schema_validator_test_uniline'),
-          'multiline' => fun('\Slack\Hack\JsonSchema\Tests\_string_schema_validator_test_multiline'),
+          'uniline' => _string_schema_validator_test_uniline<>,
+          'multiline' => _string_schema_validator_test_multiline<>,
         ),
       ),
     );
