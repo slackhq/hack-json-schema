@@ -66,6 +66,7 @@ abstract class BaseCodegenTestCase extends HackTest {
       ?'json_schema_codegen_config' => IJsonSchemaCodegenConfig,
       ?'refs' => Codegen::TValidatorRefsConfig,
       ?'defaults' => Codegen::TValidatorDefaultsConfig,
+      ?'discard_additional_properties' => bool,
     ) $options = shape(),
   ): shape(
     'path' => string,
@@ -77,6 +78,10 @@ abstract class BaseCodegenTestCase extends HackTest {
       'file' => $path,
       'class' => $name,
     );
+
+    if (Shapes::keyExists($options, 'discard_additional_properties')) {
+      $validator_config['discard_additional_properties'] = $options['discard_additional_properties'];
+    }
 
     $defaults = $options['defaults'] ?? null;
     if ($defaults is nonnull) {
@@ -122,7 +127,7 @@ abstract class BaseCodegenTestCase extends HackTest {
     }
 
     $average = Math\sum($benchmarks) / C\count($benchmarks);
-    \print_r("{$label} took: {$average}\n");
+    echo Str\format("%s took: %s\n", $label, (string)$average);
   }
 
   public static function microtimeMs(): int {

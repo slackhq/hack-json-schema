@@ -19,7 +19,7 @@ class UniqueRefBuilder implements IBuilder {
     $this->classname = '';
     $this->filename = '';
 
-    $refs_root = $this->ctx->getRefsRootDirectory();
+    $refs_root = $this->ctx->getRefsRootDirectory() ?? '';
     $ref_file_path = $this->ctx->getCurrentRefFileName();
     if (Str\is_empty($ref_file_path)) {
       $ref_file_path = $this->getRefFilePath($this->ref);

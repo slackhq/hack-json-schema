@@ -3,6 +3,7 @@
 namespace Slack\Hack\JsonSchema\Tests;
 
 use function Facebook\FBExpect\expect;
+use namespace HH\Lib\Str;
 
 use type Slack\Hack\JsonSchema\Tests\Generated\BooleanSchemaValidator;
 
@@ -65,14 +66,14 @@ final class BooleanSchemaValidatorTest extends BaseCodegenTestCase {
       ]);
       $validator->validate();
 
-      expect($validator->isValid())->toBeTrue("should be valid for input: '{$case['input']}'");
+      expect($validator->isValid())->toBeTrue(Str\format("should be valid for input: '%s'", (string)$case['input']));
 
       $validated = $validator->getValidatedInput();
       expect($validated)->toNotBeNull('should be valid');
 
       expect($validated['coerce'] ?? null)->toBeSame(
         $case['output'],
-        "should equal output for input: '{$case['input']}'",
+        Str\format('should equal output for input: %s', (string)$case['input']),
       );
     }
 
