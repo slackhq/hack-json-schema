@@ -158,6 +158,24 @@
       "additionalProperties": {
         "$ref": "#/properties/additional_properties_array"
       }
+    },
+    "only_min_properties": {
+      "type": "object",
+      "minProperties": 1
+    },
+    "only_max_properties": {
+      "type": "object",
+      "maxProperties": 1
+    },
+    "min_and_max_properties": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 2 
+    },
+    "invalid_min_properties_with_no_additional_properties": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false
     }
   }
 }
