@@ -164,7 +164,6 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
         HackBuilderValues::literal(),
       );
 
-
     # Check for the simplest case where we just want to return the resulting dictionary
     if ($properties === null && $pattern_properties === null && $allow_any_additional_properties) {
       $hb->addReturn('$typed', HackBuilderValues::literal());
@@ -327,8 +326,9 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     # `properties` key will be run through that JSON schema. These values will
     # also be included in the output and will be typed to the specific schema.
     #
-    # If the 'ignore_aditional_properties' validator configuration is set to true, we
-    # will just ignore the additional values instead of throwing validation errors.
+    # If the 'discard_aditional_properties' validator configuration is set to
+    # true, we will just ignore and discard the additional values instead of
+    # throwing a validation error.
     #
 
     if (
