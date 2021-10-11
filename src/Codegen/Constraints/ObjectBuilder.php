@@ -143,12 +143,15 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
       $additional_properties;
     $discard_additional_properties = $additional_properties === false && $this->ctx->shouldIgnoreAdditionalProperties();
 
-    # Check if we need to discard everything
-    if (
-      $discard_additional_properties &&
+    $discard_all = $discard_additional_properties &&
       ($properties is null || C\count($properties) == 0) &&
-      $pattern_properties is null
-    ) {
+      $pattern_properties is null;
+
+    # Check if we need to discard everything
+    if ($discard_all) {
+      $hb->addInlineComment('Hack to prevent us from having to change the params names when we are not using them.');
+      $hb->addAssignment('$_', '$input', HackBuilderValues::literal());
+      $hb->addAssignment('$_', '$pointer', HackBuilderValues::literal());
       $hb->addReturn('dict[]', HackBuilderValues::literal());
 
       return $hb;
@@ -160,6 +163,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
         'Constraints\ObjectConstraint::check($input, $pointer, self::$coerce)',
         HackBuilderValues::literal(),
       );
+
 
     # Check for the simplest case where we just want to return the resulting dictionary
     if ($properties === null && $pattern_properties === null && $allow_any_additional_properties) {

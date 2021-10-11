@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<d9856903c0896b7cbb058041ac821568>>
+ * @generated SignedSource<<79c457344a7c80630eb3e29d65e7c000>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -131,6 +131,10 @@ final class DiscardAddititionalPropertiesValidatorPropertiesOnlyNoAdditionalProp
     mixed $input,
     string $pointer,
   ): TDiscardAddititionalPropertiesValidatorPropertiesOnlyNoAdditionalProperties {
+    // Hack to prevent us from having to change the params names when we are not
+    // using them.
+    $_ = $input;
+    $_ = $pointer;
     return dict[];
   }
 }
