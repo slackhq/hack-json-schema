@@ -141,7 +141,8 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     $allow_any_additional_properties = $additional_properties is nonnull &&
       $is_additional_properties_boolean &&
       $additional_properties;
-    $discard_additional_properties = $additional_properties === false && $this->ctx->shouldIgnoreAdditionalProperties();
+    $discard_additional_properties = $additional_properties === false &&
+      $this->ctx->shouldDiscardAdditionalProperties();
 
     $discard_all = $discard_additional_properties &&
       ($properties is null || C\count($properties) == 0) &&

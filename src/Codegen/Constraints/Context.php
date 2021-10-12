@@ -131,7 +131,7 @@ final class Context {
     return C\contains($this->seen_refs, $ref);
   }
 
-  public function shouldIgnoreAdditionalProperties(): bool {
+  public function shouldDiscardAdditionalProperties(): bool {
     return $this->validatorConfig['discard_additional_properties'] ?? false;
   }
 }
