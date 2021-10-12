@@ -15,6 +15,8 @@ enum FieldErrorConstraint: string {
   MAX_ITEMS = 'max_items';
   MAX_LENGTH = 'max_length';
   MIN_LENGTH = 'min_length';
+  MAX_PROPERTIES = 'max_properties';
+  MIN_PROPERTIES = 'min_properties';
   MAXIMUM = 'maximum';
   MINIMUM = 'minimum';
   MULTIPLE_OF = 'multiple_of';

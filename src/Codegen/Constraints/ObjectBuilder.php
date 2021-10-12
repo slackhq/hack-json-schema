@@ -20,6 +20,8 @@ type TObjectSchema = shape(
   ?'additionalProperties' => mixed,
   ?'patternProperties' => dict<string, TSchema>,
   ?'coerce' => bool,
+  ?'minProperties' => int,
+  ?'maxProperties' => int,
   ...
 );
 
@@ -72,6 +74,34 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
       $class_properties[] = $this->codegenProperty('properties')
         ->setType('keyset<string>')
         ->setValue($hb->getCode(), HackBuilderValues::literal());
+    }
+
+    $max_properties = $this->typed_schema['maxProperties'] ?? null;
+    if ($max_properties is nonnull) {
+      if ($max_properties < 0) {
+        throw new \Exception('maxProperties must be a non-negative integer');
+      }
+
+      $class_properties[] = $this->codegenProperty('maxProperties')
+        ->setType('int')
+        ->setValue($max_properties, HackBuilderValues::export());
+    }
+
+    $min_properties = $this->typed_schema['minProperties'] ?? null;
+    if ($min_properties is nonnull) {
+      if ($min_properties < 0) {
+        throw new \Exception('minProperties must be a non-negative integer');
+      }
+
+      $class_properties[] = $this->codegenProperty('minProperties')
+        ->setType('int')
+        ->setValue($min_properties, HackBuilderValues::export());
+    }
+
+    if ($min_properties is nonnull && $max_properties is nonnull) {
+      if ($min_properties > $max_properties) {
+        throw new \Exception('maxProperties must be greater than minProperties');
+      }
     }
 
     $class->addProperties($class_properties);
@@ -130,6 +160,29 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
       $include_error_handling = true;
     } else if ($additional_properties is nonnull && (!$is_additional_properties_boolean || !$additional_properties)) {
       $include_error_handling = true;
+    }
+
+    $max_properties = $this->typed_schema['maxProperties'] ?? null;
+    $min_properties = $this->typed_schema['minProperties'] ?? null;
+
+    if ($max_properties is nonnull || $min_properties is nonnull) {
+      $hb->addAssignment('$length', '\HH\Lib\C\count($typed)', HackBuilderValues::literal())->ensureEmptyLine();
+    }
+
+    if ($max_properties is nonnull) {
+      $hb->addMultilineCall(
+        'Constraints\ObjectMaxPropertiesConstraint::check',
+        vec['$length', 'self::$maxProperties', '$pointer'],
+      )
+        ->ensureEmptyLine();
+    }
+
+    if ($min_properties is nonnull) {
+      $hb->addMultilineCall(
+        'Constraints\ObjectMinPropertiesConstraint::check',
+        vec['$length', 'self::$minProperties', '$pointer'],
+      )
+        ->ensureEmptyLine();
     }
 
     $defaults = $this->getDefaults();

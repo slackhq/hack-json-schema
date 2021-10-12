@@ -7,6 +7,7 @@ use namespace Slack\Hack\JsonSchema;
 use namespace Facebook\TypeAssert;
 use function Facebook\FBExpect\expect;
 
+use type Slack\Hack\JsonSchema\{FieldErrorCode, FieldErrorConstraint};
 use type Slack\Hack\JsonSchema\Tests\Generated\ObjectSchemaValidator;
 
 final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
@@ -528,6 +529,167 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
     $validator = new ObjectSchemaValidator($input);
     $validator->validate();
     expect($validator->isValid())->toBeFalse();
+  }
+
+  public function testMinPropertiesWithValidLength(): void {
+    $validator = new ObjectSchemaValidator(dict[
+      'only_min_properties' => dict[
+        'a' => 0,
+      ],
+    ]);
+
+    $validator->validate();
+    expect($validator->isValid())->toBeTrue();
+  }
+
+  public function testMinPropertiesWithInvalidLength(): void {
+    $validator = new ObjectSchemaValidator(dict[
+      'only_min_properties' => dict[],
+    ]);
+
+    $validator->validate();
+    expect($validator->isValid())->toBeFalse();
+
+    $errors = $validator->getErrors();
+    expect(C\count($errors))->toEqual(1);
+
+    $error = C\firstx($errors);
+    expect($error['code'])->toEqual(FieldErrorCode::FAILED_CONSTRAINT);
+    expect($error['message'])->toEqual('must have minimum 1 properties');
+
+    $constraint = Shapes::at($error, 'constraint');
+    expect($constraint['type'])->toEqual(FieldErrorConstraint::MIN_PROPERTIES);
+    expect($constraint['got'] ?? null)->toEqual(0);
+  }
+
+  public function testMaxPropertiesWithValidLength(): void {
+    // maxProperties is set to 1, so having 1 value should be fine
+    $validator = new ObjectSchemaValidator(dict[
+      'only_max_properties' => dict[
+        'a' => 0,
+      ],
+    ]);
+
+    $validator->validate();
+    expect($validator->isValid())->toBeTrue();
+
+    // maxProperties is set to 1, so having no values should also be fine
+    $validator = new ObjectSchemaValidator(dict[
+      'only_max_properties' => dict[],
+    ]);
+
+    $validator->validate();
+    expect($validator->isValid())->toBeTrue();
+  }
+
+  public function testMaxPropertiesWithInvalidLength(): void {
+    $validator = new ObjectSchemaValidator(dict[
+      'only_max_properties' => dict[
+        'a' => 0,
+        'b' => 1,
+      ],
+    ]);
+
+    $validator->validate();
+    expect($validator->isValid())->toBeFalse();
+
+    $errors = $validator->getErrors();
+    expect(C\count($errors))->toEqual(1);
+
+    $error = C\firstx($errors);
+    expect($error['code'])->toEqual(FieldErrorCode::FAILED_CONSTRAINT);
+    expect($error['message'])->toEqual('no more than 1 properties allowed');
+
+    $constraint = Shapes::at($error, 'constraint');
+    expect($constraint['type'])->toEqual(FieldErrorConstraint::MAX_PROPERTIES);
+    expect($constraint['got'] ?? null)->toEqual(2);
+  }
+
+  public function testMinAndMaxPropertiesWithValidLength(): void {
+    $validator = new ObjectSchemaValidator(dict[
+      'min_and_max_properties' => dict[
+        'a' => 0,
+      ],
+    ]);
+
+    $validator->validate();
+    expect($validator->isValid())->toBeTrue();
+
+    $validator = new ObjectSchemaValidator(dict[
+      'min_and_max_properties' => dict[
+        'a' => 0,
+        'b' => 1,
+      ],
+    ]);
+
+    $validator->validate();
+    expect($validator->isValid())->toBeTrue();
+  }
+
+  public function testMinAndMaxPropertiesWithInvalidLength(): void {
+    // minProperties is set to 1, violate it
+    $validator = new ObjectSchemaValidator(dict[
+      'min_and_max_properties' => dict[],
+    ]);
+
+    $validator->validate();
+    expect($validator->isValid())->toBeFalse();
+
+    $errors = $validator->getErrors();
+    expect(C\count($errors))->toEqual(1);
+
+    $error = C\firstx($errors);
+    expect($error['code'])->toEqual(FieldErrorCode::FAILED_CONSTRAINT);
+    expect($error['message'])->toEqual('must have minimum 1 properties');
+
+    $constraint = Shapes::at($error, 'constraint');
+    expect($constraint['type'])->toEqual(FieldErrorConstraint::MIN_PROPERTIES);
+    expect($constraint['got'] ?? null)->toEqual(0);
+
+    // maxProperties is set to 2, violate it
+    $validator = new ObjectSchemaValidator(dict[
+      'min_and_max_properties' => dict[
+        'a' => 0,
+        'b' => 1,
+        'c' => 2,
+      ],
+    ]);
+
+    $validator->validate();
+    expect($validator->isValid())->toBeFalse();
+
+    $errors = $validator->getErrors();
+    expect(C\count($errors))->toEqual(1);
+
+    $error = C\firstx($errors);
+    expect($error['code'])->toEqual(FieldErrorCode::FAILED_CONSTRAINT);
+    expect($error['message'])->toEqual('no more than 2 properties allowed');
+
+    $constraint = Shapes::at($error, 'constraint');
+    expect($constraint['type'])->toEqual(FieldErrorConstraint::MAX_PROPERTIES);
+    expect($constraint['got'] ?? null)->toEqual(3);
+  }
+
+  public function testInvalidMinPropertiesWithNoAdditionalProperties(): void {
+    $validator = new ObjectSchemaValidator(dict[
+      'invalid_min_properties_with_no_additional_properties' => dict[
+        'a' => 0,
+      ],
+    ]);
+
+    $validator->validate();
+    expect($validator->isValid())->toBeFalse();
+
+    $errors = $validator->getErrors();
+    expect(C\count($errors))->toEqual(1);
+
+    $error = C\firstx($errors);
+    expect($error['code'])->toEqual(FieldErrorCode::FAILED_CONSTRAINT);
+    expect($error['message'])->toEqual('invalid additional property: a');
+
+    $constraint = Shapes::at($error, 'constraint');
+    expect($constraint['type'])->toEqual(FieldErrorConstraint::ADDITIONAL_PROPERTIES);
+    expect($constraint['got'] ?? null)->toEqual('a');
   }
 
 }

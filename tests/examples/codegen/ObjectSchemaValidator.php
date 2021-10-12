@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<4dc1f7d0a726caf2a6f79d0ee597cb2a>>
+ * @generated SignedSource<<7fa7d1f5ae7e84bf34ab173568728f05>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -89,6 +89,14 @@ type TObjectSchemaValidatorPropertiesAdditionalPropertiesRefAdditionalProperties
 
 type TObjectSchemaValidatorPropertiesAdditionalPropertiesRef = dict<string, mixed>;
 
+type TObjectSchemaValidatorPropertiesOnlyMinProperties = dict<string, mixed>;
+
+type TObjectSchemaValidatorPropertiesOnlyMaxProperties = dict<string, mixed>;
+
+type TObjectSchemaValidatorPropertiesMinAndMaxProperties = dict<string, mixed>;
+
+type TObjectSchemaValidatorPropertiesInvalidMinPropertiesWithNoAdditionalProperties = dict<string, mixed>;
+
 type TObjectSchemaValidator = shape(
   ?'only_additional_properties' => TObjectSchemaValidatorPropertiesOnlyAdditionalProperties,
   ?'only_no_additional_properties' => TObjectSchemaValidatorPropertiesOnlyNoAdditionalProperties,
@@ -107,6 +115,10 @@ type TObjectSchemaValidator = shape(
   ?'no_additional_properties' => TObjectSchemaValidatorPropertiesNoAdditionalProperties,
   ?'additional_properties_array' => TObjectSchemaValidatorPropertiesAdditionalPropertiesArray,
   ?'additional_properties_ref' => TObjectSchemaValidatorPropertiesAdditionalPropertiesRef,
+  ?'only_min_properties' => TObjectSchemaValidatorPropertiesOnlyMinProperties,
+  ?'only_max_properties' => TObjectSchemaValidatorPropertiesOnlyMaxProperties,
+  ?'min_and_max_properties' => TObjectSchemaValidatorPropertiesMinAndMaxProperties,
+  ?'invalid_min_properties_with_no_additional_properties' => TObjectSchemaValidatorPropertiesInvalidMinPropertiesWithNoAdditionalProperties,
   ...
 );
 
@@ -1508,6 +1520,134 @@ final class ObjectSchemaValidatorPropertiesAdditionalPropertiesRef {
   }
 }
 
+final class ObjectSchemaValidatorPropertiesOnlyMinProperties {
+
+  private static bool $coerce = false;
+  private static int $minProperties = 1;
+
+  public static function check(
+    mixed $input,
+    string $pointer,
+  ): TObjectSchemaValidatorPropertiesOnlyMinProperties {
+    $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
+    $length = \HH\Lib\C\count($typed);
+
+    Constraints\ObjectMinPropertiesConstraint::check(
+      $length,
+      self::$minProperties,
+      $pointer,
+    );
+
+
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some functions generated with this statement do not use their $output, they use their $typed instead*/
+    $output = dict[];
+
+    return $typed;
+  }
+}
+
+final class ObjectSchemaValidatorPropertiesOnlyMaxProperties {
+
+  private static bool $coerce = false;
+  private static int $maxProperties = 1;
+
+  public static function check(
+    mixed $input,
+    string $pointer,
+  ): TObjectSchemaValidatorPropertiesOnlyMaxProperties {
+    $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
+    $length = \HH\Lib\C\count($typed);
+
+    Constraints\ObjectMaxPropertiesConstraint::check(
+      $length,
+      self::$maxProperties,
+      $pointer,
+    );
+
+
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some functions generated with this statement do not use their $output, they use their $typed instead*/
+    $output = dict[];
+
+    return $typed;
+  }
+}
+
+final class ObjectSchemaValidatorPropertiesMinAndMaxProperties {
+
+  private static bool $coerce = false;
+  private static int $maxProperties = 2;
+  private static int $minProperties = 1;
+
+  public static function check(
+    mixed $input,
+    string $pointer,
+  ): TObjectSchemaValidatorPropertiesMinAndMaxProperties {
+    $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
+    $length = \HH\Lib\C\count($typed);
+
+    Constraints\ObjectMaxPropertiesConstraint::check(
+      $length,
+      self::$maxProperties,
+      $pointer,
+    );
+
+    Constraints\ObjectMinPropertiesConstraint::check(
+      $length,
+      self::$minProperties,
+      $pointer,
+    );
+
+
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some functions generated with this statement do not use their $output, they use their $typed instead*/
+    $output = dict[];
+
+    return $typed;
+  }
+}
+
+final class ObjectSchemaValidatorPropertiesInvalidMinPropertiesWithNoAdditionalProperties {
+
+  private static bool $coerce = false;
+  private static int $minProperties = 1;
+
+  public static function check(
+    mixed $input,
+    string $pointer,
+  ): TObjectSchemaValidatorPropertiesInvalidMinPropertiesWithNoAdditionalProperties {
+    $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
+    $length = \HH\Lib\C\count($typed);
+
+    Constraints\ObjectMinPropertiesConstraint::check(
+      $length,
+      self::$minProperties,
+      $pointer,
+    );
+
+
+    $errors = vec[];
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some functions generated with this statement do not use their $output, they use their $typed instead*/
+    $output = dict[];
+
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
+    foreach ($typed as $key => $value) {
+      $errors[] = shape(
+        'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
+        'message' => "invalid additional property: {$key}",
+        'constraint' => shape(
+          'type' => JsonSchema\FieldErrorConstraint::ADDITIONAL_PROPERTIES,
+          'got' => $key,
+        ),
+      );
+    }
+
+    if (\HH\Lib\C\count($errors)) {
+      throw new JsonSchema\InvalidFieldException($pointer, $errors);
+    }
+
+    return $output;
+  }
+}
+
 final class ObjectSchemaValidator
   extends JsonSchema\BaseValidator<TObjectSchemaValidator> {
 
@@ -1709,6 +1849,50 @@ final class ObjectSchemaValidator
         $output['additional_properties_ref'] = ObjectSchemaValidatorPropertiesAdditionalPropertiesRef::check(
           $typed['additional_properties_ref'],
           JsonSchema\get_pointer($pointer, 'additional_properties_ref'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'only_min_properties')) {
+      try {
+        $output['only_min_properties'] = ObjectSchemaValidatorPropertiesOnlyMinProperties::check(
+          $typed['only_min_properties'],
+          JsonSchema\get_pointer($pointer, 'only_min_properties'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'only_max_properties')) {
+      try {
+        $output['only_max_properties'] = ObjectSchemaValidatorPropertiesOnlyMaxProperties::check(
+          $typed['only_max_properties'],
+          JsonSchema\get_pointer($pointer, 'only_max_properties'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'min_and_max_properties')) {
+      try {
+        $output['min_and_max_properties'] = ObjectSchemaValidatorPropertiesMinAndMaxProperties::check(
+          $typed['min_and_max_properties'],
+          JsonSchema\get_pointer($pointer, 'min_and_max_properties'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'invalid_min_properties_with_no_additional_properties')) {
+      try {
+        $output['invalid_min_properties_with_no_additional_properties'] = ObjectSchemaValidatorPropertiesInvalidMinPropertiesWithNoAdditionalProperties::check(
+          $typed['invalid_min_properties_with_no_additional_properties'],
+          JsonSchema\get_pointer($pointer, 'invalid_min_properties_with_no_additional_properties'),
         );
       } catch (JsonSchema\InvalidFieldException $e) {
         $errors = \HH\Lib\Vec\concat($errors, $e->errors);
