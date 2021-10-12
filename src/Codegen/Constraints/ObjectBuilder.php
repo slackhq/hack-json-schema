@@ -78,6 +78,10 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
 
     $max_properties = $this->typed_schema['maxProperties'] ?? null;
     if ($max_properties is nonnull) {
+      if ($max_properties < 0) {
+        throw new \Exception('maxProperties must be a non-negative integer');
+      }
+
       $class_properties[] = $this->codegenProperty('maxProperties')
         ->setType('int')
         ->setValue($max_properties, HackBuilderValues::export());
@@ -85,9 +89,19 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
 
     $min_properties = $this->typed_schema['minProperties'] ?? null;
     if ($min_properties is nonnull) {
+      if ($min_properties < 0) {
+        throw new \Exception('minProperties must be a non-negative integer');
+      }
+
       $class_properties[] = $this->codegenProperty('minProperties')
         ->setType('int')
         ->setValue($min_properties, HackBuilderValues::export());
+    }
+
+    if ($min_properties is nonnull && $max_properties is nonnull) {
+      if ($min_properties > $max_properties) {
+        throw new \Exception('maxProperties must be greater than minProperties');
+      }
     }
 
     $class->addProperties($class_properties);
