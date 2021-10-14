@@ -130,4 +130,8 @@ final class Context {
   public function hasSeenRef(string $ref): bool {
     return C\contains($this->seen_refs, $ref);
   }
+
+  public function shouldDiscardAdditionalProperties(): bool {
+    return $this->validatorConfig['discard_additional_properties'] ?? false;
+  }
 }

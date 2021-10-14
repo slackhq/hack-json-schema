@@ -141,6 +141,22 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     $allow_any_additional_properties = $additional_properties is nonnull &&
       $is_additional_properties_boolean &&
       $additional_properties;
+    $discard_additional_properties = $additional_properties === false &&
+      $this->ctx->shouldDiscardAdditionalProperties();
+
+    $discard_all = $discard_additional_properties &&
+      ($properties is null || C\count($properties) == 0) &&
+      $pattern_properties is null;
+
+    # Check if we need to discard everything
+    if ($discard_all) {
+      $hb->addInlineComment('Hack to prevent us from having to change the params names when we are not using them.');
+      $hb->addAssignment('$_', '$input', HackBuilderValues::literal());
+      $hb->addAssignment('$_', '$pointer', HackBuilderValues::literal());
+      $hb->addReturn('dict[]', HackBuilderValues::literal());
+
+      return $hb;
+    }
 
     $hb
       ->addAssignment(
@@ -311,8 +327,15 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     # `properties` key will be run through that JSON schema. These values will
     # also be included in the output and will be typed to the specific schema.
     #
+    # If the 'discard_aditional_properties' validator configuration is set to
+    # true, we will just ignore and discard the additional values instead of
+    # throwing a validation error.
+    #
 
-    if (($additional_properties is nonnull && !$allow_any_additional_properties) || $pattern_properties is nonnull) {
+    if (
+      ($additional_properties is nonnull && !$allow_any_additional_properties && !$discard_additional_properties) ||
+      $pattern_properties is nonnull
+    ) {
       $hb
         ->addLine(
           '/*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/',

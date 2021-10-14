@@ -2,7 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Constraints;
 
-use namespace HH\Lib\Math;
+use namespace HH\Lib\{Math, Str};
 use namespace Slack\Hack\JsonSchema;
 
 // Because comparing floating point numbers using `===` will have undesierable results,
@@ -28,7 +28,7 @@ class NumberMultipleOfConstraint {
         'expected' => $devisor,
         'got' => $dividend,
       ),
-      'message' => "must be a multiple of {$devisor}",
+      'message' => Str\format('must be a multiple of %s', (string)$devisor),
     );
 
     if ($remainer is int && $remainer !== 0) {

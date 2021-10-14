@@ -1,5 +1,6 @@
 <?hh // strict
 
+use namespace HH\Lib\Str;
 namespace Slack\Hack\JsonSchema\Constraints;
 
 use namespace Slack\Hack\JsonSchema;
@@ -14,7 +15,7 @@ class NumberMinimumConstraint {
           'expected' => $minimum,
           'got' => $input,
         ),
-        'message' => "must be greater than {$minimum}",
+        'message' => Str\format('must be greater than %s', (string)$minimum),
       );
       throw new JsonSchema\InvalidFieldException($pointer, vec[$error]);
 

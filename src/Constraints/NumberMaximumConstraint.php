@@ -1,5 +1,6 @@
 <?hh // strict
 
+use namespace HH\Lib\Str;
 namespace Slack\Hack\JsonSchema\Constraints;
 
 use namespace Slack\Hack\JsonSchema;
@@ -14,7 +15,7 @@ class NumberMaximumConstraint {
           'expected' => $maximum,
           'got' => $input,
         ),
-        'message' => "must be less than {$maximum}",
+        'message' => Str\format('must be less than %s', (string)$maximum),
       );
       throw new JsonSchema\InvalidFieldException($pointer, vec[$error]);
     }
