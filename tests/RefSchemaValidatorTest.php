@@ -112,5 +112,4 @@ final class RefSchemaValidatorTest extends BaseCodegenTestCase {
     expect($value['string'] ?? '')->toBeSame('string');
     expect($value['integer'] ?? 0)->toBeSame(1);
   }
-
 }
