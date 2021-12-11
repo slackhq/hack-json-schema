@@ -1,0 +1,40 @@
+{
+    "allOf": [
+        {"$ref": "./allof-schema-1.json#"},
+        {"$ref": "../external_examples/external_definitions.json#person"},
+        {"$ref": "../external_examples/simple-object-ref.json#"},
+        {
+            "type": "object",
+            "required": ["nickname"]
+        },
+        {
+            "type": "object",
+            "properties": {
+                "baz": {
+                    "type": "integer",
+                    "multipleOf": 3
+                },
+                "xs": {
+                    "type": "array",
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "./allof-schema-1.json#"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "qux": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": ["qux"]
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": ["baz", "xs"]
+        }
+    ]
+}

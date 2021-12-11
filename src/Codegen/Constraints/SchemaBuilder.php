@@ -33,6 +33,7 @@ class SchemaBuilder implements IBuilder {
 
   private IBuilder $builder;
   private TSchema $resolvedSchema;
+  private Context $resolvedContext;
 
   public function __construct(
     protected Context $ctx,
@@ -72,6 +73,7 @@ class SchemaBuilder implements IBuilder {
     // Set the resolved ref
 
     $this->resolvedSchema = $schema;
+    $this->resolvedContext = $new_ctx;
 
     // If unique refs is specified, use the UniqueRefBuilder to generate a class
     // for the specific ref.
@@ -159,6 +161,10 @@ class SchemaBuilder implements IBuilder {
 
   public function getResolvedSchema(): TSchema {
     return $this->resolvedSchema;
+  }
+
+  public function getResolvedContext(): Context {
+    return $this->resolvedContext;
   }
 
   public function setSuffix(string $suffix): void {

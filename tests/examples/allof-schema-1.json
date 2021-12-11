@@ -1,0 +1,27 @@
+{
+    "allOf": [
+        {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "foo": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "required": ["foo"]
+        },
+        {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "bar": {
+                    "type": "integer",
+                    "maximum": 10
+                }
+            },
+            "required": ["bar"],
+            "coerce": true
+        }
+    ]
+}
