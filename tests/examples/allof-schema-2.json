@@ -25,6 +25,7 @@
                             },
                             {
                                 "type": "object",
+                                "additionalProperties": false,
                                 "properties": {
                                     "qux": {
                                         "type": "integer"
