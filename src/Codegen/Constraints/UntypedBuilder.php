@@ -221,7 +221,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       |> Vec\reverse($$); // Reverse for parity with non-strict output; this shouldn't actually matter.
     foreach ($schemas as $index => $schema) {
       $schema_builder = new SchemaBuilder(
-        $this->ctx, 
+        $this->ctx,
         $this->generateClassName($this->suffix, 'allOf', (string)$index),
         $schema
       );
@@ -304,7 +304,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       if (Shapes::keyExists($schema, 'maxProperties')) {
         $max_properties = $max_properties is null
           ? $schema['maxProperties']
-          : Math\maxva($max_properties, $schema['maxProperties']);
+          : Math\minva($max_properties, $schema['maxProperties']);
       }
 
       $coerce = $coerce || Shapes::idx($schema, 'coerce', false);
@@ -334,7 +334,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
 
   private function generateMergedAllOfChecks(TSchema $schema, HackBuilder $hb): void {
     $schema_builder = new SchemaBuilder(
-      $this->ctx, 
+      $this->ctx,
       $this->generateClassName($this->suffix, 'allOf'),
       $schema
     );

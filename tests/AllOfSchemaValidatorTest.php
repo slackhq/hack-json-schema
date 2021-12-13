@@ -83,7 +83,7 @@ final class AllOfSchemaValidatorTest extends BaseCodegenTestCase {
 
             $validator = new ExamplesAllofSchema2($input);
             $validator->validate();
-            expect($validator->isValid())->toBeFalse("Input is invalid when %s is missing", $field);
+            expect($validator->isValid())->toBeFalse();
 
             $errors = $validator->getErrors();
             expect(C\count($errors))->toEqual(1);
