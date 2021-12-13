@@ -245,7 +245,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
 
       $schema = type_assert_shape<TObjectSchema>($schema, TObjectSchema::class);
 
-      if (Shapes::idx($schema, 'additionalProperties')) {
+      if (Shapes::idx($schema, 'additionalProperties', true)) {
         // If any schema allows arbitrary properties, just bail out to keep this simple.
         return null;
       }

@@ -5,10 +5,12 @@
         {"$ref": "../external_examples/simple-object-ref.json#"},
         {
             "type": "object",
+            "additionalProperties": false,
             "required": ["nickname"]
         },
         {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "baz": {
                     "type": "integer",

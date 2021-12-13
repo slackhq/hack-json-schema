@@ -5,19 +5,18 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<aaac02e5d111884d1e116a9c82ca0dad>>
+ * @generated SignedSource<<0c4fdc27f37539f07b7f2f9143483751>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
 use namespace Slack\Hack\JsonSchema\Constraints;
 
-type TExamplesAllofSchema2AllOfPropertiesXsItemsAllOf = shape(
+type TExamplesAllofSchema2AllOfPropertiesXsItemsAllOf1 = shape(
   'qux' => int,
-  'bar' => int,
-  'foo' => int,
+  ...
 );
 
-type TExamplesAllofSchema2AllOfPropertiesXsItems = TExamplesAllofSchema2AllOfPropertiesXsItemsAllOf;
+type TExamplesAllofSchema2AllOfPropertiesXsItems = mixed;
 
 type TExamplesAllofSchema2AllOfPropertiesSimpleObjectProp2 = shape(
   'prop_1' => int,
@@ -53,7 +52,7 @@ final class ExamplesAllofSchema2AllOfPropertiesBaz {
   }
 }
 
-final class ExamplesAllofSchema2AllOfPropertiesXsItemsAllOfPropertiesQux {
+final class ExamplesAllofSchema2AllOfPropertiesXsItemsAllOf1PropertiesQux {
 
   private static bool $coerce = false;
 
@@ -65,60 +64,17 @@ final class ExamplesAllofSchema2AllOfPropertiesXsItemsAllOfPropertiesQux {
   }
 }
 
-final class ExamplesAllofSchema2AllOfPropertiesXsItemsAllOfPropertiesBar {
-
-  private static int $maximum = 10;
-  private static bool $coerce = false;
-
-  public static function check(mixed $input, string $pointer): int {
-    $typed =
-      Constraints\IntegerConstraint::check($input, $pointer, self::$coerce);
-
-    Constraints\NumberMaximumConstraint::check(
-      $typed,
-      self::$maximum,
-      $pointer,
-    );
-    return $typed;
-  }
-}
-
-final class ExamplesAllofSchema2AllOfPropertiesXsItemsAllOfPropertiesFoo {
-
-  private static int $minimum = 0;
-  private static bool $coerce = false;
-
-  public static function check(mixed $input, string $pointer): int {
-    $typed =
-      Constraints\IntegerConstraint::check($input, $pointer, self::$coerce);
-
-    Constraints\NumberMinimumConstraint::check(
-      $typed,
-      self::$minimum,
-      $pointer,
-    );
-    return $typed;
-  }
-}
-
-final class ExamplesAllofSchema2AllOfPropertiesXsItemsAllOf {
+final class ExamplesAllofSchema2AllOfPropertiesXsItemsAllOf1 {
 
   private static keyset<string> $required = keyset[
     'qux',
-    'bar',
-    'foo',
   ];
-  private static bool $coerce = true;
-  private static keyset<string> $properties = keyset[
-    'qux',
-    'bar',
-    'foo',
-  ];
+  private static bool $coerce = false;
 
   public static function check(
     mixed $input,
     string $pointer,
-  ): TExamplesAllofSchema2AllOfPropertiesXsItemsAllOf {
+  ): TExamplesAllofSchema2AllOfPropertiesXsItemsAllOf1 {
     $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
     Constraints\ObjectRequiredConstraint::check(
       $typed,
@@ -129,53 +85,21 @@ final class ExamplesAllofSchema2AllOfPropertiesXsItemsAllOf {
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
+    foreach ($typed as $key => $value) {
+      /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
+      $output[$key] = $value;
+    }
+
     if (\HH\Lib\C\contains_key($typed, 'qux')) {
       try {
-        $output['qux'] = ExamplesAllofSchema2AllOfPropertiesXsItemsAllOfPropertiesQux::check(
+        $output['qux'] = ExamplesAllofSchema2AllOfPropertiesXsItemsAllOf1PropertiesQux::check(
           $typed['qux'],
           JsonSchema\get_pointer($pointer, 'qux'),
         );
       } catch (JsonSchema\InvalidFieldException $e) {
         $errors = \HH\Lib\Vec\concat($errors, $e->errors);
       }
-    }
-
-    if (\HH\Lib\C\contains_key($typed, 'bar')) {
-      try {
-        $output['bar'] = ExamplesAllofSchema2AllOfPropertiesXsItemsAllOfPropertiesBar::check(
-          $typed['bar'],
-          JsonSchema\get_pointer($pointer, 'bar'),
-        );
-      } catch (JsonSchema\InvalidFieldException $e) {
-        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
-      }
-    }
-
-    if (\HH\Lib\C\contains_key($typed, 'foo')) {
-      try {
-        $output['foo'] = ExamplesAllofSchema2AllOfPropertiesXsItemsAllOfPropertiesFoo::check(
-          $typed['foo'],
-          JsonSchema\get_pointer($pointer, 'foo'),
-        );
-      } catch (JsonSchema\InvalidFieldException $e) {
-        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
-      }
-    }
-
-    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
-    foreach ($typed as $key => $value) {
-      if (\HH\Lib\C\contains_key(self::$properties, $key)) {
-        continue;
-      }
-
-      $errors[] = shape(
-        'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
-        'message' => "invalid additional property: {$key}",
-        'constraint' => shape(
-          'type' => JsonSchema\FieldErrorConstraint::ADDITIONAL_PROPERTIES,
-          'got' => $key,
-        ),
-      );
     }
 
     if (\HH\Lib\C\count($errors)) {
@@ -193,7 +117,38 @@ final class ExamplesAllofSchema2AllOfPropertiesXsItems {
     mixed $input,
     string $pointer,
   ): TExamplesAllofSchema2AllOfPropertiesXsItems {
-    return ExamplesAllofSchema2AllOfPropertiesXsItemsAllOf::check($input, $pointer);
+    $constraints = vec[
+      ExamplesAllofSchema1::check<>,
+      ExamplesAllofSchema2AllOfPropertiesXsItemsAllOf1::check<>,
+    ];
+
+    $failed_any = false;
+    $errors = vec[
+    ];
+    $output = $input;
+    foreach ($constraints as $constraint) {
+      try {
+        $output = $constraint($output, $pointer);
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+        $failed_any = true;
+      }
+    }
+
+    if ($failed_any) {
+      $error = shape(
+        'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
+        'constraint' => shape(
+          'type' => JsonSchema\FieldErrorConstraint::ALL_OF,
+        ),
+        'message' => 'failed to match all allowed schemas',
+      );
+
+      $output_errors = vec[$error];
+      $output_errors = \HH\Lib\Vec\concat($output_errors, $errors);
+      throw new JsonSchema\InvalidFieldException($pointer, $output_errors);
+    }
+    return $output;
   }
 }
 
