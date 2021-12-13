@@ -225,7 +225,6 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
         $this->generateClassName($this->suffix, 'allOf', (string)$index),
         $schema
       );
-      $builder = $schema_builder->getBuilder();
       $schema = $schema_builder->getResolvedSchema();
       if (Shapes::keyExists($schema, 'allOf')) {
         $builder = new UntypedBuilder($this->ctx, 'allOf', $schema);
@@ -277,7 +276,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
               // Ref in the same file
               $prop_root = $resolved_root_directory.'/'.$resolved_context->getCurrentRefFileName();
             } else {
-              // File and ref in the file
+              // External file containing ref
               $prop_root = $resolved_root_directory.'/';
             }
             $num_root_directory_parts = C\count(Str\split($root_directory, '/'));
