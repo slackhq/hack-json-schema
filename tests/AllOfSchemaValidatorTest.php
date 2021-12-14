@@ -60,8 +60,9 @@ final class AllOfSchemaValidatorTest extends BaseCodegenTestCase {
         dict<string, mixed> $valid_input,
         vec<(string, mixed)> $invalid_inputs
     ): void {
-        foreach ($invalid_inputs as $k => $v) {
+        foreach ($invalid_inputs as $invalid_input) {
             $input = Dict\map($valid_input, $_ ==> $_);
+            list($k, $v) = $invalid_input;
             $input[$k] = $v;
 
             $validator = new $validator($input);
@@ -70,6 +71,7 @@ final class AllOfSchemaValidatorTest extends BaseCodegenTestCase {
 
             $errors = $validator->getErrors();
             expect(C\count($errors))->toEqual(1);
+            expect(C\first($errors)['pointer'] ?? '')->toContainSubstring($k);
         }
     }
 
