@@ -2,7 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use namespace HH\Lib\{C, Vec};
+use namespace HH\Lib\{C, Math, Str, Vec};
 use type Facebook\HackCodegen\{CodegenMethod, CodegenType, HackBuilder, HackBuilderKeys, HackBuilderValues};
 
 type TUntypedSchema = shape(
@@ -191,6 +191,157 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
   }
 
   private function generateAllOfChecks(vec<TSchema> $schemas, HackBuilder $hb): void {
+    $merged_schema = $this->getMergedAllOfChecks();
+    if ($merged_schema) {
+      $this->generateMergedAllOfChecks($merged_schema, $hb);
+    } else {
+      $this->generateMixedAllOfChecks($schemas, $hb);
+    }
+  }
+
+  /**
+   * Attempt to merge schemas in an `allOf` declaration into a single object.
+   * Doing so will allow us to generate a Hack shape instead of using `mixed`.
+   * If the declarations conflict, or if there's a non `allOf` constraint present,
+   * bail out and just used `mixed`.
+   */
+  public function getMergedAllOfChecks(): ?TSchema {
+    // Bail if this schema contains more than an `allOf` constraint.
+    if (C\count(Shapes::toDict($this->typed_schema)) !== 1) {
+      return null;
+    }
+
+    $merged_properties = dict[];
+    $merged_required = vec[];
+    $max_properties = null;
+    $min_properties = null;
+    $coerce = false;
+
+    $schemas = $this->typed_schema['allOf'] ?? vec[]
+      |> Vec\reverse($$); // Reverse for parity with non-strict output; this shouldn't actually matter.
+    foreach ($schemas as $index => $schema) {
+      $schema_builder = new SchemaBuilder(
+        $this->ctx,
+        $this->generateClassName($this->suffix, 'allOf', (string)$index),
+        $schema
+      );
+      $schema = $schema_builder->getResolvedSchema();
+      if (Shapes::keyExists($schema, 'allOf')) {
+        $builder = new UntypedBuilder($this->ctx, 'allOf', $schema);
+        $schema = $builder->getMergedAllOfChecks();
+      }
+
+      if (!$schema || Shapes::idx($schema, 'type') !== TSchemaType::OBJECT_T) {
+        return null;
+      }
+
+      $schema = type_assert_shape<TObjectSchema>($schema, TObjectSchema::class);
+
+      if (Shapes::idx($schema, 'additionalProperties', true)) {
+        // If any schema allows arbitrary properties, just bail out to keep this simple.
+        return null;
+      }
+
+      if (Shapes::idx($schema, 'patternProperties')) {
+        // We don't currently support merging pattern properties, though we probably could.
+        return null;
+      }
+
+      $resolved_context = $schema_builder->getResolvedContext();
+      $resolved_root_directory = $resolved_context->getRefsRootDirectory();
+      if ($resolved_root_directory is null) {
+        $resolved_root_directory = __DIR__;
+      } else {
+        $resolved_root_directory = \realpath($resolved_root_directory);
+      }
+
+      foreach ($schema['properties'] ?? dict[] as $name => $prop) {
+        if (C\contains_key($merged_properties, $name)) {
+          // TODO: We could more intelligently handle duplicate keys.
+          return null;
+        }
+
+        if (Shapes::keyExists($prop, '$ref')) {
+          $root_directory = $this->ctx->getRefsRootDirectory();
+          if ($root_directory is null) {
+            $root_directory = __DIR__;
+          } else {
+            $root_directory = \realpath($root_directory);
+          }
+
+          if ($resolved_root_directory !== $root_directory) {
+            // Disgusting hack: let's just rewind the entire root directory
+            if (Str\starts_with($prop['$ref'], '#')) {
+              // Ref in the same file
+              $prop_root = $resolved_root_directory.'/'.$resolved_context->getCurrentRefFileName();
+            } else {
+              // External file containing ref
+              $prop_root = $resolved_root_directory.'/';
+            }
+            $num_root_directory_parts = C\count(Str\split($root_directory, '/'));
+            for ($i = 0; $i < $num_root_directory_parts - 1; $i++) {
+              $prop_root = '/..'.$prop_root;
+            }
+            $prop['$ref'] = $prop_root.$prop['$ref'];
+          }
+        }
+
+        $merged_properties[$name] = $prop;
+      }
+
+      $merged_required = ($schema['required'] ?? vec[])
+        |> Vec\concat($merged_required, $$)
+        |> Vec\unique($$);
+
+      if (Shapes::keyExists($schema, 'minProperties')) {
+        $min_properties = $min_properties is null
+          ? $schema['minProperties']
+          : Math\maxva($min_properties, $schema['minProperties']);
+      }
+
+      if (Shapes::keyExists($schema, 'maxProperties')) {
+        $max_properties = $max_properties is null
+          ? $schema['maxProperties']
+          : Math\minva($max_properties, $schema['maxProperties']);
+      }
+
+      $coerce = $coerce || Shapes::idx($schema, 'coerce', false);
+    }
+
+    if (!$merged_properties) {
+      return null;
+    }
+
+    $merged_schema = shape(
+      'type' => TSchemaType::OBJECT_T,
+      'additionalProperties' => false,
+      'properties' => $merged_properties,
+      'required' => $merged_required,
+    );
+    if ($min_properties) {
+      $merged_schema['min_properties'] = $min_properties;
+    }
+    if ($max_properties) {
+      $merged_schema['max_properties'] = $max_properties;
+    }
+    if ($coerce) {
+      $merged_schema['coerce'] = $coerce;
+    }
+    return $merged_schema;
+  }
+
+  private function generateMergedAllOfChecks(TSchema $schema, HackBuilder $hb): void {
+    $schema_builder = new SchemaBuilder(
+      $this->ctx,
+      $this->generateClassName($this->suffix, 'allOf'),
+      $schema
+    );
+    $schema_builder->build();
+    $this->current_type = $schema_builder->getType();
+    $hb->addReturnf('%s::check($input, $pointer)', $schema_builder->getClassName());
+  }
+
+  private function generateMixedAllOfChecks(vec<TSchema> $schemas, HackBuilder $hb): void {
     $constraints = vec[];
     foreach ($schemas as $index => $schema) {
       $schema_builder = new SchemaBuilder(

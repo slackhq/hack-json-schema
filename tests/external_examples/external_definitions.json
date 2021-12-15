@@ -3,6 +3,7 @@
     "loop": {"$ref": "loop-schema.json#/properties/loop"},
     "person": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "nickname": { "$ref": "#/nickname" }
       }

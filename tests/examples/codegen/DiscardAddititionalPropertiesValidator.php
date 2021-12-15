@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<79c457344a7c80630eb3e29d65e7c000>>
+ * @generated SignedSource<<b7402ada37fd9060f375d82d3276ac85>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -89,6 +89,14 @@ type TDiscardAddititionalPropertiesValidatorPropertiesAdditionalPropertiesRefAdd
 
 type TDiscardAddititionalPropertiesValidatorPropertiesAdditionalPropertiesRef = dict<string, mixed>;
 
+type TDiscardAddititionalPropertiesValidatorPropertiesOnlyMinProperties = dict<string, mixed>;
+
+type TDiscardAddititionalPropertiesValidatorPropertiesOnlyMaxProperties = dict<string, mixed>;
+
+type TDiscardAddititionalPropertiesValidatorPropertiesMinAndMaxProperties = dict<string, mixed>;
+
+type TDiscardAddititionalPropertiesValidatorPropertiesInvalidMinPropertiesWithNoAdditionalProperties = dict<string, mixed>;
+
 type TDiscardAddititionalPropertiesValidator = shape(
   ?'only_additional_properties' => TDiscardAddititionalPropertiesValidatorPropertiesOnlyAdditionalProperties,
   ?'only_no_additional_properties' => TDiscardAddititionalPropertiesValidatorPropertiesOnlyNoAdditionalProperties,
@@ -107,6 +115,10 @@ type TDiscardAddititionalPropertiesValidator = shape(
   ?'no_additional_properties' => TDiscardAddititionalPropertiesValidatorPropertiesNoAdditionalProperties,
   ?'additional_properties_array' => TDiscardAddititionalPropertiesValidatorPropertiesAdditionalPropertiesArray,
   ?'additional_properties_ref' => TDiscardAddititionalPropertiesValidatorPropertiesAdditionalPropertiesRef,
+  ?'only_min_properties' => TDiscardAddititionalPropertiesValidatorPropertiesOnlyMinProperties,
+  ?'only_max_properties' => TDiscardAddititionalPropertiesValidatorPropertiesOnlyMaxProperties,
+  ?'min_and_max_properties' => TDiscardAddititionalPropertiesValidatorPropertiesMinAndMaxProperties,
+  ?'invalid_min_properties_with_no_additional_properties' => TDiscardAddititionalPropertiesValidatorPropertiesInvalidMinPropertiesWithNoAdditionalProperties,
   ...
 );
 
@@ -1442,6 +1454,108 @@ final class DiscardAddititionalPropertiesValidatorPropertiesAdditionalProperties
   }
 }
 
+final class DiscardAddititionalPropertiesValidatorPropertiesOnlyMinProperties {
+
+  private static bool $coerce = false;
+  private static int $minProperties = 1;
+
+  public static function check(
+    mixed $input,
+    string $pointer,
+  ): TDiscardAddititionalPropertiesValidatorPropertiesOnlyMinProperties {
+    $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
+    $length = \HH\Lib\C\count($typed);
+
+    Constraints\ObjectMinPropertiesConstraint::check(
+      $length,
+      self::$minProperties,
+      $pointer,
+    );
+
+
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some functions generated with this statement do not use their $output, they use their $typed instead*/
+    $output = dict[];
+
+    return $typed;
+  }
+}
+
+final class DiscardAddititionalPropertiesValidatorPropertiesOnlyMaxProperties {
+
+  private static bool $coerce = false;
+  private static int $maxProperties = 1;
+
+  public static function check(
+    mixed $input,
+    string $pointer,
+  ): TDiscardAddititionalPropertiesValidatorPropertiesOnlyMaxProperties {
+    $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
+    $length = \HH\Lib\C\count($typed);
+
+    Constraints\ObjectMaxPropertiesConstraint::check(
+      $length,
+      self::$maxProperties,
+      $pointer,
+    );
+
+
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some functions generated with this statement do not use their $output, they use their $typed instead*/
+    $output = dict[];
+
+    return $typed;
+  }
+}
+
+final class DiscardAddititionalPropertiesValidatorPropertiesMinAndMaxProperties {
+
+  private static bool $coerce = false;
+  private static int $maxProperties = 2;
+  private static int $minProperties = 1;
+
+  public static function check(
+    mixed $input,
+    string $pointer,
+  ): TDiscardAddititionalPropertiesValidatorPropertiesMinAndMaxProperties {
+    $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
+    $length = \HH\Lib\C\count($typed);
+
+    Constraints\ObjectMaxPropertiesConstraint::check(
+      $length,
+      self::$maxProperties,
+      $pointer,
+    );
+
+    Constraints\ObjectMinPropertiesConstraint::check(
+      $length,
+      self::$minProperties,
+      $pointer,
+    );
+
+
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some functions generated with this statement do not use their $output, they use their $typed instead*/
+    $output = dict[];
+
+    return $typed;
+  }
+}
+
+final class DiscardAddititionalPropertiesValidatorPropertiesInvalidMinPropertiesWithNoAdditionalProperties {
+
+  private static bool $coerce = false;
+  private static int $minProperties = 1;
+
+  public static function check(
+    mixed $input,
+    string $pointer,
+  ): TDiscardAddititionalPropertiesValidatorPropertiesInvalidMinPropertiesWithNoAdditionalProperties {
+    // Hack to prevent us from having to change the params names when we are not
+    // using them.
+    $_ = $input;
+    $_ = $pointer;
+    return dict[];
+  }
+}
+
 final class DiscardAddititionalPropertiesValidator
   extends JsonSchema\BaseValidator<TDiscardAddititionalPropertiesValidator> {
 
@@ -1643,6 +1757,50 @@ final class DiscardAddititionalPropertiesValidator
         $output['additional_properties_ref'] = DiscardAddititionalPropertiesValidatorPropertiesAdditionalPropertiesRef::check(
           $typed['additional_properties_ref'],
           JsonSchema\get_pointer($pointer, 'additional_properties_ref'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'only_min_properties')) {
+      try {
+        $output['only_min_properties'] = DiscardAddititionalPropertiesValidatorPropertiesOnlyMinProperties::check(
+          $typed['only_min_properties'],
+          JsonSchema\get_pointer($pointer, 'only_min_properties'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'only_max_properties')) {
+      try {
+        $output['only_max_properties'] = DiscardAddititionalPropertiesValidatorPropertiesOnlyMaxProperties::check(
+          $typed['only_max_properties'],
+          JsonSchema\get_pointer($pointer, 'only_max_properties'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'min_and_max_properties')) {
+      try {
+        $output['min_and_max_properties'] = DiscardAddititionalPropertiesValidatorPropertiesMinAndMaxProperties::check(
+          $typed['min_and_max_properties'],
+          JsonSchema\get_pointer($pointer, 'min_and_max_properties'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'invalid_min_properties_with_no_additional_properties')) {
+      try {
+        $output['invalid_min_properties_with_no_additional_properties'] = DiscardAddititionalPropertiesValidatorPropertiesInvalidMinPropertiesWithNoAdditionalProperties::check(
+          $typed['invalid_min_properties_with_no_additional_properties'],
+          JsonSchema\get_pointer($pointer, 'invalid_min_properties_with_no_additional_properties'),
         );
       } catch (JsonSchema\InvalidFieldException $e) {
         $errors = \HH\Lib\Vec\concat($errors, $e->errors);

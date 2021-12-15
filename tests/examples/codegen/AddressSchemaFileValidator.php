@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<484727a0001529079af389185ae513a4>>
+ * @generated SignedSource<<97f0dd218841ea23c803bc0dbcac309e>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -19,7 +19,6 @@ type TAddressSchemaFileValidatorPropertiesPhonesItems = shape(
 
 type TAddressSchemaFileValidatorPropertiesRelative = shape(
   ?'nickname' => string,
-  ...
 );
 
 type TAddressSchemaFileValidatorPropertiesPostalCode = mixed;
@@ -250,6 +249,9 @@ final class AddressSchemaFileValidatorPropertiesRelativePropertiesNickname {
 final class AddressSchemaFileValidatorPropertiesRelative {
 
   private static bool $coerce = false;
+  private static keyset<string> $properties = keyset[
+    'nickname',
+  ];
 
   public static function check(
     mixed $input,
@@ -260,12 +262,6 @@ final class AddressSchemaFileValidatorPropertiesRelative {
     $errors = vec[];
     $output = shape();
 
-    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
-    foreach ($typed as $key => $value) {
-      /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
-      $output[$key] = $value;
-    }
-
     if (\HH\Lib\C\contains_key($typed, 'nickname')) {
       try {
         $output['nickname'] = AddressSchemaFileValidatorPropertiesRelativePropertiesNickname::check(
@@ -275,6 +271,22 @@ final class AddressSchemaFileValidatorPropertiesRelative {
       } catch (JsonSchema\InvalidFieldException $e) {
         $errors = \HH\Lib\Vec\concat($errors, $e->errors);
       }
+    }
+
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
+    foreach ($typed as $key => $value) {
+      if (\HH\Lib\C\contains_key(self::$properties, $key)) {
+        continue;
+      }
+
+      $errors[] = shape(
+        'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
+        'message' => "invalid additional property: {$key}",
+        'constraint' => shape(
+          'type' => JsonSchema\FieldErrorConstraint::ADDITIONAL_PROPERTIES,
+          'got' => $key,
+        ),
+      );
     }
 
     if (\HH\Lib\C\count($errors)) {

@@ -1,0 +1,20 @@
+{
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "simple_object_prop_1": {
+            "type": "integer"
+        },
+        "simple_object_prop_2": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "prop_1": {
+                    "type": "integer"
+                }
+            },
+            "required": ["prop_1"]
+        }
+    },
+    "required": ["simple_object_prop_1"]
+}
