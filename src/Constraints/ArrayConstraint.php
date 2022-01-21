@@ -26,8 +26,7 @@ class ArrayConstraint {
 
     $spec = TypeSpec\vec(TypeSpec\mixed());
     try {
-      # To allow for either PHP or hack arrays, we coerce to a vec here.
-      return $spec->coerceType($input);
+      return $spec->assertType($input);
     } catch (TypeCoercionException $e) {
       $error = shape(
         'code' => JsonSchema\FieldErrorCode::INVALID_TYPE,
