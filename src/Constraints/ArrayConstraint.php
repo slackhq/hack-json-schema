@@ -4,7 +4,7 @@ namespace Slack\Hack\JsonSchema\Constraints;
 
 use namespace HH\Lib\Str;
 use type Facebook\TypeAssert\{TypeCoercionException};
-use namespace Facebook\TypeSpec;
+use namespace Facebook\{TypeAssert, TypeSpec};
 use namespace Slack\Hack\JsonSchema;
 
 class ArrayConstraint {
@@ -27,7 +27,7 @@ class ArrayConstraint {
     $spec = TypeSpec\vec(TypeSpec\mixed());
     try {
       return $spec->assertType($input);
-    } catch (TypeCoercionException $e) {
+    } catch (TypeAssert\IncorrectTypeException $e) {
       $error = shape(
         'code' => JsonSchema\FieldErrorCode::INVALID_TYPE,
         'message' => 'must provide an array',
