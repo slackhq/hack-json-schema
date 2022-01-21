@@ -61,7 +61,7 @@ final class DiscardAddititionalPropertiesValidatorTest extends BaseCodegenTestCa
     $input = dict[
       'additional_properties_ref' => dict[
         'something' => dict[
-          'something-else' => varray['array', 'of', 'strings'],
+          'something-else' => vec['array', 'of', 'strings'],
         ],
       ],
     ];
@@ -73,7 +73,7 @@ final class DiscardAddititionalPropertiesValidatorTest extends BaseCodegenTestCa
     $input = dict[
       'additional_properties_ref' => dict[
         'something' => dict[
-          'something-else' => varray[34, 'of', 'strings'],
+          'something-else' => vec[34, 'of', 'strings'],
         ],
       ],
     ];
