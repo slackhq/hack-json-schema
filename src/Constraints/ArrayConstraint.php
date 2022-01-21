@@ -3,7 +3,6 @@
 namespace Slack\Hack\JsonSchema\Constraints;
 
 use namespace HH\Lib\Str;
-use type Facebook\TypeAssert\{TypeCoercionException};
 use namespace Facebook\{TypeAssert, TypeSpec};
 use namespace Slack\Hack\JsonSchema;
 
