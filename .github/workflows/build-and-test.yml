@@ -8,10 +8,10 @@ jobs:
       # Run tests on all OS's and HHVM versions, even if one fails
       fail-fast: false
       matrix:
-        os: [ ubuntu ]
+        os: [ubuntu]
         hhvm:
-          - '4.80'
-          - '4.102'
+          - "4.102"
+          - "4.128"
     runs-on: ${{matrix.os}}-latest
     steps:
       - uses: actions/checkout@v2
