@@ -53,6 +53,19 @@ final class ArraySchemaValidatorTest extends BaseCodegenTestCase {
     expect($validator->isValid())->toBeFalse();
   }
 
+  public function testUntypedArrayValid(): void {
+    $validator = new ArraySchemaValidator(dict[
+      'untyped_array' => vec['test', 'values'],
+    ]);
+    $validator->validate();
+
+    expect($validator->isValid())->toBeTrue();
+    $validated = $validator->getValidatedInput();
+
+    expect(Shapes::idx($validated, 'untyped_array') as nonnull[0])->toBeSame('test');
+    expect(Shapes::idx($validated, 'untyped_array') as nonnull[1])->toBeSame('values');
+  }
+
   public function testCoerceArrayValidString(): void {
     $input = vec[1, 2, 3, 4];
 
