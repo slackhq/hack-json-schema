@@ -64,7 +64,7 @@ final class RefSchemaValidatorTest extends BaseCodegenTestCase {
       ),
       shape(
         'input' => darray[
-          'single-item-array-ref' => varray[
+          'single-item-array-ref' => vec[
             darray['string' => 'test', 'integer' => 5],
             darray['string' => 'test2', 'integer' => 10],
           ],
