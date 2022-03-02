@@ -148,7 +148,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
       ($properties is null || C\count($properties) == 0) &&
       $pattern_properties is null;
 
-    # Check if we need to discard everything
+    // Check if we need to discard everything
     if ($discard_all) {
       $hb->addInlineComment('Hack to prevent us from having to change the params names when we are not using them.');
       $hb->addAssignment('$_', '$input', HackBuilderValues::literal());
@@ -165,7 +165,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
         HackBuilderValues::literal(),
       );
 
-    # Check for the simplest case where we just want to return the resulting dictionary
+    // Check for the simplest case where we just want to return the resulting dictionary
     if ($properties === null && $pattern_properties === null && $allow_any_additional_properties) {
       $hb->addReturn('$typed', HackBuilderValues::literal());
       return $hb;
@@ -210,8 +210,8 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
         HackBuilderValues::dict(HackBuilderKeys::export(), HackBuilderValues::export()),
       );
 
-      # Merge in `$defaults` first so values from `$typed` will override any
-      # defaults.
+      // Merge in `$defaults` first so values from `$typed` will override any
+      // defaults.
       $hb->addAssignment('$typed', '\HH\Lib\Dict\merge($defaults, $typed)', HackBuilderValues::literal());
       $hb->ensureEmptyLine();
     }
@@ -289,8 +289,8 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
         $hb->ensureEmptyLine();
       }
     } else {
-      # if `properties` isn't defined, we have a dynamic-ish output (either
-      # `additionalProperties` or `patternProperties`)
+      // if `properties` isn't defined, we have a dynamic-ish output (either
+      // `additionalProperties` or `patternProperties`)
       $hb->addLine(
         '/*HHAST_IGNORE_ERROR[UnusedVariable] Some functions generated with this statement do not use their $output, they use their $typed instead*/',
       )
@@ -313,24 +313,24 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
         ->ensureEmptyLine();
     }
 
-    #
-    # Handle `additionalProperties`. `additionalProperties` is either a boolean
-    # or a JSON schema.
-    #
-    # If it is a boolean set to `true`, we don't run additional properties
-    # through any validation and simply store them directly in the output.
-    #
-    # If it is a boolean set to `false`, any property not specified in the
-    # object's `properties` key will result in an error.
-    #
-    # If it is a JSON schema, any property not specified in the object's
-    # `properties` key will be run through that JSON schema. These values will
-    # also be included in the output and will be typed to the specific schema.
-    #
-    # If the 'discard_aditional_properties' validator configuration is set to
-    # true, we will just ignore and discard the additional values instead of
-    # throwing a validation error.
-    #
+    //
+    // Handle `additionalProperties`. `additionalProperties` is either a boolean
+    // or a JSON schema.
+    //
+    // If it is a boolean set to `true`, we don't run additional properties
+    // through any validation and simply store them directly in the output.
+    //
+    // If it is a boolean set to `false`, any property not specified in the
+    // object's `properties` key will result in an error.
+    //
+    // If it is a JSON schema, any property not specified in the object's
+    // `properties` key will be run through that JSON schema. These values will
+    // also be included in the output and will be typed to the specific schema.
+    //
+    // If the 'discard_aditional_properties' validator configuration is set to
+    // true, we will just ignore and discard the additional values instead of
+    // throwing a validation error.
+    //
 
     if (
       ($additional_properties is nonnull && !$allow_any_additional_properties && !$discard_additional_properties) ||
@@ -423,9 +423,9 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
           ->startTryBlock();
 
         if ($properties is nonnull) {
-          # If we've defined `properties` then we'll run checks against
-          # `additionalProperties` but we won't output them since we can't
-          # output dynamic keys in a shape.
+          // If we've defined `properties` then we'll run checks against
+          // `additionalProperties` but we won't output them since we can't
+          // output dynamic keys in a shape.
           $hb
             ->addMultilineCall(
               "{$additional_properties_class_name}::check",
