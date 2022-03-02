@@ -23,7 +23,7 @@ final class InvalidEnumTest extends BaseCodegenTestCase {
     $ret = self::getBuilderForSchema(
         shape(
             'type' => 'string',
-            'hackEnum' => TestStringEnum::class, 
+            'hackEnum' => TestStringEnum::class,
             'enum' => vec['qux']
         ),
         'InvalidEnumValidator'
@@ -35,7 +35,7 @@ final class InvalidEnumTest extends BaseCodegenTestCase {
     $ret = self::getBuilderForSchema(
         shape(
             'type' => 'string',
-            'hackEnum' => TestIntEnum::class, 
+            'hackEnum' => TestIntEnum::class,
         ),
         'InvalidEnumValidator'
     );

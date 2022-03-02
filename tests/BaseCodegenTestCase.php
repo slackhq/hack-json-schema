@@ -92,7 +92,7 @@ abstract class BaseCodegenTestCase extends HackTest {
     'codegen' => Codegen,
   ) {
     $codegen_config = self::getConfig($name, $options);
-    $codegen = Codegen::forSchema(Shapes::toDict($schema), $codegen_config, __DIR__."/examples/");
+    $codegen = Codegen::forSchema(Shapes::toDict($schema), $codegen_config, __DIR__.'/examples/');
 
     return shape(
       'path' => $codegen_config['validator']['file'],

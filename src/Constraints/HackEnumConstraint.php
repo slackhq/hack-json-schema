@@ -2,7 +2,6 @@
 
 namespace Slack\Hack\JsonSchema\Constraints;
 
-use namespace HH\Lib\Str;
 use namespace Slack\Hack\JsonSchema;
 
 /**
