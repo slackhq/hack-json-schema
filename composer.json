@@ -23,5 +23,10 @@
     },
     "autoload-dev": {
       "classmap": [ "tests/" ]
+    },
+    "config": {
+        "allow-plugins": {
+            "hhvm/hhvm-autoload": true
+        }
     }
 }
