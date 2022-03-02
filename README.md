@@ -85,7 +85,7 @@ By defining the `source_root` and `output_root` we can generate unique validator
 We handle all dependencies through Docker. It's as simple as:
 
 ```console
-make build && make install
+make install
 ```
 
 ### Running Tests
