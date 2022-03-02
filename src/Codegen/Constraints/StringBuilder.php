@@ -3,7 +3,7 @@
 namespace Slack\Hack\JsonSchema\Codegen;
 
 use function Slack\Hack\JsonSchema\get_function_name_from_function;
-
+use namespace HH\Lib\Str;
 use type Facebook\HackCodegen\{CodegenMethod, HackBuilderValues};
 
 type TStringSchema = shape(
@@ -11,6 +11,7 @@ type TStringSchema = shape(
   ?'maxLength' => int,
   ?'minLength' => int,
   ?'enum' => vec<string>,
+  ?'hackEnum' => string,
   ?'pattern' => string,
   ?'format' => string,
   ?'sanitize' => shape(
@@ -132,16 +133,22 @@ class StringBuilder extends BaseBuilder<TStringSchema> {
       );
     }
 
+    $this->addHackEnumConstraintCheck($hb);
+
     $hb->addReturn('$typed', HackBuilderValues::literal());
 
     return $this->codegenCheckMethod()
       ->addParameters(vec['mixed $input', 'string $pointer'])
       ->setBody($hb->getCode())
-      ->setReturnType('string');
+      ->setReturnType($this->getType());
   }
 
   <<__Override>>
   public function getType(): string {
+    if (Shapes::keyExists($this->typed_schema, 'hackEnum')) {
+      return Str\format('\%s', $this->typed_schema['hackEnum']);
+    }
+
     return 'string';
   }
 }

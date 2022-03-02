@@ -24,6 +24,7 @@ type TSchema = shape(
   ?'$ref' => string,
   ?'default' => mixed,
   ?'enum' => vec<mixed>,
+  ?'hackEnum' => string,
   ...
 );
 

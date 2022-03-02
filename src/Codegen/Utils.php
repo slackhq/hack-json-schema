@@ -12,6 +12,12 @@ function _type_assert_get_type_structure(string $type) {
   return $s->getResolvedTypeStructure();
 }
 
+function type_assert_type<T>(mixed $var, typename<T> $type): T {
+  $ts = _type_assert_get_type_structure($type);
+  $result = TypeAssert\matches_type_structure($ts, $var);
+  return $result;
+}
+
 function type_assert_shape<T>(mixed $var, string $shape): T {
   $ts = _type_assert_get_type_structure($shape);
   $result = TypeAssert\matches_type_structure($ts, $var);

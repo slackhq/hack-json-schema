@@ -2,6 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
+use namespace HH\Lib\{C, Str};
 use type Facebook\HackCodegen\{CodegenClass, CodegenMethod, CodegenProperty, HackBuilder, HackBuilderValues};
 
 <<__ConsistentConstruct>>
@@ -89,6 +90,64 @@ abstract class BaseBuilder<T> implements IBuilder {
     $schema = type_assert_shape($this->typed_schema, 'Slack\Hack\JsonSchema\Codegen\TSchema');
     if (($schema['enum'] ?? null) is nonnull) {
       $hb->addMultilineCall('Constraints\EnumConstraint::check', vec['$typed', 'self::$enum', '$pointer']);
+    }
+  }
+
+  protected function addHackEnumConstraintCheck(HackBuilder $hb): void {
+    $schema = type_assert_type($this->typed_schema, TSchema::class);
+    if (Shapes::keyExists($schema, 'hackEnum')) {
+      try {
+        $rc = new \ReflectionClass($schema['hackEnum']);
+      } catch (\ReflectionException $e) {
+        throw new \Exception(Str\format("Hack enum '%s' does not exist", $schema['hackEnum']));
+      }
+
+      invariant($rc->isEnum(), "'%s' is not an enum", $schema['hackEnum']);
+
+      $schema_type = $schema['type'] ?? null;
+      $hack_enum_values = keyset[];
+      foreach ($rc->getConstants() as $hack_enum_value) {
+        if ($schema_type === TSchemaType::INTEGER_T) {
+          $hack_enum_value = $hack_enum_value ?as int;
+        } else {
+          $hack_enum_value = $hack_enum_value ?as string;
+        }
+        invariant(
+          $hack_enum_value is nonnull,
+          "'%s' must contain only values of type %s",
+          $rc->getName(),
+          $schema_type === TSchemaType::INTEGER_T ? 'int' : 'string'
+        );
+        $hack_enum_values[] = $hack_enum_value;
+      }
+
+      if (Shapes::keyExists($schema, 'enum')) {
+        // If both `enum` and `hackEnum` are specified, assert that `enum` is a subset of
+        // `hackEnum` values.
+        foreach ($schema['enum'] as $enum_value) {
+          invariant(
+            $enum_value is string,
+            "Enum value '%s' is not a valid value for '%s'",
+            \print_r($enum_value, true),
+            $rc->getName()
+          );
+          invariant(
+            C\contains_key($hack_enum_values, $enum_value),
+            "Enum value '%s' is unexpectedly not present in '%s'",
+            \print_r($enum_value, true),
+            $rc->getName()
+          );
+        }
+      }
+
+      $hb->addMultilineCall(
+        '$typed = Constraints\HackEnumConstraint::check',
+        vec[
+          '$typed',
+          Str\format('\%s::class', $rc->getName()),
+          '$pointer'
+        ]
+      );
     }
   }
 

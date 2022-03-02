@@ -51,6 +51,14 @@
               }
           }
       }
+    },
+    "hack_enum_items": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "hackEnum": "Slack\\Hack\\JsonSchema\\Tests\\TestStringEnum"
+      }
     }
   }
 }

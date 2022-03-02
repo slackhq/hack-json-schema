@@ -5,13 +5,21 @@ namespace Slack\Hack\JsonSchema\Tests;
 use namespace HH\Lib\{C, Math, Str};
 use function Facebook\FBExpect\expect;
 use type Slack\Hack\JsonSchema\Validator;
-use type Slack\Hack\JsonSchema\Codegen\{Codegen, IJsonSchemaCodegenConfig};
+use type Slack\Hack\JsonSchema\Codegen\{Codegen, IJsonSchemaCodegenConfig, TSchema};
 use type Facebook\HackTest\HackTest;
 
 abstract class BaseCodegenTestCase extends HackTest {
 
   const string CODEGEN_ROOT = __DIR__.'/examples/codegen';
   const string CODEGEN_NS = 'Slack\\Hack\\JsonSchema\\Tests\\Generated';
+
+  const type TOptions = shape(
+    ?'sanitize_string' => Codegen::TSanitizeStringConfig,
+    ?'json_schema_codegen_config' => IJsonSchemaCodegenConfig,
+    ?'refs' => Codegen::TValidatorRefsConfig,
+    ?'defaults' => Codegen::TValidatorDefaultsConfig,
+    ?'discard_additional_properties' => bool,
+  );
 
   public function assertUnchanged(string $_value, ?string $_token = null): void {
     self::markTestSkipped("assertUnchanged doesn't work in hacktest yet");
@@ -61,17 +69,38 @@ abstract class BaseCodegenTestCase extends HackTest {
   public static function getBuilder(
     string $json_filename,
     string $name,
-    shape(
-      ?'sanitize_string' => Codegen::TSanitizeStringConfig,
-      ?'json_schema_codegen_config' => IJsonSchemaCodegenConfig,
-      ?'refs' => Codegen::TValidatorRefsConfig,
-      ?'defaults' => Codegen::TValidatorDefaultsConfig,
-      ?'discard_additional_properties' => bool,
-    ) $options = shape(),
+    this::TOptions $options = shape(),
   ): shape(
     'path' => string,
     'codegen' => Codegen,
   ) {
+    $codegen_config = self::getConfig($name, $options);
+    $codegen = Codegen::forPath(__DIR__."/examples/{$json_filename}", $codegen_config);
+
+    return shape(
+      'path' => $codegen_config['validator']['file'],
+      'codegen' => $codegen,
+    );
+  }
+
+  public static function getBuilderForSchema(
+    TSchema $schema,
+    string $name,
+    this::TOptions $options = shape(),
+  ): shape(
+    'path' => string,
+    'codegen' => Codegen,
+  ) {
+    $codegen_config = self::getConfig($name, $options);
+    $codegen = Codegen::forSchema(Shapes::toDict($schema), $codegen_config, __DIR__."/examples/");
+
+    return shape(
+      'path' => $codegen_config['validator']['file'],
+      'codegen' => $codegen,
+    );
+  }
+
+  private static function getConfig(string $name, this::TOptions $options): Codegen::TCodegenConfig {
     $path = self::getCodeGenPath("{$name}.php");
     $validator_config = shape(
       'namespace' => self::CODEGEN_NS,
@@ -108,12 +137,7 @@ abstract class BaseCodegenTestCase extends HackTest {
       $codegen_config['jsonSchemaCodegenConfig'] = $json_schema_codegen_config;
     }
 
-    $codegen = Codegen::forPath(__DIR__."/examples/{$json_filename}", $codegen_config);
-
-    return shape(
-      'path' => $path,
-      'codegen' => $codegen,
-    );
+    return $codegen_config;
   }
 
   public static function benchmark(string $label, (function(): void) $callback): void {

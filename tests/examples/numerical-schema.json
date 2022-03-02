@@ -14,6 +14,10 @@
     "number_coerce": {
       "type": "number",
       "coerce": true
+    },
+    "hack_enum": {
+      "type": "integer",
+      "hackEnum": "Slack\\Hack\\JsonSchema\\Tests\\TestIntEnum"
     }
   }
 }

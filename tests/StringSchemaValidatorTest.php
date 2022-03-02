@@ -6,6 +6,11 @@ use namespace HH\Lib\Str;
 
 use type Slack\Hack\JsonSchema\Tests\Generated\StringSchemaValidator;
 
+enum TestStringEnum: string {
+  ABC = 'foo';
+  DEF = 'bar';
+}
+
 function _string_schema_validator_test_uniline(string $input): string {
   return $input
     |> Str\replace($$, ' ', '_')
@@ -112,6 +117,26 @@ final class StringSchemaValidatorTest extends BaseCodegenTestCase {
         'input' => darray['date_format' => 'invalid_date'],
         'valid' => false,
       ),
+    ];
+
+    $this->expectCases($cases, $input ==> new StringSchemaValidator($input));
+  }
+
+  public function testHackEnum(): void {
+    $cases = vec[
+      shape(
+        'input' => darray['hack_enum' => 'foo'],
+        'output' => darray['hack_enum' => TestStringEnum::ABC],
+        'valid' => true,
+      ),
+      shape(
+        'input' => darray['hack_enum' => 'bar'],
+        'output' => darray['hack_enum' => TestStringEnum::DEF],
+        'valid' => true,
+      ),
+      shape('input' => darray['hack_enum' => 'ABC'], 'valid' => false),
+      shape('input' => darray['hack_enum' => 'aaaaaaaaaaaaa'], 'valid' => false),
+      shape('input' => darray['hack_enum' => ''], 'valid' => false),
     ];
 
     $this->expectCases($cases, $input ==> new StringSchemaValidator($input));
