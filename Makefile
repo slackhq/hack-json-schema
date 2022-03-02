@@ -15,5 +15,11 @@ hh_autoload:
 test:
 	docker run -v `pwd`:/app -it slack/hack-json-schema ./vendor/bin/hacktest tests
 
+lint:
+	docker run -v `pwd`:/app -it slack/hack-json-schema ./vendor/bin/hhast-lint
+
 format:
 	docker run -v `pwd`:/app -it slack/hack-json-schema find {src,tests} -type f -name "*.hack" -exec hackfmt -i {} \;
+
+typecheck:
+	docker run -v `pwd`:/app -it slack/hack-json-schema /bin/bash -c './vendor/bin/hh-autoload && hh_server --check .'
