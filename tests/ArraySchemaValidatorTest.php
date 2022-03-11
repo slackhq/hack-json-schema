@@ -216,4 +216,16 @@ final class ArraySchemaValidatorTest extends BaseCodegenTestCase {
     expect($validated)->toEqual(shape('unsupported_unique_items' => vec[shape('foo' => 'a'), shape('foo' => 'a')]));
   }
 
+  public function testHackEnumItems(): void {
+    $input = vec['foo', 'bar'];
+
+    $validator = new ArraySchemaValidator(dict['hack_enum_items' => $input]);
+    $validator->validate();
+
+    expect($validator->isValid())->toBeTrue();
+    $validated = $validator->getValidatedInput();
+
+    expect($validated)->toEqual(shape('hack_enum_items' => vec[TestStringEnum::ABC, TestStringEnum::DEF]));
+  }
+
 }

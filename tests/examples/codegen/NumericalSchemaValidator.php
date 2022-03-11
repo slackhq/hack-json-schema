@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<c310e117909d698ab90098b220ec8d0d>>
+ * @generated SignedSource<<5d96bf78c70de4ebc3454eec9a957550>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -16,6 +16,7 @@ type TNumericalSchemaValidator = shape(
   ?'number' => num,
   ?'integer_coerce' => int,
   ?'number_coerce' => num,
+  ?'hack_enum' => \Slack\Hack\JsonSchema\Tests\TestIntEnum,
   ...
 );
 
@@ -61,6 +62,26 @@ final class NumericalSchemaValidatorPropertiesNumberCoerce {
   public static function check(mixed $input, string $pointer): num {
     $typed = Constraints\NumberConstraint::check($input, $pointer, self::$coerce);
 
+    return $typed;
+  }
+}
+
+final class NumericalSchemaValidatorPropertiesHackEnum {
+
+  private static bool $coerce = false;
+
+  public static function check(
+    mixed $input,
+    string $pointer,
+  ): \Slack\Hack\JsonSchema\Tests\TestIntEnum {
+    $typed =
+      Constraints\IntegerConstraint::check($input, $pointer, self::$coerce);
+
+    $typed = Constraints\HackEnumConstraint::check(
+      $typed,
+      \Slack\Hack\JsonSchema\Tests\TestIntEnum::class,
+      $pointer,
+    );
     return $typed;
   }
 }
@@ -123,6 +144,17 @@ final class NumericalSchemaValidator
         $output['number_coerce'] = NumericalSchemaValidatorPropertiesNumberCoerce::check(
           $typed['number_coerce'],
           JsonSchema\get_pointer($pointer, 'number_coerce'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'hack_enum')) {
+      try {
+        $output['hack_enum'] = NumericalSchemaValidatorPropertiesHackEnum::check(
+          $typed['hack_enum'],
+          JsonSchema\get_pointer($pointer, 'hack_enum'),
         );
       } catch (JsonSchema\InvalidFieldException $e) {
         $errors = \HH\Lib\Vec\concat($errors, $e->errors);

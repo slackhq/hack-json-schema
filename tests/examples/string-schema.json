@@ -22,6 +22,10 @@
     "date_format": {
       "type": "string",
       "format": "date"
+    },
+    "hack_enum": {
+      "type": "string",
+      "hackEnum": "Slack\\Hack\\JsonSchema\\Tests\\TestStringEnum"
     }
   },
   "definitions": {

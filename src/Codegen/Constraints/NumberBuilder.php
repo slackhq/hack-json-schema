@@ -2,6 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
+use namespace HH\Lib\Str;
 use type Facebook\HackCodegen\{CodegenMethod, HackBuilderValues};
 
 type TNumberSchema = shape(
@@ -10,6 +11,7 @@ type TNumberSchema = shape(
   ?'minimum' => int,
   ?'coerce' => bool,
   ?'multipleOf' => num,
+  ?'hackEnum' => string,
   ...
 );
 
@@ -63,12 +65,11 @@ class NumberBuilder extends BaseBuilder<TNumberSchema> {
   protected function getCheckMethod(): CodegenMethod {
     $hb = $this->getHackBuilder();
 
+    $return_type = $this->getType();
     if ($this->typed_schema['type'] === TSchemaType::INTEGER_T) {
       $type_constraint = 'Constraints\IntegerConstraint';
-      $return_type = 'int';
     } else {
       $type_constraint = 'Constraints\NumberConstraint';
-      $return_type = 'num';
     }
 
     $hb
@@ -96,6 +97,10 @@ class NumberBuilder extends BaseBuilder<TNumberSchema> {
       );
     }
 
+    if ($this->typed_schema['type'] === TSchemaType::INTEGER_T) {
+      $this->addHackEnumConstraintCheck($hb);
+    }
+
     $hb->addReturn('$typed', HackBuilderValues::literal());
 
     return $this->codegenCheckMethod()
@@ -107,6 +112,9 @@ class NumberBuilder extends BaseBuilder<TNumberSchema> {
   <<__Override>>
   public function getType(): string {
     if ($this->typed_schema['type'] === TSchemaType::INTEGER_T) {
+      if (Shapes::keyExists($this->typed_schema, 'hackEnum')) {
+        return Str\format('\%s', $this->typed_schema['hackEnum']);
+      }
       return 'int';
     }
     return 'num';

@@ -5,6 +5,11 @@ namespace Slack\Hack\JsonSchema\Tests;
 
 use type Slack\Hack\JsonSchema\Tests\Generated\NumericalSchemaValidator;
 
+enum TestIntEnum: int {
+  ABC = 1;
+  DEF = 2;
+}
+
 final class NumericalSchemaValidatorTest extends BaseCodegenTestCase {
 
   <<__Override>>
@@ -98,6 +103,26 @@ final class NumericalSchemaValidatorTest extends BaseCodegenTestCase {
         'input' => darray['number_coerce' => 'invalid'],
         'valid' => false,
       ),
+    ];
+
+    $this->expectCases($cases, $input ==> new NumericalSchemaValidator($input));
+  }
+
+  public function testHackEnum(): void {
+    $cases = vec[
+      shape(
+        'input' => darray['hack_enum' => 1],
+        'output' => darray['hack_enum' => TestIntEnum::ABC],
+        'valid' => true,
+      ),
+      shape(
+        'input' => darray['hack_enum' => 2],
+        'output' => darray['hack_enum' => TestIntEnum::DEF],
+        'valid' => true,
+      ),
+      shape('input' => darray['hack_enum' => 0], 'valid' => false),
+      shape('input' => darray['hack_enum' => 3], 'valid' => false),
+      shape('input' => darray['hack_enum' => 1000], 'valid' => false),
     ];
 
     $this->expectCases($cases, $input ==> new NumericalSchemaValidator($input));

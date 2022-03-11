@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<d1a4e4a4c88c5edb5ac1b4b881ed8a3e>>
+ * @generated SignedSource<<34c8f64163a7a2a1d537cafa31516f44>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -17,6 +17,7 @@ type TExamplesStringSchema = shape(
   ?'sanitize_uniline' => string,
   ?'sanitize_multiline' => string,
   ?'date_format' => string,
+  ?'hack_enum' => \Slack\Hack\JsonSchema\Tests\TestStringEnum,
   ...
 );
 
@@ -70,6 +71,25 @@ final class ExamplesStringSchemaPropertiesDateFormat {
     $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
 
     Constraints\StringFormatConstraint::check($typed, self::$format, $pointer);
+    return $typed;
+  }
+}
+
+final class ExamplesStringSchemaPropertiesHackEnum {
+
+  private static bool $coerce = false;
+
+  public static function check(
+    mixed $input,
+    string $pointer,
+  ): \Slack\Hack\JsonSchema\Tests\TestStringEnum {
+    $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
+
+    $typed = Constraints\HackEnumConstraint::check(
+      $typed,
+      \Slack\Hack\JsonSchema\Tests\TestStringEnum::class,
+      $pointer,
+    );
     return $typed;
   }
 }
@@ -143,6 +163,17 @@ final class ExamplesStringSchema
         $output['date_format'] = ExamplesStringSchemaPropertiesDateFormat::check(
           $typed['date_format'],
           JsonSchema\get_pointer($pointer, 'date_format'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'hack_enum')) {
+      try {
+        $output['hack_enum'] = ExamplesStringSchemaPropertiesHackEnum::check(
+          $typed['hack_enum'],
+          JsonSchema\get_pointer($pointer, 'hack_enum'),
         );
       } catch (JsonSchema\InvalidFieldException $e) {
         $errors = \HH\Lib\Vec\concat($errors, $e->errors);

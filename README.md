@@ -82,10 +82,10 @@ By defining the `source_root` and `output_root` we can generate unique validator
 ## Developing
 
 ### Installing Dependencies
-We use composer to install our dependencies. Running the following will install composer (if it doesn't exist already) and install the dependencies:
+We handle all dependencies through Docker. It's as simple as:
 
 ```console
-make composer-install
+make install
 ```
 
 ### Running Tests
