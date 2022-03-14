@@ -486,7 +486,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
   public function testAdditionalProperitesArray(): void {
     $input = dict[
       'additional_properties_array' => dict[
-        'something' => vec['array', 'of', 'strings'],
+        'something' => varray['array', 'of', 'strings'],
       ],
     ];
 
@@ -496,7 +496,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
 
     $input = dict[
       'additional_properties_array' => dict[
-        'something' => vec[34, 'of', 'strings'],
+        'something' => varray[34, 'of', 'strings'],
       ],
     ];
 
@@ -509,7 +509,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
     $input = dict[
       'additional_properties_ref' => dict[
         'something' => dict[
-          'something-else' => vec['array', 'of', 'strings'],
+          'something-else' => varray['array', 'of', 'strings'],
         ],
       ],
     ];
@@ -521,7 +521,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
     $input = dict[
       'additional_properties_ref' => dict[
         'something' => dict[
-          'something-else' => vec[34, 'of', 'strings'],
+          'something-else' => varray[34, 'of', 'strings'],
         ],
       ],
     ];
