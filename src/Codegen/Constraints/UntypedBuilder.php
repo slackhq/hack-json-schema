@@ -273,7 +273,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
             // Disgusting hack: let's just rewind the entire root directory
             if (Str\starts_with($prop['$ref'], '#')) {
               // Ref in the same file
-              $prop_root = $resolved_root_directory.'/'.$resolved_context->getCurrentRefFileName();
+              $prop_root = $resolved_root_directory.'/'.($resolved_context->getCurrentRefFileName() ?? '');
             } else {
               // External file containing ref
               $prop_root = $resolved_root_directory.'/';
