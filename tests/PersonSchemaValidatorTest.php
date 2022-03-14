@@ -172,7 +172,7 @@ final class PersonSchemaValidatorTest extends BaseCodegenTestCase {
     $devices = $validated['devices'] ?? null as nonnull;
 
     $device = $devices[0];
-    invariant(\HH\is_php_array($device), 'device should be array');
+    invariant($device is AnyArray<_, _>, 'device should be array');
 
     $extra = $device['extra'] ?? null;
     expect($extra)->toBeSame(true, 'additional properties should  be included in output');
@@ -200,7 +200,7 @@ final class PersonSchemaValidatorTest extends BaseCodegenTestCase {
     $devices = $validated['devices'] ?? null as nonnull;
 
     $device = $devices[0];
-    invariant(\HH\is_php_array($device), 'device should be array');
+    invariant($device is AnyArray<_, _>, 'device should be array');
 
     $extra = $device['extra'] ?? null;
     expect($extra)->toBeSame(null, "additional properties aren't set if other properties are defined");
