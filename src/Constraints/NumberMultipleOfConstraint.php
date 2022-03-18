@@ -17,9 +17,8 @@ class NumberMultipleOfConstraint {
   public static function check(num $dividend, num $devisor, string $pointer): void {
     invariant($devisor > 0, 'multipleOf 0 or a negative number does not make sense. Use a positive non-zero number.');
 
-    $remainer = Math\abs(
-      $dividend is int && $devisor is int ? $dividend % $devisor : \fmod((float)$dividend, (float)$devisor),
-    );
+    $remainer =
+      Math\abs($dividend is int && $devisor is int ? $dividend % $devisor : \fmod((float)$dividend, (float)$devisor));
 
     $error = shape(
       'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,

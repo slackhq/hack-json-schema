@@ -66,11 +66,7 @@ abstract class BaseCodegenTestCase extends HackTest {
     return self::getCodeGenRoot()."/{$file}";
   }
 
-  public static function getBuilder(
-    string $json_filename,
-    string $name,
-    this::TOptions $options = shape(),
-  ): shape(
+  public static function getBuilder(string $json_filename, string $name, this::TOptions $options = shape()): shape(
     'path' => string,
     'codegen' => Codegen,
   ) {
@@ -83,11 +79,7 @@ abstract class BaseCodegenTestCase extends HackTest {
     );
   }
 
-  public static function getBuilderForSchema(
-    TSchema $schema,
-    string $name,
-    this::TOptions $options = shape(),
-  ): shape(
+  public static function getBuilderForSchema(TSchema $schema, string $name, this::TOptions $options = shape()): shape(
     'path' => string,
     'codegen' => Codegen,
   ) {

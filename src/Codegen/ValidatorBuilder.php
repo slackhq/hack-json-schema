@@ -76,14 +76,8 @@ final class ValidatorBuilder {
   private function buildCodegenClass(string $classname, CodegenFile $file): void {
     $class = $this->cg->codegenClass($classname);
 
-    $root = new RootBuilder(
-      $this->codegenConfig,
-      $this->cg,
-      $this->jsonSchemaCodegenConfig,
-      $this->schema,
-      $class,
-      $file,
-    );
+    $root =
+      new RootBuilder($this->codegenConfig, $this->cg, $this->jsonSchemaCodegenConfig, $this->schema, $class, $file);
 
     $root->build();
 

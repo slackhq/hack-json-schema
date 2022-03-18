@@ -192,11 +192,8 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
 
     $constraints = vec[];
     foreach ($schemas as $index => $schema) {
-      $schema_builder = new SchemaBuilder(
-        $this->ctx,
-        $this->generateClassName('items', $this->suffix, (string)$index),
-        $schema,
-      );
+      $schema_builder =
+        new SchemaBuilder($this->ctx, $this->generateClassName('items', $this->suffix, (string)$index), $schema);
       $schema_builder->build();
 
       $constraints[] = "{$schema_builder->getClassName()}::check<>";

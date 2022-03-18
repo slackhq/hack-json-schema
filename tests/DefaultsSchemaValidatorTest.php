@@ -9,11 +9,8 @@ final class DefaultsSchemaValidatorTest extends BaseCodegenTestCase {
 
   <<__Override>>
   public static async function beforeFirstTestAsync(): Awaitable<void> {
-    $ret = self::getBuilder(
-      'defaults-schema.json',
-      'DefaultsSchemaValidator',
-      shape('defaults' => shape('coerce' => true)),
-    );
+    $ret =
+      self::getBuilder('defaults-schema.json', 'DefaultsSchemaValidator', shape('defaults' => shape('coerce' => true)));
     $ret['codegen']->build();
     require_once($ret['path']);
   }
