@@ -28,7 +28,7 @@ function sanitize(string $input): string {
   return $input
     |> Str\replace_every($$, dict['_' => ' ', '-' => ' ', '.' => ' '])
     |> \preg_replace('/[^A-Za-z0-9 ]/', '_nan_', $$)
-    |> Str\capitalize_words($$)
+    |> Str\capitalize_words($$, " \t\r\n\f\v")
     |> Str\replace($$, ' ', '');
 }
 
