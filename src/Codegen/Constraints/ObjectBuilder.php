@@ -138,11 +138,10 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
 
     $additional_properties = $this->typed_schema['additionalProperties'] ?? null;
     $is_additional_properties_boolean = $additional_properties is nonnull && $additional_properties is bool;
-    $allow_any_additional_properties = $additional_properties is nonnull &&
-      $is_additional_properties_boolean &&
-      $additional_properties;
-    $discard_additional_properties = $additional_properties === false &&
-      $this->ctx->shouldDiscardAdditionalProperties();
+    $allow_any_additional_properties =
+      $additional_properties is nonnull && $is_additional_properties_boolean && $additional_properties;
+    $discard_additional_properties =
+      $additional_properties === false && $this->ctx->shouldDiscardAdditionalProperties();
 
     $discard_all = $discard_additional_properties &&
       ($properties is null || C\count($properties) == 0) &&
@@ -411,11 +410,8 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
       } else if ($additional_properties is nonnull) {
         $schema = type_assert_shape($additional_properties, 'Slack\Hack\JsonSchema\Codegen\TSchema');
 
-        $additional_properties_builder = new SchemaBuilder(
-          $this->ctx,
-          $this->generateClassName($this->suffix, 'additional_properties'),
-          $schema,
-        );
+        $additional_properties_builder =
+          new SchemaBuilder($this->ctx, $this->generateClassName($this->suffix, 'additional_properties'), $schema);
         $additional_properties_builder->build();
         $additional_properties_class_name = $additional_properties_builder->getClassName();
 
@@ -529,9 +525,8 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
       $additional_properties = $this->typed_schema['additionalProperties'] ?? null;
       $defaults = $this->getDefaults();
 
-      $allow_subtyping = $additional_properties is nonnull && $additional_properties is bool
-        ? $additional_properties
-        : true;
+      $allow_subtyping =
+        $additional_properties is nonnull && $additional_properties is bool ? $additional_properties : true;
 
       $members = vec[];
       foreach ($property_classes as $property => $builder) {

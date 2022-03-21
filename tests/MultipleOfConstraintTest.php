@@ -15,8 +15,7 @@ final class MultipleOfConstraintTest extends BaseCodegenTestCase {
     require_once($ret['path']);
   }
 
-  public function provideCasesForIsValid(
-  ): dict<
+  public function provideCasesForIsValid(): dict<
     string,
     (shape(?'a_multiple_of_five_int' => int, ?'a_multiple_of_1_point_one_repeating_number' => num), bool),
   > {

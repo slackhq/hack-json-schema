@@ -79,11 +79,8 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
   private function generateNotChecks(vec<TSchema> $schemas, HackBuilder $hb): void {
     $constraints = vec[];
     foreach ($schemas as $index => $schema) {
-      $schema_builder = new SchemaBuilder(
-        $this->ctx,
-        $this->generateClassName($this->suffix, 'not', (string)$index),
-        $schema,
-      );
+      $schema_builder =
+        new SchemaBuilder($this->ctx, $this->generateClassName($this->suffix, 'not', (string)$index), $schema);
       $schema_builder->build();
       $constraints[] = "{$schema_builder->getClassName()}::check<>";
     }
@@ -134,11 +131,8 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
   private function generateOneOfChecks(vec<TSchema> $schemas, HackBuilder $hb): void {
     $constraints = vec[];
     foreach ($schemas as $index => $schema) {
-      $schema_builder = new SchemaBuilder(
-        $this->ctx,
-        $this->generateClassName($this->suffix, 'oneOf', (string)$index),
-        $schema,
-      );
+      $schema_builder =
+        new SchemaBuilder($this->ctx, $this->generateClassName($this->suffix, 'oneOf', (string)$index), $schema);
       $schema_builder->build();
       $constraints[] = "{$schema_builder->getClassName()}::check<>";
     }
@@ -220,11 +214,8 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
     $schemas = $this->typed_schema['allOf'] ?? vec[]
       |> Vec\reverse($$); // Reverse for parity with non-strict output; this shouldn't actually matter.
     foreach ($schemas as $index => $schema) {
-      $schema_builder = new SchemaBuilder(
-        $this->ctx,
-        $this->generateClassName($this->suffix, 'allOf', (string)$index),
-        $schema
-      );
+      $schema_builder =
+        new SchemaBuilder($this->ctx, $this->generateClassName($this->suffix, 'allOf', (string)$index), $schema);
       $schema = $schema_builder->getResolvedSchema();
       if (Shapes::keyExists($schema, 'allOf')) {
         $builder = new UntypedBuilder($this->ctx, 'allOf', $schema);
@@ -294,15 +285,13 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
         |> Vec\unique($$);
 
       if (Shapes::keyExists($schema, 'minProperties')) {
-        $min_properties = $min_properties is null
-          ? $schema['minProperties']
-          : Math\maxva($min_properties, $schema['minProperties']);
+        $min_properties =
+          $min_properties is null ? $schema['minProperties'] : Math\maxva($min_properties, $schema['minProperties']);
       }
 
       if (Shapes::keyExists($schema, 'maxProperties')) {
-        $max_properties = $max_properties is null
-          ? $schema['maxProperties']
-          : Math\minva($max_properties, $schema['maxProperties']);
+        $max_properties =
+          $max_properties is null ? $schema['maxProperties'] : Math\minva($max_properties, $schema['maxProperties']);
       }
 
       $coerce = $coerce || Shapes::idx($schema, 'coerce', false);
@@ -331,11 +320,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
   }
 
   private function generateMergedAllOfChecks(TSchema $schema, HackBuilder $hb): void {
-    $schema_builder = new SchemaBuilder(
-      $this->ctx,
-      $this->generateClassName($this->suffix, 'allOf'),
-      $schema
-    );
+    $schema_builder = new SchemaBuilder($this->ctx, $this->generateClassName($this->suffix, 'allOf'), $schema);
     $schema_builder->build();
     $this->current_type = $schema_builder->getType();
     $hb->addReturnf('%s::check($input, $pointer)', $schema_builder->getClassName());
@@ -344,11 +329,8 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
   private function generateMixedAllOfChecks(vec<TSchema> $schemas, HackBuilder $hb): void {
     $constraints = vec[];
     foreach ($schemas as $index => $schema) {
-      $schema_builder = new SchemaBuilder(
-        $this->ctx,
-        $this->generateClassName($this->suffix, 'allOf', (string)$index),
-        $schema,
-      );
+      $schema_builder =
+        new SchemaBuilder($this->ctx, $this->generateClassName($this->suffix, 'allOf', (string)$index), $schema);
       $schema_builder->build();
       $constraints[] = "{$schema_builder->getClassName()}::check<>";
     }
@@ -454,10 +436,8 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
               $property_type = TSchemaType::assert($property_type);
 
               if ($property_type === TSchemaType::STRING_T && C\contains($required, $property_name)) {
-                $typed_property_schema = type_assert_shape(
-                  $property_schema,
-                  'Slack\Hack\JsonSchema\Codegen\TStringSchema',
-                );
+                $typed_property_schema =
+                  type_assert_shape($property_schema, 'Slack\Hack\JsonSchema\Codegen\TStringSchema');
 
                 $enum = $typed_property_schema['enum'] ?? null;
                 if ($enum is nonnull && C\count($enum) === 1) {

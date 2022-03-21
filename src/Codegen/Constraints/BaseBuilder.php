@@ -119,7 +119,7 @@ abstract class BaseBuilder<T> implements IBuilder {
         $hack_enum_value is nonnull,
         "'%s' must contain only values of type %s",
         $rc->getName(),
-        $schema_type === TSchemaType::INTEGER_T ? 'int' : 'string'
+        $schema_type === TSchemaType::INTEGER_T ? 'int' : 'string',
       );
       $hack_enum_values[] = $hack_enum_value;
     }
@@ -132,13 +132,13 @@ abstract class BaseBuilder<T> implements IBuilder {
           $enum_value is string,
           "Enum value '%s' is not a valid value for '%s'",
           \print_r($enum_value, true),
-          $rc->getName()
+          $rc->getName(),
         );
         invariant(
           C\contains_key($hack_enum_values, $enum_value),
           "Enum value '%s' is unexpectedly not present in '%s'",
           \print_r($enum_value, true),
-          $rc->getName()
+          $rc->getName(),
         );
       }
     }
@@ -148,8 +148,8 @@ abstract class BaseBuilder<T> implements IBuilder {
       vec[
         '$typed',
         Str\format('\%s::class', $rc->getName()),
-        '$pointer'
-      ]
+        '$pointer',
+      ],
     );
   }
 
