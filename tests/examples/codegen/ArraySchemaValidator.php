@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<87191fcc75856e69e35c2652ba5f9836>>
+ * @generated SignedSource<<7f20c3eead69c411ea999a821ff7167a>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -25,6 +25,7 @@ type TArraySchemaValidator = shape(
   ?'unique_numbers_coerce' => keyset<int>,
   ?'unsupported_unique_items' => vec<TArraySchemaValidatorPropertiesUnsupportedUniqueItemsItems>,
   ?'hack_enum_items' => vec<\Slack\Hack\JsonSchema\Tests\TestStringEnum>,
+  ?'unique_hack_enum_items' => keyset<\Slack\Hack\JsonSchema\Tests\TestStringEnum>,
   ...
 );
 
@@ -392,6 +393,63 @@ final class ArraySchemaValidatorPropertiesHackEnumItems {
   }
 }
 
+final class ArraySchemaValidatorPropertiesUniqueHackEnumItemsItems {
+
+  private static bool $coerce = false;
+
+  public static function check(
+    mixed $input,
+    string $pointer,
+  ): \Slack\Hack\JsonSchema\Tests\TestStringEnum {
+    $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
+
+    $typed = Constraints\HackEnumConstraint::check(
+      $typed,
+      \Slack\Hack\JsonSchema\Tests\TestStringEnum::class,
+      $pointer,
+    );
+    return $typed;
+  }
+}
+
+final class ArraySchemaValidatorPropertiesUniqueHackEnumItems {
+
+  private static bool $coerce = true;
+
+  public static function check(
+    mixed $input,
+    string $pointer,
+  ): keyset<\Slack\Hack\JsonSchema\Tests\TestStringEnum> {
+    $typed = Constraints\ArrayConstraint::check($input, $pointer, self::$coerce);
+
+    $output = vec[];
+    $errors = vec[];
+
+    foreach ($typed as $index => $value) {
+      try {
+        $output[] = ArraySchemaValidatorPropertiesUniqueHackEnumItemsItems::check(
+          $value,
+          JsonSchema\get_pointer($pointer, (string) $index),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\count($errors)) {
+      throw new JsonSchema\InvalidFieldException($pointer, $errors);
+    }
+
+    $output = Constraints\ArrayUniqueItemsConstraint::check(
+      $output,
+      $pointer,
+      self::$coerce,
+    );
+
+    return $output;
+  }
+}
+
 final class ArraySchemaValidator
   extends JsonSchema\BaseValidator<TArraySchemaValidator> {
 
@@ -494,6 +552,17 @@ final class ArraySchemaValidator
         $output['hack_enum_items'] = ArraySchemaValidatorPropertiesHackEnumItems::check(
           $typed['hack_enum_items'],
           JsonSchema\get_pointer($pointer, 'hack_enum_items'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'unique_hack_enum_items')) {
+      try {
+        $output['unique_hack_enum_items'] = ArraySchemaValidatorPropertiesUniqueHackEnumItems::check(
+          $typed['unique_hack_enum_items'],
+          JsonSchema\get_pointer($pointer, 'unique_hack_enum_items'),
         );
       } catch (JsonSchema\InvalidFieldException $e) {
         $errors = \HH\Lib\Vec\concat($errors, $e->errors);
