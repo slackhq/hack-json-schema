@@ -3,11 +3,10 @@
 namespace Slack\Hack\JsonSchema\Codegen;
 
 use namespace HH\Lib\C;
-use type Facebook\HackCodegen\CodegenFile;
 
 final class RefCache {
 
-  static private dict<string, CodegenFile> $generatedRefs = dict[];
+  static private dict<string, Codegen> $generatedRefs = dict[];
 
   //
   // Run this resetCache before using any other method
@@ -22,8 +21,8 @@ final class RefCache {
   // the full pathname of the file.
   //
 
-  static public function cacheRef(string $refName, CodegenFile $file): void {
-    RefCache::$generatedRefs[$refName] = $file;
+  static public function cacheRef(string $refName, Codegen $codegen): void {
+    RefCache::$generatedRefs[$refName] = $codegen;
   }
 
   //
@@ -36,11 +35,11 @@ final class RefCache {
 
   //
   // Do not use this function unless you have already verified that a
-  // CodegenFile exists for $refName. This function will not gracefully
+  // Codegen exists for $refName. This function will not gracefully
   // handle the case when $refName is not found in the cache.
   //
 
-  static public function getCachedFile(string $refName): CodegenFile {
+  static public function getCachedCodegen(string $refName): Codegen {
     return RefCache::$generatedRefs[$refName];
   }
 }

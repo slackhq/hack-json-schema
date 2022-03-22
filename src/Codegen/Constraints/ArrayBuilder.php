@@ -2,7 +2,6 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use namespace HH\Lib\C;
 use type Facebook\HackCodegen\{CodegenMethod, HackBuilder, HackBuilderValues};
 
 type TArraySchema = shape(
@@ -266,11 +265,12 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
    */
   private function determineHackArrayType(): void {
     $items = $this->typed_schema['items'] ?? null;
-    if (($this->schema['uniqueItems'] ?? false) && $this->isSchema($items)) {
-      $schema = type_assert_type($items, TArraySchemaItemsSingleSchema::class);
-      if (C\contains(keyset[TSchemaType::INTEGER_T, TSchemaType::STRING_T], $schema['type'] ?? null)) {
-        $this->hackArrayType = HackArrayType::KEYSET;
-      }
+    if (
+      Shapes::idx($this->typed_schema, 'uniqueItems') &&
+      $this->isSchema($items) &&
+      $this->singleItemSchemaBuilder?->isArrayKeyType()
+    ) {
+      $this->hackArrayType = HackArrayType::KEYSET;
     }
   }
 }

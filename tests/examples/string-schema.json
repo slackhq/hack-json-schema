@@ -29,9 +29,16 @@
     }
   },
   "definitions": {
+    "simple": {
+      "type": "string"
+    },
     "coerce": {
       "type": "string",
       "coerce": true
+    },
+    "hack_enum": {
+      "type": "string",
+      "hackEnum": "Slack\\Hack\\JsonSchema\\Tests\\TestStringEnum"
     }
   }
 }

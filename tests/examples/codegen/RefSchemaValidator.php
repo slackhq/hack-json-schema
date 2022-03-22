@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<98eaf6ad9c7dad3c90928ea79b70f4e7>>
+ * @generated SignedSource<<8b989ac14d2b7d0004cd6b8bc0b8e7b5>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -24,6 +24,7 @@ type TRefSchemaValidatorPropertiesDuplicateRefs = shape(
 
 type TRefSchemaValidator = shape(
   ?'local-reference' => TExamplesRefSchemaDefinitionsLocalObjectReference,
+  ?'string-reference' => string,
   ?'remote-reference' => string,
   ?'remote-reference-self' => string,
   ?'remote-same-dir-reference' => string,
@@ -213,6 +214,17 @@ final class RefSchemaValidator
         $output['local-reference'] = ExamplesRefSchemaDefinitionsLocalObjectReference::check(
           $typed['local-reference'],
           JsonSchema\get_pointer($pointer, 'local-reference'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'string-reference')) {
+      try {
+        $output['string-reference'] = ExamplesStringSchemaDefinitionsSimple::check(
+          $typed['string-reference'],
+          JsonSchema\get_pointer($pointer, 'string-reference'),
         );
       } catch (JsonSchema\InvalidFieldException $e) {
         $errors = \HH\Lib\Vec\concat($errors, $e->errors);

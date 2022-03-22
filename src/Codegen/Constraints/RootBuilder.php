@@ -31,8 +31,20 @@ final class RootBuilder implements IBuilder {
     return $this->root->getClassName();
   }
 
+  public function getClass(): CodegenClass {
+    return $this->class;
+  }
+
+  public function getFile(): CodegenFile {
+    return $this->file;
+  }
+
   public function getType(): string {
     return $this->root->getType();
+  }
+
+  public function isArrayKeyType(): bool {
+    return $this->root->isArrayKeyType();
   }
 
   public function setSuffix(string $_suffix): void {

@@ -29,6 +29,16 @@ abstract class BaseBuilder<T> implements IBuilder {
   */
   abstract public function getType(): string;
 
+  public function isArrayKeyType(): bool {
+    $type = $this->getType();
+    if ($type === 'string' || $type === 'int') {
+      return true;
+    }
+
+    $schema = type_assert_type($this->typed_schema, TSchema::class);
+    return Shapes::keyExists($schema, 'hackEnum');
+  }
+
   /**
   *
   * Main method for building the class for the schema and appending it to the

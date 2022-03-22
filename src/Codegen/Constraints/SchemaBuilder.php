@@ -152,6 +152,10 @@ class SchemaBuilder implements IBuilder {
     return $this->builder->getType();
   }
 
+  public function isArrayKeyType(): bool {
+    return $this->builder->isArrayKeyType();
+  }
+
   public function getClassName(): string {
     return $this->builder->getClassName();
   }
