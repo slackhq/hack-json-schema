@@ -2,7 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use namespace HH\Lib\{Str, Vec};
+use namespace HH\Lib\Str;
 
 use type Facebook\HackCodegen\CodegenMethod;
 
