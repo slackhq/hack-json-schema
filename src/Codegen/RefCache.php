@@ -5,8 +5,13 @@ namespace Slack\Hack\JsonSchema\Codegen;
 use namespace HH\Lib\C;
 
 final class RefCache {
+  const type TCachedRef = shape(
+    'type' => string,
+    'classname' => string,
+    'isArrayKeyType' => bool
+  );
 
-  static private dict<string, Codegen> $generatedRefs = dict[];
+  static private dict<string, self::TCachedRef> $generatedRefs = dict[];
 
   //
   // Run this resetCache before using any other method
@@ -17,12 +22,12 @@ final class RefCache {
   }
 
   //
-  // Cache the ref by passing in a CodegenFile object. The $refName should be
+  // Cache the ref by passing in a Cached Ref. The $refName should be
   // the full pathname of the file.
   //
 
-  static public function cacheRef(string $refName, Codegen $codegen): void {
-    RefCache::$generatedRefs[$refName] = $codegen;
+  static public function cacheRef(string $refName, self::TCachedRef $ref): void {
+    RefCache::$generatedRefs[$refName] = $ref;
   }
 
   //
@@ -35,11 +40,11 @@ final class RefCache {
 
   //
   // Do not use this function unless you have already verified that a
-  // Codegen exists for $refName. This function will not gracefully
+  // Cached Ref exists for $refName. This function will not gracefully
   // handle the case when $refName is not found in the cache.
   //
 
-  static public function getCachedCodegen(string $refName): Codegen {
+  static public function getCachedRef(string $refName): this::TCachedRef {
     return RefCache::$generatedRefs[$refName];
   }
 }

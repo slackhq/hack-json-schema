@@ -2,16 +2,20 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use namespace HH\Lib\Vec;
+use namespace HH\Lib\{Str, Vec};
 use type Facebook\HackCodegen\{
+  CodegenClass,
   CodegenFile,
+  CodegenFileType,
   CodegenGeneratedFrom,
+  CodegenMethod,
+  HackBuilder,
   HackCodegenConfig,
   HackCodegenFactory,
   IHackCodegenConfig,
 };
 
-final class Codegen {
+final class Codegen implements IBuilder {
 
   const type TValidatorRefsUniqueConfig = shape(
     /* The root path where all of the schemas live */
@@ -108,23 +112,45 @@ final class Codegen {
     ),
   );
 
-  private ValidatorBuilder $builder;
+  private ?CodegenGeneratedFrom $generatedFrom;
+  private HackCodegenFactory $cg;
+  private bool $discardChanges = false;
+  private bool $createAbstract = false;
+  private SchemaBuilder $builder;
+  private CodegenClass $class;
+  private CodegenFile $file;
+  private ?Codegen::TSanitizeStringConfig $sanitizeString = null;
 
   private function __construct(private dict<arraykey, mixed> $schema, private self::TCodegenConfig $config) {
-    $config = $this->config['validator'];
+    $this->cg = new HackCodegenFactory($this->getHackCodegenConfig());
 
-    $builder = new ValidatorBuilder(
+    $validatorConfig = $config['validator'];
+
+    $this->class = $this->cg->codegenClass($validatorConfig['class']);
+
+    $this->file = $this->cg
+      ->codegenFile($validatorConfig['file'])
+      ->setFileType(CodegenFileType::HACK_STRICT)
+      ->setGeneratedFrom($this->getGeneratedFrom())
+      ->setDoClobber($config['discardChanges'] ?? false)
+      ->useNamespace('Slack\Hack\JsonSchema');
+
+    if (Shapes::keyExists($validatorConfig, 'namespace')) {
+      $this->file->setNamespace($validatorConfig['namespace']);
+    }
+
+    $context = new Context(
       $this->config,
-      $this->getHackCodegenConfig(),
+      $this->cg,
       $this->getJsonSchemaCodegenConfig(),
       $this->schema,
+      $this->class->getName(),
+      $this->file
     );
+    $typed_schema = type_assert_type($this->schema, TSchema::class);
+    $this->builder = new SchemaBuilder($context, '', $typed_schema, $this->class);
 
-    $this->builder = $builder
-      ->setCreateAbstractClass(false)
-      ->setGeneratedFrom($this->getGeneratedFrom())
-      ->setDiscardChanges($this->config['discardChanges'] ?? false)
-      ->setSanitizeString($config['sanitize_string'] ?? null);
+    $this->sanitizeString = $validatorConfig['sanitize_string'] ?? null;
   }
 
   /**
@@ -228,11 +254,64 @@ final class Codegen {
     return $this->config['jsonSchemaCodegenConfig'] ?? new JsonSchemaCodegenConfig();
   }
 
-  public function build(): CodegenFile {
-    return $this->builder->build();
+  public function build(): this {
+    $this->builder->build();
+
+    if ($this->builder->isUniqueRef()) {
+      // No need to do anything, we're building a top-level ref.
+      return $this;
+    }
+
+    $this->class = $this->class
+      ->setExtends("JsonSchema\BaseValidator<{$this->builder->getType()}>")
+      ->setIsAbstract(false)
+      ->setIsFinal(true)
+      ->addMethod($this->getCodegenClassProcessMethod());
+
+    $this->file->addClass($this->class);
+
+    $contents = $this->file->render();
+    if (Str\contains($contents, 'Constraints\\')) {
+      $this->file->useNamespace('Slack\Hack\JsonSchema\Constraints');
+    }
+
+    $this->file->save();
+
+    return $this;
   }
 
-  public function getBuilder(): ValidatorBuilder {
-    return $this->builder;
+  private function getCodegenClassProcessMethod(): CodegenMethod {
+    $hb = new HackBuilder($this->getHackCodegenConfig());
+    $hb->addMultilineCall('return self::check', vec['$this->input', '$this->pointer']);
+
+    return $this->cg
+      ->codegenMethod('process')
+      ->setReturnType($this->builder->getType())
+      ->addEmptyUserAttribute('__Override')
+      ->setProtected()
+      ->setBody($hb->getCode());
+  }
+
+  public function getClass(): CodegenClass {
+    return $this->class;
+  }
+
+  public function getFile(): CodegenFile {
+    return $this->file;
+  }
+
+  public function getClassName(): string {
+    return $this->builder->getClassName();
+  }
+
+  public function getType(): string {
+    return $this->builder->getType();
+  }
+
+  public function isArrayKeyType(): bool {
+    return $this->builder->isArrayKeyType();
+  }
+
+  public function setSuffix(string $_suffix): void {
   }
 }

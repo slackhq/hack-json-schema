@@ -175,4 +175,8 @@ class SchemaBuilder implements IBuilder {
   public function setSuffix(string $suffix): void {
     $this->builder->setSuffix($suffix);
   }
+
+  public function isUniqueRef(): bool {
+    return $this->getBuilder() is UniqueRefBuilder;
+  }
 }
