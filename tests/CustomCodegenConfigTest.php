@@ -20,7 +20,8 @@ final class CustomCodegenConfigTest extends BaseCodegenTestCase {
         'json_schema_codegen_config' => $config,
       ),
     );
-    $cf = $ret['codegen']->build();
+    $ret['codegen']->build();
+    $cf = $ret['codegen']->getFile();
 
     $rendered = $cf->render();
     $this->assertUnchanged($rendered);

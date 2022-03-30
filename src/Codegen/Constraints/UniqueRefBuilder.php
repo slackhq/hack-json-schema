@@ -13,7 +13,7 @@ class UniqueRefBuilder implements IBuilder {
 
   private string $classname;
   private string $filename;
-  private ?RootBuilder $builder;
+  private ?RefCache::TCachedRef $cached_ref;
 
   public function __construct(protected Context $ctx, protected string $ref, protected TSchema $schema) {
     $this->classname = '';
@@ -63,15 +63,18 @@ class UniqueRefBuilder implements IBuilder {
     $codegen_config['validator']['context'] = $context_config;
 
     if (RefCache::isRefCached($this->filename)) {
-      $codegen = RefCache::getCachedCodegen($this->filename);
+      $this->cached_ref = RefCache::getCachedRef($this->filename);
     } else {
       $codegen = Codegen::forSchema(Shapes::toDict($this->schema), $codegen_config, $root_directory);
       $codegen->build();
-      RefCache::cacheRef($this->filename, $codegen);
+      $this->cached_ref = shape(
+        'type' => $codegen->getType(),
+        'classname' => $codegen->getClassName(),
+        'isArrayKeyType' => $codegen->isArrayKeyType(),
+      );
+      RefCache::cacheRef($this->filename, $this->cached_ref);
     }
 
-    $validator_builder = $codegen->getBuilder();
-    $this->builder = $validator_builder->getBuilder();
     return $this;
   }
 
@@ -80,13 +83,13 @@ class UniqueRefBuilder implements IBuilder {
   }
 
   public function getType(): string {
-    invariant($this->builder is nonnull, 'must call `build` method before accessing type');
-    return $this->builder->getType();
+    invariant($this->cached_ref is nonnull, 'must call `build` method before accessing type');
+    return $this->cached_ref['type'];
   }
 
   public function isArrayKeyType(): bool {
-    invariant($this->builder is nonnull, 'must call `build` method before accessing type');
-    return $this->builder->isArrayKeyType();
+    invariant($this->cached_ref is nonnull, 'must call `build` method before accessing type');
+    return $this->cached_ref['isArrayKeyType'];
   }
 
   public function setSuffix(string $_suffix): void {

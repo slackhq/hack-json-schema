@@ -23,7 +23,8 @@ final class AnyOfRefiningTest extends BaseCodegenTestCase {
   public function testNullableString(): void {
 
     $ret = self::getBuilder('anyof-schema-1.json', 'AnyOfValidator1');
-    $cf = $ret['codegen']->build();
+    $ret['codegen']->build();
+    $cf = $ret['codegen']->getFile();
 
     $validator = new AnyOfValidator1('ok');
     $validator->validate();
@@ -37,7 +38,8 @@ final class AnyOfRefiningTest extends BaseCodegenTestCase {
   public function testMixedUnchanged(): void {
 
     $ret2 = self::getBuilder('anyof-schema-2.json', 'AnyOfValidator2');
-    $cf = $ret2['codegen']->build();
+    $ret2['codegen']->build();
+    $cf = $ret2['codegen']->getFile();
 
     $validator = new AnyOfValidator2(2);
     $validator->validate();
@@ -51,7 +53,8 @@ final class AnyOfRefiningTest extends BaseCodegenTestCase {
   public function testDoubleNull(): void {
 
     $ret3 = self::getBuilder('anyof-schema-3.json', 'AnyOfValidator3');
-    $cf = $ret3['codegen']->build();
+    $ret3['codegen']->build();
+    $cf = $ret3['codegen']->getFile();
 
     $validator = new AnyOfValidator3(null);
     $validator->validate();
@@ -65,7 +68,8 @@ final class AnyOfRefiningTest extends BaseCodegenTestCase {
   public function testNullableObject(): void {
 
     $ret4 = self::getBuilder('anyof-schema-4.json', 'AnyOfValidator4');
-    $cf = $ret4['codegen']->build();
+    $ret4['codegen']->build();
+    $cf = $ret4['codegen']->getFile();
 
     $validator = new AnyOfValidator4(dict[
       'post-office-box' => 'ok',

@@ -264,12 +264,7 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
    * Determine the type of hack array we will generate.
    */
   private function determineHackArrayType(): void {
-    $items = $this->typed_schema['items'] ?? null;
-    if (
-      Shapes::idx($this->typed_schema, 'uniqueItems') &&
-      $this->isSchema($items) &&
-      $this->singleItemSchemaBuilder?->isArrayKeyType()
-    ) {
+    if (Shapes::idx($this->typed_schema, 'uniqueItems') && $this->singleItemSchemaBuilder?->isArrayKeyType()) {
       $this->hackArrayType = HackArrayType::KEYSET;
     }
   }
