@@ -25,6 +25,13 @@
         "type": "string"
       }
     },
+    "unique_strings_ref": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "string-schema.json#/definitions/simple"
+      }
+    },
     "unique_numbers": {
       "type": "array",
       "uniqueItems": true,
@@ -66,6 +73,14 @@
       "items": {
         "type": "string",
         "hackEnum": "Slack\\Hack\\JsonSchema\\Tests\\TestStringEnum"
+      }
+    },
+    "unique_hack_enum_items_ref": {
+      "type": "array",
+      "uniqueItems": true,
+      "coerce": true,
+      "items": {
+        "$ref": "string-schema.json#/definitions/hack_enum"
       }
     }
   }

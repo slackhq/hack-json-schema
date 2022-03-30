@@ -2,7 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Codegen;
 
-use namespace HH\Lib\{Str, Vec};
+use namespace HH\Lib\Str;
 
 use type Facebook\HackCodegen\CodegenMethod;
 
@@ -13,7 +13,7 @@ class UniqueRefBuilder implements IBuilder {
 
   private string $classname;
   private string $filename;
-  private ?string $type;
+  private ?RootBuilder $builder;
 
   public function __construct(protected Context $ctx, protected string $ref, protected TSchema $schema) {
     $this->classname = '';
@@ -62,33 +62,16 @@ class UniqueRefBuilder implements IBuilder {
     $codegen_config['validator']['refs'] = $refs_config;
     $codegen_config['validator']['context'] = $context_config;
 
-    $codegen = Codegen::forSchema(Shapes::toDict($this->schema), $codegen_config, $root_directory);
-
-    $codegen_file = null;
     if (RefCache::isRefCached($this->filename)) {
-      $codegen_file = RefCache::getCachedFile($this->filename);
+      $codegen = RefCache::getCachedCodegen($this->filename);
     } else {
-      $codegen_file = $codegen->build();
+      $codegen = Codegen::forSchema(Shapes::toDict($this->schema), $codegen_config, $root_directory);
+      $codegen->build();
+      RefCache::cacheRef($this->filename, $codegen);
     }
 
-    RefCache::cacheRef($this->filename, $codegen_file);
-
-    $main_class = Vec\filter($codegen_file->getClasses(), $class ==> $class->getName() === $this->classname)[0];
-
-    $methods = get_private_property(\get_class($main_class), 'methods', $main_class)
-      |> type_assert_shape($$, '\Slack\Hack\JsonSchema\Codegen\TCodegenMethods');
-
-    $check_method = Vec\filter(
-      $methods,
-      $method ==> {
-        $name = get_private_property(\get_class($method), 'name', $method);
-        return $name === 'check';
-      },
-    )[0];
-
-    $return_type = get_private_property(\get_class($check_method), 'returnType', $check_method);
-    $this->type = $return_type as string;
-
+    $validator_builder = $codegen->getBuilder();
+    $this->builder = $validator_builder->getBuilder();
     return $this;
   }
 
@@ -97,8 +80,13 @@ class UniqueRefBuilder implements IBuilder {
   }
 
   public function getType(): string {
-    invariant($this->type is nonnull, 'must call `build` method before accessing type');
-    return $this->type;
+    invariant($this->builder is nonnull, 'must call `build` method before accessing type');
+    return $this->builder->getType();
+  }
+
+  public function isArrayKeyType(): bool {
+    invariant($this->builder is nonnull, 'must call `build` method before accessing type');
+    return $this->builder->isArrayKeyType();
   }
 
   public function setSuffix(string $_suffix): void {

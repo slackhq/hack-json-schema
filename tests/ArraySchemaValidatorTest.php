@@ -12,7 +12,18 @@ final class ArraySchemaValidatorTest extends BaseCodegenTestCase {
 
   <<__Override>>
   public static async function beforeFirstTestAsync(): Awaitable<void> {
-    $ret = self::getBuilder('array-schema.json', 'ArraySchemaValidator');
+    $ret = self::getBuilder(
+      'array-schema.json',
+      'ArraySchemaValidator',
+      shape(
+        'refs' => shape(
+          'unique' => shape(
+            'source_root' => __DIR__,
+            'output_root' => __DIR__.'/examples/codegen',
+          ),
+        ),
+      ),
+    );
     $ret['codegen']->build();
     require_once($ret['path']);
   }
@@ -162,6 +173,18 @@ final class ArraySchemaValidatorTest extends BaseCodegenTestCase {
     expect($constraint['got'] ?? null)->toEqual($input);
   }
 
+  public function testUniqueItemsWithValidStringRef(): void {
+    $input = vec['a', 'b', 'c'];
+
+    $validator = new ArraySchemaValidator(dict['unique_strings_ref' => $input]);
+    $validator->validate();
+
+    expect($validator->isValid())->toBeTrue();
+    $validated = $validator->getValidatedInput();
+
+    expect($validated)->toBeSame(shape('unique_strings_ref' => keyset($input)));
+  }
+
   public function testUniqueItemsWithValidNumbers(): void {
     $input = vec[1, 2, 3];
 
@@ -240,6 +263,20 @@ final class ArraySchemaValidatorTest extends BaseCodegenTestCase {
     $validated = $validator->getValidatedInput();
 
     expect($validated)->toEqual(shape('unique_hack_enum_items' => keyset[TestStringEnum::ABC, TestStringEnum::DEF]));
+  }
+
+  public function testUniqueHackEnumItemsRef(): void {
+    $input = vec['foo', 'bar', 'foo'];
+
+    $validator = new ArraySchemaValidator(dict['unique_hack_enum_items_ref' => $input]);
+    $validator->validate();
+
+    expect($validator->isValid())->toBeTrue();
+    $validated = $validator->getValidatedInput();
+
+    expect($validated)->toEqual(
+      shape('unique_hack_enum_items_ref' => keyset[TestStringEnum::ABC, TestStringEnum::DEF]),
+    );
   }
 
 }

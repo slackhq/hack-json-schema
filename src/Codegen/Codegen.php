@@ -108,7 +108,24 @@ final class Codegen {
     ),
   );
 
-  private function __construct(private dict<arraykey, mixed> $schema, private self::TCodegenConfig $config) {}
+  private ValidatorBuilder $builder;
+
+  private function __construct(private dict<arraykey, mixed> $schema, private self::TCodegenConfig $config) {
+    $config = $this->config['validator'];
+
+    $builder = new ValidatorBuilder(
+      $this->config,
+      $this->getHackCodegenConfig(),
+      $this->getJsonSchemaCodegenConfig(),
+      $this->schema,
+    );
+
+    $this->builder = $builder
+      ->setCreateAbstractClass(false)
+      ->setGeneratedFrom($this->getGeneratedFrom())
+      ->setDiscardChanges($this->config['discardChanges'] ?? false)
+      ->setSanitizeString($config['sanitize_string'] ?? null);
+  }
 
   /**
   * Generate validators for multiple schema paths. This requires using unique
@@ -212,25 +229,10 @@ final class Codegen {
   }
 
   public function build(): CodegenFile {
-    return $this->buildValidator();
+    return $this->builder->build();
   }
 
-  private function buildValidator(): CodegenFile {
-    $config = $this->config['validator'];
-
-    $builder = new ValidatorBuilder(
-      $this->config,
-      $this->getHackCodegenConfig(),
-      $this->getJsonSchemaCodegenConfig(),
-      $this->schema,
-    );
-
-    return $builder
-      ->setCreateAbstractClass(false)
-      ->setGeneratedFrom($this->getGeneratedFrom())
-      ->setDiscardChanges($this->config['discardChanges'] ?? false)
-      ->setSanitizeString($config['sanitize_string'] ?? null)
-      ->renderToFile($config['file'], $config['namespace'] ?? null, $config['class']);
+  public function getBuilder(): ValidatorBuilder {
+    return $this->builder;
   }
-
 }

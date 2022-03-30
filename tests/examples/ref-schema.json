@@ -4,6 +4,9 @@
     "local-reference": {
       "$ref": "#/definitions/local-object-reference"
     },
+    "string-reference": {
+      "$ref": "string-schema.json#/definitions/simple"
+    },
     "remote-reference": {
       "$ref": "#/definitions/remote-reference"
     },

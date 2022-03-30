@@ -19,6 +19,7 @@ final class ValidatorBuilder {
   private HackCodegenFactory $cg;
   private bool $discardChanges = false;
   private bool $createAbstract = false;
+  private RootBuilder $builder;
   private ?Codegen::TSanitizeStringConfig $sanitizeString = null;
 
   public function __construct(
@@ -28,6 +29,22 @@ final class ValidatorBuilder {
     private dict<arraykey, mixed> $schema,
   ) {
     $this->cg = new HackCodegenFactory($hackCodegenConfig);
+
+    $config = $codegenConfig['validator'];
+
+    $class = $this->cg->codegenClass($config['class']);
+
+    $file = $this->cg
+      ->codegenFile($config['file'])
+      ->setFileType(CodegenFileType::HACK_STRICT)
+      ->useNamespace('Slack\Hack\JsonSchema');
+
+    if (Shapes::keyExists($config, 'namespace')) {
+      $file->setNamespace($config['namespace']);
+    }
+
+    $this->builder =
+      new RootBuilder($this->codegenConfig, $this->cg, $this->jsonSchemaCodegenConfig, $this->schema, $class, $file);
   }
 
   public function setCreateAbstractClass(bool $abstract): this {
@@ -36,12 +53,12 @@ final class ValidatorBuilder {
   }
 
   public function setGeneratedFrom(CodegenGeneratedFrom $generated_from): this {
-    $this->generatedFrom = $generated_from;
+    $this->builder->getFile()->setGeneratedFrom($generated_from);
     return $this;
   }
 
   public function setDiscardChanges(bool $discard): this {
-    $this->discardChanges = $discard;
+    $this->builder->getFile()->setDoClobber($discard);
     return $this;
   }
 
@@ -50,59 +67,40 @@ final class ValidatorBuilder {
     return $this;
   }
 
-  public function renderToFile(string $filename, ?string $namespace, string $classname): CodegenFile {
-    $file = $this->getCodegenFile($filename, $namespace, $classname);
-    $file->save();
-    return $file;
+  public function getBuilder(): RootBuilder {
+    return $this->builder;
   }
 
-  private function getCodegenFile(string $filename, ?string $namespace, string $classname): CodegenFile {
-    $file = $this->cg
-      ->codegenFile($filename)
-      ->setDoClobber($this->discardChanges)
-      ->setFileType(CodegenFileType::HACK_STRICT)
-      ->setGeneratedFrom($this->generatedFrom ?? $this->cg->codegenGeneratedFromScript())
-      ->useNamespace('Slack\Hack\JsonSchema');
-
-    $this->buildCodegenClass($classname, $file);
-
-    if ($namespace !== null) {
-      $file->setNamespace($namespace);
-    }
-
-    return $file;
-  }
-
-  private function buildCodegenClass(string $classname, CodegenFile $file): void {
-    $class = $this->cg->codegenClass($classname);
-
-    $root =
-      new RootBuilder($this->codegenConfig, $this->cg, $this->jsonSchemaCodegenConfig, $this->schema, $class, $file);
-
-    $root->build();
+  public function build(): CodegenFile {
+    $this->builder->build();
 
     $abstract = $this->createAbstract;
-    $class
-      ->setExtends("JsonSchema\BaseValidator<{$root->getType()}>")
+    $class = $this->builder
+      ->getClass()
+      ->setExtends("JsonSchema\BaseValidator<{$this->builder->getType()}>")
       ->setIsAbstract($abstract)
       ->setIsFinal(!$abstract)
-      ->addMethod($this->getCodegenClassProcessMethod($root));
+      ->addMethod($this->getCodegenClassProcessMethod());
 
+    $file = $this->builder->getFile();
     $file->addClass($class);
 
     $contents = $file->render();
     if (Str\contains($contents, 'Constraints\\')) {
       $file->useNamespace('Slack\Hack\JsonSchema\Constraints');
     }
+
+    $file->save();
+    return $file;
   }
 
-  private function getCodegenClassProcessMethod(RootBuilder $root): CodegenMethod {
+  private function getCodegenClassProcessMethod(): CodegenMethod {
     $hb = new HackBuilder($this->hackCodegenConfig);
     $hb->addMultilineCall('return self::check', vec['$this->input', '$this->pointer']);
 
     return $this->cg
       ->codegenMethod('process')
-      ->setReturnType($root->getType())
+      ->setReturnType($this->builder->getType())
       ->addEmptyUserAttribute('__Override')
       ->setProtected()
       ->setBody($hb->getCode());
