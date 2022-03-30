@@ -70,7 +70,7 @@ class UniqueRefBuilder implements IBuilder {
       $this->cached_ref = shape(
         'type' => $codegen->getType(),
         'classname' => $codegen->getClassName(),
-        'isArrayKeyType' => $codegen->isArrayKeyType()
+        'isArrayKeyType' => $codegen->isArrayKeyType(),
       );
       RefCache::cacheRef($this->filename, $this->cached_ref);
     }

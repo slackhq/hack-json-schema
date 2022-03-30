@@ -145,7 +145,7 @@ final class Codegen implements IBuilder {
       $this->getJsonSchemaCodegenConfig(),
       $this->schema,
       $this->class->getName(),
-      $this->file
+      $this->file,
     );
     $typed_schema = type_assert_type($this->schema, TSchema::class);
     $this->builder = new SchemaBuilder($context, '', $typed_schema, $this->class);

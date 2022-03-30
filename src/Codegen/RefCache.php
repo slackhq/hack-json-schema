@@ -8,7 +8,7 @@ final class RefCache {
   const type TCachedRef = shape(
     'type' => string,
     'classname' => string,
-    'isArrayKeyType' => bool
+    'isArrayKeyType' => bool,
   );
 
   static private dict<string, self::TCachedRef> $generatedRefs = dict[];
