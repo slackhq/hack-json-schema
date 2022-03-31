@@ -309,11 +309,16 @@ final class Codegen implements IBuilder {
   }
 
   public function getClassName(): string {
+    // Whether or not we're generating a unique ref,
+    // we'll always end up outputting a new class.
     return $this->generateClassName($this->class->getName());
   }
 
   public function getType(): string {
     if ($this->builder->isUniqueRef()) {
+      // Generating an alias to a unique ref.
+      // Don't re-use the referenced type's name; instead,
+      // generate a new type pointing to it.
       return $this->generateTypeName($this->getClassName());
     } else {
       return $this->builder->getType();
