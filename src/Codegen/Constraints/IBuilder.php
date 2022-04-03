@@ -8,4 +8,5 @@ interface IBuilder {
   public function isArrayKeyType(): bool;
   public function build(): this;
   public function setSuffix(string $suffix): void;
+  public function getTypeInfo(): Typing\Type;
 }

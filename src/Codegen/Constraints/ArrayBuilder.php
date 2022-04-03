@@ -268,4 +268,18 @@ class ArrayBuilder extends BaseBuilder<TArraySchema> {
       $this->hackArrayType = HackArrayType::KEYSET;
     }
   }
+
+  <<__Override>>
+  public function getTypeInfo(): Typing\Type {
+    if ($this->singleItemSchemaBuilder) {
+      $inner = $this->singleItemSchemaBuilder->getTypeInfo();
+    } else {
+      $inner = Typing\TypeSystem::mixed();
+    }
+    if ($this->hackArrayType === HackArrayType::KEYSET) {
+      return Typing\TypeSystem::keyset($inner);
+    } else {
+      return Typing\TypeSystem::vec($inner);
+    }
+  }
 }

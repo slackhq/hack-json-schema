@@ -151,4 +151,13 @@ class StringBuilder extends BaseBuilder<TStringSchema> {
 
     return 'string';
   }
+
+  <<__Override>>
+  public function getTypeInfo(): Typing\Type {
+    if ($this->getType() === 'string') {
+      return Typing\TypeSystem::string();
+    }
+    // TODO: Type resolution for hackEnum
+    return Typing\TypeSystem::nonnull();
+  }
 }

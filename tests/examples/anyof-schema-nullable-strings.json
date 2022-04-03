@@ -1,0 +1,14 @@
+{
+    "anyOf": [
+        {
+            "$ref": "string-schema.json#/definitions/max_length"
+        },
+        {
+            "type": "string",
+            "minLength": 12
+        },
+        {
+            "type": "null"
+        }
+    ]
+}

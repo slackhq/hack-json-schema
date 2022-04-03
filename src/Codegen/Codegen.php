@@ -263,6 +263,7 @@ final class Codegen implements IBuilder {
       $this->file->addBeforeType(
         $this->getHackCodegenFactory()->codegenType($this->getType())->setType($this->builder->getType()),
       );
+      Typing\TypeSystem::registerAlias($this->getType(), $this->builder->getTypeInfo());
     }
 
     $this->class = $this->class
@@ -327,6 +328,10 @@ final class Codegen implements IBuilder {
 
   public function isArrayKeyType(): bool {
     return $this->builder->isArrayKeyType();
+  }
+
+  public function getTypeInfo(): Typing\Type {
+    return $this->builder->getTypeInfo();
   }
 
   public function setSuffix(string $_suffix): void {

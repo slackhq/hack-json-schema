@@ -109,6 +109,8 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
 
     // Generate a type based on the specified properties
     $type = $this->codegenType($property_classes, $pattern_properties_classes);
+    // TODO: Register objects as shapes or dicts
+    Typing\TypeSystem::registerAlias($this->getType(), Typing\TypeSystem::nonnull());
     $this->ctx->getFile()->addBeforeType($type);
     return $this;
   }
@@ -560,4 +562,8 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     }
   }
 
+  <<__Override>>
+  public function getTypeInfo(): Typing\Type {
+    return Typing\TypeSystem::alias($this->getType());
+  }
 }

@@ -5,31 +5,12 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<d77b8264266f73d1a54d15323844b5c1>>
+ * @generated SignedSource<<f0d4600667c097dc2374711aba82c6f2>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
-use namespace Slack\Hack\JsonSchema\Constraints;
 
-type TAnyOfValidator3 = mixed;
-
-final class AnyOfValidator3AnyOf0 {
-
-  public static function check(mixed $input, string $pointer): null {
-    $typed = Constraints\NullConstraint::check($input, $pointer);
-
-    return $typed;
-  }
-}
-
-final class AnyOfValidator3AnyOf1 {
-
-  public static function check(mixed $input, string $pointer): null {
-    $typed = Constraints\NullConstraint::check($input, $pointer);
-
-    return $typed;
-  }
-}
+type TAnyOfValidator3 = null;
 
 final class AnyOfValidator3 extends JsonSchema\BaseValidator<TAnyOfValidator3> {
 
@@ -37,9 +18,11 @@ final class AnyOfValidator3 extends JsonSchema\BaseValidator<TAnyOfValidator3> {
     mixed $input,
     string $pointer,
   ): TAnyOfValidator3 {
+    if ($input === null) {
+      return null;
+    }
+
     $constraints = vec[
-      AnyOfValidator3AnyOf0::check<>,
-      AnyOfValidator3AnyOf1::check<>,
     ];
     $errors = vec[
     ];

@@ -44,4 +44,8 @@ class NullBuilder extends BaseBuilder<TNullSchema> {
     return 'null';
   }
 
+  <<__Override>>
+  public function getTypeInfo(): Typing\Type {
+    return Typing\TypeSystem::null();
+  }
 }

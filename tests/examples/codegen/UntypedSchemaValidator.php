@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<c0576aa98b9a4c6a29bb9015922ecc9e>>
+ * @generated SignedSource<<25dc59f6b0554fb484fa23d884432464>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -13,7 +13,7 @@ use namespace Slack\Hack\JsonSchema\Constraints;
 
 type TUntypedSchemaValidatorPropertiesAllOf = mixed;
 
-type TUntypedSchemaValidatorPropertiesAnyOf = mixed;
+type TUntypedSchemaValidatorPropertiesAnyOf = arraykey;
 
 type TUntypedSchemaValidatorPropertiesAllOfPassThrough = mixed;
 

@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<8e911409a784ef7ec27497da5a725588>>
+ * @generated SignedSource<<f55b7686ddc5695a203819aec8bb8742>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -17,7 +17,7 @@ type TAddressSchemaValidatorPropertiesPhonesItems = shape(
   ...
 );
 
-type TAddressSchemaValidatorPropertiesPostalCode = mixed;
+type TAddressSchemaValidatorPropertiesPostalCode = arraykey;
 
 type TAddressSchemaValidatorPropertiesSize = mixed;
 

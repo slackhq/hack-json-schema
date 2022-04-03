@@ -5,15 +5,15 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<99b51d66245aaffdf4a13563142ea5f5>>
+ * @generated SignedSource<<0482f1326bc163a4302dcc3cec431f17>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
 use namespace Slack\Hack\JsonSchema\Constraints;
 
-type TAnyOfValidator2 = nonnull;
+type TAnyOfValidatorNullableVec = ?vec<string>;
 
-final class AnyOfValidator2AnyOf0 {
+final class AnyOfValidatorNullableVecAnyOf1Items {
 
   private static bool $coerce = false;
 
@@ -24,26 +24,48 @@ final class AnyOfValidator2AnyOf0 {
   }
 }
 
-final class AnyOfValidator2AnyOf1 {
+final class AnyOfValidatorNullableVecAnyOf1 {
 
   private static bool $coerce = false;
 
-  public static function check(mixed $input, string $pointer): num {
-    $typed = Constraints\NumberConstraint::check($input, $pointer, self::$coerce);
+  public static function check(mixed $input, string $pointer): vec<string> {
+    $typed = Constraints\ArrayConstraint::check($input, $pointer, self::$coerce);
 
-    return $typed;
+    $output = vec[];
+    $errors = vec[];
+
+    foreach ($typed as $index => $value) {
+      try {
+        $output[] = AnyOfValidatorNullableVecAnyOf1Items::check(
+          $value,
+          JsonSchema\get_pointer($pointer, (string) $index),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\count($errors)) {
+      throw new JsonSchema\InvalidFieldException($pointer, $errors);
+    }
+
+    return $output;
   }
 }
 
-final class AnyOfValidator2 extends JsonSchema\BaseValidator<TAnyOfValidator2> {
+final class AnyOfValidatorNullableVec
+  extends JsonSchema\BaseValidator<TAnyOfValidatorNullableVec> {
 
   public static function check(
     mixed $input,
     string $pointer,
-  ): TAnyOfValidator2 {
+  ): TAnyOfValidatorNullableVec {
+    if ($input === null) {
+      return null;
+    }
+
     $constraints = vec[
-      AnyOfValidator2AnyOf0::check<>,
-      AnyOfValidator2AnyOf1::check<>,
+      AnyOfValidatorNullableVecAnyOf1::check<>,
     ];
     $errors = vec[
     ];
@@ -71,7 +93,7 @@ final class AnyOfValidator2 extends JsonSchema\BaseValidator<TAnyOfValidator2> {
   }
 
   <<__Override>>
-  protected function process(): TAnyOfValidator2 {
+  protected function process(): TAnyOfValidatorNullableVec {
     return self::check($this->input, $this->pointer);
   }
 }

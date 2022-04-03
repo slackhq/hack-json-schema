@@ -5,13 +5,13 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<91ebb2683251509f90bb004296968623>>
+ * @generated SignedSource<<d9e951b7c4e5dd6d27e2dc5c8d3900bc>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
 use namespace Slack\Hack\JsonSchema\Constraints;
 
-type TPersonSchemaValidatorPropertiesStringOrNum = mixed;
+type TPersonSchemaValidatorPropertiesStringOrNum = arraykey;
 
 type TPersonSchemaValidatorPropertiesFriendsItems = shape(
   'first_name' => string,

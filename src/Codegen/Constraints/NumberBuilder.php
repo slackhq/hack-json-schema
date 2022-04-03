@@ -120,4 +120,15 @@ class NumberBuilder extends BaseBuilder<TNumberSchema> {
     return 'num';
   }
 
+  <<__Override>>
+  public function getTypeInfo(): Typing\Type {
+    if ($this->getType() === 'int') {
+      return Typing\TypeSystem::int();
+    } else if ($this->getType() === 'num') {
+      return Typing\TypeSystem::num();
+    } else {
+      // TODO: Handle hackEnum
+      return Typing\TypeSystem::mixed();
+    }
+  }
 }

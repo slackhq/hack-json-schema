@@ -96,6 +96,10 @@ class UniqueRefBuilder implements IBuilder {
     // noop because we don't use suffixes for unique refs
   }
 
+  public function getTypeInfo(): Typing\Type {
+    return Typing\TypeSystem::alias($this->getType());
+  }
+
   /**
   * Static function for generating class and file names based off the unique
   * ref config. This is static because we use it in `Codegen::forPaths`

@@ -5,45 +5,60 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<99b51d66245aaffdf4a13563142ea5f5>>
+ * @generated SignedSource<<5610d11a0979ed1891990f9d20b7bcea>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
 use namespace Slack\Hack\JsonSchema\Constraints;
 
-type TAnyOfValidator2 = nonnull;
+type TAnyOfValidatorStrings = string;
 
-final class AnyOfValidator2AnyOf0 {
+final class AnyOfValidatorStringsAnyOf0 {
 
+  private static int $maxLength = 10;
   private static bool $coerce = false;
 
   public static function check(mixed $input, string $pointer): string {
     $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
 
+    $length = \mb_strlen($typed);
+    Constraints\StringMaxLengthConstraint::check(
+      $length,
+      self::$maxLength,
+      $pointer,
+    );
     return $typed;
   }
 }
 
-final class AnyOfValidator2AnyOf1 {
+final class AnyOfValidatorStringsAnyOf1 {
 
+  private static int $minLength = 12;
   private static bool $coerce = false;
 
-  public static function check(mixed $input, string $pointer): num {
-    $typed = Constraints\NumberConstraint::check($input, $pointer, self::$coerce);
+  public static function check(mixed $input, string $pointer): string {
+    $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
 
+    $length = \mb_strlen($typed);
+    Constraints\StringMinLengthConstraint::check(
+      $length,
+      self::$minLength,
+      $pointer,
+    );
     return $typed;
   }
 }
 
-final class AnyOfValidator2 extends JsonSchema\BaseValidator<TAnyOfValidator2> {
+final class AnyOfValidatorStrings
+  extends JsonSchema\BaseValidator<TAnyOfValidatorStrings> {
 
   public static function check(
     mixed $input,
     string $pointer,
-  ): TAnyOfValidator2 {
+  ): TAnyOfValidatorStrings {
     $constraints = vec[
-      AnyOfValidator2AnyOf0::check<>,
-      AnyOfValidator2AnyOf1::check<>,
+      AnyOfValidatorStringsAnyOf0::check<>,
+      AnyOfValidatorStringsAnyOf1::check<>,
     ];
     $errors = vec[
     ];
@@ -71,7 +86,7 @@ final class AnyOfValidator2 extends JsonSchema\BaseValidator<TAnyOfValidator2> {
   }
 
   <<__Override>>
-  protected function process(): TAnyOfValidator2 {
+  protected function process(): TAnyOfValidatorStrings {
     return self::check($this->input, $this->pointer);
   }
 }
