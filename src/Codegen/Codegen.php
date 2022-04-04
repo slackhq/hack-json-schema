@@ -16,6 +16,7 @@ use type Facebook\HackCodegen\{
 };
 
 final class Codegen implements IBuilder {
+  use Factory;
 
   const type TValidatorRefsUniqueConfig = shape(
     /* The root path where all of the schemas live */
@@ -139,7 +140,7 @@ final class Codegen implements IBuilder {
       $this->file->setNamespace($validatorConfig['namespace']);
     }
 
-    $context = new Context(
+    $this->ctx = new Context(
       $this->config,
       $this->cg,
       $this->getJsonSchemaCodegenConfig(),
@@ -148,7 +149,7 @@ final class Codegen implements IBuilder {
       $this->file,
     );
     $typed_schema = type_assert_type($this->schema, TSchema::class);
-    $this->builder = new SchemaBuilder($context, '', $typed_schema, $this->class);
+    $this->builder = new SchemaBuilder($this->ctx, '', $typed_schema, $this->class);
 
     $this->sanitizeString = $validatorConfig['sanitize_string'] ?? null;
   }
@@ -258,8 +259,10 @@ final class Codegen implements IBuilder {
     $this->builder->build();
 
     if ($this->builder->isUniqueRef()) {
-      // No need to do anything, we're building a top-level ref.
-      return $this;
+      // Add a type aliasing the referenced type
+      $this->file->addBeforeType(
+        $this->getHackCodegenFactory()->codegenType($this->getType())->setType($this->builder->getType()),
+      );
     }
 
     $this->class = $this->class
@@ -282,7 +285,12 @@ final class Codegen implements IBuilder {
 
   private function getCodegenClassProcessMethod(): CodegenMethod {
     $hb = new HackBuilder($this->getHackCodegenConfig());
-    $hb->addMultilineCall('return self::check', vec['$this->input', '$this->pointer']);
+    if ($this->builder->isUniqueRef()) {
+      $obj = $this->builder->getClassName();
+    } else {
+      $obj = 'self';
+    }
+    $hb->addMultilineCall(Str\format('return %s::check', $obj), vec['$this->input', '$this->pointer']);
 
     return $this->cg
       ->codegenMethod('process')
@@ -301,11 +309,20 @@ final class Codegen implements IBuilder {
   }
 
   public function getClassName(): string {
-    return $this->builder->getClassName();
+    // Whether or not we're generating a unique ref,
+    // we'll always end up outputting a new class.
+    return $this->generateClassName($this->class->getName());
   }
 
   public function getType(): string {
-    return $this->builder->getType();
+    if ($this->builder->isUniqueRef()) {
+      // Generating an alias to a unique ref.
+      // Don't re-use the referenced type's name; instead,
+      // generate a new type pointing to it.
+      return $this->generateTypeName($this->getClassName());
+    } else {
+      return $this->builder->getType();
+    }
   }
 
   public function isArrayKeyType(): bool {
