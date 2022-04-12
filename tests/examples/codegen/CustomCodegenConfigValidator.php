@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<e839a5cf76cbc60c3da1a15b9eb5ff3d>>
+ * @generated SignedSource<<ee119ba08bdb81ffcb9a78abe60d794d>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -646,7 +646,7 @@ final class CustomCodegenConfigValidatorPropertiesDevicesItems {
     string $pointer,
   ): custom_codegen_config_validator_properties_devices_items_t {
     $key = 'type';
-    $typed = Constraints\ObjectConstraint::check($input, $pointer, false);
+    $typed = Constraints\ObjectConstraint::check($input, $pointer, true);
 
     Constraints\ObjectRequiredConstraint::check($typed, keyset[$key], $pointer);
     $field_pointer = JsonSchema\get_pointer($pointer, $key);
@@ -674,7 +674,7 @@ final class CustomCodegenConfigValidatorPropertiesDevicesItems {
       throw new JsonSchema\InvalidFieldException($field_pointer, vec[$error]);
     }
 
-    return $constraint($typed, $pointer);
+    return $constraint($input, $pointer);
   }
 }
 
