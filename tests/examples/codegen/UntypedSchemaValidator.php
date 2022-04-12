@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<307dd9e864c92ca6b69a2c4d5156158f>>
+ * @generated SignedSource<<af288ef99613b99be842ab276e44eb06>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -962,7 +962,8 @@ final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnum {
     string $pointer,
   ): TUntypedSchemaValidatorPropertiesAnyOfOptimizedEnum {
     $key = 'type';
-    $typed = Constraints\ObjectConstraint::check($input, $pointer, false);
+    $coerce = false;
+    $typed = Constraints\ObjectConstraint::check($input, $pointer, $coerce);
 
     Constraints\ObjectRequiredConstraint::check($typed, keyset[$key], $pointer);
     $field_pointer = JsonSchema\get_pointer($pointer, $key);

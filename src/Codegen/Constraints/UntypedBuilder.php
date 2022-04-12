@@ -564,9 +564,10 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
 
     $hb
       ->addAssignment('$key', $any_of_types['key'], HackBuilderValues::export())
+      ->addAssignment('$coerce', $this->ctx->getCoerceDefault(), HackBuilderValues::export())
       ->addAssignment(
         '$typed',
-        'Constraints\ObjectConstraint::check($input, $pointer, false)',
+        'Constraints\ObjectConstraint::check($input, $pointer, $coerce)',
         HackBuilderValues::literal(),
       )
       ->ensureEmptyLine()
