@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<af288ef99613b99be842ab276e44eb06>>
+ * @generated SignedSource<<c0576aa98b9a4c6a29bb9015922ecc9e>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -78,7 +78,7 @@ type TUntypedSchemaValidator = shape(
 
 final class UntypedSchemaValidatorPropertiesAllOfAllOf0 {
 
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(mixed $input, string $pointer): string {
     $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
@@ -89,7 +89,7 @@ final class UntypedSchemaValidatorPropertiesAllOfAllOf0 {
 
 final class UntypedSchemaValidatorPropertiesAllOfAllOf1 {
 
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(mixed $input, string $pointer): int {
     $typed =
@@ -142,7 +142,7 @@ final class UntypedSchemaValidatorPropertiesAllOf {
 
 final class UntypedSchemaValidatorPropertiesAnyOfAnyOf0 {
 
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(mixed $input, string $pointer): string {
     $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
@@ -153,7 +153,7 @@ final class UntypedSchemaValidatorPropertiesAnyOfAnyOf0 {
 
 final class UntypedSchemaValidatorPropertiesAnyOfAnyOf1 {
 
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(mixed $input, string $pointer): int {
     $typed =
@@ -201,7 +201,7 @@ final class UntypedSchemaValidatorPropertiesAnyOf {
 
 final class UntypedSchemaValidatorPropertiesAllOfPassThroughAllOf0 {
 
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(mixed $input, string $pointer): string {
     $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
@@ -217,7 +217,7 @@ final class UntypedSchemaValidatorPropertiesAllOfPassThroughAllOf0 {
 final class UntypedSchemaValidatorPropertiesAllOfPassThroughAllOf1 {
 
   private static int $minLength = 1;
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(mixed $input, string $pointer): string {
     $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
@@ -275,7 +275,7 @@ final class UntypedSchemaValidatorPropertiesAllOfPassThrough {
 
 final class UntypedSchemaValidatorPropertiesAllOfPassThroughSecondAllOf0 {
 
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(mixed $input, string $pointer): string {
     $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
@@ -290,7 +290,7 @@ final class UntypedSchemaValidatorPropertiesAllOfPassThroughSecondAllOf0 {
 
 final class UntypedSchemaValidatorPropertiesAllOfPassThroughSecondAllOf1 {
 
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(mixed $input, string $pointer): string {
     $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
@@ -363,7 +363,7 @@ final class UntypedSchemaValidatorPropertiesAllOfCoerceAllOf0 {
 
 final class UntypedSchemaValidatorPropertiesAllOfCoerceAllOf1PropertiesProperty {
 
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(mixed $input, string $pointer): string {
     $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
@@ -374,7 +374,7 @@ final class UntypedSchemaValidatorPropertiesAllOfCoerceAllOf1PropertiesProperty 
 
 final class UntypedSchemaValidatorPropertiesAllOfCoerceAllOf1 {
 
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(
     mixed $input,
@@ -454,7 +454,7 @@ final class UntypedSchemaValidatorPropertiesAllOfCoerce {
 
 final class UntypedSchemaValidatorPropertiesAllOfDefaultAllOf0PropertiesProperty {
 
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(mixed $input, string $pointer): string {
     $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
@@ -465,7 +465,7 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultAllOf0PropertiesProperty
 
 final class UntypedSchemaValidatorPropertiesAllOfDefaultAllOf0 {
 
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(
     mixed $input,
@@ -510,7 +510,7 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultAllOf0 {
 
 final class UntypedSchemaValidatorPropertiesAllOfDefaultAllOf1PropertiesNumericalProperty {
 
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(mixed $input, string $pointer): num {
     $typed = Constraints\NumberConstraint::check($input, $pointer, self::$coerce);
@@ -521,7 +521,7 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultAllOf1PropertiesNumerica
 
 final class UntypedSchemaValidatorPropertiesAllOfDefaultAllOf1 {
 
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(
     mixed $input,
@@ -607,7 +607,7 @@ final class UntypedSchemaValidatorPropertiesAllOfDefault {
 
 final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf0PropertiesProperty {
 
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(mixed $input, string $pointer): string {
     $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
@@ -618,7 +618,7 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf0Pro
 
 final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf0 {
 
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(
     mixed $input,
@@ -663,7 +663,7 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf0 {
 
 final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf1PropertiesProperty {
 
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(mixed $input, string $pointer): string {
     $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
@@ -674,7 +674,7 @@ final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf1Pro
 
 final class UntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWinsAllOf1 {
 
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(
     mixed $input,
@@ -763,7 +763,7 @@ final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesFirstPro
   private static vec<mixed> $enum = vec[
     'first',
   ];
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(mixed $input, string $pointer): string {
     $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
@@ -775,7 +775,7 @@ final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesFirstPro
 
 final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesFirstPropertiesString {
 
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(mixed $input, string $pointer): string {
     $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
@@ -861,7 +861,7 @@ final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesSecondPr
   private static vec<mixed> $enum = vec[
     'second',
   ];
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(mixed $input, string $pointer): string {
     $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
@@ -873,7 +873,7 @@ final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesSecondPr
 
 final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesSecondPropertiesInteger {
 
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(mixed $input, string $pointer): int {
     $typed =
@@ -962,8 +962,7 @@ final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnum {
     string $pointer,
   ): TUntypedSchemaValidatorPropertiesAnyOfOptimizedEnum {
     $key = 'type';
-    $coerce = false;
-    $typed = Constraints\ObjectConstraint::check($input, $pointer, $coerce);
+    $typed = Constraints\ObjectConstraint::check($input, $pointer, true);
 
     Constraints\ObjectRequiredConstraint::check($typed, keyset[$key], $pointer);
     $field_pointer = JsonSchema\get_pointer($pointer, $key);
@@ -991,14 +990,14 @@ final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnum {
       throw new JsonSchema\InvalidFieldException($field_pointer, vec[$error]);
     }
 
-    return $constraint($typed, $pointer);
+    return $constraint($input, $pointer);
   }
 }
 
 final class UntypedSchemaValidator
   extends JsonSchema\BaseValidator<TUntypedSchemaValidator> {
 
-  private static bool $coerce = false;
+  private static bool $coerce = true;
 
   public static function check(
     mixed $input,

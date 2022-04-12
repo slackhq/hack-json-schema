@@ -31,6 +31,7 @@ final class UntypedSchemaValidatorTest extends BaseCodegenTestCase {
           'uniline' => _untyped_schema_validator_test_uniline<>,
           'multiline' => _untyped_schema_validator_test_multiline<>,
         ),
+        'defaults' => shape('coerce' => true),
       ),
     );
     $ret['codegen']->build();
@@ -180,6 +181,25 @@ final class UntypedSchemaValidatorTest extends BaseCodegenTestCase {
     expect($error['code'])->toBeSame('invalid_type');
     expect($error['message'])->toBeSame('must provide a string');
     expect($error['pointer'] ?? null)->toBeSame('/any_of_optimized_enum/type');
+  }
+
+  public function testAnyOfOptimizedEnumCoercionInvalid(): void {
+    $input = dict[
+      'any_of_optimized_enum' => \json_encode(dict[
+        'type' => 'first',
+        'string' => 'something',
+      ]),
+    ];
+
+    $validator = new UntypedSchemaValidator($input);
+    $validator->validate();
+    expect($validator->isValid())->toBeFalse();
+    $errors = $validator->getErrors();
+    expect(C\count($errors))->toBeSame(1);
+    $error = $errors[0];
+    expect($error['code'])->toBeSame('invalid_type');
+    expect($error['message'])->toBeSame('must provide an object');
+    expect($error['pointer'] ?? null)->toBeSame('/any_of_optimized_enum');
   }
 
 }

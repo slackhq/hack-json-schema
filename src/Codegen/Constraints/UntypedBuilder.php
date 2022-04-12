@@ -564,10 +564,9 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
 
     $hb
       ->addAssignment('$key', $any_of_types['key'], HackBuilderValues::export())
-      ->addAssignment('$coerce', $this->ctx->getCoerceDefault(), HackBuilderValues::export())
       ->addAssignment(
         '$typed',
-        'Constraints\ObjectConstraint::check($input, $pointer, $coerce)',
+        'Constraints\ObjectConstraint::check($input, $pointer, true)',
         HackBuilderValues::literal(),
       )
       ->ensureEmptyLine()
@@ -614,8 +613,10 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       ->endIfBlock()
       ->ensureEmptyLine();
 
+    // Pass $input instead of $typed here since we have coerced $typed to an object above
+    // to determine the type, but such coercion may not be allowed by the constraint.
     $hb
-      ->addMultilineCall('return $constraint', vec['$typed', '$pointer']);
+      ->addMultilineCall('return $constraint', vec['$input', '$pointer']);
   }
 
   <<__Override>>
