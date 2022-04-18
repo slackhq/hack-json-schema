@@ -9,6 +9,7 @@ final class RefCache {
     'type' => string,
     'classname' => string,
     'isArrayKeyType' => bool,
+    'typeInfo' => Typing\Type,
   );
 
   static private dict<string, self::TCachedRef> $generatedRefs = dict[];

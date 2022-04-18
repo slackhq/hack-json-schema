@@ -331,6 +331,9 @@ final class Codegen implements IBuilder {
   }
 
   public function getTypeInfo(): Typing\Type {
+    if ($this->builder->isUniqueRef()) {
+      return Typing\TypeSystem::alias($this->builder->getType());
+    }
     return $this->builder->getTypeInfo();
   }
 

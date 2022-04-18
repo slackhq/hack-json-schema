@@ -29,7 +29,14 @@ final class AnyOfRefiningTest extends BaseCodegenTestCase {
     $ret['codegen']->build();
     $ret = self::getBuilder('anyof-schema-4.json', 'AnyOfValidator4');
     $ret['codegen']->build();
-    $ret = self::getBuilder('anyof-schema-strings.json', 'AnyOfValidatorStrings');
+    $ret = self::getBuilder('anyof-schema-strings.json', 'AnyOfValidatorStrings', shape(
+      'refs' => shape(
+        'unique' => shape(
+          'source_root' => __DIR__,
+          'output_root' => __DIR__.'/examples/codegen',
+        ),
+      ),
+    ));
     $ret['codegen']->build();
     $ret = self::getBuilder('anyof-schema-nested-nullable-anyof.json', 'AnyOfValidatorNestedNullableAnyOf');
     $ret['codegen']->build();

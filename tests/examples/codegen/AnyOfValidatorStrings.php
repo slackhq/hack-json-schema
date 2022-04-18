@@ -5,31 +5,13 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<5610d11a0979ed1891990f9d20b7bcea>>
+ * @generated SignedSource<<0a61a4d8cd764d9ef92d0ac04da6ccac>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
 use namespace Slack\Hack\JsonSchema\Constraints;
 
 type TAnyOfValidatorStrings = string;
-
-final class AnyOfValidatorStringsAnyOf0 {
-
-  private static int $maxLength = 10;
-  private static bool $coerce = false;
-
-  public static function check(mixed $input, string $pointer): string {
-    $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
-
-    $length = \mb_strlen($typed);
-    Constraints\StringMaxLengthConstraint::check(
-      $length,
-      self::$maxLength,
-      $pointer,
-    );
-    return $typed;
-  }
-}
 
 final class AnyOfValidatorStringsAnyOf1 {
 
@@ -57,7 +39,7 @@ final class AnyOfValidatorStrings
     string $pointer,
   ): TAnyOfValidatorStrings {
     $constraints = vec[
-      AnyOfValidatorStringsAnyOf0::check<>,
+      ExamplesStringSchemaDefinitionsMaxLength::check<>,
       AnyOfValidatorStringsAnyOf1::check<>,
     ];
     $errors = vec[

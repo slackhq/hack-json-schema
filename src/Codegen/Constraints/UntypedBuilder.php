@@ -634,7 +634,6 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
 
   <<__Override>>
   public function getTypeInfo(): Typing\Type {
-    invariant($this->type_info is nonnull, 'must call `build` method before accessing type info');
-    return $this->type_info;
+    return Typing\TypeSystem::alias($this->getType());
   }
 }

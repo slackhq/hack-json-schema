@@ -26,6 +26,11 @@ final class ConcreteType extends Type {
   }
 
   <<__Override>>
+  public function getAlias(): null {
+    return null;
+  }
+
+  <<__Override>>
   public function hasAlias(): bool {
     return false;
   }

@@ -158,8 +158,7 @@ final abstract class TypeSystem {
   /**
    * Try to map the solved type to one of the passed-in type aliases.
    *
-   * If a matching alias exists, it may make sense to prefer it over generating
-   * a fresh type.
+   * If all types are the alias or null, use the alias.
    */
   private static function maybeUseAlias(Type $type, vec<Type> $types): Type {
     $equivalent_types = vec[];
@@ -173,6 +172,9 @@ final abstract class TypeSystem {
       }
       if ($candidate_ty->isEquivalent($type)) {
         $equivalent_types[] = $candidate_ty;
+      } else if ($candidate_ty->getConcreteTypeName() !== ConcreteTypeName::NOTHING) {
+        // Conflicting type which is not null — bail out.
+        return $type;
       }
     }
 

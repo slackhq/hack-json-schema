@@ -22,6 +22,11 @@ final class OptionalType extends Type {
   }
 
   <<__Override>>
+  public function getAlias(): ?string {
+    return $this->type->getAlias();
+  }
+
+  <<__Override>>
   public function hasAlias(): bool {
     return $this->type->hasAlias();
   }
