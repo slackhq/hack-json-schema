@@ -41,7 +41,7 @@ class NullBuilder extends BaseBuilder<TNullSchema> {
 
   <<__Override>>
   public function getType(): string {
-    return 'mixed';
+    return 'null';
   }
 
 }

@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<f75639f4e8e44660c38760a9b0e53aa6>>
+ * @generated SignedSource<<d77b8264266f73d1a54d15323844b5c1>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -15,7 +15,7 @@ type TAnyOfValidator3 = mixed;
 
 final class AnyOfValidator3AnyOf0 {
 
-  public static function check(mixed $input, string $pointer): mixed {
+  public static function check(mixed $input, string $pointer): null {
     $typed = Constraints\NullConstraint::check($input, $pointer);
 
     return $typed;
@@ -24,7 +24,7 @@ final class AnyOfValidator3AnyOf0 {
 
 final class AnyOfValidator3AnyOf1 {
 
-  public static function check(mixed $input, string $pointer): mixed {
+  public static function check(mixed $input, string $pointer): null {
     $typed = Constraints\NullConstraint::check($input, $pointer);
 
     return $typed;
