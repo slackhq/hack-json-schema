@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<c1e1a034a097914b540fefaa46b64ab6>>
+ * @generated SignedSource<<401cc11f57c0dbcdfeb500b3e2a606f7>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -24,7 +24,7 @@ type TFriendsSchemaValidatorItems = shape(
   'last_name' => string,
   ?'age' => int,
   ?'~devices/' => vec<TFriendsSchemaValidatorItemsPropertiesNanDevicesNanItems>,
-  ?'enemies' => mixed,
+  ?'enemies' => null,
   ?'rating' => vec<mixed>,
   ?'contact' => vec<mixed>,
   ?'empty_object' => TFriendsSchemaValidatorItemsPropertiesEmptyObject,
@@ -185,7 +185,7 @@ final class FriendsSchemaValidatorItemsPropertiesNanDevicesNan {
 
 final class FriendsSchemaValidatorItemsPropertiesEnemies {
 
-  public static function check(mixed $input, string $pointer): mixed {
+  public static function check(mixed $input, string $pointer): null {
     $typed = Constraints\NullConstraint::check($input, $pointer);
 
     return $typed;

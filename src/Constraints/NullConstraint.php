@@ -5,8 +5,8 @@ namespace Slack\Hack\JsonSchema\Constraints;
 use namespace Slack\Hack\JsonSchema;
 
 class NullConstraint {
-  public static function check(mixed $input, string $pointer): mixed {
-    if ($input === null) {
+  public static function check(mixed $input, string $pointer): null {
+    if ($input is null) {
       return $input;
     } else {
       $error = shape(
