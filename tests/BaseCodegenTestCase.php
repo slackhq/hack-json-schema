@@ -122,7 +122,7 @@ abstract class BaseCodegenTestCase extends HackTest {
     $codegen_config = shape(
       'generatedFrom' => '`make test`',
       'validator' => $validator_config,
-      'discardChanges' => true
+      'discardChanges' => true,
     );
 
     $json_schema_codegen_config = $options['json_schema_codegen_config'] ?? null;

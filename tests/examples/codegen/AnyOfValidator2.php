@@ -5,13 +5,13 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<99b51d66245aaffdf4a13563142ea5f5>>
+ * @generated SignedSource<<72449b6279d0ca5b12355b69be8582b1>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
 use namespace Slack\Hack\JsonSchema\Constraints;
 
-type TAnyOfValidator2 = nonnull;
+type TAnyOfValidator2 = mixed;
 
 final class AnyOfValidator2AnyOf0 {
 
