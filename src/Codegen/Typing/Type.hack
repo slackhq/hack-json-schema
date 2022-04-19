@@ -20,11 +20,6 @@ abstract class Type {
   abstract public function getGenerics(): vec<Type>;
 
   /**
-   * Alias for this type, if any.
-   */
-  abstract public function getAlias(): ?string;
-
-  /**
    * Whether this type has an alias (e.g., is of form <alias> or ?<alias>).
    */
   abstract public function hasAlias(): bool;

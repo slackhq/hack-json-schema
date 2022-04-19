@@ -24,11 +24,6 @@ final class TypeAlias extends Type {
   }
 
   <<__Override>>
-  public function getAlias(): string {
-    return $this->alias;
-  }
-
-  <<__Override>>
   public function hasAlias(): bool {
     return $this->getType()->hasAlias();
   }
@@ -40,6 +35,6 @@ final class TypeAlias extends Type {
 
   <<__Override>>
   public function render(): string {
-    return $this->getAlias();
+    return $this->alias;
   }
 }
