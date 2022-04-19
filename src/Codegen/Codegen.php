@@ -331,6 +331,9 @@ final class Codegen implements IBuilder {
   }
 
   public function getTypeInfo(): Typing\Type {
+    // If we're referencing a different schema, always generate an alias.
+    // Otherwise, simply delegate to the builder, which may or may not
+    // build an alias itself (e.g., in the case of ObjectBuilder).
     if ($this->builder->isUniqueRef()) {
       return Typing\TypeSystem::alias($this->builder->getType());
     }
