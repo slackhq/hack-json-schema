@@ -1,0 +1,37 @@
+{
+    "anyOf": [
+        {
+            "type": "object",
+            "required": ["foo"],
+            "properties": {
+                "foo": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "baz": {
+                            "type": "integer"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "type": "object",
+            "required": ["foo"],
+            "properties": {
+                "foo": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "baz": {
+                            "type": "string"
+                        },
+                        "qux": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
