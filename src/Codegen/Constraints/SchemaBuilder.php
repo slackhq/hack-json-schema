@@ -172,6 +172,10 @@ class SchemaBuilder implements IBuilder {
     return $this->resolvedContext;
   }
 
+  public function getTypeInfo(): Typing\Type {
+    return $this->builder->getTypeInfo();
+  }
+
   public function setSuffix(string $suffix): void {
     $this->builder->setSuffix($suffix);
   }

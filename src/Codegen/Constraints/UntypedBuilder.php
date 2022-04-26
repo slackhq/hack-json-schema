@@ -3,7 +3,14 @@
 namespace Slack\Hack\JsonSchema\Codegen;
 
 use namespace HH\Lib\{C, Math, Str, Vec};
-use type Facebook\HackCodegen\{CodegenMethod, CodegenType, HackBuilder, HackBuilderKeys, HackBuilderValues};
+use type Facebook\HackCodegen\{
+  CodegenClass,
+  CodegenMethod,
+  CodegenType,
+  HackBuilder,
+  HackBuilderKeys,
+  HackBuilderValues,
+};
 
 type TUntypedSchema = shape(
   ?'anyOf' => vec<TSchema>,
@@ -20,7 +27,12 @@ type TOptimizedAnyOfTypes = shape(
 
 class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
   protected static string $schema_name = 'Slack\hack\JsonSchema\Codegen\TUntypedSchema';
-  private ?string $current_type = null;
+  private Typing\Type $type_info;
+
+  public function __construct(Context $ctx, string $suffix, TSchema $schema, ?CodegenClass $class = null) {
+    parent::__construct($ctx, $suffix, $schema, $class);
+    $this->type_info = Typing\TypeSystem::mixed();
+  }
 
   <<__Override>>
   public function build(): this {
@@ -31,6 +43,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
 
     $type = $this->codegenType();
     $this->ctx->getFile()->addBeforeType($type);
+    Typing\TypeSystem::registerAlias($this->getType(), $this->type_info);
 
     return $this;
   }
@@ -128,6 +141,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
 
   }
 
+  // TODO: Determine Lowest Upper Bound for oneOf constraint.
   private function generateOneOfChecks(vec<TSchema> $schemas, HackBuilder $hb): void {
     $constraints = vec[];
     foreach ($schemas as $index => $schema) {
@@ -184,6 +198,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
 
   }
 
+  // TODO: Determine Greatest Lower Bound for allOf constraint.
   private function generateAllOfChecks(vec<TSchema> $schemas, HackBuilder $hb): void {
     $merged_schema = $this->getMergedAllOfChecks();
     if ($merged_schema) {
@@ -322,7 +337,6 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
   private function generateMergedAllOfChecks(TSchema $schema, HackBuilder $hb): void {
     $schema_builder = new SchemaBuilder($this->ctx, $this->generateClassName($this->suffix, 'allOf'), $schema);
     $schema_builder->build();
-    $this->current_type = $schema_builder->getType();
     $hb->addReturnf('%s::check($input, $pointer)', $schema_builder->getClassName());
   }
 
@@ -469,47 +483,41 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
   }
 
   private function generateGenericAnyOfChecks(vec<SchemaBuilder> $schema_builders, HackBuilder $hb): void {
-    $constraints = vec[];
+    $present_types = vec[];
+    $nonnull_builders = vec[];
     foreach ($schema_builders as $schema_builder) {
-      $constraints[] = "{$schema_builder->getClassName()}::check<>";
-    }
-
-    // Checks for the special case of one null and one non-null type in order to
-    // form a nullable unified type.
-    //
-    // For unique references, we require that the schemas be built before
-    // accessing the type. However, we want to filter out the `NullBuilder` in
-    // this special case before it gets built. If we run into this case, we'll
-    // store a reference to the `non_null_schema_builder` that we can reference
-    // after we've filtered out the `NullBuilder` and have built all the
-    // schemas. This lets us adjust the current type to be nullable
-    // (`?<whatever>`)
-    $non_null_schema_builder = null;
-    if (C\count($schema_builders) === 1) {
-      $this->current_type = $schema_builders[0]->getType();
-    } else if (C\count($schema_builders) === 2) {
-      $without_null = Vec\filter($schema_builders, $sb ==> !($sb->getBuilder() is NullBuilder));
-
-      if (C\count($without_null) === 1) {
-        $non_null_schema_builder = $without_null[0];
-
-        $constraints = vec["{$non_null_schema_builder->getClassName()}::check<>"];
-        $schema_builders = vec[$non_null_schema_builder];
-
-        $hb
-          ->startIfBlock('$input === null')
-          ->addReturn(null, HackBuilderValues::export())
-          ->endIfBlock()
-          ->ensureEmptyLine();
+      // Avoid building null validators as we're going to instead
+      // bail out using a guard.
+      if ($schema_builder->getBuilder() is NullBuilder) {
+        $present_types[] = Typing\TypeSystem::null();
+      } else {
+        $schema_builder->build();
+        $nonnull_builders[] = $schema_builder;
+        $present_types[] = $schema_builder->getTypeInfo();
       }
     }
 
-    foreach ($schema_builders as $sb) {
-      $sb->build();
+    $type_info = Typing\TypeSystem::union($present_types);
+    // For now, keep upcasting nonnull to mixed.
+    // This is a temporary cludge to reduce the amount of code changed by generating unions.
+    // TODO: Stop doing the above.
+    if ($type_info is Typing\ConcreteType && $type_info->getConcreteTypeName() === Typing\ConcreteTypeName::NONNULL) {
+      $type_info = Typing\TypeSystem::mixed();
+    }
+    $this->type_info = $type_info;
+    if (C\count($nonnull_builders) < C\count($schema_builders)) {
+      // If we filtered out a null builder above, handle it here.
+      // TODO: Once we remove the above cludge, we can do `if ($this->type_info->isOptional()) {`
+      $hb
+        ->startIfBlock('$input === null')
+        ->addReturn(null, HackBuilderValues::export())
+        ->endIfBlock()
+        ->ensureEmptyLine();
     }
 
-    if ($non_null_schema_builder is nonnull) {
-      $this->current_type = '?'.$non_null_schema_builder->getType();
+    $constraints = vec[];
+    foreach ($nonnull_builders as $schema_builder) {
+      $constraints[] = "{$schema_builder->getClassName()}::check<>";
     }
 
     $hb
@@ -628,7 +636,11 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
     return $this->ctx
       ->getHackCodegenFactory()
       ->codegenType($this->getType())
-      ->setType($this->current_type ?? 'mixed');
+      ->setType($this->type_info->render());
   }
 
+  <<__Override>>
+  public function getTypeInfo(): Typing\Type {
+    return Typing\TypeSystem::alias($this->getType());
+  }
 }

@@ -263,6 +263,7 @@ final class Codegen implements IBuilder {
       $this->file->addBeforeType(
         $this->getHackCodegenFactory()->codegenType($this->getType())->setType($this->builder->getType()),
       );
+      Typing\TypeSystem::registerAlias($this->getType(), $this->builder->getTypeInfo());
     }
 
     $this->class = $this->class
@@ -327,6 +328,16 @@ final class Codegen implements IBuilder {
 
   public function isArrayKeyType(): bool {
     return $this->builder->isArrayKeyType();
+  }
+
+  public function getTypeInfo(): Typing\Type {
+    // If we're referencing a different schema, always generate an alias.
+    // Otherwise, simply delegate to the builder, which may or may not
+    // build an alias itself (e.g., in the case of ObjectBuilder).
+    if ($this->builder->isUniqueRef()) {
+      return Typing\TypeSystem::alias($this->builder->getType());
+    }
+    return $this->builder->getTypeInfo();
   }
 
   public function setSuffix(string $_suffix): void {

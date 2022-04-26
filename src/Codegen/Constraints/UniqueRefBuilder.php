@@ -71,6 +71,7 @@ class UniqueRefBuilder implements IBuilder {
         'type' => $codegen->getType(),
         'classname' => $codegen->getClassName(),
         'isArrayKeyType' => $codegen->isArrayKeyType(),
+        'typeInfo' => $codegen->getTypeInfo(),
       );
       RefCache::cacheRef($this->filename, $this->cached_ref);
     }
@@ -94,6 +95,11 @@ class UniqueRefBuilder implements IBuilder {
 
   public function setSuffix(string $_suffix): void {
     // noop because we don't use suffixes for unique refs
+  }
+
+  public function getTypeInfo(): Typing\Type {
+    invariant($this->cached_ref is nonnull, 'must call `build` method before accessing type');
+    return $this->cached_ref['typeInfo'];
   }
 
   /**

@@ -51,4 +51,8 @@ class BooleanBuilder extends BaseBuilder<TBooleanSchema> {
       ->setReturnType($this->getType());
   }
 
+  <<__Override>>
+  public function getTypeInfo(): Typing\Type {
+    return Typing\TypeSystem::bool();
+  }
 }

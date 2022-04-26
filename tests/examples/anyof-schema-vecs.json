@@ -1,0 +1,29 @@
+{
+    "anyOf": [
+        {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        {
+            "type": "array",
+            "items": {
+                "type": "integer"
+            }
+        },
+        {
+            "type": "array",
+            "items": {
+                "anyOf": [
+                    {
+                        "type": "null"
+                    },
+                    {
+                        "type": "integer"
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -5,24 +5,42 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<f0d4600667c097dc2374711aba82c6f2>>
+ * @generated SignedSource<<0a61a4d8cd764d9ef92d0ac04da6ccac>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
+use namespace Slack\Hack\JsonSchema\Constraints;
 
-type TAnyOfValidator3 = null;
+type TAnyOfValidatorStrings = string;
 
-final class AnyOfValidator3 extends JsonSchema\BaseValidator<TAnyOfValidator3> {
+final class AnyOfValidatorStringsAnyOf1 {
+
+  private static int $minLength = 12;
+  private static bool $coerce = false;
+
+  public static function check(mixed $input, string $pointer): string {
+    $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
+
+    $length = \mb_strlen($typed);
+    Constraints\StringMinLengthConstraint::check(
+      $length,
+      self::$minLength,
+      $pointer,
+    );
+    return $typed;
+  }
+}
+
+final class AnyOfValidatorStrings
+  extends JsonSchema\BaseValidator<TAnyOfValidatorStrings> {
 
   public static function check(
     mixed $input,
     string $pointer,
-  ): TAnyOfValidator3 {
-    if ($input === null) {
-      return null;
-    }
-
+  ): TAnyOfValidatorStrings {
     $constraints = vec[
+      ExamplesStringSchemaDefinitionsMaxLength::check<>,
+      AnyOfValidatorStringsAnyOf1::check<>,
     ];
     $errors = vec[
     ];
@@ -50,7 +68,7 @@ final class AnyOfValidator3 extends JsonSchema\BaseValidator<TAnyOfValidator3> {
   }
 
   <<__Override>>
-  protected function process(): TAnyOfValidator3 {
+  protected function process(): TAnyOfValidatorStrings {
     return self::check($this->input, $this->pointer);
   }
 }

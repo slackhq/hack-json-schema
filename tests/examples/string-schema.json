@@ -39,6 +39,10 @@
     "hack_enum": {
       "type": "string",
       "hackEnum": "Slack\\Hack\\JsonSchema\\Tests\\TestStringEnum"
+    },
+    "max_length": {
+      "type": "string",
+      "maxLength": 10
     }
   }
 }

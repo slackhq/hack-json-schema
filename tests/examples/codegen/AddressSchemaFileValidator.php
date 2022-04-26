@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<97f0dd218841ea23c803bc0dbcac309e>>
+ * @generated SignedSource<<83bc73d6cc5967079aa4e158eeaf2123>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -21,7 +21,7 @@ type TAddressSchemaFileValidatorPropertiesRelative = shape(
   ?'nickname' => string,
 );
 
-type TAddressSchemaFileValidatorPropertiesPostalCode = mixed;
+type TAddressSchemaFileValidatorPropertiesPostalCode = arraykey;
 
 type TAddressSchemaFileValidator = shape(
   ?'post-office-box' => string,
