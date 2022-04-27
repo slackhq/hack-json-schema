@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<d86fe60f9a4b277d13542c3017f28e35>>
+ * @generated SignedSource<<391cff06fb3f584b3ca4670e891301d7>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -16,7 +16,7 @@ type TExamplesAllofSchema1AllOf = shape(
   'foo' => int,
 );
 
-type TExamplesAllofSchema1 = mixed;
+type TExamplesAllofSchema1 = TExamplesAllofSchema1AllOf;
 
 final class ExamplesAllofSchema1AllOfPropertiesBar {
 
