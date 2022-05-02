@@ -337,6 +337,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
   private function generateMergedAllOfChecks(TSchema $schema, HackBuilder $hb): void {
     $schema_builder = new SchemaBuilder($this->ctx, $this->generateClassName($this->suffix, 'allOf'), $schema);
     $schema_builder->build();
+    $this->type_info = $schema_builder->getTypeInfo();
     $hb->addReturnf('%s::check($input, $pointer)', $schema_builder->getClassName());
   }
 
