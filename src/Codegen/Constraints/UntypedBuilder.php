@@ -17,6 +17,18 @@ type TUntypedSchema = shape(
   ?'allOf' => vec<TSchema>,
   ?'not' => vec<TSchema>,
   ?'oneOf' => vec<TSchema>,
+
+  // Whether to use advanced type inference. When
+  // `disableTypeInference` is true, Hack-JSON-Schema will
+  // output `mixed` for intersection and union types.
+  //
+  // Note that this is a temporary flag to ease migrating
+  // to more complex types. In the event that user-defined
+  // types have drifted out of sync with schema definitions,
+  // you can enable this flag and repair the types or schemas
+  // at your leisure.
+  ?'disableTypeInference' => bool,
+
   ...
 );
 
@@ -215,6 +227,10 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
    * bail out and just used `mixed`.
    */
   public function getMergedAllOfChecks(): ?TSchema {
+    if (!$this->isTypeInferenceEnabled()) {
+      return null;
+    }
+
     // Bail if this schema contains more than an `allOf` constraint.
     if (C\count(Shapes::toDict($this->typed_schema)) !== 1) {
       return null;
@@ -498,14 +514,17 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       }
     }
 
-    $type_info = Typing\TypeSystem::union($present_types);
-    // For now, keep upcasting nonnull to mixed.
-    // This is a temporary cludge to reduce the amount of code changed by generating unions.
-    // TODO: Stop doing the above.
-    if ($type_info is Typing\ConcreteType && $type_info->getConcreteTypeName() === Typing\ConcreteTypeName::NONNULL) {
-      $type_info = Typing\TypeSystem::mixed();
+    if ($this->isTypeInferenceEnabled()) {
+      $type_info = Typing\TypeSystem::union($present_types);
+      // For now, keep upcasting nonnull to mixed.
+      // This is a temporary cludge to reduce the amount of code changed by generating unions.
+      // TODO: Stop doing the above.
+      if ($type_info is Typing\ConcreteType && $type_info->getConcreteTypeName() === Typing\ConcreteTypeName::NONNULL) {
+        $type_info = Typing\TypeSystem::mixed();
+      }
+      $this->type_info = $type_info;
     }
-    $this->type_info = $type_info;
+
     if (C\count($nonnull_builders) < C\count($schema_builders)) {
       // If we filtered out a null builder above, handle it here.
       // TODO: Once we remove the above cludge, we can do `if ($this->type_info->isOptional()) {`
@@ -643,5 +662,9 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
   <<__Override>>
   public function getTypeInfo(): Typing\Type {
     return Typing\TypeSystem::alias($this->getType());
+  }
+
+  private function isTypeInferenceEnabled(): bool {
+    return !Shapes::idx($this->typed_schema, 'disableTypeInference', false);
   }
 }
