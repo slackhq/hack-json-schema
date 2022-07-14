@@ -22,6 +22,7 @@ type TObjectSchema = shape(
   ?'coerce' => bool,
   ?'minProperties' => int,
   ?'maxProperties' => int,
+  ?'discardAdditionalProperties' => bool,
   ...
 );
 
@@ -143,7 +144,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     $allow_any_additional_properties =
       $additional_properties is nonnull && $is_additional_properties_boolean && $additional_properties;
     $discard_additional_properties =
-      $additional_properties === false && $this->ctx->shouldDiscardAdditionalProperties();
+      $additional_properties === false && Shapes::idx($this->typed_schema, 'discardAdditionalProperties', false);
 
     $discard_all = $discard_additional_properties &&
       ($properties is null || C\count($properties) == 0) &&
@@ -328,9 +329,8 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
     // `properties` key will be run through that JSON schema. These values will
     // also be included in the output and will be typed to the specific schema.
     //
-    // If the 'discard_aditional_properties' validator configuration is set to
-    // true, we will just ignore and discard the additional values instead of
-    // throwing a validation error.
+    // If 'discard_aditional_properties' is set to true, we will just ignore
+    // and discard the additional values instead of throwing a validation error.
     //
 
     if (

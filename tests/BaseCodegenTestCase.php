@@ -18,7 +18,6 @@ abstract class BaseCodegenTestCase extends HackTest {
     ?'json_schema_codegen_config' => IJsonSchemaCodegenConfig,
     ?'refs' => Codegen::TValidatorRefsConfig,
     ?'defaults' => Codegen::TValidatorDefaultsConfig,
-    ?'discard_additional_properties' => bool,
   );
 
   public function assertUnchanged(string $_value, ?string $_token = null): void {
@@ -99,10 +98,6 @@ abstract class BaseCodegenTestCase extends HackTest {
       'file' => $path,
       'class' => $name,
     );
-
-    if (Shapes::keyExists($options, 'discard_additional_properties')) {
-      $validator_config['discard_additional_properties'] = $options['discard_additional_properties'];
-    }
 
     $defaults = $options['defaults'] ?? null;
     if ($defaults is nonnull) {
