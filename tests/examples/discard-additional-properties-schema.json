@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "properties": {
+    "only_additional_properties": {
+      "type": "object",
+      "additionalProperties": true,
+      "discardAdditionalProperties": true
+    },
+    "only_properties": {
+      "type": "object",
+      "additionalProperties": false,
+      "discardAdditionalProperties": true,
+      "required": ["required_string"],
+      "properties": {
+        "string": { "type": "string", "default": "optional_default" },
+        "number": { "type": "number", "default": 3 },
+        "required_string": { "type": "string", "default": "required_default" }
+      }
+    },
+    "additional_properties_ref": {
+      "type": "object",
+      "discardAdditionalProperties": true,
+      "additionalProperties": {
+        "$ref": "#/properties/additional_properties_array"
+      }
+    },
+    "additional_properties_array": {
+      "type": "object",
+      "discardAdditionalProperties": true,
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

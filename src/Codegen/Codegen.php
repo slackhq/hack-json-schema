@@ -58,7 +58,6 @@ final class Codegen implements IBuilder {
       ?'root_schema' => TSchema,
       ?'root_schema_path' => string,
     ),
-    ?'discard_additional_properties' => bool,
   );
 
   const type TSanitizeStringConfig = shape(
