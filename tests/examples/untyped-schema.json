@@ -144,6 +144,41 @@
           }
         }
       ]
+    },
+    "one_of_nullable_string": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "one_of_string_and_int": {
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "string",
+          "coerce": false
+        }
+      ]
+    },
+    "one_of_string_and_vec": {
+      "oneOf": [
+        {
+          "type": "string",
+          "coerce": false
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      ]
     }
   }
 }

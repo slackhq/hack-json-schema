@@ -10,10 +10,7 @@ final class DiscardAddititionalPropertiesValidatorTest extends BaseCodegenTestCa
 
   <<__Override>>
   public static async function beforeFirstTestAsync(): Awaitable<void> {
-    $ret = self::getBuilder(
-      'discard-additional-properties-schema.json',
-      'DiscardAddititionalPropertiesValidator',
-    );
+    $ret = self::getBuilder('discard-additional-properties-schema.json', 'DiscardAddititionalPropertiesValidator');
     $ret['codegen']->build();
     require_once($ret['path']);
   }
