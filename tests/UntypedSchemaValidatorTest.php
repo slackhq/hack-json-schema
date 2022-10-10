@@ -202,4 +202,36 @@ final class UntypedSchemaValidatorTest extends BaseCodegenTestCase {
     expect($error['pointer'] ?? null)->toBeSame('/any_of_optimized_enum');
   }
 
+  public function testOneOfNullableString(): void {
+    $this->expectCases(
+      vec[
+        shape('input' => 'foo', 'output' => dict['one_of_nullable_string' => 'foo'], 'valid' => true),
+        shape('input' => null, 'output' => dict['one_of_nullable_string' => null], 'valid' => true),
+        shape('input' => true, 'valid' => false),
+      ],
+      $input ==> new UntypedSchemaValidator(dict['one_of_nullable_string' => $input]),
+    );
+  }
+
+  public function testOneOfStringAndInt(): void {
+    $this->expectCases(
+      vec[
+        shape('input' => 'foo', 'output' => dict['one_of_string_and_int' => 'foo'], 'valid' => true),
+        shape('input' => 3, 'output' => dict['one_of_string_and_int' => 3], 'valid' => true),
+        shape('input' => true, 'valid' => false),
+      ],
+      $input ==> new UntypedSchemaValidator(dict['one_of_string_and_int' => $input]),
+    );
+  }
+
+  public function testOneOfStringAndVec(): void {
+    $this->expectCases(
+      vec[
+        shape('input' => 'foo', 'output' => dict['one_of_string_and_vec' => 'foo'], 'valid' => true),
+        shape('input' => vec[3], 'output' => dict['one_of_string_and_vec' => vec[3]], 'valid' => true),
+        shape('input' => 3, 'valid' => false),
+      ],
+      $input ==> new UntypedSchemaValidator(dict['one_of_string_and_vec' => $input]),
+    );
+  }
 }

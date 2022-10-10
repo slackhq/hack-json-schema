@@ -11,6 +11,7 @@ use type Facebook\HackCodegen\{
   HackBuilderKeys,
   HackBuilderValues,
 };
+use type Slack\Hack\JsonSchema\Sentinel;
 
 type TUntypedSchema = shape(
   ?'anyOf' => vec<TSchema>,
@@ -141,15 +142,25 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
 
   }
 
-  // TODO: Determine Lowest Upper Bound for oneOf constraint.
   private function generateOneOfChecks(vec<TSchema> $schemas, HackBuilder $hb): void {
     $constraints = vec[];
+    $types = vec[];
     foreach ($schemas as $index => $schema) {
       $schema_builder =
         new SchemaBuilder($this->ctx, $this->generateClassName($this->suffix, 'oneOf', (string)$index), $schema);
       $schema_builder->build();
       $constraints[] = "{$schema_builder->getClassName()}::check<>";
+      $types[] = $schema_builder->getTypeInfo();
     }
+
+    $type_info = Typing\TypeSystem::union($types);
+    // For now, keep upcasting nonnull to mixed.
+    // This is a temporary cludge to reduce the amount of code changed by generating unions.
+    // TODO: Stop doing the above.
+    if ($type_info is Typing\ConcreteType && $type_info->getConcreteTypeName() === Typing\ConcreteTypeName::NONNULL) {
+      $type_info = Typing\TypeSystem::mixed();
+    }
+    $this->type_info = $type_info;
 
     $hb
       ->addAssignment('$constraints', $constraints, HackBuilderValues::vec(HackBuilderValues::literal()))
@@ -158,7 +169,8 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
     $hb
       ->addAssignment('$passed_any', false, HackBuilderValues::export())
       ->addAssignment('$passed_multi', false, HackBuilderValues::export())
-      ->addAssignment('$output', null, HackBuilderValues::export())
+      // Use `Sentinel` rather than `null` so that it's obvious when we failed to match any constraint.
+      ->addAssignment('$output', Str\format('\%s::get()', Sentinel::class), HackBuilderValues::literal())
       ->startForeachLoop('$constraints', null, '$constraint')
       ->startTryBlock()
       ->addMultilineCall('$output = $constraint', vec['$input', '$pointer'])
@@ -181,7 +193,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
     );
 
     $hb
-      ->startIfBlock('$passed_multi || !$passed_any')
+      ->startIfBlockf('$passed_multi || !$passed_any || $output is \%s', Sentinel::class)
       ->addAssignment(
         '$error',
         $error,
@@ -452,7 +464,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
 
               if ($property_type === TSchemaType::STRING_T && C\contains($required, $property_name)) {
                 $typed_property_schema =
-                  type_assert_shape($property_schema, 'Slack\Hack\JsonSchema\Codegen\TStringSchema');
+                  type_assert_type($property_schema, \Slack\Hack\JsonSchema\Codegen\TStringSchema::class);
 
                 $enum = $typed_property_schema['enum'] ?? null;
                 if ($enum is nonnull && C\count($enum) === 1) {

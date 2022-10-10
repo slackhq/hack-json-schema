@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<25dc59f6b0554fb484fa23d884432464>>
+ * @generated SignedSource<<e7f10e1ede65035fb26f7fa52cba5e5f>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -64,6 +64,12 @@ type TUntypedSchemaValidatorPropertiesAnyOfOptimizedEnumAnyOfTypesSecond = shape
 
 type TUntypedSchemaValidatorPropertiesAnyOfOptimizedEnum = mixed;
 
+type TUntypedSchemaValidatorPropertiesOneOfNullableString = ?string;
+
+type TUntypedSchemaValidatorPropertiesOneOfStringAndInt = arraykey;
+
+type TUntypedSchemaValidatorPropertiesOneOfStringAndVec = mixed;
+
 type TUntypedSchemaValidator = shape(
   ?'all_of' => TUntypedSchemaValidatorPropertiesAllOf,
   ?'any_of' => TUntypedSchemaValidatorPropertiesAnyOf,
@@ -73,6 +79,9 @@ type TUntypedSchemaValidator = shape(
   ?'all_of_default' => TUntypedSchemaValidatorPropertiesAllOfDefault,
   ?'all_of_default_first_schema_wins' => TUntypedSchemaValidatorPropertiesAllOfDefaultFirstSchemaWins,
   ?'any_of_optimized_enum' => TUntypedSchemaValidatorPropertiesAnyOfOptimizedEnum,
+  ?'one_of_nullable_string' => TUntypedSchemaValidatorPropertiesOneOfNullableString,
+  ?'one_of_string_and_int' => TUntypedSchemaValidatorPropertiesOneOfStringAndInt,
+  ?'one_of_string_and_vec' => TUntypedSchemaValidatorPropertiesOneOfStringAndVec,
   ...
 );
 
@@ -994,6 +1003,221 @@ final class UntypedSchemaValidatorPropertiesAnyOfOptimizedEnum {
   }
 }
 
+final class UntypedSchemaValidatorPropertiesOneOfNullableStringOneOf0 {
+
+  public static function check(mixed $input, string $pointer): null {
+    $typed = Constraints\NullConstraint::check($input, $pointer);
+
+    return $typed;
+  }
+}
+
+final class UntypedSchemaValidatorPropertiesOneOfNullableStringOneOf1 {
+
+  private static bool $coerce = true;
+
+  public static function check(mixed $input, string $pointer): string {
+    $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
+
+    return $typed;
+  }
+}
+
+final class UntypedSchemaValidatorPropertiesOneOfNullableString {
+
+  public static function check(
+    mixed $input,
+    string $pointer,
+  ): TUntypedSchemaValidatorPropertiesOneOfNullableString {
+    $constraints = vec[
+      UntypedSchemaValidatorPropertiesOneOfNullableStringOneOf0::check<>,
+      UntypedSchemaValidatorPropertiesOneOfNullableStringOneOf1::check<>,
+    ];
+
+    $passed_any = false;
+    $passed_multi = false;
+    $output = \Slack\Hack\JsonSchema\Sentinel::get();
+    foreach ($constraints as $constraint) {
+      try {
+        $output = $constraint($input, $pointer);
+        if ($passed_any) {
+          $passed_multi = true;
+          break;
+        }
+        $passed_any = true;
+      } catch (JsonSchema\InvalidFieldException $e) {
+      }
+    }
+
+    if ($passed_multi || !$passed_any || $output is \Slack\Hack\JsonSchema\Sentinel) {
+      $error = shape(
+        'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
+        'constraint' => shape(
+          'type' => JsonSchema\FieldErrorConstraint::ONE_OF,
+        ),
+        'message' => 'failed to match exactly one allowed schema',
+      );
+      throw new JsonSchema\InvalidFieldException($pointer, vec[$error]);
+    }
+    return $output;
+  }
+}
+
+final class UntypedSchemaValidatorPropertiesOneOfStringAndIntOneOf0 {
+
+  private static bool $coerce = true;
+
+  public static function check(mixed $input, string $pointer): int {
+    $typed =
+      Constraints\IntegerConstraint::check($input, $pointer, self::$coerce);
+
+    return $typed;
+  }
+}
+
+final class UntypedSchemaValidatorPropertiesOneOfStringAndIntOneOf1 {
+
+  private static bool $coerce = false;
+
+  public static function check(mixed $input, string $pointer): string {
+    $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
+
+    return $typed;
+  }
+}
+
+final class UntypedSchemaValidatorPropertiesOneOfStringAndInt {
+
+  public static function check(
+    mixed $input,
+    string $pointer,
+  ): TUntypedSchemaValidatorPropertiesOneOfStringAndInt {
+    $constraints = vec[
+      UntypedSchemaValidatorPropertiesOneOfStringAndIntOneOf0::check<>,
+      UntypedSchemaValidatorPropertiesOneOfStringAndIntOneOf1::check<>,
+    ];
+
+    $passed_any = false;
+    $passed_multi = false;
+    $output = \Slack\Hack\JsonSchema\Sentinel::get();
+    foreach ($constraints as $constraint) {
+      try {
+        $output = $constraint($input, $pointer);
+        if ($passed_any) {
+          $passed_multi = true;
+          break;
+        }
+        $passed_any = true;
+      } catch (JsonSchema\InvalidFieldException $e) {
+      }
+    }
+
+    if ($passed_multi || !$passed_any || $output is \Slack\Hack\JsonSchema\Sentinel) {
+      $error = shape(
+        'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
+        'constraint' => shape(
+          'type' => JsonSchema\FieldErrorConstraint::ONE_OF,
+        ),
+        'message' => 'failed to match exactly one allowed schema',
+      );
+      throw new JsonSchema\InvalidFieldException($pointer, vec[$error]);
+    }
+    return $output;
+  }
+}
+
+final class UntypedSchemaValidatorPropertiesOneOfStringAndVecOneOf0 {
+
+  private static bool $coerce = false;
+
+  public static function check(mixed $input, string $pointer): string {
+    $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
+
+    return $typed;
+  }
+}
+
+final class UntypedSchemaValidatorPropertiesOneOfStringAndVecOneOf1Items {
+
+  private static bool $coerce = true;
+
+  public static function check(mixed $input, string $pointer): int {
+    $typed =
+      Constraints\IntegerConstraint::check($input, $pointer, self::$coerce);
+
+    return $typed;
+  }
+}
+
+final class UntypedSchemaValidatorPropertiesOneOfStringAndVecOneOf1 {
+
+  private static bool $coerce = true;
+
+  public static function check(mixed $input, string $pointer): vec<int> {
+    $typed = Constraints\ArrayConstraint::check($input, $pointer, self::$coerce);
+
+    $output = vec[];
+    $errors = vec[];
+
+    foreach ($typed as $index => $value) {
+      try {
+        $output[] = UntypedSchemaValidatorPropertiesOneOfStringAndVecOneOf1Items::check(
+          $value,
+          JsonSchema\get_pointer($pointer, (string) $index),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\count($errors)) {
+      throw new JsonSchema\InvalidFieldException($pointer, $errors);
+    }
+
+    return $output;
+  }
+}
+
+final class UntypedSchemaValidatorPropertiesOneOfStringAndVec {
+
+  public static function check(
+    mixed $input,
+    string $pointer,
+  ): TUntypedSchemaValidatorPropertiesOneOfStringAndVec {
+    $constraints = vec[
+      UntypedSchemaValidatorPropertiesOneOfStringAndVecOneOf0::check<>,
+      UntypedSchemaValidatorPropertiesOneOfStringAndVecOneOf1::check<>,
+    ];
+
+    $passed_any = false;
+    $passed_multi = false;
+    $output = \Slack\Hack\JsonSchema\Sentinel::get();
+    foreach ($constraints as $constraint) {
+      try {
+        $output = $constraint($input, $pointer);
+        if ($passed_any) {
+          $passed_multi = true;
+          break;
+        }
+        $passed_any = true;
+      } catch (JsonSchema\InvalidFieldException $e) {
+      }
+    }
+
+    if ($passed_multi || !$passed_any || $output is \Slack\Hack\JsonSchema\Sentinel) {
+      $error = shape(
+        'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
+        'constraint' => shape(
+          'type' => JsonSchema\FieldErrorConstraint::ONE_OF,
+        ),
+        'message' => 'failed to match exactly one allowed schema',
+      );
+      throw new JsonSchema\InvalidFieldException($pointer, vec[$error]);
+    }
+    return $output;
+  }
+}
+
 final class UntypedSchemaValidator
   extends JsonSchema\BaseValidator<TUntypedSchemaValidator> {
 
@@ -1096,6 +1320,39 @@ final class UntypedSchemaValidator
         $output['any_of_optimized_enum'] = UntypedSchemaValidatorPropertiesAnyOfOptimizedEnum::check(
           $typed['any_of_optimized_enum'],
           JsonSchema\get_pointer($pointer, 'any_of_optimized_enum'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'one_of_nullable_string')) {
+      try {
+        $output['one_of_nullable_string'] = UntypedSchemaValidatorPropertiesOneOfNullableString::check(
+          $typed['one_of_nullable_string'],
+          JsonSchema\get_pointer($pointer, 'one_of_nullable_string'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'one_of_string_and_int')) {
+      try {
+        $output['one_of_string_and_int'] = UntypedSchemaValidatorPropertiesOneOfStringAndInt::check(
+          $typed['one_of_string_and_int'],
+          JsonSchema\get_pointer($pointer, 'one_of_string_and_int'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'one_of_string_and_vec')) {
+      try {
+        $output['one_of_string_and_vec'] = UntypedSchemaValidatorPropertiesOneOfStringAndVec::check(
+          $typed['one_of_string_and_vec'],
+          JsonSchema\get_pointer($pointer, 'one_of_string_and_vec'),
         );
       } catch (JsonSchema\InvalidFieldException $e) {
         $errors = \HH\Lib\Vec\concat($errors, $e->errors);
