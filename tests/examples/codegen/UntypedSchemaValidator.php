@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<90a3ca75ea51b3a416f721e6eb1828de>>
+ * @generated SignedSource<<8553bd28dc52954a5c87a8c2cb2f3b01>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -1036,7 +1036,7 @@ final class UntypedSchemaValidatorPropertiesOneOfNullableString {
 
     $passed_any = false;
     $passed_multi = false;
-    $output = new \Slack\Hack\JsonSchema\Sentinal();
+    $output = \Slack\Hack\JsonSchema\Sentinal::get();
     foreach ($constraints as $constraint) {
       try {
         $output = $constraint($input, $pointer);
@@ -1099,7 +1099,7 @@ final class UntypedSchemaValidatorPropertiesOneOfStringAndInt {
 
     $passed_any = false;
     $passed_multi = false;
-    $output = new \Slack\Hack\JsonSchema\Sentinal();
+    $output = \Slack\Hack\JsonSchema\Sentinal::get();
     foreach ($constraints as $constraint) {
       try {
         $output = $constraint($input, $pointer);
@@ -1191,7 +1191,7 @@ final class UntypedSchemaValidatorPropertiesOneOfStringAndVec {
 
     $passed_any = false;
     $passed_multi = false;
-    $output = new \Slack\Hack\JsonSchema\Sentinal();
+    $output = \Slack\Hack\JsonSchema\Sentinal::get();
     foreach ($constraints as $constraint) {
       try {
         $output = $constraint($input, $pointer);

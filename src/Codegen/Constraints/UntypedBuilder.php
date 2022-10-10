@@ -170,7 +170,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       ->addAssignment('$passed_any', false, HackBuilderValues::export())
       ->addAssignment('$passed_multi', false, HackBuilderValues::export())
       // Use `sentinal` rather than `null` so that it's obvious when we failed to match any constraint.
-      ->addAssignment('$output', Str\format('new \%s()', Sentinal::class), HackBuilderValues::literal())
+      ->addAssignment('$output', Str\format('\%s::get()', Sentinal::class), HackBuilderValues::literal())
       ->startForeachLoop('$constraints', null, '$constraint')
       ->startTryBlock()
       ->addMultilineCall('$output = $constraint', vec['$input', '$pointer'])

@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<884da88463b70fac29468fab117c4e1b>>
+ * @generated SignedSource<<7c546e3edf3430be1044abfffdf398cd>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -425,7 +425,7 @@ final class AddressSchemaValidatorPropertiesLatitude {
 
     $passed_any = false;
     $passed_multi = false;
-    $output = new \Slack\Hack\JsonSchema\Sentinal();
+    $output = \Slack\Hack\JsonSchema\Sentinal::get();
     foreach ($constraints as $constraint) {
       try {
         $output = $constraint($input, $pointer);
