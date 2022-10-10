@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<8553bd28dc52954a5c87a8c2cb2f3b01>>
+ * @generated SignedSource<<e7f10e1ede65035fb26f7fa52cba5e5f>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -1036,7 +1036,7 @@ final class UntypedSchemaValidatorPropertiesOneOfNullableString {
 
     $passed_any = false;
     $passed_multi = false;
-    $output = \Slack\Hack\JsonSchema\Sentinal::get();
+    $output = \Slack\Hack\JsonSchema\Sentinel::get();
     foreach ($constraints as $constraint) {
       try {
         $output = $constraint($input, $pointer);
@@ -1049,7 +1049,7 @@ final class UntypedSchemaValidatorPropertiesOneOfNullableString {
       }
     }
 
-    if ($passed_multi || !$passed_any || $output is \Slack\Hack\JsonSchema\Sentinal) {
+    if ($passed_multi || !$passed_any || $output is \Slack\Hack\JsonSchema\Sentinel) {
       $error = shape(
         'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
         'constraint' => shape(
@@ -1099,7 +1099,7 @@ final class UntypedSchemaValidatorPropertiesOneOfStringAndInt {
 
     $passed_any = false;
     $passed_multi = false;
-    $output = \Slack\Hack\JsonSchema\Sentinal::get();
+    $output = \Slack\Hack\JsonSchema\Sentinel::get();
     foreach ($constraints as $constraint) {
       try {
         $output = $constraint($input, $pointer);
@@ -1112,7 +1112,7 @@ final class UntypedSchemaValidatorPropertiesOneOfStringAndInt {
       }
     }
 
-    if ($passed_multi || !$passed_any || $output is \Slack\Hack\JsonSchema\Sentinal) {
+    if ($passed_multi || !$passed_any || $output is \Slack\Hack\JsonSchema\Sentinel) {
       $error = shape(
         'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
         'constraint' => shape(
@@ -1191,7 +1191,7 @@ final class UntypedSchemaValidatorPropertiesOneOfStringAndVec {
 
     $passed_any = false;
     $passed_multi = false;
-    $output = \Slack\Hack\JsonSchema\Sentinal::get();
+    $output = \Slack\Hack\JsonSchema\Sentinel::get();
     foreach ($constraints as $constraint) {
       try {
         $output = $constraint($input, $pointer);
@@ -1204,7 +1204,7 @@ final class UntypedSchemaValidatorPropertiesOneOfStringAndVec {
       }
     }
 
-    if ($passed_multi || !$passed_any || $output is \Slack\Hack\JsonSchema\Sentinal) {
+    if ($passed_multi || !$passed_any || $output is \Slack\Hack\JsonSchema\Sentinel) {
       $error = shape(
         'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
         'constraint' => shape(

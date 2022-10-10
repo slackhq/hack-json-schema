@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<7c546e3edf3430be1044abfffdf398cd>>
+ * @generated SignedSource<<bbd4e20ed2f469e62e0efcc5610d2ccc>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -425,7 +425,7 @@ final class AddressSchemaValidatorPropertiesLatitude {
 
     $passed_any = false;
     $passed_multi = false;
-    $output = \Slack\Hack\JsonSchema\Sentinal::get();
+    $output = \Slack\Hack\JsonSchema\Sentinel::get();
     foreach ($constraints as $constraint) {
       try {
         $output = $constraint($input, $pointer);
@@ -438,7 +438,7 @@ final class AddressSchemaValidatorPropertiesLatitude {
       }
     }
 
-    if ($passed_multi || !$passed_any || $output is \Slack\Hack\JsonSchema\Sentinal) {
+    if ($passed_multi || !$passed_any || $output is \Slack\Hack\JsonSchema\Sentinel) {
       $error = shape(
         'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
         'constraint' => shape(

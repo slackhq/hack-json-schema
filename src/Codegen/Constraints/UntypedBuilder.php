@@ -11,7 +11,7 @@ use type Facebook\HackCodegen\{
   HackBuilderKeys,
   HackBuilderValues,
 };
-use type Slack\Hack\JsonSchema\Sentinal;
+use type Slack\Hack\JsonSchema\Sentinel;
 
 type TUntypedSchema = shape(
   ?'anyOf' => vec<TSchema>,
@@ -169,8 +169,8 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
     $hb
       ->addAssignment('$passed_any', false, HackBuilderValues::export())
       ->addAssignment('$passed_multi', false, HackBuilderValues::export())
-      // Use `sentinal` rather than `null` so that it's obvious when we failed to match any constraint.
-      ->addAssignment('$output', Str\format('\%s::get()', Sentinal::class), HackBuilderValues::literal())
+      // Use `Sentinel` rather than `null` so that it's obvious when we failed to match any constraint.
+      ->addAssignment('$output', Str\format('\%s::get()', Sentinel::class), HackBuilderValues::literal())
       ->startForeachLoop('$constraints', null, '$constraint')
       ->startTryBlock()
       ->addMultilineCall('$output = $constraint', vec['$input', '$pointer'])
@@ -193,7 +193,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
     );
 
     $hb
-      ->startIfBlockf('$passed_multi || !$passed_any || $output is \%s', Sentinal::class)
+      ->startIfBlockf('$passed_multi || !$passed_any || $output is \%s', Sentinel::class)
       ->addAssignment(
         '$error',
         $error,
