@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<fa85e2dfb2ba253b0d8d4d4bf3885c14>>
+ * @generated SignedSource<<0a79c5a2b4cdbd407b5c69fb9125b3ed>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -20,7 +20,7 @@ type TAnyOfValidatorShapesAnyOf1 = shape(
   ?'foo' => string,
 );
 
-type TAnyOfValidatorShapes = mixed;
+type TAnyOfValidatorShapes = nonnull;
 
 final class AnyOfValidatorShapesAnyOf0PropertiesFoo {
 

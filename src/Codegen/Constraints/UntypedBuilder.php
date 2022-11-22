@@ -153,14 +153,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       $types[] = $schema_builder->getTypeInfo();
     }
 
-    $type_info = Typing\TypeSystem::union($types);
-    // For now, keep upcasting nonnull to mixed.
-    // This is a temporary cludge to reduce the amount of code changed by generating unions.
-    // TODO: Stop doing the above.
-    if ($type_info is Typing\ConcreteType && $type_info->getConcreteTypeName() === Typing\ConcreteTypeName::NONNULL) {
-      $type_info = Typing\TypeSystem::mixed();
-    }
-    $this->type_info = $type_info;
+    $this->type_info = Typing\TypeSystem::union($types);
 
     $hb
       ->addAssignment('$constraints', $constraints, HackBuilderValues::vec(HackBuilderValues::literal()))
@@ -510,17 +503,8 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       }
     }
 
-    $type_info = Typing\TypeSystem::union($present_types);
-    // For now, keep upcasting nonnull to mixed.
-    // This is a temporary cludge to reduce the amount of code changed by generating unions.
-    // TODO: Stop doing the above.
-    if ($type_info is Typing\ConcreteType && $type_info->getConcreteTypeName() === Typing\ConcreteTypeName::NONNULL) {
-      $type_info = Typing\TypeSystem::mixed();
-    }
-    $this->type_info = $type_info;
-    if (C\count($nonnull_builders) < C\count($schema_builders)) {
-      // If we filtered out a null builder above, handle it here.
-      // TODO: Once we remove the above cludge, we can do `if ($this->type_info->isOptional()) {`
+    $this->type_info = Typing\TypeSystem::union($present_types);
+    if ($this->type_info->isOptional()) {
       $hb
         ->startIfBlock('$input === null')
         ->addReturn(null, HackBuilderValues::export())
