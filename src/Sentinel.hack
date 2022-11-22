@@ -8,6 +8,7 @@ final class Sentinel {
     /**
      * The singleton instance of the sentinal value.
      */
+    <<__Memoize>>
     public static function get(): this {
         return new self();
     }

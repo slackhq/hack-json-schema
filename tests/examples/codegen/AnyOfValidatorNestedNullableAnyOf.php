@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<caed5ad653fe7f7d3dfe0516296d4e6b>>
+ * @generated SignedSource<<c1940fa688271ce27b41f85f8b502a40>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -84,6 +84,10 @@ final class AnyOfValidatorNestedNullableAnyOf
     mixed $input,
     string $pointer,
   ): TAnyOfValidatorNestedNullableAnyOf {
+    if ($input === null) {
+      return null;
+    }
+
     $constraints = vec[
       AnyOfValidatorNestedNullableAnyOfAnyOf0::check<>,
       AnyOfValidatorNestedNullableAnyOfAnyOf1::check<>,
