@@ -6,7 +6,6 @@ use namespace HH\Lib\{C, Math, Str, Vec};
 use type Facebook\HackCodegen\{
   CodegenClass,
   CodegenMethod,
-  CodegenType,
   HackBuilder,
   HackBuilderKeys,
   HackBuilderValues,
@@ -42,9 +41,8 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
 
     $this->addBuilderClass($class);
 
-    $type = $this->codegenType();
-    $this->ctx->getFile()->addBeforeType($type);
-    Typing\TypeSystem::registerAlias($this->getType(), $this->type_info);
+    $renderer = new TypeRenderer($this->ctx);
+    $renderer->render($this->type_info, $this->getType());
 
     return $this;
   }
@@ -627,13 +625,6 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
   <<__Override>>
   public function getType(): string {
     return $this->generateTypeName($this->getClassName());
-  }
-
-  private function codegenType(): CodegenType {
-    return $this->ctx
-      ->getHackCodegenFactory()
-      ->codegenType($this->getType())
-      ->setType($this->type_info->render());
   }
 
   <<__Override>>

@@ -1,6 +1,6 @@
 namespace Slack\Hack\JsonSchema\Codegen\Typing;
 
-use namespace HH\Lib\{Str, Vec};
+use Facebook\HackCodegen\CodegenType;
 
 /**
  * Represents a concrete type in the Hack type system,
@@ -13,7 +13,12 @@ use namespace HH\Lib\{Str, Vec};
  * approach for now.
  */
 final class ConcreteType extends Type {
-  public function __construct(private ConcreteTypeName $name, private vec<Type> $generics = vec[]) {}
+  public function __construct(
+    private ConcreteTypeName $name,
+    private vec<Type> $generics = vec[],
+    private this::TShapeFields $shape_fields = dict[],
+    private bool $is_closed_shape = false,
+  ) {}
 
   <<__Override>>
   public function getConcreteTypeName(): ConcreteTypeName {
@@ -26,23 +31,27 @@ final class ConcreteType extends Type {
   }
 
   <<__Override>>
+  public function getName(): string {
+    return (string)$this->getConcreteTypeName();
+  }
+
+  <<__Override>>
+  public function getShapeFields(): this::TShapeFields {
+    return $this->shape_fields;
+  }
+
+  <<__Override>>
   public function hasAlias(): bool {
     return false;
   }
 
   <<__Override>>
-  public function isOptional(): bool {
-    return false;
+  public function isClosedShape(): bool {
+    return $this->is_closed_shape;
   }
 
   <<__Override>>
-  public function render(): string {
-    $out = (string)$this->name;
-    $generics = $this->getGenerics();
-    if ($generics) {
-      $out = $out.'<'.Str\join(Vec\map($generics, $generic ==> $generic->render()), ', ').'>';
-    }
-    // TODO: Handle shape fields
-    return $out;
+  public function isOptional(): bool {
+    return false;
   }
 }
