@@ -1,5 +1,7 @@
 namespace Slack\Hack\JsonSchema\Codegen\Typing;
 
+use Facebook\HackCodegen\CodegenType;
+
 /**
  * Represents a concrete type in the Hack type system,
  * i.e., a type which cannot be satisfied by `null`
