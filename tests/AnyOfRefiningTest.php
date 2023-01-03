@@ -9,10 +9,18 @@ use type Slack\Hack\JsonSchema\Tests\Generated\{
   AnyOfValidator2,
   AnyOfValidator3,
   AnyOfValidator4,
+  AnyOfValidatorManyShapes,
   AnyOfValidatorNestedNullableAnyOf,
+  AnyOfValidatorNestedShapes,
   AnyOfValidatorNullableArraykey,
+  AnyOfValidatorNullableNestedShapes,
   AnyOfValidatorNullableStrings,
+  AnyOfValidatorOpenAndClosedShapes,
+  AnyOfValidatorOpenShapes,
+  AnyOfValidatorRefShapes,
+  AnyOfValidatorRequiredShapeProperties,
   AnyOfValidatorShapes,
+  AnyOfValidatorShapesDisjoint,
   AnyOfValidatorStrings,
   AnyOfValidatorVecs,
 };
@@ -38,6 +46,8 @@ final class AnyOfRefiningTest extends BaseCodegenTestCase {
       ),
     ));
     $ret['codegen']->build();
+    $ret = self::getBuilder('anyof-schema-many-shapes.json', 'AnyOfValidatorManyShapes');
+    $ret['codegen']->build();
     $ret = self::getBuilder('anyof-schema-nested-nullable-anyof.json', 'AnyOfValidatorNestedNullableAnyOf');
     $ret['codegen']->build();
     $ret = self::getBuilder('anyof-schema-nullable-arraykey.json', 'AnyOfValidatorNullableArraykey');
@@ -46,7 +56,21 @@ final class AnyOfRefiningTest extends BaseCodegenTestCase {
     $ret['codegen']->build();
     $ret = self::getBuilder('anyof-schema-nullable-strings.json', 'AnyOfValidatorNullableStrings');
     $ret['codegen']->build();
+    $ret = self::getBuilder('anyof-schema-nested-shapes.json', 'AnyOfValidatorNestedShapes');
+    $ret['codegen']->build();
+    $ret = self::getBuilder('anyof-schema-nullable-nested-shapes.json', 'AnyOfValidatorNullableNestedShapes');
+    $ret['codegen']->build();
+    $ret = self::getBuilder('anyof-schema-open-and-closed-shapes.json', 'AnyOfValidatorOpenAndClosedShapes');
+    $ret['codegen']->build();
+    $ret = self::getBuilder('anyof-schema-open-shapes.json', 'AnyOfValidatorOpenShapes');
+    $ret['codegen']->build();
+    $ret = self::getBuilder('anyof-schema-ref-shapes.json', 'AnyOfValidatorRefShapes');
+    $ret['codegen']->build();
+    $ret = self::getBuilder('anyof-schema-required-shape-properties.json', 'AnyOfValidatorRequiredShapeProperties');
+    $ret['codegen']->build();
     $ret = self::getBuilder('anyof-schema-shapes.json', 'AnyOfValidatorShapes');
+    $ret['codegen']->build();
+    $ret = self::getBuilder('anyof-schema-shapes-disjoint.json', 'AnyOfValidatorShapesDisjoint');
     $ret['codegen']->build();
     $ret = self::getBuilder('anyof-schema-shapes-disabled.json', 'AnyOfValidatorShapesDisabled');
     $ret['codegen']->build();
@@ -226,6 +250,65 @@ final class AnyOfRefiningTest extends BaseCodegenTestCase {
     );
   }
 
+  public function testAnyOfValidatorManyShapes(): void {
+    $this->expectType<shape(
+      ?'foo' => ?int,
+      ?'bar' => string,
+      ?'baz' => bool,
+    )>(AnyOfValidatorManyShapes::class);
+  }
+
+  public function testAnyOfValidatorNestedShapes(): void {
+    $this->expectType<shape(
+      ?'foo' => shape(
+        ?'baz' => arraykey,
+        ?'qux' => bool,
+      ),
+      ...
+    )>(AnyOfValidatorNestedShapes::class);
+  }
+
+  public function testAnyOfValidatorNullableNestedShapes(): void {
+    $this->expectType<shape(
+      ?'foo' => ?shape(
+        ?'baz' => arraykey,
+        ?'qux' => bool,
+      ),
+      ...
+    )>(AnyOfValidatorNullableNestedShapes::class);
+  }
+
+  public function testAnyOfValidatorOpenAndClosedShapes(): void {
+    $this->expectType<shape(
+      ?'foo' => arraykey,
+      ?'bar' => vec<int>,
+      ...
+    )>(AnyOfValidatorOpenAndClosedShapes::class);
+  }
+
+  public function testAnyOfValidatorOpenShapes(): void {
+    $this->expectType<shape(
+      ?'foo' => arraykey,
+      ...
+    )>(AnyOfValidatorOpenShapes::class);
+  }
+
+  public function testAnyOfValidatorRefShapes(): void {
+    $this->expectType<shape(
+      ?'foo' => vec<arraykey>,
+      ?'baz' => nonnull,
+      ...
+    )>(AnyOfValidatorRefShapes::class);
+  }
+
+  public function testAnyOfValidatorRequiredShapeProperties(): void {
+    $this->expectType<shape(
+      'foo' => arraykey,
+      ?'bar' => vec<arraykey>,
+      ...
+    )>(AnyOfValidatorRequiredShapeProperties::class);
+  }
+
   public function testAnyofValidatorShapes(): void {
     $this->expectCases(
       vec[
@@ -254,6 +337,10 @@ final class AnyOfRefiningTest extends BaseCodegenTestCase {
       ],
       $input ==> new AnyOfValidatorShapes($input),
     );
+  }
+
+  public function testAnyOfValidatorShapesDisjoint(): void {
+    $this->expectType<mixed>(AnyOfValidatorShapesDisjoint::class);
   }
 
   public function testAnyofValidatorVecs(): void {

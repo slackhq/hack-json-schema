@@ -1,11 +1,39 @@
 {
-    "nickname": {"type": "string"},
-    "loop": {"$ref": "loop-schema.json#/properties/loop"},
-    "person": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "nickname": { "$ref": "#/nickname" }
+  "nickname": {"type": "string"},
+  "loop": {"$ref": "loop-schema.json#/properties/loop"},
+  "person": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "nickname": { "$ref": "#/nickname" }
+    }
+  },
+  "shape_1": {
+    "type": "object",
+    "properties": {
+      "foo": {
+        "type": "array",
+        "items": {
+          "type": "integer"
+        }
+      },
+      "baz": {
+        "type": "integer"
       }
     }
+  },
+  "shape_2": {
+    "type": "object",
+    "properties": {
+      "foo": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "baz": {
+        "type": "string"
+      }
+    }
+  }
 }

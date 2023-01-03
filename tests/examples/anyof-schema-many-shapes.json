@@ -1,0 +1,43 @@
+{
+    "anyOf": [
+        {
+            "type": "object",
+            "required": ["foo"],
+            "additionalProperties": false,
+            "properties": {
+                "foo": {
+                    "type": "integer"
+                }
+            }
+        },
+        {
+            "type": "object",
+            "required": ["bar"],
+            "additionalProperties": false,
+            "properties": {
+                "bar": {
+                    "type": "string"
+                }
+            }
+        },
+        {
+            "type": "object",
+            "required": ["baz"],
+            "additionalProperties": false,
+            "properties": {
+                "baz": {
+                    "type": "boolean"
+                }
+            }
+        },
+        {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "foo": {
+                    "type": "null"
+                }
+            }
+        }
+    ]
+}

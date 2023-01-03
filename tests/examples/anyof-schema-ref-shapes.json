@@ -1,0 +1,19 @@
+{
+    "anyOf": [
+        {
+            "$ref": "../external_examples/external_definitions.json#/shape_1"
+        },
+        {
+            "$ref": "../external_examples/external_definitions.json#/shape_2"
+        },
+        {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "baz": {
+                    "type": "boolean"
+                }
+            }
+        }
+    ]
+}
