@@ -29,8 +29,8 @@ final abstract class TypeSystem {
   /**
    * Resolve a type alias to the type it references.
    */
-  public static function resolveAlias(string $alias): Type {
-    return self::$aliases[$alias];
+  public static function resolveAlias(string $alias): ?Type {
+    return self::$aliases[$alias] ?? null;
   }
 
   /**
@@ -84,6 +84,10 @@ final abstract class TypeSystem {
     return new ConcreteType(ConcreteTypeName::NUM);
   }
 
+  public static function shape(Type::TShapeFields $fields, bool $is_closed_shape): ConcreteType {
+    return new ConcreteType(ConcreteTypeName::SHAPE, vec[], $fields, $is_closed_shape);
+  }
+
   /**
    * Generate a string type.
    */
@@ -97,22 +101,22 @@ final abstract class TypeSystem {
    * For example, if the list contains int, string, and null, we'd generate ?arraykey, since
    * ?arraykey is the most broad type which is satisfied by either int, string, and null.
    */
-  public static function union(vec<Type> $types): Type {
+  public static function union(
+    vec<Type> $types,
+    shape(?'disable_shape_unification' => bool) $options = shape()
+  ): Type {
     $contains_null = C\any($types, $type ==> $type->isOptional());
     $type_names = Keyset\map($types, $type ==> $type->getConcreteTypeName());
+    if ($options['disable_shape_unification'] ?? false) {
+      $type_names = Keyset\map($type_names, $type_name ==> $type_name === ConcreteTypeName::SHAPE ? ConcreteTypeName::NONNULL : $type_name);
+    }
     $builtin_type_name = self::getTypeHierarchy()->computeLowestUpperBound($type_names) ?? ConcreteTypeName::NOTHING;
 
-    $generics = vec[];
-    // TODO: Handle dicts
-    if ($builtin_type_name === ConcreteTypeName::VEC || $builtin_type_name === ConcreteTypeName::KEYSET) {
-      $generics[] = Vec\map($types, $ty ==> C\first($ty->getGenerics()))
-        |> Vec\filter_nulls($$)
-        |> self::union($$);
-    }
+    $generics = self::resolveGenerics($builtin_type_name, $types);
 
-    // TODO: Handle shapes
+    list($shape_fields, $is_closed_shape) = self::resolveShapeFields($builtin_type_name, $types);
 
-    $type = new ConcreteType($builtin_type_name, $generics);
+    $type = new ConcreteType($builtin_type_name, $generics, $shape_fields, $is_closed_shape);
     if ($contains_null) {
       $type = new OptionalType($type);
     }
@@ -170,7 +174,7 @@ final abstract class TypeSystem {
         // declaring the union of T2 and null, for example.
         $candidate_ty = new OptionalType($candidate_ty);
       }
-      if ($candidate_ty->isEquivalent($type)) {
+      if ($candidate_ty->hasAlias() && $candidate_ty->isEquivalent($type)) {
         $equivalent_types[] = $candidate_ty;
       } else if ($candidate_ty->getConcreteTypeName() !== ConcreteTypeName::NOTHING) {
         // Conflicting type which is not null — bail out.
@@ -182,10 +186,90 @@ final abstract class TypeSystem {
     // use the alias A instead of using the solved type T. This better matches developer
     // intent when combining aliases and other types: the union of A and a type T2
     // which is itself a subtype of A should be expressed as A.
-    if (C\count(Vec\unique_by($equivalent_types, $ty ==> $ty->render())) === 1) {
+    if (C\count(Vec\unique_by($equivalent_types, $ty ==> $ty->getName())) === 1) {
       return C\firstx($equivalent_types);
     } else {
       return $type;
     }
+  }
+
+  private static function resolveGenerics(ConcreteTypeName $builtin_type_name, vec<Type> $types): vec<Type> {
+    $generics = vec[];
+    // TODO: Handle dicts
+    if ($builtin_type_name === ConcreteTypeName::VEC || $builtin_type_name === ConcreteTypeName::KEYSET) {
+      $generics[] = Vec\map($types, $ty ==> C\first($ty->getGenerics()))
+        |> Vec\filter_nulls($$)
+        |> self::union($$);
+    }
+    return $generics;
+  }
+
+  private static function resolveShapeFields(ConcreteTypeName $builtin_type_name, vec<Type> $types): (Type::TShapeFields, bool) {
+    // Union of shapes: union the shape fields such that `shape('a' => int) | shape('a' => string)`
+    // becomes `shape('a' => arraykey)`. Assume any field absent from an open shape can only be
+    // typed as `mixed`, so that `shape('a' => int) | shape('b' => int, ...)` becomes
+    // `shape(?'b' => int, ...)`.
+    $is_closed_shape = false;
+    $shape_fields = dict[];
+
+    if ($builtin_type_name === ConcreteTypeName::SHAPE) {
+      // All types must be shapes or subtypes of shapes (i.e. nothing). In generating our unioned shape,
+      // we only consider shapes, skipping nothing types.
+      $num_shapes = 0;
+      $num_closed_shapes = 0;
+      $shape_field_types = dict[];
+      $open_shape_field_counts = dict[];
+      $required_field_counts = dict[];
+
+      foreach ($types as $ty) {
+        if ($ty->getConcreteTypeName() === ConcreteTypeName::SHAPE) {
+          $num_shapes++;
+          if ($ty->isClosedShape()) {
+            $num_closed_shapes++;
+          }
+
+          foreach ($ty->getShapeFields() as $name => $field) {
+            $shape_field_types[$name] ??= vec[];
+            $shape_field_types[$name][] = $field['type'];
+
+            if (!$ty->isClosedShape()) {
+              $open_shape_field_counts[$name] ??= 0;
+              $open_shape_field_counts[$name]++;
+            }
+
+            if ($field['required'] ?? false) {
+              $required_field_counts[$name] ??= 0;
+              $required_field_counts[$name]++;
+            }
+          }
+        }
+      }
+
+      // A union of shapes containing at least one open shape cannot produce a closed shape.
+      $num_open_shapes = $num_shapes - $num_closed_shapes;
+      $is_closed_shape = $num_open_shapes === 0;
+      foreach ($shape_field_types as $name => $field_types) {
+        // If field is undefined in an open shape, it must be undefined in the union as well.
+        if (($open_shape_field_counts[$name] ?? 0) === $num_open_shapes) {
+          $unified_field_type = self::union($field_types);
+          // A field is required if it's required by all shapes in the union.
+          $required = ($required_field_counts[$name] ?? 0) === $num_shapes;
+
+          if (
+            $required ||
+            // While we could skip non-required aliases which point to `mixed`, that seems
+            // overly complicated.
+            $unified_field_type->hasAlias() ||
+            !$unified_field_type->isOptional() ||
+            $unified_field_type->getConcreteTypeName() !== ConcreteTypeName::NONNULL
+          ) {
+            // Only add a field if it is not of the form ?'foo' => mixed.
+            $shape_fields[$name] = shape('type' => $unified_field_type, 'required' => $required);
+          }
+        }
+      }
+    }
+
+    return tuple($shape_fields, $is_closed_shape);
   }
 }

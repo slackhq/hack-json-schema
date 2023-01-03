@@ -1,0 +1,24 @@
+{
+    "anyOf": [
+        {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["bar"],
+            "properties": {
+                "bar": {
+                    "type": "integer"
+                }
+            }
+        },
+        {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "bar": {
+                    "type": "string"
+                }
+            }
+        }
+    ],
+    "disableShapeUnification": true
+}

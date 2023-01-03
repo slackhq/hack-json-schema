@@ -189,4 +189,11 @@ abstract class BaseCodegenTestCase extends HackTest {
     }
   }
 
+  /**
+   * Assert that the given validator accepts input of the given type.
+   *
+   * This isn't really a test, but it is a way to ensure that static analysis flags
+   * when types aren't as expected.
+   */
+  public function expectType<T>(classname<Validator<T>> $_): void {}
 }

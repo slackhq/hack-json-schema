@@ -5,27 +5,31 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<0661118eb7013377aa86d536b9f79660>>
+ * @generated SignedSource<<168ca62b52f91b7b69e64639cb0d2b5a>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
 use namespace Slack\Hack\JsonSchema\Constraints;
 
-type TAnyOfValidatorShapesAnyOf0 = shape(
-  ?'foo' => int,
+type TAnyOfValidatorRequiredShapePropertiesAnyOf0 = shape(
+  'foo' => int,
   'bar' => vec<int>,
+  ...
 );
 
-type TAnyOfValidatorShapesAnyOf1 = shape(
-  ?'foo' => string,
+type TAnyOfValidatorRequiredShapePropertiesAnyOf1 = shape(
+  'foo' => string,
+  ?'bar' => vec<string>,
+  ...
 );
 
-type TAnyOfValidatorShapes = shape(
-  ?'foo' => arraykey,
-  ?'bar' => vec<int>,
+type TAnyOfValidatorRequiredShapeProperties = shape(
+  'foo' => arraykey,
+  ?'bar' => vec<arraykey>,
+  ...
 );
 
-final class AnyOfValidatorShapesAnyOf0PropertiesFoo {
+final class AnyOfValidatorRequiredShapePropertiesAnyOf0PropertiesFoo {
 
   private static bool $coerce = false;
 
@@ -37,7 +41,7 @@ final class AnyOfValidatorShapesAnyOf0PropertiesFoo {
   }
 }
 
-final class AnyOfValidatorShapesAnyOf0PropertiesBarItems {
+final class AnyOfValidatorRequiredShapePropertiesAnyOf0PropertiesBarItems {
 
   private static bool $coerce = false;
 
@@ -49,7 +53,7 @@ final class AnyOfValidatorShapesAnyOf0PropertiesBarItems {
   }
 }
 
-final class AnyOfValidatorShapesAnyOf0PropertiesBar {
+final class AnyOfValidatorRequiredShapePropertiesAnyOf0PropertiesBar {
 
   private static bool $coerce = false;
 
@@ -61,7 +65,7 @@ final class AnyOfValidatorShapesAnyOf0PropertiesBar {
 
     foreach ($typed as $index => $value) {
       try {
-        $output[] = AnyOfValidatorShapesAnyOf0PropertiesBarItems::check(
+        $output[] = AnyOfValidatorRequiredShapePropertiesAnyOf0PropertiesBarItems::check(
           $value,
           JsonSchema\get_pointer($pointer, (string) $index),
         );
@@ -78,21 +82,18 @@ final class AnyOfValidatorShapesAnyOf0PropertiesBar {
   }
 }
 
-final class AnyOfValidatorShapesAnyOf0 {
+final class AnyOfValidatorRequiredShapePropertiesAnyOf0 {
 
   private static keyset<string> $required = keyset[
-    'bar',
-  ];
-  private static bool $coerce = false;
-  private static keyset<string> $properties = keyset[
     'foo',
     'bar',
   ];
+  private static bool $coerce = false;
 
   public static function check(
     mixed $input,
     string $pointer,
-  ): TAnyOfValidatorShapesAnyOf0 {
+  ): TAnyOfValidatorRequiredShapePropertiesAnyOf0 {
     $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
     Constraints\ObjectRequiredConstraint::check(
       $typed,
@@ -103,9 +104,15 @@ final class AnyOfValidatorShapesAnyOf0 {
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
+    foreach ($typed as $key => $value) {
+      /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
+      $output[$key] = $value;
+    }
+
     if (\HH\Lib\C\contains_key($typed, 'foo')) {
       try {
-        $output['foo'] = AnyOfValidatorShapesAnyOf0PropertiesFoo::check(
+        $output['foo'] = AnyOfValidatorRequiredShapePropertiesAnyOf0PropertiesFoo::check(
           $typed['foo'],
           JsonSchema\get_pointer($pointer, 'foo'),
         );
@@ -116,29 +123,13 @@ final class AnyOfValidatorShapesAnyOf0 {
 
     if (\HH\Lib\C\contains_key($typed, 'bar')) {
       try {
-        $output['bar'] = AnyOfValidatorShapesAnyOf0PropertiesBar::check(
+        $output['bar'] = AnyOfValidatorRequiredShapePropertiesAnyOf0PropertiesBar::check(
           $typed['bar'],
           JsonSchema\get_pointer($pointer, 'bar'),
         );
       } catch (JsonSchema\InvalidFieldException $e) {
         $errors = \HH\Lib\Vec\concat($errors, $e->errors);
       }
-    }
-
-    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
-    foreach ($typed as $key => $value) {
-      if (\HH\Lib\C\contains_key(self::$properties, $key)) {
-        continue;
-      }
-
-      $errors[] = shape(
-        'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
-        'message' => "invalid additional property: {$key}",
-        'constraint' => shape(
-          'type' => JsonSchema\FieldErrorConstraint::ADDITIONAL_PROPERTIES,
-          'got' => $key,
-        ),
-      );
     }
 
     if (\HH\Lib\C\count($errors)) {
@@ -150,7 +141,7 @@ final class AnyOfValidatorShapesAnyOf0 {
   }
 }
 
-final class AnyOfValidatorShapesAnyOf1PropertiesFoo {
+final class AnyOfValidatorRequiredShapePropertiesAnyOf1PropertiesFoo {
 
   private static bool $coerce = false;
 
@@ -161,25 +152,76 @@ final class AnyOfValidatorShapesAnyOf1PropertiesFoo {
   }
 }
 
-final class AnyOfValidatorShapesAnyOf1 {
+final class AnyOfValidatorRequiredShapePropertiesAnyOf1PropertiesBarItems {
 
   private static bool $coerce = false;
-  private static keyset<string> $properties = keyset[
+
+  public static function check(mixed $input, string $pointer): string {
+    $typed = Constraints\StringConstraint::check($input, $pointer, self::$coerce);
+
+    return $typed;
+  }
+}
+
+final class AnyOfValidatorRequiredShapePropertiesAnyOf1PropertiesBar {
+
+  private static bool $coerce = false;
+
+  public static function check(mixed $input, string $pointer): vec<string> {
+    $typed = Constraints\ArrayConstraint::check($input, $pointer, self::$coerce);
+
+    $output = vec[];
+    $errors = vec[];
+
+    foreach ($typed as $index => $value) {
+      try {
+        $output[] = AnyOfValidatorRequiredShapePropertiesAnyOf1PropertiesBarItems::check(
+          $value,
+          JsonSchema\get_pointer($pointer, (string) $index),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\count($errors)) {
+      throw new JsonSchema\InvalidFieldException($pointer, $errors);
+    }
+
+    return $output;
+  }
+}
+
+final class AnyOfValidatorRequiredShapePropertiesAnyOf1 {
+
+  private static keyset<string> $required = keyset[
     'foo',
   ];
+  private static bool $coerce = false;
 
   public static function check(
     mixed $input,
     string $pointer,
-  ): TAnyOfValidatorShapesAnyOf1 {
+  ): TAnyOfValidatorRequiredShapePropertiesAnyOf1 {
     $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
+    Constraints\ObjectRequiredConstraint::check(
+      $typed,
+      self::$required,
+      $pointer,
+    );
 
     $errors = vec[];
     $output = shape();
 
+    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
+    foreach ($typed as $key => $value) {
+      /* HH_IGNORE_ERROR[4051] allow dynamic access to preserve input. See comment in the codegen lib for reasoning and alternatives if needed. */
+      $output[$key] = $value;
+    }
+
     if (\HH\Lib\C\contains_key($typed, 'foo')) {
       try {
-        $output['foo'] = AnyOfValidatorShapesAnyOf1PropertiesFoo::check(
+        $output['foo'] = AnyOfValidatorRequiredShapePropertiesAnyOf1PropertiesFoo::check(
           $typed['foo'],
           JsonSchema\get_pointer($pointer, 'foo'),
         );
@@ -188,20 +230,15 @@ final class AnyOfValidatorShapesAnyOf1 {
       }
     }
 
-    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
-    foreach ($typed as $key => $value) {
-      if (\HH\Lib\C\contains_key(self::$properties, $key)) {
-        continue;
+    if (\HH\Lib\C\contains_key($typed, 'bar')) {
+      try {
+        $output['bar'] = AnyOfValidatorRequiredShapePropertiesAnyOf1PropertiesBar::check(
+          $typed['bar'],
+          JsonSchema\get_pointer($pointer, 'bar'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
       }
-
-      $errors[] = shape(
-        'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
-        'message' => "invalid additional property: {$key}",
-        'constraint' => shape(
-          'type' => JsonSchema\FieldErrorConstraint::ADDITIONAL_PROPERTIES,
-          'got' => $key,
-        ),
-      );
     }
 
     if (\HH\Lib\C\count($errors)) {
@@ -213,16 +250,16 @@ final class AnyOfValidatorShapesAnyOf1 {
   }
 }
 
-final class AnyOfValidatorShapes
-  extends JsonSchema\BaseValidator<TAnyOfValidatorShapes> {
+final class AnyOfValidatorRequiredShapeProperties
+  extends JsonSchema\BaseValidator<TAnyOfValidatorRequiredShapeProperties> {
 
   public static function check(
     mixed $input,
     string $pointer,
-  ): TAnyOfValidatorShapes {
+  ): TAnyOfValidatorRequiredShapeProperties {
     $constraints = vec[
-      AnyOfValidatorShapesAnyOf0::check<>,
-      AnyOfValidatorShapesAnyOf1::check<>,
+      AnyOfValidatorRequiredShapePropertiesAnyOf0::check<>,
+      AnyOfValidatorRequiredShapePropertiesAnyOf1::check<>,
     ];
     $errors = vec[
     ];
@@ -250,7 +287,7 @@ final class AnyOfValidatorShapes
   }
 
   <<__Override>>
-  protected function process(): TAnyOfValidatorShapes {
+  protected function process(): TAnyOfValidatorRequiredShapeProperties {
     return self::check($this->input, $this->pointer);
   }
 }

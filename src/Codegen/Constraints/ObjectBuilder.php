@@ -110,8 +110,6 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
 
     // Generate a type based on the specified properties
     $type = $this->codegenType($property_classes, $pattern_properties_classes);
-    // TODO: Register objects as shapes or dicts
-    Typing\TypeSystem::registerAlias($this->getType(), Typing\TypeSystem::nonnull());
     $this->ctx->getFile()->addBeforeType($type);
     return $this;
   }
@@ -531,14 +529,20 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
         $additional_properties is nonnull && $additional_properties is bool ? $additional_properties : true;
 
       $members = vec[];
+      $shape_fields = dict[];
       foreach ($property_classes as $property => $builder) {
         $member = new CodegenShapeMember($property, $builder->getType());
-        if (!C\contains($required, $property) && !C\contains_key($defaults, $property)) {
-          $member->setIsOptional();
-        }
+        $field = shape('type' => $builder->getTypeInfo());
+
+        $is_optional = !C\contains($required, $property) && !C\contains_key($defaults, $property);
+        $member->setIsOptional($is_optional);
+        $field['required'] = !$is_optional;
 
         $members[] = $member;
+        $shape_fields[$property] = $field;
       }
+
+      Typing\TypeSystem::registerAlias($this->getType(), Typing\TypeSystem::shape($shape_fields, !$allow_subtyping));
 
       $shape = $this->ctx
         ->getHackCodegenFactory()
@@ -549,12 +553,16 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
         ->codegenType($this->getType())
         ->setShape($shape);
     } else if ($pattern_property_classes is nonnull && C\count($pattern_property_classes) === 1) {
+      // TODO: Register pattern properties as dicts.
+      Typing\TypeSystem::registerAlias($this->getType(), Typing\TypeSystem::nonnull());
       $builder = vec($pattern_property_classes)[0];
       return $this->ctx
         ->getHackCodegenFactory()
         ->codegenType($this->getType())
         ->setType(Str\format('dict<string, %s>', $builder->getType()));
     } else {
+      // TODO: Register as dict.
+      Typing\TypeSystem::registerAlias($this->getType(), Typing\TypeSystem::nonnull());
       return $this->ctx
         ->getHackCodegenFactory()
         ->codegenType($this->getType())

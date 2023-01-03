@@ -8,6 +8,7 @@ use namespace HH\Lib\{C, Vec};
  * to "null"), or an alias (which may wrap either an optional or concrete type).
  */
 abstract class Type {
+  const type TShapeFields = dict<string, shape(?'required' => bool, 'type' => Type)>;
 
   /**
    * The builtin underlying this type.
@@ -20,9 +21,24 @@ abstract class Type {
   abstract public function getGenerics(): vec<Type>;
 
   /**
+   * Get the name of this type.
+   */
+  abstract public function getName(): string;
+
+  /**
+   * Get the shape fields present in this type, if any.
+   */
+  abstract public function getShapeFields(): this::TShapeFields;
+
+  /**
    * Whether this type has an alias (e.g., is of form <alias> or ?<alias>).
    */
   abstract public function hasAlias(): bool;
+
+  /**
+   * Whether this type is a closed shape.
+   */
+  abstract public function isClosedShape(): bool;
 
   /**
    * Whether this type is optional (i.e., null can be substituted).
@@ -30,15 +46,9 @@ abstract class Type {
   abstract public function isOptional(): bool;
 
   /**
-   * Render this type to a string.
-   */
-  abstract public function render(): string;
-
-  /**
    * True IFF two types can be substituted for one another.
    */
   final public function isEquivalent(Type $type): bool {
-    // TODO: Handle generics and shapes.
     if ($this->isOptional() !== $type->isOptional()) {
       return false;
     }
@@ -54,6 +64,24 @@ abstract class Type {
       if (!$a->isEquivalent($b)) {
         return false;
       }
+    }
+    $this_shape_fields = $this->getShapeFields();
+    $that_shape_fields = $type->getShapeFields();
+    if (C\count($this_shape_fields) !== C\count($that_shape_fields)) {
+      return false;
+    }
+    foreach ($this_shape_fields as $name => $this_shape_field) {
+      $that_shape_field = $that_shape_fields[$name] ?? null;
+      if (
+        $that_shape_field is null ||
+        Shapes::idx($this_shape_field, 'required', false) !== Shapes::idx($that_shape_field, 'required', false) ||
+        !$this_shape_field['type']->isEquivalent($that_shape_field['type'])
+      ) {
+        return false;
+      }
+    }
+    if ($this->isClosedShape() !== $type->isClosedShape()) {
+      return false;
     }
     return true;
   }

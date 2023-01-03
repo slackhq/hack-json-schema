@@ -10,7 +10,7 @@ final class TypeAlias extends Type {
   public function __construct(private string $alias) {}
 
   private function getType(): Type {
-    return TypeSystem::resolveAlias($this->alias);
+    return TypeSystem::resolveAlias($this->alias) as nonnull;
   }
 
   <<__Override>>
@@ -24,17 +24,27 @@ final class TypeAlias extends Type {
   }
 
   <<__Override>>
+  public function getName(): string {
+    return $this->alias;
+  }
+
+  <<__Override>>
+  public function getShapeFields(): this::TShapeFields {
+    return $this->getType()->getShapeFields();
+  }
+
+  <<__Override>>
   public function hasAlias(): bool {
-    return $this->getType()->hasAlias();
+    return true;
+  }
+
+  <<__Override>>
+  public function isClosedShape(): bool {
+    return $this->getType()->isClosedShape();
   }
 
   <<__Override>>
   public function isOptional(): bool {
     return $this->getType()->isOptional();
-  }
-
-  <<__Override>>
-  public function render(): string {
-    return $this->alias;
   }
 }

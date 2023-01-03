@@ -6,7 +6,6 @@ use namespace HH\Lib\{C, Math, Str, Vec};
 use type Facebook\HackCodegen\{
   CodegenClass,
   CodegenMethod,
-  CodegenType,
   HackBuilder,
   HackBuilderKeys,
   HackBuilderValues,
@@ -18,6 +17,13 @@ type TUntypedSchema = shape(
   ?'allOf' => vec<TSchema>,
   ?'not' => vec<TSchema>,
   ?'oneOf' => vec<TSchema>,
+
+  // Disable generating best-effort unions from shapes,
+  // preferring nonnull instead.
+  // This makes it easy to safely upgrade to versions of
+  // Hack-JSON-Schema which enable shape unification.
+  ?'disableShapeUnification' => bool,
+
   ...
 );
 
@@ -42,9 +48,8 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
 
     $this->addBuilderClass($class);
 
-    $type = $this->codegenType();
-    $this->ctx->getFile()->addBeforeType($type);
-    Typing\TypeSystem::registerAlias($this->getType(), $this->type_info);
+    $renderer = new TypeRenderer($this->ctx);
+    $renderer->render($this->type_info, $this->getType());
 
     return $this;
   }
@@ -153,7 +158,10 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       $types[] = $schema_builder->getTypeInfo();
     }
 
-    $this->type_info = Typing\TypeSystem::union($types);
+    $this->type_info = Typing\TypeSystem::union(
+      $types,
+      shape('disable_shape_unification' => $this->typed_schema['disableShapeUnification'] ?? false)
+    );
 
     $hb
       ->addAssignment('$constraints', $constraints, HackBuilderValues::vec(HackBuilderValues::literal()))
@@ -503,7 +511,10 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       }
     }
 
-    $this->type_info = Typing\TypeSystem::union($present_types);
+    $this->type_info = Typing\TypeSystem::union(
+      $present_types,
+      shape('disable_shape_unification' => $this->typed_schema['disableShapeUnification'] ?? false)
+    );
     if ($this->type_info->isOptional()) {
       $hb
         ->startIfBlock('$input === null')
@@ -627,13 +638,6 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
   <<__Override>>
   public function getType(): string {
     return $this->generateTypeName($this->getClassName());
-  }
-
-  private function codegenType(): CodegenType {
-    return $this->ctx
-      ->getHackCodegenFactory()
-      ->codegenType($this->getType())
-      ->setType($this->type_info->render());
   }
 
   <<__Override>>

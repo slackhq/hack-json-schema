@@ -5,27 +5,23 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<0661118eb7013377aa86d536b9f79660>>
+ * @generated SignedSource<<15b0edf487f6fc6c564b6b1506c3e914>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
 use namespace Slack\Hack\JsonSchema\Constraints;
 
-type TAnyOfValidatorShapesAnyOf0 = shape(
-  ?'foo' => int,
-  'bar' => vec<int>,
+type TAnyOfValidatorShapesDisabledAnyOf0 = shape(
+  'bar' => int,
 );
 
-type TAnyOfValidatorShapesAnyOf1 = shape(
-  ?'foo' => string,
+type TAnyOfValidatorShapesDisabledAnyOf1 = shape(
+  ?'bar' => string,
 );
 
-type TAnyOfValidatorShapes = shape(
-  ?'foo' => arraykey,
-  ?'bar' => vec<int>,
-);
+type TAnyOfValidatorShapesDisabled = nonnull;
 
-final class AnyOfValidatorShapesAnyOf0PropertiesFoo {
+final class AnyOfValidatorShapesDisabledAnyOf0PropertiesBar {
 
   private static bool $coerce = false;
 
@@ -37,62 +33,20 @@ final class AnyOfValidatorShapesAnyOf0PropertiesFoo {
   }
 }
 
-final class AnyOfValidatorShapesAnyOf0PropertiesBarItems {
-
-  private static bool $coerce = false;
-
-  public static function check(mixed $input, string $pointer): int {
-    $typed =
-      Constraints\IntegerConstraint::check($input, $pointer, self::$coerce);
-
-    return $typed;
-  }
-}
-
-final class AnyOfValidatorShapesAnyOf0PropertiesBar {
-
-  private static bool $coerce = false;
-
-  public static function check(mixed $input, string $pointer): vec<int> {
-    $typed = Constraints\ArrayConstraint::check($input, $pointer, self::$coerce);
-
-    $output = vec[];
-    $errors = vec[];
-
-    foreach ($typed as $index => $value) {
-      try {
-        $output[] = AnyOfValidatorShapesAnyOf0PropertiesBarItems::check(
-          $value,
-          JsonSchema\get_pointer($pointer, (string) $index),
-        );
-      } catch (JsonSchema\InvalidFieldException $e) {
-        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
-      }
-    }
-
-    if (\HH\Lib\C\count($errors)) {
-      throw new JsonSchema\InvalidFieldException($pointer, $errors);
-    }
-
-    return $output;
-  }
-}
-
-final class AnyOfValidatorShapesAnyOf0 {
+final class AnyOfValidatorShapesDisabledAnyOf0 {
 
   private static keyset<string> $required = keyset[
     'bar',
   ];
   private static bool $coerce = false;
   private static keyset<string> $properties = keyset[
-    'foo',
     'bar',
   ];
 
   public static function check(
     mixed $input,
     string $pointer,
-  ): TAnyOfValidatorShapesAnyOf0 {
+  ): TAnyOfValidatorShapesDisabledAnyOf0 {
     $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
     Constraints\ObjectRequiredConstraint::check(
       $typed,
@@ -103,20 +57,9 @@ final class AnyOfValidatorShapesAnyOf0 {
     $errors = vec[];
     $output = shape();
 
-    if (\HH\Lib\C\contains_key($typed, 'foo')) {
-      try {
-        $output['foo'] = AnyOfValidatorShapesAnyOf0PropertiesFoo::check(
-          $typed['foo'],
-          JsonSchema\get_pointer($pointer, 'foo'),
-        );
-      } catch (JsonSchema\InvalidFieldException $e) {
-        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
-      }
-    }
-
     if (\HH\Lib\C\contains_key($typed, 'bar')) {
       try {
-        $output['bar'] = AnyOfValidatorShapesAnyOf0PropertiesBar::check(
+        $output['bar'] = AnyOfValidatorShapesDisabledAnyOf0PropertiesBar::check(
           $typed['bar'],
           JsonSchema\get_pointer($pointer, 'bar'),
         );
@@ -150,7 +93,7 @@ final class AnyOfValidatorShapesAnyOf0 {
   }
 }
 
-final class AnyOfValidatorShapesAnyOf1PropertiesFoo {
+final class AnyOfValidatorShapesDisabledAnyOf1PropertiesBar {
 
   private static bool $coerce = false;
 
@@ -161,27 +104,27 @@ final class AnyOfValidatorShapesAnyOf1PropertiesFoo {
   }
 }
 
-final class AnyOfValidatorShapesAnyOf1 {
+final class AnyOfValidatorShapesDisabledAnyOf1 {
 
   private static bool $coerce = false;
   private static keyset<string> $properties = keyset[
-    'foo',
+    'bar',
   ];
 
   public static function check(
     mixed $input,
     string $pointer,
-  ): TAnyOfValidatorShapesAnyOf1 {
+  ): TAnyOfValidatorShapesDisabledAnyOf1 {
     $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
 
     $errors = vec[];
     $output = shape();
 
-    if (\HH\Lib\C\contains_key($typed, 'foo')) {
+    if (\HH\Lib\C\contains_key($typed, 'bar')) {
       try {
-        $output['foo'] = AnyOfValidatorShapesAnyOf1PropertiesFoo::check(
-          $typed['foo'],
-          JsonSchema\get_pointer($pointer, 'foo'),
+        $output['bar'] = AnyOfValidatorShapesDisabledAnyOf1PropertiesBar::check(
+          $typed['bar'],
+          JsonSchema\get_pointer($pointer, 'bar'),
         );
       } catch (JsonSchema\InvalidFieldException $e) {
         $errors = \HH\Lib\Vec\concat($errors, $e->errors);
@@ -213,16 +156,16 @@ final class AnyOfValidatorShapesAnyOf1 {
   }
 }
 
-final class AnyOfValidatorShapes
-  extends JsonSchema\BaseValidator<TAnyOfValidatorShapes> {
+final class AnyOfValidatorShapesDisabled
+  extends JsonSchema\BaseValidator<TAnyOfValidatorShapesDisabled> {
 
   public static function check(
     mixed $input,
     string $pointer,
-  ): TAnyOfValidatorShapes {
+  ): TAnyOfValidatorShapesDisabled {
     $constraints = vec[
-      AnyOfValidatorShapesAnyOf0::check<>,
-      AnyOfValidatorShapesAnyOf1::check<>,
+      AnyOfValidatorShapesDisabledAnyOf0::check<>,
+      AnyOfValidatorShapesDisabledAnyOf1::check<>,
     ];
     $errors = vec[
     ];
@@ -250,7 +193,7 @@ final class AnyOfValidatorShapes
   }
 
   <<__Override>>
-  protected function process(): TAnyOfValidatorShapes {
+  protected function process(): TAnyOfValidatorShapesDisabled {
     return self::check($this->input, $this->pointer);
   }
 }

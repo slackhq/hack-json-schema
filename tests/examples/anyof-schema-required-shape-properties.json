@@ -1,0 +1,34 @@
+{
+    "anyOf": [
+        {
+            "type": "object",
+            "required": ["foo", "bar"],
+            "properties": {
+                "foo": {
+                    "type": "integer"
+                },
+                "bar": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        {
+            "type": "object",
+            "required": ["foo"],
+            "properties": {
+                "foo": {
+                    "type": "string"
+                },
+                "bar": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    ]
+}

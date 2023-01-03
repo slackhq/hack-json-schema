@@ -11,6 +11,10 @@ namespace Slack\Hack\JsonSchema\Codegen\Typing;
 final class OptionalType extends Type {
   public function __construct(private Type $type) {}
 
+  public function getType(): Type {
+    return $this->type;
+  }
+
   <<__Override>>
   public function getConcreteTypeName(): ConcreteTypeName {
     return $this->type->getConcreteTypeName();
@@ -22,25 +26,27 @@ final class OptionalType extends Type {
   }
 
   <<__Override>>
+  public function getName(): string {
+    return '?'.$this->type->getName();
+  }
+
+  <<__Override>>
+  public function getShapeFields(): this::TShapeFields {
+    return $this->type->getShapeFields();
+  }
+
+  <<__Override>>
   public function hasAlias(): bool {
     return $this->type->hasAlias();
   }
 
   <<__Override>>
-  public function isOptional(): bool {
-    return true;
+  public function isClosedShape(): bool {
+    return $this->type->isClosedShape();
   }
 
   <<__Override>>
-  public function render(): string {
-    $type_name = $this->type->render();
-    switch ($type_name) {
-      case ConcreteTypeName::NOTHING:
-        return 'null';
-      case ConcreteTypeName::NONNULL:
-        return 'mixed';
-      default:
-        return '?'.$type_name;
-    }
+  public function isOptional(): bool {
+    return true;
   }
 }
