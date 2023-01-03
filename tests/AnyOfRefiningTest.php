@@ -72,6 +72,8 @@ final class AnyOfRefiningTest extends BaseCodegenTestCase {
     $ret['codegen']->build();
     $ret = self::getBuilder('anyof-schema-shapes-disjoint.json', 'AnyOfValidatorShapesDisjoint');
     $ret['codegen']->build();
+    $ret = self::getBuilder('anyof-schema-shapes-disabled.json', 'AnyOfValidatorShapesDisabled');
+    $ret['codegen']->build();
     $ret = self::getBuilder('anyof-schema-vecs.json', 'AnyOfValidatorVecs');
     $ret['codegen']->build();
   }
