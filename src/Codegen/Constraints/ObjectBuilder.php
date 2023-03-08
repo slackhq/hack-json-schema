@@ -153,7 +153,7 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
       $hb->addInlineComment('Hack to prevent us from having to change the params names when we are not using them.');
       $hb->addAssignment('$_', '$input', HackBuilderValues::literal());
       $hb->addAssignment('$_', '$pointer', HackBuilderValues::literal());
-      $hb->addReturn('dict[]', HackBuilderValues::literal());
+      $hb->addReturn('shape()', HackBuilderValues::literal());
 
       return $hb;
     }

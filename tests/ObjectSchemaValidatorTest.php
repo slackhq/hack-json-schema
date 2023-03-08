@@ -692,4 +692,29 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
     expect($constraint['got'] ?? null)->toEqual('a');
   }
 
+  public function testEmptyClosedShape(): void {
+    $validator = new ObjectSchemaValidator(dict[
+      'empty_closed_shape' => dict[]
+    ]);
+    $validator->validate();
+    expect($validator->isValid())->toBeTrue();
+
+    $validator = new ObjectSchemaValidator(dict[
+      'empty_closed_shape' => dict['foo' => 'bar']
+    ]);
+    $validator->validate();
+    expect($validator->isValid())->toBeFalse();
+
+    $errors = $validator->getErrors();
+    expect(C\count($errors))->toEqual(1);
+
+    $error = C\firstx($errors);
+    expect($error['code'])->toEqual(FieldErrorCode::FAILED_CONSTRAINT);
+    expect($error['message'])->toEqual('invalid additional property: foo');
+
+    $constraint = Shapes::at($error, 'constraint');
+    expect($constraint['type'])->toEqual(FieldErrorConstraint::ADDITIONAL_PROPERTIES);
+    expect($constraint['got'] ?? null)->toEqual('foo');
+  }
+
 }
