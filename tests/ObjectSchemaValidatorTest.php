@@ -698,7 +698,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
     ]);
     $validator->validate();
     expect($validator->isValid())->toBeTrue();
-    expect($validator->getValidatedInput())->toEqual(shape());
+    expect($validator->getValidatedInput())->toEqual(shape('empty_closed_shape' => shape()));
 
     // Additional properties are discarded
     $validator = new ObjectSchemaValidator(dict[
@@ -706,7 +706,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
     ]);
     $validator->validate();
     expect($validator->isValid())->toBeTrue();
-    expect($validator->getValidatedInput())->toEqual(shape());
+    expect($validator->getValidatedInput())->toEqual(shape('empty_closed_shape' => shape()));
   }
 
 }
