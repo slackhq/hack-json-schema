@@ -176,6 +176,12 @@
       "type": "object",
       "minProperties": 1,
       "additionalProperties": false
+    },
+    "empty_closed_shape": {
+      "type": "object",
+      "additionalProperties": false,
+      "discardAdditionalProperties": true,
+      "properties": {}
     }
   }
 }

@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<7fa7d1f5ae7e84bf34ab173568728f05>>
+ * @generated SignedSource<<39430f90b530b5635008632715853853>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -97,6 +97,9 @@ type TObjectSchemaValidatorPropertiesMinAndMaxProperties = dict<string, mixed>;
 
 type TObjectSchemaValidatorPropertiesInvalidMinPropertiesWithNoAdditionalProperties = dict<string, mixed>;
 
+type TObjectSchemaValidatorPropertiesEmptyClosedShape = shape(
+);
+
 type TObjectSchemaValidator = shape(
   ?'only_additional_properties' => TObjectSchemaValidatorPropertiesOnlyAdditionalProperties,
   ?'only_no_additional_properties' => TObjectSchemaValidatorPropertiesOnlyNoAdditionalProperties,
@@ -119,6 +122,7 @@ type TObjectSchemaValidator = shape(
   ?'only_max_properties' => TObjectSchemaValidatorPropertiesOnlyMaxProperties,
   ?'min_and_max_properties' => TObjectSchemaValidatorPropertiesMinAndMaxProperties,
   ?'invalid_min_properties_with_no_additional_properties' => TObjectSchemaValidatorPropertiesInvalidMinPropertiesWithNoAdditionalProperties,
+  ?'empty_closed_shape' => TObjectSchemaValidatorPropertiesEmptyClosedShape,
   ...
 );
 
@@ -1648,6 +1652,24 @@ final class ObjectSchemaValidatorPropertiesInvalidMinPropertiesWithNoAdditionalP
   }
 }
 
+final class ObjectSchemaValidatorPropertiesEmptyClosedShape {
+
+  private static bool $coerce = false;
+  private static keyset<string> $properties = keyset[
+  ];
+
+  public static function check(
+    mixed $input,
+    string $pointer,
+  ): TObjectSchemaValidatorPropertiesEmptyClosedShape {
+    // Hack to prevent us from having to change the params names when we are not
+    // using them.
+    $_ = $input;
+    $_ = $pointer;
+    return shape();
+  }
+}
+
 final class ObjectSchemaValidator
   extends JsonSchema\BaseValidator<TObjectSchemaValidator> {
 
@@ -1893,6 +1915,17 @@ final class ObjectSchemaValidator
         $output['invalid_min_properties_with_no_additional_properties'] = ObjectSchemaValidatorPropertiesInvalidMinPropertiesWithNoAdditionalProperties::check(
           $typed['invalid_min_properties_with_no_additional_properties'],
           JsonSchema\get_pointer($pointer, 'invalid_min_properties_with_no_additional_properties'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'empty_closed_shape')) {
+      try {
+        $output['empty_closed_shape'] = ObjectSchemaValidatorPropertiesEmptyClosedShape::check(
+          $typed['empty_closed_shape'],
+          JsonSchema\get_pointer($pointer, 'empty_closed_shape'),
         );
       } catch (JsonSchema\InvalidFieldException $e) {
         $errors = \HH\Lib\Vec\concat($errors, $e->errors);
