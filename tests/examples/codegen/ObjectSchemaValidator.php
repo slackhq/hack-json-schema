@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<5d8158e850af0f6d550037bc4003da67>>
+ * @generated SignedSource<<39430f90b530b5635008632715853853>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -1662,33 +1662,11 @@ final class ObjectSchemaValidatorPropertiesEmptyClosedShape {
     mixed $input,
     string $pointer,
   ): TObjectSchemaValidatorPropertiesEmptyClosedShape {
-    $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
-
-    $errors = vec[];
-    $output = shape();
-
-    /*HHAST_IGNORE_ERROR[UnusedVariable] Some loops generated with this statement do not use their $value*/
-    foreach ($typed as $key => $value) {
-      if (\HH\Lib\C\contains_key(self::$properties, $key)) {
-        continue;
-      }
-
-      $errors[] = shape(
-        'code' => JsonSchema\FieldErrorCode::FAILED_CONSTRAINT,
-        'message' => "invalid additional property: {$key}",
-        'constraint' => shape(
-          'type' => JsonSchema\FieldErrorConstraint::ADDITIONAL_PROPERTIES,
-          'got' => $key,
-        ),
-      );
-    }
-
-    if (\HH\Lib\C\count($errors)) {
-      throw new JsonSchema\InvalidFieldException($pointer, $errors);
-    }
-
-    /* HH_IGNORE_ERROR[4163] */
-    return $output;
+    // Hack to prevent us from having to change the params names when we are not
+    // using them.
+    $_ = $input;
+    $_ = $pointer;
+    return shape();
   }
 }
 
