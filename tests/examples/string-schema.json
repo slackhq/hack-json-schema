@@ -40,6 +40,10 @@
       "type": "string",
       "hackEnum": "Slack\\Hack\\JsonSchema\\Tests\\TestStringEnum"
     },
+    "min_length": {
+      "type": "string",
+      "minLength": 1
+    },
     "max_length": {
       "type": "string",
       "maxLength": 10

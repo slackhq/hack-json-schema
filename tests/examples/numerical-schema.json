@@ -18,6 +18,12 @@
     "hack_enum": {
       "type": "integer",
       "hackEnum": "Slack\\Hack\\JsonSchema\\Tests\\TestIntEnum"
+    },
+    "integer_limits": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10,
+      "default": 5
     }
   }
 }
