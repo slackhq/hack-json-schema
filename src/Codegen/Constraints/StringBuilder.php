@@ -61,7 +61,24 @@ class StringBuilder extends BaseBuilder<TStringSchema> {
 
 		$enum = $this->getEnumCodegenProperty();
 		if ($enum is nonnull) {
-			$properties[] = $enum;
+			$generateHackEnum = $this->typed_schema['generateHackEnum'] ?? false;
+			if ($generateHackEnum) {
+				$enum = $this->typed_schema['enum'] ?? vec[];
+				$factory = $this->ctx->getHackCodegenFactory();
+				$members = Vec\map(
+					$enum,
+					$member ==> $factory->codegenEnumMember(Str\uppercase($member))
+						->setValue($member, HackBuilderValues::export()),
+				);
+				$enumName = $this->typed_schema['hackEnum'] ?? null;
+				invariant($enumName is string, 'hackEnum is required when generating hack enum.');
+				$enum_obj = $factory->codegenEnum($enumName, 'string')
+					->addMembers($members)
+					->setIsAs('string');
+				$this->ctx->getFile()->addEnum($enum_obj);
+			} else {
+				$properties[] = $enum;
+			}
 		}
 
 		$coerce = $this->typed_schema['coerce'] ?? $this->ctx->getCoerceDefault();
@@ -100,8 +117,11 @@ class StringBuilder extends BaseBuilder<TStringSchema> {
 				->addAssignment('$typed', '$sanitize_string($typed)', HackBuilderValues::literal())
 				->ensureEmptyLine();
 		}
-
-		$this->addEnumConstraintCheck($hb);
+		if ($this->typed_schema['generateHackEnum'] ?? false) {
+			$this->addHackEnumConstraintCheck($hb);
+		} else {
+			$this->addEnumConstraintCheck($hb);
+		}
 
 		$max_length = $this->typed_schema['maxLength'] ?? null;
 		$min_length = $this->typed_schema['minLength'] ?? null;
@@ -109,11 +129,17 @@ class StringBuilder extends BaseBuilder<TStringSchema> {
 		$format = $this->typed_schema['format'] ?? null;
 
 		if ($pattern is nonnull) {
-			$hb->addMultilineCall('Constraints\StringPatternConstraint::check', vec['$typed', 'self::$pattern', '$pointer']);
+			$hb->addMultilineCall(
+				'Constraints\StringPatternConstraint::check',
+				vec['$typed', 'self::$pattern', '$pointer'],
+			);
 		}
 
 		if ($format is nonnull) {
-			$hb->addMultilineCall('Constraints\StringFormatConstraint::check', vec['$typed', 'self::$format', '$pointer']);
+			$hb->addMultilineCall(
+				'Constraints\StringFormatConstraint::check',
+				vec['$typed', 'self::$format', '$pointer'],
+			);
 		}
 
 		if ($max_length is nonnull || $min_length is nonnull) {
