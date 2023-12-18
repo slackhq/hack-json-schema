@@ -117,9 +117,7 @@ class StringBuilder extends BaseBuilder<TStringSchema> {
 				->addAssignment('$typed', '$sanitize_string($typed)', HackBuilderValues::literal())
 				->ensureEmptyLine();
 		}
-		if ($this->typed_schema['generateHackEnum'] ?? false) {
-			$this->addHackEnumConstraintCheck($hb);
-		} else {
+		if (!($this->typed_schema['generateHackEnum'] ?? false)) {
 			$this->addEnumConstraintCheck($hb);
 		}
 
