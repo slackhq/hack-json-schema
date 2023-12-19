@@ -173,6 +173,9 @@ class StringBuilder extends BaseBuilder<TStringSchema> {
 	<<__Override>>
 	public function getType(): string {
 		if (Shapes::keyExists($this->typed_schema, 'hackEnum')) {
+			if ($this->typed_schema['generateHackEnum'] ?? false) {
+				return $this->typed_schema['hackEnum'];
+			}
 			return Str\format('\%s', $this->typed_schema['hackEnum']);
 		}
 

@@ -154,16 +154,16 @@ abstract class BaseBuilder<T> implements IBuilder {
 					);
 				}
 			}
-			$enum_name = $rc->getName();
+			$enum_name = Str\format('\%s::class', $rc->getName());
 		} else {
-			$enum_name = $schema['hackEnum'];
+			$enum_name = $schema['hackEnum'].'::class';
 		}
 
 		$hb->addMultilineCall(
 			'$typed = Constraints\HackEnumConstraint::check',
 			vec[
 				'$typed',
-				Str\format('\%s::class', $enum_name),
+				$enum_name,
 				'$pointer',
 			],
 		);
