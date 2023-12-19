@@ -60,12 +60,12 @@ class StringBuilder extends BaseBuilder<TStringSchema> {
 		}
 
 		$enum = $this->getEnumCodegenProperty();
+		$generateHackEnum = $this->typed_schema['generateHackEnum'] ?? false;
 		if ($enum is nonnull) {
-			$generateHackEnum = $this->typed_schema['generateHackEnum'] ?? false;
 			if ($generateHackEnum) {
 				$enum = $this->typed_schema['enum'] ?? vec[];
 				$factory = $this->ctx->getHackCodegenFactory();
-				$members = Vec\map(
+				$members = \HH\Lib\Vec\map(
 					$enum,
 					$member ==> $factory->codegenEnumMember(Str\uppercase($member))
 						->setValue($member, HackBuilderValues::export()),
@@ -79,6 +79,8 @@ class StringBuilder extends BaseBuilder<TStringSchema> {
 			} else {
 				$properties[] = $enum;
 			}
+		} else {
+			invariant(!$generateHackEnum, 'enum is required when generating hack enum');
 		}
 
 		$coerce = $this->typed_schema['coerce'] ?? $this->ctx->getCoerceDefault();
