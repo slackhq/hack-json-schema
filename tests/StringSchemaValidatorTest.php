@@ -140,5 +140,6 @@ final class StringSchemaValidatorTest extends BaseCodegenTestCase {
     ];
 
     $this->expectCases($cases, $input ==> new StringSchemaValidator($input));
-	}
+  }
+
 }
