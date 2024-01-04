@@ -16,16 +16,16 @@ final class GeneratedHackEnumSchemaValidatorTest extends BaseCodegenTestCase {
   public function testStringEnum(): void {
     $cases = vec[
       shape(
-        'input' => darray['enum_string' => 'one'],
-        'output' => darray['enum_string' => 'one'],
+        'input' => dict['enum_string' => 'one'],
+        'output' => dict['enum_string' => 'one'],
         'valid' => true,
       ),
       shape(
-        'input' => darray['enum_string' => 'four'],
+        'input' => dict['enum_string' => 'four'],
         'valid' => false,
       ),
       shape(
-        'input' => darray['enum_string' => 1],
+        'input' => dict['enum_string' => 1],
         'valid' => false,
       ),
     ];
