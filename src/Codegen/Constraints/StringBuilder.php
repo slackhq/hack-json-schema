@@ -12,6 +12,7 @@ type TStringSchema = shape(
   ?'minLength' => int,
   ?'enum' => vec<string>,
   ?'hackEnum' => string,
+  ?'generateHackEnum' => bool,
   ?'pattern' => string,
   ?'format' => string,
   ?'sanitize' => shape(
@@ -59,8 +60,28 @@ class StringBuilder extends BaseBuilder<TStringSchema> {
     }
 
     $enum = $this->getEnumCodegenProperty();
+    $generateHackEnum = $this->typed_schema['generateHackEnum'] ?? false;
     if ($enum is nonnull) {
-      $properties[] = $enum;
+      if ($generateHackEnum) {
+        $enum = $this->typed_schema['enum'] ?? vec[];
+        $factory = $this->ctx->getHackCodegenFactory();
+        $members = \HH\Lib\Vec\map(
+          $enum,
+          $member ==> $factory->codegenEnumMember(Str\uppercase($member))
+            ->setValue($member, HackBuilderValues::export()),
+        );
+        $enumName = $this->typed_schema['hackEnum'] ?? null;
+        invariant($enumName is string, 'hackEnum is required when generating hack enum.');
+        invariant(!Str\contains($enumName, '\\'), 'hackEnum must not contain a slash.');
+        $enum_obj = $factory->codegenEnum($enumName, 'string')
+          ->addMembers($members)
+          ->setIsAs('string');
+        $this->ctx->getFile()->addEnum($enum_obj);
+      } else {
+        $properties[] = $enum;
+      }
+    } else {
+      invariant(!$generateHackEnum, 'enum is required when generating hack enum');
     }
 
     $coerce = $this->typed_schema['coerce'] ?? $this->ctx->getCoerceDefault();
@@ -99,8 +120,9 @@ class StringBuilder extends BaseBuilder<TStringSchema> {
         ->addAssignment('$typed', '$sanitize_string($typed)', HackBuilderValues::literal())
         ->ensureEmptyLine();
     }
-
-    $this->addEnumConstraintCheck($hb);
+    if (!($this->typed_schema['generateHackEnum'] ?? false)) {
+      $this->addEnumConstraintCheck($hb);
+    }
 
     $max_length = $this->typed_schema['maxLength'] ?? null;
     $min_length = $this->typed_schema['minLength'] ?? null;
@@ -146,6 +168,9 @@ class StringBuilder extends BaseBuilder<TStringSchema> {
   <<__Override>>
   public function getType(): string {
     if (Shapes::keyExists($this->typed_schema, 'hackEnum')) {
+      if ($this->typed_schema['generateHackEnum'] ?? false) {
+        return $this->typed_schema['hackEnum'];
+      }
       return Str\format('\%s', $this->typed_schema['hackEnum']);
     }
 

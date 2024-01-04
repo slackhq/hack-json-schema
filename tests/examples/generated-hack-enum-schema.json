@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "properties": {
+    "enum_string": {
+    "type": "string",
+    "enum": ["one", "two", "three"],
+    "generateHackEnum": true,
+    "hackEnum": "myCoolTestEnum"
+    }
+  }
+}
