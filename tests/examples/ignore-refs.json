@@ -1,0 +1,29 @@
+{
+    "type": "object",
+    "properties": {
+      "randomprop": {
+        "$ref": "#/definitions/objectRef",
+        "hackIgnoreRef": true
+      }
+    },
+    "definitions": {
+        "otherRef": {
+            "$ref": "#/definitions/anotherRef"
+        },
+        "anotherRef": {
+            "$ref": "#/definitions/otherRef"
+        },
+        "objectRef": {
+            "type": "object",
+            "properties": {
+                "thing": {
+                    "$ref": "#/definitions/objectRef2"
+                }
+
+            }
+        },
+        "objectRef2": {
+            "$ref": "#/definitions/objectRef"
+        }
+    }
+}

@@ -25,6 +25,14 @@ type TSchema = shape(
   ?'default' => mixed,
   ?'enum' => vec<mixed>,
   ?'hackEnum' => string,
+
+  // Generate a mixed type instead of following the ref.
+  //
+  // Normally you cannot use circular references in JSON Schema because Hack
+  // does not support them. However many other languages that use JSON Schema such as
+  // Typescript and Kotlin do support circular references. This allows us to generate
+  // circular references in those languages at the cost of generating a mixed type in Hack.
+  ?'hackIgnoreRef' => bool,
   ...
 );
 
@@ -42,7 +50,12 @@ class SchemaBuilder implements IBuilder {
     protected TSchema $schema,
     ?CodegenClass $class = null,
   ) {
-    $ref = $schema['$ref'] ?? null;
+
+    $ref = null;
+    if (!($schema['hackIgnoreRef'] ?? false)) {
+      $ref = $schema['$ref'] ?? null;
+    }
+
     $new_ctx = clone $this->ctx;
 
     // Resolve refs until we get to an actual schema
