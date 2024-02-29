@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<d9e951b7c4e5dd6d27e2dc5c8d3900bc>>
+ * @generated SignedSource<<ee778314572dafea42ca53253a97056b>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -34,7 +34,10 @@ type TPersonSchemaValidatorPropertiesDevicesItemsAnyOfTypesComputer = shape(
   ...
 );
 
-type TPersonSchemaValidatorPropertiesDevicesItems = mixed;
+type TPersonSchemaValidatorPropertiesDevicesItems = shape(
+  'type' => string,
+  ...
+);
 
 type TPersonSchemaValidator = shape(
   'first_name' => string,
