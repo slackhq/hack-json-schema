@@ -268,8 +268,22 @@ class ObjectBuilder extends BaseBuilder<TObjectSchema> {
           $hb->startIfBlockf('\HH\Lib\C\contains_key($typed, \'%s\')', $property_name);
         }
 
+        $hb->startTryBlock();
+
+        if ($property_class->isUniqueRef() &&
+          ($property_class->getResolvedSchema()['type'] ?? null) === TSchemaType::OBJECT_T &&
+          ($property_class->getUnresolvedSchema()['coerce'] ?? false)) {
+          $hb->addMultilineCall(
+            "\$typed['{$property_name}'] = Constraints\\ObjectConstraint::check",
+            vec[
+              "\$typed['{$property_name}']",
+              "JsonSchema\get_pointer(\$pointer, '{$property_name}')",
+              "true"
+            ]
+          );
+        }
+
         $hb
-          ->startTryBlock()
           ->addMultilineCall(
             "\$output['{$property_name}'] = {$property_class_name}::check",
             vec[

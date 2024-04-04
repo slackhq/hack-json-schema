@@ -29,57 +29,57 @@ final class RefSchemaValidatorTest extends BaseCodegenTestCase {
   public function testUniqueRefs(): void {
     $cases = vec[
       shape(
-        'input' => darray['remote-reference' => 'one'],
-        'output' => darray['remote-reference' => 'one'],
+        'input' => dict['remote-reference' => 'one'],
+        'output' => dict['remote-reference' => 'one'],
         'valid' => true,
       ),
       shape(
-        'input' => darray['remote-reference' => 5],
+        'input' => dict['remote-reference' => 5],
         'valid' => false,
       ),
       shape(
-        'input' => darray[
-          'duplicate-refs' => darray[
-            'first' => darray['string' => 'test', 'integer' => 5],
-            'fourth' => darray['string' => 'test', 'integer' => 5],
+        'input' => dict[
+          'duplicate-refs' => dict[
+            'first' => dict['string' => 'test', 'integer' => 5],
+            'fourth' => dict['string' => 'test', 'integer' => 5],
           ],
         ],
-        'output' => darray[
-          'duplicate-refs' => darray[
-            'first' => darray['string' => 'test', 'integer' => 5],
-            'fourth' => darray['string' => 'test', 'integer' => 5],
+        'output' => dict[
+          'duplicate-refs' => dict[
+            'first' => dict['string' => 'test', 'integer' => 5],
+            'fourth' => dict['string' => 'test', 'integer' => 5],
           ],
         ],
         'valid' => true,
       ),
       shape(
-        'input' => darray['remote-same-dir-reference' => 4],
-        'output' => darray['remote-same-dir-reference' => '4'],
+        'input' => dict['remote-same-dir-reference' => 4],
+        'output' => dict['remote-same-dir-reference' => '4'],
         'valid' => true,
       ),
       shape(
-        'input' => darray['remote-nested-dir-reference' => 'test'],
-        'output' => darray['remote-nested-dir-reference' => 'test'],
+        'input' => dict['remote-nested-dir-reference' => 'test'],
+        'output' => dict['remote-nested-dir-reference' => 'test'],
         'valid' => true,
       ),
       shape(
-        'input' => darray[
+        'input' => dict[
           'single-item-array-ref' => varray[
-            darray['string' => 'test', 'integer' => 5],
-            darray['string' => 'test2', 'integer' => 10],
+            dict['string' => 'test', 'integer' => 5],
+            dict['string' => 'test2', 'integer' => 10],
           ],
         ],
-        'output' => darray[
+        'output' => dict[
           'single-item-array-ref' => vec[
-            darray['string' => 'test', 'integer' => 5],
-            darray['string' => 'test2', 'integer' => 10],
+            dict['string' => 'test', 'integer' => 5],
+            dict['string' => 'test2', 'integer' => 10],
           ],
         ],
         'valid' => true,
       ),
       shape(
-        'input' => darray['local-reference' => darray['first' => 'test']],
-        'output' => darray['local-reference' => darray['first' => 'test']],
+        'input' => dict['local-reference' => dict['first' => 'test']],
+        'output' => dict['local-reference' => dict['first' => 'test']],
         'valid' => true,
       ),
     ];
@@ -88,7 +88,7 @@ final class RefSchemaValidatorTest extends BaseCodegenTestCase {
   }
 
   public function testNullableUniqueRefNullValue(): void {
-    $input = darray['nullable-unique-ref' => null];
+    $input = dict['nullable-unique-ref' => null];
 
     $validator = new RefSchemaValidator($input);
     $validator->validate();
@@ -100,7 +100,7 @@ final class RefSchemaValidatorTest extends BaseCodegenTestCase {
   }
 
   public function testNullableUniqueRef(): void {
-    $input = darray['nullable-unique-ref' => darray['integer' => 1, 'string' => 'string']];
+    $input = dict['nullable-unique-ref' => dict['integer' => 1, 'string' => 'string']];
 
     $validator = new RefSchemaValidator($input);
     $validator->validate();
@@ -113,4 +113,17 @@ final class RefSchemaValidatorTest extends BaseCodegenTestCase {
     expect($value['integer'] ?? 0)->toBeSame(1);
   }
 
+  public function testCoerceObjectRef(): void {
+    $input = dict['coerce-object-ref' => \json_encode(dict['string' => 'aaa', 'integer' => 123])];
+
+    $validator = new RefSchemaValidator($input);
+    $validator->validate();
+
+    expect($validator->isValid())->toBeTrue();
+    $validated = $validator->getValidatedInput();
+    $value = $validated['coerce-object-ref'] ?? null as nonnull;
+
+    expect($value['string'] ?? '')->toBeSame('aaa');
+    expect($value['integer'] ?? 0)->toBeSame(123);
+  }
 }

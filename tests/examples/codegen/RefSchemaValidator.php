@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<8b989ac14d2b7d0004cd6b8bc0b8e7b5>>
+ * @generated SignedSource<<2d38853b998dfd0053bf66ea24166fce>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -32,6 +32,7 @@ type TRefSchemaValidator = shape(
   ?'nullable-unique-ref' => TRefSchemaValidatorPropertiesNullableUniqueRef,
   ?'duplicate-refs' => TRefSchemaValidatorPropertiesDuplicateRefs,
   ?'single-item-array-ref' => vec<TExternalExamplesRefSchemaDefinitionsObject>,
+  ?'coerce-object-ref' => TExternalExamplesRefSchemaDefinitionsObject,
   ...
 );
 
@@ -302,6 +303,22 @@ final class RefSchemaValidator
         $output['single-item-array-ref'] = RefSchemaValidatorPropertiesSingleItemArrayRef::check(
           $typed['single-item-array-ref'],
           JsonSchema\get_pointer($pointer, 'single-item-array-ref'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'coerce-object-ref')) {
+      try {
+        $typed['coerce-object-ref'] = Constraints\ObjectConstraint::check(
+          $typed['coerce-object-ref'],
+          JsonSchema\get_pointer($pointer, 'coerce-object-ref'),
+          true,
+        );
+        $output['coerce-object-ref'] = ExternalExamplesRefSchemaDefinitionsObject::check(
+          $typed['coerce-object-ref'],
+          JsonSchema\get_pointer($pointer, 'coerce-object-ref'),
         );
       } catch (JsonSchema\InvalidFieldException $e) {
         $errors = \HH\Lib\Vec\concat($errors, $e->errors);
