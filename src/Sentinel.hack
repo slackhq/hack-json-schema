@@ -5,13 +5,13 @@ namespace Slack\Hack\JsonSchema;
  */
 final class Sentinel {
 
-    /**
-     * The singleton instance of the sentinal value.
-     */
-    <<__Memoize>>
-    public static function get(): this {
-        return new self();
-    }
+  /**
+   * The singleton instance of the sentinal value.
+   */
+  <<__Memoize>>
+  public static function get(): this {
+    return new self();
+  }
 
-    private function __construct () {}
+  private function __construct() {}
 }

@@ -3,13 +3,7 @@
 namespace Slack\Hack\JsonSchema\Codegen;
 
 use namespace HH\Lib\{C, Math, Str, Vec};
-use type Facebook\HackCodegen\{
-  CodegenClass,
-  CodegenMethod,
-  HackBuilder,
-  HackBuilderKeys,
-  HackBuilderValues,
-};
+use type Facebook\HackCodegen\{CodegenClass, CodegenMethod, HackBuilder, HackBuilderKeys, HackBuilderValues};
 use type Slack\Hack\JsonSchema\Sentinel;
 
 type TUntypedSchema = shape(
@@ -160,7 +154,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
 
     $this->type_info = Typing\TypeSystem::union(
       $types,
-      shape('disable_shape_unification' => $this->typed_schema['disableShapeUnification'] ?? false)
+      shape('disable_shape_unification' => $this->typed_schema['disableShapeUnification'] ?? false),
     );
 
     $hb
@@ -513,7 +507,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
 
     $this->type_info = Typing\TypeSystem::union(
       $present_types,
-      shape('disable_shape_unification' => $this->typed_schema['disableShapeUnification'] ?? false)
+      shape('disable_shape_unification' => $this->typed_schema['disableShapeUnification'] ?? false),
     );
     if ($this->type_info->isOptional()) {
       $hb

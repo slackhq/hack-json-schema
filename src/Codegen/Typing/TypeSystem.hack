@@ -101,14 +101,14 @@ final abstract class TypeSystem {
    * For example, if the list contains int, string, and null, we'd generate ?arraykey, since
    * ?arraykey is the most broad type which is satisfied by either int, string, and null.
    */
-  public static function union(
-    vec<Type> $types,
-    shape(?'disable_shape_unification' => bool) $options = shape()
-  ): Type {
+  public static function union(vec<Type> $types, shape(?'disable_shape_unification' => bool) $options = shape()): Type {
     $contains_null = C\any($types, $type ==> $type->isOptional());
     $type_names = Keyset\map($types, $type ==> $type->getConcreteTypeName());
     if ($options['disable_shape_unification'] ?? false) {
-      $type_names = Keyset\map($type_names, $type_name ==> $type_name === ConcreteTypeName::SHAPE ? ConcreteTypeName::NONNULL : $type_name);
+      $type_names = Keyset\map(
+        $type_names,
+        $type_name ==> $type_name === ConcreteTypeName::SHAPE ? ConcreteTypeName::NONNULL : $type_name,
+      );
     }
     $builtin_type_name = self::getTypeHierarchy()->computeLowestUpperBound($type_names) ?? ConcreteTypeName::NOTHING;
 
@@ -204,7 +204,10 @@ final abstract class TypeSystem {
     return $generics;
   }
 
-  private static function resolveShapeFields(ConcreteTypeName $builtin_type_name, vec<Type> $types): (Type::TShapeFields, bool) {
+  private static function resolveShapeFields(
+    ConcreteTypeName $builtin_type_name,
+    vec<Type> $types,
+  ): (Type::TShapeFields, bool) {
     // Union of shapes: union the shape fields such that `shape('a' => int) | shape('a' => string)`
     // becomes `shape('a' => arraykey)`. Assume any field absent from an open shape can only be
     // typed as `mixed`, so that `shape('a' => int) | shape('b' => int, ...)` becomes

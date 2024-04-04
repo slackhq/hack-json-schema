@@ -694,7 +694,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
 
   public function testEmptyClosedShape(): void {
     $validator = new ObjectSchemaValidator(dict[
-      'empty_closed_shape' => dict[]
+      'empty_closed_shape' => dict[],
     ]);
     $validator->validate();
     expect($validator->isValid())->toBeTrue();
@@ -702,7 +702,7 @@ final class ObjectSchemaValidatorTest extends BaseCodegenTestCase {
 
     // Additional properties are discarded
     $validator = new ObjectSchemaValidator(dict[
-      'empty_closed_shape' => dict['foo' => 'bar']
+      'empty_closed_shape' => dict['foo' => 'bar'],
     ]);
     $validator->validate();
     expect($validator->isValid())->toBeTrue();
