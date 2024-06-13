@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<5d96bf78c70de4ebc3454eec9a957550>>
+ * @generated SignedSource<<922cf6e7d1d33858846294df801f20f3>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -17,6 +17,7 @@ type TNumericalSchemaValidator = shape(
   ?'integer_coerce' => int,
   ?'number_coerce' => num,
   ?'hack_enum' => \Slack\Hack\JsonSchema\Tests\TestIntEnum,
+  'integer_limits' => int,
   ...
 );
 
@@ -86,6 +87,30 @@ final class NumericalSchemaValidatorPropertiesHackEnum {
   }
 }
 
+final class NumericalSchemaValidatorPropertiesIntegerLimits {
+
+  private static int $maximum = 10;
+  private static int $minimum = 1;
+  private static bool $coerce = false;
+
+  public static function check(mixed $input, string $pointer): int {
+    $typed =
+      Constraints\IntegerConstraint::check($input, $pointer, self::$coerce);
+
+    Constraints\NumberMaximumConstraint::check(
+      $typed,
+      self::$maximum,
+      $pointer,
+    );
+    Constraints\NumberMinimumConstraint::check(
+      $typed,
+      self::$minimum,
+      $pointer,
+    );
+    return $typed;
+  }
+}
+
 final class NumericalSchemaValidator
   extends JsonSchema\BaseValidator<TNumericalSchemaValidator> {
 
@@ -96,6 +121,12 @@ final class NumericalSchemaValidator
     string $pointer,
   ): TNumericalSchemaValidator {
     $typed = Constraints\ObjectConstraint::check($input, $pointer, self::$coerce);
+
+    $defaults = dict[
+      'integer_limits' => 5,
+    ];
+    $typed = \HH\Lib\Dict\merge($defaults, $typed);
+
 
     $errors = vec[];
     $output = shape();
@@ -155,6 +186,17 @@ final class NumericalSchemaValidator
         $output['hack_enum'] = NumericalSchemaValidatorPropertiesHackEnum::check(
           $typed['hack_enum'],
           JsonSchema\get_pointer($pointer, 'hack_enum'),
+        );
+      } catch (JsonSchema\InvalidFieldException $e) {
+        $errors = \HH\Lib\Vec\concat($errors, $e->errors);
+      }
+    }
+
+    if (\HH\Lib\C\contains_key($typed, 'integer_limits')) {
+      try {
+        $output['integer_limits'] = NumericalSchemaValidatorPropertiesIntegerLimits::check(
+          $typed['integer_limits'],
+          JsonSchema\get_pointer($pointer, 'integer_limits'),
         );
       } catch (JsonSchema\InvalidFieldException $e) {
         $errors = \HH\Lib\Vec\concat($errors, $e->errors);

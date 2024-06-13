@@ -115,13 +115,17 @@
       "anyOf": [
         {
           "type": "object",
-          "required": ["type"],
+          "required": [
+            "type"
+          ],
           "additionalProperties": false,
           "coerce": false,
           "properties": {
             "type": {
               "type": "string",
-              "enum": ["first"]
+              "enum": [
+                "first"
+              ]
             },
             "string": {
               "type": "string"
@@ -130,13 +134,17 @@
         },
         {
           "type": "object",
-          "required": ["type"],
+          "required": [
+            "type"
+          ],
           "additionalProperties": false,
           "coerce": false,
           "properties": {
             "type": {
               "type": "string",
-              "enum": ["second"]
+              "enum": [
+                "second"
+              ]
             },
             "integer": {
               "type": "integer"
