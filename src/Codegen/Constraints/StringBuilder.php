@@ -67,7 +67,7 @@ class StringBuilder extends BaseBuilder<TStringSchema> {
         $factory = $this->ctx->getHackCodegenFactory();
         $members = \HH\Lib\Vec\map(
           $enum,
-          $member ==> $factory->codegenEnumMember(Str\uppercase($member))
+          $member ==> $factory->codegenEnumMember(Str\uppercase(Str\replace_every($member, dict[':' => '_', '.' => '_'])))
             ->setValue($member, HackBuilderValues::export()),
         );
         $enumName = $this->typed_schema['hackEnum'] ?? null;
