@@ -26,12 +26,18 @@ final class TopLevelRefValidatorTest extends BaseCodegenTestCase {
     $cases = vec[
       shape(
         'input' => darray['integer' => 1000],
-        'output' => darray['integer' => 1000],
+        'output' => darray[
+          'integer_limits' => 5,
+          'integer' => 1000
+        ],
         'valid' => true,
       ),
       shape(
         'input' => darray['integer' => 0],
-        'output' => darray['integer' => 0],
+        'output' => darray[
+          'integer_limits' => 5,
+          'integer' => 0
+        ],
         'valid' => true,
       ),
       shape('input' => darray['integer' => '1000'], 'valid' => false),

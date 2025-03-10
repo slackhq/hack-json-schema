@@ -23,12 +23,18 @@ final class NumericalSchemaValidatorTest extends BaseCodegenTestCase {
     $cases = vec[
       shape(
         'input' => darray['integer' => 1000],
-        'output' => darray['integer' => 1000],
+        'output' => darray[
+          'integer_limits' => 5,
+          'integer' => 1000
+        ],
         'valid' => true,
       ),
       shape(
         'input' => darray['integer' => 0],
-        'output' => darray['integer' => 0],
+        'output' => darray[
+          'integer_limits' => 5,
+          'integer' => 0
+        ],
         'valid' => true,
       ),
       shape('input' => darray['integer' => '1000'], 'valid' => false),
@@ -42,12 +48,18 @@ final class NumericalSchemaValidatorTest extends BaseCodegenTestCase {
     $cases = vec[
       shape(
         'input' => darray['number' => 1000],
-        'output' => darray['number' => 1000],
+        'output' => darray[
+          'integer_limits' => 5,
+          'number' => 1000
+        ],
         'valid' => true,
       ),
       shape(
         'input' => darray['number' => 1000.00],
-        'output' => darray['number' => 1000.00],
+        'output' => darray[
+          'integer_limits' => 5,
+          'number' => 1000.00
+        ],
         'valid' => true,
       ),
       shape('input' => darray['number' => '1000'], 'valid' => false),
@@ -61,12 +73,18 @@ final class NumericalSchemaValidatorTest extends BaseCodegenTestCase {
     $cases = vec[
       shape(
         'input' => darray['integer_coerce' => 1],
-        'output' => darray['integer_coerce' => 1],
+        'output' => darray[
+          'integer_limits' => 5,
+          'integer_coerce' => 1
+        ],
         'valid' => true,
       ),
       shape(
         'input' => darray['integer_coerce' => '100'],
-        'output' => darray['integer_coerce' => 100],
+        'output' => darray[
+          'integer_limits' => 5,
+          'integer_coerce' => 100
+        ],
         'valid' => true,
       ),
       shape(
@@ -86,17 +104,26 @@ final class NumericalSchemaValidatorTest extends BaseCodegenTestCase {
     $cases = vec[
       shape(
         'input' => darray['number_coerce' => 1.0],
-        'output' => darray['number_coerce' => 1.0],
+        'output' => darray[
+          'integer_limits' => 5,
+          'number_coerce' => 1.0
+        ],
         'valid' => true,
       ),
       shape(
         'input' => darray['number_coerce' => '100'],
-        'output' => darray['number_coerce' => 100],
+        'output' => darray[
+          'integer_limits' => 5,
+          'number_coerce' => 100
+        ],
         'valid' => true,
       ),
       shape(
         'input' => darray['number_coerce' => '100.0'],
-        'output' => darray['number_coerce' => 100.0],
+        'output' => darray[
+          'integer_limits' => 5,
+          'number_coerce' => 100.0
+        ],
         'valid' => true,
       ),
       shape(
@@ -112,12 +139,18 @@ final class NumericalSchemaValidatorTest extends BaseCodegenTestCase {
     $cases = vec[
       shape(
         'input' => darray['hack_enum' => 1],
-        'output' => darray['hack_enum' => TestIntEnum::ABC],
+        'output' => darray[
+          'integer_limits' => 5,
+          'hack_enum' => TestIntEnum::ABC
+        ],
         'valid' => true,
       ),
       shape(
         'input' => darray['hack_enum' => 2],
-        'output' => darray['hack_enum' => TestIntEnum::DEF],
+        'output' => darray[
+          'integer_limits' => 5,
+          'hack_enum' => TestIntEnum::DEF
+        ],
         'valid' => true,
       ),
       shape('input' => darray['hack_enum' => 0], 'valid' => false),
