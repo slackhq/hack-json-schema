@@ -256,6 +256,7 @@ final abstract class TypeSystem {
           $required = ($required_field_counts[$name] ?? 0) === $num_shapes;
 
           if (
+            $is_closed_shape ||
             $required ||
             // While we could skip non-required aliases which point to `mixed`, that seems
             // overly complicated.
