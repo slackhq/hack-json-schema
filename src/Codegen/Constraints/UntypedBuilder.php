@@ -569,14 +569,21 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
   }
 
   private function generateOptimizedAnyOfChecks(TOptimizedAnyOfTypes $any_of_types, HackBuilder $hb): void {
-    $types = dict[];
+    $types = vec[];
+    $constraints = dict[];
     foreach ($any_of_types['types'] as $type_name => $schema_builder) {
       $suffix = $this->generateClassName($this->suffix, 'anyOfTypes', $type_name);
       $schema_builder->setSuffix($suffix);
       $schema_builder->build();
 
-      $types[$type_name] = "{$schema_builder->getClassName()}::check<>";
+      $constraints[$type_name] = "{$schema_builder->getClassName()}::check<>";
+      $types[] = $schema_builder->getTypeInfo();
     }
+
+    $this->type_info = Typing\TypeSystem::union(
+      $types,
+      shape('disable_shape_unification' => $this->typed_schema['disableShapeUnification'] ?? false)
+    );
 
     $hb
       ->addAssignment('$key', $any_of_types['key'], HackBuilderValues::export())
@@ -596,7 +603,7 @@ class UntypedBuilder extends BaseBuilder<TUntypedSchema> {
       ->ensureEmptyLine()
       ->addAssignment(
         '$types',
-        $types,
+        $constraints,
         HackBuilderValues::dict(HackBuilderKeys::export(), HackBuilderValues::literal()),
       )
       ->ensureEmptyLine();
