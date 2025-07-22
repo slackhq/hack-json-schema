@@ -76,6 +76,9 @@ final class AnyOfRefiningTest extends BaseCodegenTestCase {
     $ret['codegen']->build();
     $ret = self::getBuilder('anyof-schema-vecs.json', 'AnyOfValidatorVecs');
     $ret['codegen']->build();
+    $ret = self::getBuilder('anyof-nested-anyof.json', 'AnyOfNestedAnyOf');
+    $ret['codegen']->build();
+
   }
 
   public function testNullableString(): void {

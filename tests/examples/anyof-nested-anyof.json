@@ -1,0 +1,53 @@
+{
+    "anyOf": [
+        {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "bar": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/testObj"
+                        },
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "bar": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/testObj"
+                        },
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "definitions": {
+        "testObj": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "qux": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
