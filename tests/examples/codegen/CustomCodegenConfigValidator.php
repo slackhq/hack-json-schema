@@ -5,7 +5,7 @@
  * To re-generate this file run `make test`
  *
  *
- * @generated SignedSource<<a2f9712dad75f484bf20025df1b6e2f8>>
+ * @generated SignedSource<<42a2e629fbe63e9b95076f6cf672801e>>
  */
 namespace Slack\Hack\JsonSchema\Tests\Generated;
 use namespace Slack\Hack\JsonSchema;
@@ -34,7 +34,10 @@ type custom_codegen_config_validator_properties_devices_items_any_of_types_compu
   ...
 );
 
-type custom_codegen_config_validator_properties_devices_items_t = mixed;
+type custom_codegen_config_validator_properties_devices_items_t = shape(
+  'type' => string,
+  ...
+);
 
 type custom_codegen_config_validator_t = shape(
   'first_name' => string,
