@@ -2,6 +2,7 @@
 
 namespace Slack\Hack\JsonSchema\Constraints;
 
+use namespace HH\Lib\Str;
 use namespace Slack\Hack\JsonSchema;
 
 class StringMaxLengthConstraint {
@@ -14,7 +15,7 @@ class StringMaxLengthConstraint {
           'expected' => $maximum,
           'got' => $length,
         ),
-        'message' => 'must be less than '.($maximum + 1).' characters',
+        'message' => Str\format('must be less than or equal to %s characters', (string)$maximum),
       );
       throw new JsonSchema\InvalidFieldException($pointer, vec[$error]);
     }

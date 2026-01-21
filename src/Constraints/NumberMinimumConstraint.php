@@ -15,7 +15,7 @@ class NumberMinimumConstraint {
           'expected' => $minimum,
           'got' => $input,
         ),
-        'message' => Str\format('must be greater than %s', (string)$minimum),
+        'message' => Str\format('must be greater than or equal to %s', (string)$minimum),
       );
       throw new JsonSchema\InvalidFieldException($pointer, vec[$error]);
 
